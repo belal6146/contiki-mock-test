@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -8,7 +9,8 @@ import Header from '@/components/Header';
 import HeroImage from '@/components/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import TabNav, { TabPanel } from '@/components/tour/TabNav';
-import DetailsGrid from '@/components/DetailsGrid';
+import BasicDetailsGrid from '@/components/DetailsGrid';
+import TourDetailsGrid from '@/components/tour/DetailsGrid';
 import VariationCards from '@/components/tour/VariationCards';
 import Reviews from '@/components/tour/Reviews';
 import Footer from '@/components/Footer';
@@ -151,7 +153,6 @@ const TourDetail = () => {
           {trip && (
             <>
               <ErrorBoundary>
-                {/* Replace HeroImage component with new one */}
                 <HeroImage
                   imageUrl={trip.image}
                   title={trip.name}
@@ -161,7 +162,7 @@ const TourDetail = () => {
               
               <ErrorBoundary>
                 <PriceBar 
-                  newPrice={trip.price} // Pass trip.price as newPrice
+                  newPrice={trip.price}
                   rating={trip.rating}
                   reviewCount={trip.reviewCount}
                 />
@@ -169,7 +170,7 @@ const TourDetail = () => {
               
               <ErrorBoundary>
                 <div className="container py-6">
-                  <DetailsGrid details={tripDetails} />
+                  <BasicDetailsGrid details={tripDetails} />
                 </div>
               </ErrorBoundary>
               
@@ -180,7 +181,7 @@ const TourDetail = () => {
                       <h2 className="heading-md mb-6">Trip Overview</h2>
                       <p className="text-lg text-gray-700 mb-8">{trip.description}</p>
                       
-                      <DetailsGrid
+                      <TourDetailsGrid
                         highlights={trip.highlights}
                         included={trip.included}
                       />
