@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -17,28 +18,108 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import BackToTopButton from '@/components/BackToTopButton';
 import { BookingProvider } from '@/context/BookingContext';
 import BookingFlow from '@/components/BookingFlow';
+import BreadcrumbNav from '@/components/Breadcrumb';
+import BookingBar from '@/components/BookingBar';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { tour: trip, loading, error } = useTour(slug || '');
   
   useEffect(() => {
+    console.debug('[TourDetail] slug:', slug);
     trackPageView(window.location.pathname);
-  }, []);
+    
+    if (loading) {
+      console.debug('[TourDetail] loading');
+    }
+  }, [slug, loading]);
   
-  // If trip is not found, redirect to 404
+  useEffect(() => {
+    if (trip) {
+      console.debug('[TourDetail] loaded');
+    }
+  }, [trip]);
+  
+  // If trip is not found (after loading is complete), render "Tour not found" message
   if (!loading && !trip) {
-    return <Navigate to="/404" />;
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-grow flex items-center justify-center p-6">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-primary mb-4">Tour Not Found</h1>
+            <p className="text-gray-700 mb-8">The tour you're looking for doesn't exist or has been removed.</p>
+            <a 
+              href="/tours" 
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium transition-colors"
+            >
+              Browse All Tours
+            </a>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
-  // Loading state
+  // Loading state with skeleton loaders
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <div className="flex-grow flex items-center justify-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+        
+        {/* Hero image skeleton */}
+        <div className="bg-gray-200 h-96 relative w-full animate-pulse" />
+        
+        {/* Breadcrumb skeleton */}
+        <div className="container py-4">
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-5 w-16" />
+            <Skeleton className="h-5 w-5 rounded-full" />
+            <Skeleton className="h-5 w-16" />
+            <Skeleton className="h-5 w-5 rounded-full" />
+            <Skeleton className="h-5 w-40" />
+          </div>
         </div>
+        
+        {/* Price bar skeleton */}
+        <div className="bg-gray-100 py-4">
+          <div className="container">
+            <div className="flex justify-between items-center">
+              <Skeleton className="h-10 w-40" />
+              <Skeleton className="h-8 w-48" />
+            </div>
+          </div>
+        </div>
+        
+        {/* Details grid skeleton */}
+        <div className="container py-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex flex-col">
+                <Skeleton className="h-5 w-20 mb-1" />
+                <Skeleton className="h-7 w-32" />
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Tabs skeleton */}
+        <div className="container py-6">
+          <div className="flex space-x-4 mb-6">
+            {[...Array(5)].map((_, i) => (
+              <Skeleton key={i} className="h-8 w-24" />
+            ))}
+          </div>
+          <div className="space-y-6">
+            <Skeleton className="h-8 w-48" />
+            <Skeleton className="h-20 w-full" />
+            <Skeleton className="h-64 w-full" />
+          </div>
+        </div>
+        
+        <div className="flex-grow" />
         <Footer />
       </div>
     );
@@ -87,15 +168,9 @@ const TourDetail = () => {
     { label: 'Trip Style', value: 'Adventure' }
   ] : [];
 
-  useEffect(() => {
-    if (trip) {
-      console.debug('[TourDetail] loaded sections');
-    }
-  }, [trip]);
-
   return (
     <BookingProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col pb-20">
         <Helmet>
           <title>{pageTitle}</title>
           <meta name="description" content={pageDescription} />
@@ -144,6 +219,8 @@ const TourDetail = () => {
         </Helmet>
       
         <Header />
+        
+        {trip && <BreadcrumbNav title={trip.name} />}
         
         <main className="flex-grow">
           {trip && (
@@ -218,7 +295,7 @@ const TourDetail = () => {
                       <div className="grid grid-cols-1 gap-6">
                         <VariationCards variations={trip.variations} />
                         
-                        <div className="mt-8">
+                        <div id="booking" className="mt-8">
                           <h3 className="text-xl font-bold mb-4">Book This Trip</h3>
                           <BookingFlow />
                         </div>
@@ -288,6 +365,8 @@ const TourDetail = () => {
             </>
           )}
         </main>
+        
+        {trip && <BookingBar price={trip.price} slug={trip.slug} />}
         
         <Footer />
         <BackToTopButton />
