@@ -1,62 +1,132 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Calendar, Users } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const Hero = () => {
+  const [destination, setDestination] = useState<string>("");
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [travelers, setTravelers] = useState<number>(1);
+
+  React.useEffect(() => {
+    console.debug('[Hero] mounted');
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.debug('[Hero] search', { destination, date, travelers });
+  };
+
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background image with overlay */}
+    <section className="relative w-full bg-primary h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
+      {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{ 
-          backgroundImage: `url('/placeholder.svg')`,
-          filter: 'brightness(0.7)' 
-        }}
-      ></div>
+        className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('https://www.contiki.com/assets/1200x800/image/croatia/2022_croatia_isle_of_hvar_guapa_beach_club_party_contiki_group_sunset_07.jpg')" }}
+      />
       
-      {/* Content */}
-      <div className="container relative z-10 text-white text-center px-4">
-        <h1 className="heading-xl mb-6 animate-[fadeIn_1s_ease-in]">
-          Discover The <span className="text-highlight">World</span> Your Way
-        </h1>
-        
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-[fadeIn_1s_0.3s_both]">
-          Unforgettable travel experiences for 18-35 year olds. 
-          Find your perfect trip across 6 continents.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row justify-center gap-4 animate-[fadeIn_1s_0.6s_both]">
-          <Link 
-            to="/tours" 
-            className="btn-primary px-8 py-3 text-lg font-medium"
-          >
-            Explore Tours
-          </Link>
-          
-          <Link 
-            to="/destinations" 
-            className="btn-outline bg-transparent border-white text-white hover:bg-white/30 px-8 py-3 text-lg font-medium"
-          >
-            View Destinations
-          </Link>
+      {/* Gradient Overlay */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-primary/80 to-transparent z-10"
+      />
+
+      {/* Content Container */}
+      <div className="container relative z-20 px-4 md:px-8">
+        <div className="text-center mb-8">
+          <h1 className="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+            ADVENTURE AWAITS
+          </h1>
+          <p className="font-montserrat font-normal text-lg md:text-xl lg:text-2xl text-white">
+            Discover the world with us
+          </p>
         </div>
-        
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="40" 
-            height="40" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          >
-            <path d="M12 5v14"></path>
-            <path d="m19 12-7 7-7-7"></path>
-          </svg>
-        </div>
+
+        {/* Search Form */}
+        <form 
+          onSubmit={handleSubmit}
+          className="bg-white rounded-lg p-4 md:p-6 shadow-lg max-w-3xl mx-auto"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Destination */}
+            <div className="space-y-2">
+              <label htmlFor="destination" className="text-sm font-medium text-primary">
+                Destination
+              </label>
+              <Input
+                id="destination"
+                placeholder="Where to?"
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                className="w-full"
+                type="text"
+              />
+            </div>
+
+            {/* Date */}
+            <div className="space-y-2">
+              <label htmlFor="date" className="text-sm font-medium text-primary">
+                Date
+              </label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full flex items-center justify-between text-left font-normal",
+                      !date && "text-muted-foreground"
+                    )}
+                  >
+                    {date ? format(date, "PPP") : "Select date"}
+                    <Calendar className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="center">
+                  <CalendarComponent
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                    className="p-3 pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            {/* Travelers */}
+            <div className="space-y-2">
+              <label htmlFor="travelers" className="text-sm font-medium text-primary">
+                Travelers
+              </label>
+              <div className="flex items-center">
+                <Input
+                  id="travelers"
+                  type="number"
+                  min="1"
+                  max="20"
+                  value={travelers}
+                  onChange={(e) => setTravelers(parseInt(e.target.value) || 1)}
+                  className="w-full"
+                />
+                <Users className="ml-2 h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+          </div>
+
+          {/* Search Button */}
+          <div className="mt-6">
+            <Button 
+              type="submit" 
+              className="w-full bg-secondary hover:bg-secondary/90 text-white"
+            >
+              Search Trips
+            </Button>
+          </div>
+        </form>
       </div>
     </section>
   );
