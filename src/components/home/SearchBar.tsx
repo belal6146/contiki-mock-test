@@ -1,5 +1,5 @@
 
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
@@ -8,8 +8,14 @@ const SearchBar = () => {
   const [duration, setDuration] = useState<string>('');
   const [budget, setBudget] = useState<string>('');
 
+  useEffect(() => {
+    console.debug('[SearchBar] mounted');
+  }, []);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    
+    console.debug('[SearchBar] submit', { destination, duration, budget });
     
     // Build query params
     const params = new URLSearchParams();

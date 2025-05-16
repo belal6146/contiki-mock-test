@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,7 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [travelers, setTravelers] = useState<number>(1);
@@ -20,6 +22,15 @@ const Hero = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.debug('[Hero] search', { destination, date, travelers });
+    
+    // Build query params
+    const params = new URLSearchParams();
+    if (destination) params.append('destination', destination);
+    if (date) params.append('date', format(date, 'yyyy-MM-dd'));
+    params.append('travelers', travelers.toString());
+    
+    // Navigate to the search results page
+    navigate(`/tours?${params.toString()}`);
   };
 
   return (
