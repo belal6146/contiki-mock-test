@@ -4,7 +4,7 @@ import { formatCurrency } from '@/lib/utils';
 
 interface PriceBarProps {
   oldPrice?: number;
-  newPrice: number;
+  newPrice: number; // Keep this as required
   price?: number; // Add this to support the prop coming from TourDetail
   rating?: number;
   reviewCount?: number;
@@ -12,23 +12,26 @@ interface PriceBarProps {
 
 const PriceBar: React.FC<PriceBarProps> = ({ 
   oldPrice, 
-  newPrice: propNewPrice, 
+  newPrice, 
   price, // Accept price prop
   rating = 0, 
   reviewCount = 0 
 }) => {
-  // Use price if provided, otherwise use newPrice
-  const newPrice = price !== undefined ? price : propNewPrice;
+  // We don't need to rename the prop and create a local variable anymore
+  // Just use newPrice directly in the component
   
   useEffect(() => {
-    console.debug('[PriceBar] mounted', { oldPrice, newPrice });
-  }, [oldPrice, newPrice]);
+    console.debug('[PriceBar] mounted', { oldPrice, newPrice: price ?? newPrice });
+  }, [oldPrice, newPrice, price]);
   
   const handleViewDates = () => {
     console.debug('[PriceBar] viewDates');
     // Navigate to the dates section
     document.getElementById('dates')?.scrollIntoView({ behavior: 'smooth' });
   };
+  
+  // Use the actual price to display (price if provided, otherwise newPrice)
+  const displayPrice = price !== undefined ? price : newPrice;
   
   return (
     <section className="sticky top-16 z-40 bg-white shadow-md">
@@ -41,7 +44,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
                 {oldPrice && (
                   <p className="text-lg text-gray-400 line-through">{formatCurrency(oldPrice)}</p>
                 )}
-                <p className="text-2xl font-bold text-primary">{formatCurrency(newPrice)}</p>
+                <p className="text-2xl font-bold text-primary">{formatCurrency(displayPrice)}</p>
               </div>
             </div>
             

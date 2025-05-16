@@ -87,7 +87,7 @@ const TourDetail = () => {
             
             <ErrorBoundary>
               <PriceBar 
-                price={trip.price}
+                newPrice={trip.price} // Pass trip.price as newPrice
                 rating={trip.rating}
                 reviewCount={trip.reviewCount}
               />
