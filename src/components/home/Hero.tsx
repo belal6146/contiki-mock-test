@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Users } from 'lucide-react';
+import { Calendar, Search, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -34,25 +34,25 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full bg-primary h-[500px] md:h-[600px] lg:h-[700px] flex items-center justify-center">
+    <section className="relative w-full bg-primary h-[calc(100vh-80px)] flex items-center justify-center">
       {/* Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ backgroundImage: "url('https://www.contiki.com/assets/1200x800/image/croatia/2022_croatia_isle_of_hvar_guapa_beach_club_party_contiki_group_sunset_07.jpg')" }}
       />
       
-      {/* Gradient Overlay */}
+      {/* Gradient Overlay - Updated to match Contiki */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-primary/80 to-transparent z-10"
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent z-10"
       />
 
       {/* Content Container */}
-      <div className="container relative z-20 px-4 md:px-8">
+      <div className="container relative z-20 px-4 md:px-8 flex flex-col items-center justify-center">
         <div className="text-center mb-8">
-          <h1 className="font-montserrat font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+          <h1 className="font-montserrat font-bold text-5xl lg:text-7xl text-white leading-tight">
             ADVENTURE AWAITS
           </h1>
-          <p className="font-montserrat font-normal text-lg md:text-xl lg:text-2xl text-white">
+          <p className="font-montserrat font-normal text-lg lg:text-2xl text-white mt-4">
             Discover the world with us
           </p>
         </div>
@@ -60,7 +60,8 @@ const Hero = () => {
         {/* Search Form */}
         <form 
           onSubmit={handleSubmit}
-          className="bg-white rounded-lg p-4 md:p-6 shadow-lg max-w-3xl mx-auto"
+          className="bg-white rounded-lg p-6 shadow-lg max-w-4xl w-full mx-auto"
+          aria-label="Trip search form"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Destination */}
@@ -68,14 +69,18 @@ const Hero = () => {
               <label htmlFor="destination" className="text-sm font-medium text-primary">
                 Destination
               </label>
-              <Input
-                id="destination"
-                placeholder="Where to?"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="w-full"
-                type="text"
-              />
+              <div className="relative">
+                <Input
+                  id="destination"
+                  placeholder="Where to?"
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
+                  className="w-full pl-10 border-secondary placeholder-secondary focus:ring-accent"
+                  type="text"
+                  aria-label="Enter destination"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary" />
+              </div>
             </div>
 
             {/* Date */}
@@ -87,9 +92,11 @@ const Hero = () => {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
+                    id="date"
+                    aria-label="Select travel date"
                     className={cn(
-                      "w-full flex items-center justify-between text-left font-normal",
-                      !date && "text-muted-foreground"
+                      "w-full flex items-center justify-between text-left font-normal border-secondary focus:ring-accent",
+                      !date && "text-secondary"
                     )}
                   >
                     {date ? format(date, "PPP") : "Select date"}
@@ -113,7 +120,7 @@ const Hero = () => {
               <label htmlFor="travelers" className="text-sm font-medium text-primary">
                 Travelers
               </label>
-              <div className="flex items-center">
+              <div className="relative">
                 <Input
                   id="travelers"
                   type="number"
@@ -121,9 +128,10 @@ const Hero = () => {
                   max="20"
                   value={travelers}
                   onChange={(e) => setTravelers(parseInt(e.target.value) || 1)}
-                  className="w-full"
+                  className="w-full pl-10 border-secondary focus:ring-accent"
+                  aria-label="Number of travelers"
                 />
-                <Users className="ml-2 h-5 w-5 text-muted-foreground" />
+                <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary" />
               </div>
             </div>
           </div>
@@ -132,7 +140,8 @@ const Hero = () => {
           <div className="mt-6">
             <Button 
               type="submit" 
-              className="w-full bg-secondary hover:bg-secondary/90 text-white"
+              className="w-full bg-accent hover:bg-accent/90 text-white font-medium px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              aria-label="Search trips"
             >
               Search Trips
             </Button>
