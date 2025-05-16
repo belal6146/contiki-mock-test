@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { BookingProvider } from "@/context/BookingContext";
 import Index from "./pages/Index";
 import Destinations from "./pages/Destinations";
 import Tours from "./pages/tours";
@@ -21,14 +22,16 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ErrorBoundary>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/destinations" element={<Destinations />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/tours/:slug" element={<TourDetail />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <BookingProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/tours" element={<Tours />} />
+              <Route path="/tours/:slug" element={<TourDetail />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BookingProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </TooltipProvider>
