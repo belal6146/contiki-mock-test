@@ -5,16 +5,21 @@ import { formatCurrency } from '@/lib/utils';
 interface PriceBarProps {
   oldPrice?: number;
   newPrice: number;
+  price?: number; // Add this to support the prop coming from TourDetail
   rating?: number;
   reviewCount?: number;
 }
 
 const PriceBar: React.FC<PriceBarProps> = ({ 
   oldPrice, 
-  newPrice, 
+  newPrice: propNewPrice, 
+  price, // Accept price prop
   rating = 0, 
   reviewCount = 0 
 }) => {
+  // Use price if provided, otherwise use newPrice
+  const newPrice = price !== undefined ? price : propNewPrice;
+  
   useEffect(() => {
     console.debug('[PriceBar] mounted', { oldPrice, newPrice });
   }, [oldPrice, newPrice]);
