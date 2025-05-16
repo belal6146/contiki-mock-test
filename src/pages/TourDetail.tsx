@@ -6,7 +6,7 @@ import { useTour } from '@/hooks/useTrips';
 import { trackPageView } from '@/lib/analytics';
 
 import Header from '@/components/Header';
-import HeroImage from '@/components/HeroImage';
+import HeroImage from '@/components/tour/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import TabNav, { TabPanel } from '@/components/tour/TabNav';
 import BasicDetailsGrid from '@/components/DetailsGrid';
