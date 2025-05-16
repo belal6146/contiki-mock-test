@@ -10,7 +10,7 @@ const mockReviews = [
     rating: 5,
     date: '2023-05-15',
     title: 'Best trip of my life!',
-    content: 'This trip exceeded all my expectations. Our tour guide was fantastic and the group dynamic was amazing. I made friends that I know I'll keep for a lifetime. The itinerary was perfect - a great mix of must-see attractions and hidden gems.',
+    content: 'This trip exceeded all my expectations. Our tour guide was fantastic and the group dynamic was amazing. I made friends that I know I\'ll keep for a lifetime. The itinerary was perfect - a great mix of must-see attractions and hidden gems.',
     helpful: 24,
     tripDate: 'April 2023'
   },
