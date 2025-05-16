@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -6,10 +5,10 @@ import { useTrips, Trip } from '@/hooks/useTrips';
 import { trackPageView } from '@/lib/analytics';
 
 import Header from '@/components/Header';
-import HeroImage from '@/components/tour/HeroImage';
+import HeroImage from '@/components/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import TabNav, { TabPanel } from '@/components/tour/TabNav';
-import DetailsGrid from '@/components/tour/DetailsGrid';
+import DetailsGrid from '@/components/DetailsGrid';
 import VariationCards from '@/components/tour/VariationCards';
 import Reviews from '@/components/tour/Reviews';
 import Footer from '@/components/Footer';
@@ -82,6 +81,20 @@ const TourDetail = () => {
     { id: 'faq', label: 'FAQ' },
   ];
 
+  // Prepare details for DetailsGrid
+  const tripDetails = trip ? [
+    { label: 'Duration', value: `${trip.duration} days` },
+    { label: 'Destination', value: trip.destination },
+    { label: 'Group Size', value: '18-35 year olds' },
+    { label: 'Trip Style', value: 'Adventure' }
+  ] : [];
+
+  useEffect(() => {
+    if (trip) {
+      console.debug('[TourDetail] loaded sections');
+    }
+  }, [trip]);
+
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col">
@@ -138,11 +151,11 @@ const TourDetail = () => {
           {trip && (
             <>
               <ErrorBoundary>
+                {/* Replace HeroImage component with new one */}
                 <HeroImage
-                  image={trip.image}
+                  imageUrl={trip.image}
                   title={trip.name}
-                  destination={trip.destination}
-                  duration={trip.duration}
+                  subtitle={trip.destination}
                 />
               </ErrorBoundary>
               
@@ -152,6 +165,12 @@ const TourDetail = () => {
                   rating={trip.rating}
                   reviewCount={trip.reviewCount}
                 />
+              </ErrorBoundary>
+              
+              <ErrorBoundary>
+                <div className="container py-6">
+                  <DetailsGrid details={tripDetails} />
+                </div>
               </ErrorBoundary>
               
               <ErrorBoundary>
