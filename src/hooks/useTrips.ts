@@ -329,3 +329,47 @@ export const useTrips = (options: UseTripsOptions = {}) => {
 
   return { trips, loading, error, getTripBySlug };
 };
+
+export const useTour = (slug: string) => {
+  const [tour, setTour] = useState<Trip | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTour = async () => {
+      setLoading(true);
+      try {
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
+        // Find tour by slug
+        const foundTour = mockTrips.find(trip => trip.slug === slug);
+        
+        if (!foundTour) {
+          setError('Tour not found');
+          setTour(null);
+        } else {
+          setTour(foundTour);
+          setError(null);
+          console.debug('[useTour] fetched', foundTour);
+        }
+      } catch (err) {
+        console.error('Error fetching tour:', err);
+        setError('Failed to fetch tour details. Please try again later.');
+        setTour(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      fetchTour();
+    } else {
+      setLoading(false);
+      setError('No tour ID provided');
+      setTour(null);
+    }
+  }, [slug]);
+
+  return { tour, loading, error };
+};

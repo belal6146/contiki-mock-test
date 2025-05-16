@@ -1,8 +1,7 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useTrips, Trip } from '@/hooks/useTrips';
+import { useTour } from '@/hooks/useTrips';
 import { trackPageView } from '@/lib/analytics';
 
 import Header from '@/components/Header';
@@ -21,14 +20,11 @@ import BookingFlow from '@/components/BookingFlow';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { getTripBySlug, loading, error } = useTrips();
+  const { tour: trip, loading, error } = useTour(slug || '');
   
   useEffect(() => {
     trackPageView(window.location.pathname);
   }, []);
-  
-  // Get trip data
-  const trip: Trip | undefined = slug ? getTripBySlug(slug) : undefined;
   
   // If trip is not found, redirect to 404
   if (!loading && !trip) {

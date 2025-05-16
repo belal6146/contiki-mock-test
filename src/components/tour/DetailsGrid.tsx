@@ -1,12 +1,16 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface DetailsGridProps {
   highlights: string[];
   included: string[];
 }
 
-const DetailsGrid: React.FC<DetailsGridProps> = ({ highlights, included }) => {
+const TourDetailsGrid: React.FC<DetailsGridProps> = ({ highlights, included }) => {
+  useEffect(() => {
+    console.debug('[TourDetailsGrid] mounted', { count: highlights.length + included.length });
+  }, [highlights.length, included.length]);
+
   return (
     <section className="py-12 bg-bgLight">
       <div className="container">
@@ -71,4 +75,4 @@ const DetailsGrid: React.FC<DetailsGridProps> = ({ highlights, included }) => {
   );
 };
 
-export default DetailsGrid;
+export default TourDetailsGrid;
