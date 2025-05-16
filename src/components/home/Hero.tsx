@@ -39,11 +39,13 @@ const Hero = () => {
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ backgroundImage: "url('https://www.contiki.com/assets/1200x800/image/croatia/2022_croatia_isle_of_hvar_guapa_beach_club_party_contiki_group_sunset_07.jpg')" }}
+        aria-hidden="true"
       />
       
-      {/* Gradient Overlay - Updated to match Contiki */}
+      {/* Gradient Overlay */}
       <div 
         className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent z-10"
+        aria-hidden="true"
       />
 
       {/* Content Container */}

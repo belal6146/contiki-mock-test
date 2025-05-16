@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { formatCurrency } from '@/lib/utils';
 
 interface TripCardProps {
   id: string;
@@ -19,11 +20,13 @@ const TripCard = ({ id, title, region, price }: TripCardProps) => {
   };
 
   return (
-    <Link to={`/tours/${id}`} onClick={handleClick}>
+    <Link to={`/tours/${id}`} onClick={handleClick} className="block">
       <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h3 className="font-medium text-lg">{title}</h3>
-        <p className="text-gray-600">{region}</p>
-        <p className="font-bold mt-2">£{price}</p>
+        <h3 className="font-montserrat font-medium text-lg">{title}</h3>
+        <p className="font-montserrat text-gray-600">{region}</p>
+        <p className="font-montserrat font-bold mt-2">
+          From {formatCurrency(price)}
+        </p>
       </div>
     </Link>
   );

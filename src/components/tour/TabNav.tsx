@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, KeyboardEvent } from 'react';
 import { cn } from '@/lib/utils';
 
 interface TabNavProps {
@@ -17,18 +17,33 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
     console.debug('[TabNav] mounted', { initialActiveTab: activeTab, tabsCount: tabs.length });
   }, []);
 
-  useEffect(() => {
-    console.debug('[TabNav] tab changed', { activeTab, tabLabel: tabs.find(tab => tab.id === activeTab)?.label });
-  }, [activeTab, tabs]);
-
   // Filter and get the active tab's children
   const activeContent = React.Children.toArray(children).find(
     (child) => React.isValidElement(child) && child.props.id === activeTab
   );
 
   const handleTabClick = (tabId: string) => {
-    console.debug('[TabNav] tab clicked', { tabId, previousTab: activeTab });
+    console.debug('[TabNav] tabClicked', { tab: tabs.find(tab => tab.id === tabId)?.label });
     setActiveTab(tabId);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>, currentIndex: number) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      
+      const direction = e.key === 'ArrowLeft' ? -1 : 1;
+      const nextIndex = (currentIndex + direction + tabs.length) % tabs.length;
+      const nextTabId = tabs[nextIndex].id;
+      
+      setActiveTab(nextTabId);
+      document.getElementById(`tab-${nextTabId}`)?.focus();
+      
+      console.debug('[TabNav] keyNavigation', { 
+        direction: e.key, 
+        prevTab: tabs[currentIndex].label,
+        nextTab: tabs[nextIndex].label 
+      });
+    }
   };
 
   return (
@@ -40,12 +55,13 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
         {/* Tab Navigation */}
         <div className="border-b border-gray-200 mb-8" role="tablist" aria-label="Tour details">
           <div className="flex overflow-x-auto hide-scrollbar">
-            {tabs.map((tab) => (
+            {tabs.map((tab, index) => (
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "px-4 md:px-6 py-3 font-medium whitespace-nowrap text-sm md:text-base transition-colors relative",
+                  "px-4 md:px-6 py-3 font-medium font-montserrat whitespace-nowrap text-sm md:text-base transition-colors relative",
                   activeTab === tab.id
                     ? "text-primary border-b-2 border-primary"
                     : "text-gray-500 hover:text-primary"
@@ -54,6 +70,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
                 aria-controls={`tab-panel-${tab.id}`}
                 id={`tab-${tab.id}`}
                 role="tab"
+                tabIndex={activeTab === tab.id ? 0 : -1}
                 type="button"
               >
                 {tab.label}

@@ -5,8 +5,7 @@ import { trackEvent } from '@/lib/analytics';
 
 interface PriceBarProps {
   oldPrice?: number;
-  newPrice: number; // Keep this as required
-  price?: number; // Add this to support the prop coming from TourDetail
+  newPrice: number;
   rating?: number;
   reviewCount?: number;
 }
@@ -14,31 +13,24 @@ interface PriceBarProps {
 const PriceBar: React.FC<PriceBarProps> = ({ 
   oldPrice, 
   newPrice, 
-  price, // Accept price prop
   rating = 0, 
   reviewCount = 0 
 }) => {
-  // We don't need to rename the prop and create a local variable anymore
-  // Just use newPrice directly in the component
-  
   useEffect(() => {
-    console.debug('[PriceBar] mounted', { oldPrice, newPrice: price ?? newPrice, rating, reviewCount });
-  }, [oldPrice, newPrice, price, rating, reviewCount]);
+    console.debug('[PriceBar] mounted', { oldPrice, newPrice, rating, reviewCount });
+  }, [oldPrice, newPrice, rating, reviewCount]);
   
   const handleViewDates = () => {
     console.debug('[PriceBar] viewDates clicked');
-    trackEvent('view_dates_clicked', { price: price ?? newPrice });
+    trackEvent('view_dates_clicked', { price: newPrice });
     // Navigate to the dates section
     document.getElementById('dates')?.scrollIntoView({ behavior: 'smooth' });
   };
   
   const handleRequestInfo = () => {
     console.debug('[PriceBar] requestInfo clicked');
-    trackEvent('request_info_clicked', { price: price ?? newPrice });
+    trackEvent('request_info_clicked', { price: newPrice });
   };
-  
-  // Use the actual price to display (price if provided, otherwise newPrice)
-  const displayPrice = price !== undefined ? price : newPrice;
   
   return (
     <section className="sticky top-16 z-40 bg-white shadow-md" aria-label="Tour pricing information">
@@ -49,12 +41,12 @@ const PriceBar: React.FC<PriceBarProps> = ({
               <p className="text-sm text-gray-500">From</p>
               <div className="flex items-end gap-2">
                 {oldPrice && (
-                  <p className="text-lg text-gray-400 line-through" aria-label={`Original price: ${formatCurrency(oldPrice)}`}>
+                  <p className="text-lg text-gray-400 line-through font-montserrat" aria-label={`Original price: ${formatCurrency(oldPrice)}`}>
                     {formatCurrency(oldPrice)}
                   </p>
                 )}
-                <p className="text-2xl font-bold text-primary" aria-label={`Current price: ${formatCurrency(displayPrice)}`}>
-                  {formatCurrency(displayPrice)}
+                <p className="text-2xl font-bold text-primary font-montserrat" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
+                  {formatCurrency(newPrice)}
                 </p>
               </div>
             </div>
@@ -79,7 +71,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
                     </svg>
                   ))}
                 </div>
-                <span className="text-gray-600">
+                <span className="text-gray-600 font-montserrat">
                   {rating > 0 ? `${rating} ` : ''}
                   {reviewCount > 0 ? `(${reviewCount} reviews)` : ''}
                 </span>
@@ -89,14 +81,14 @@ const PriceBar: React.FC<PriceBarProps> = ({
           
           <div className="flex space-x-3">
             <button 
-              className="btn-outline px-4 py-2 border-secondary text-secondary hover:bg-secondary hover:text-white"
+              className="btn-outline px-4 py-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-montserrat focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
               REQUEST INFO
             </button>
             <button 
-              className="btn-primary px-6 py-2 bg-accent text-white hover:bg-accent/90"
+              className="btn-primary px-6 py-2 bg-accent text-white hover:bg-accent/90 font-montserrat focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
               onClick={handleViewDates}
               aria-label="View available dates"
             >
