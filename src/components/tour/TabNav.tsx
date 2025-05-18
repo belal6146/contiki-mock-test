@@ -27,7 +27,8 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
     setActiveTab(tabId);
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>, currentIndex: number) => {
+  // Updated the type here to match the event from button elements
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       e.preventDefault();
       
