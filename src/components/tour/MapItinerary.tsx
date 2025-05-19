@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 interface ItineraryDay {
   day: number;
@@ -40,7 +41,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
   }));
   
   return (
-    <section className="py-12">
+    <section className="py-12 bg-white">
       <div className="container">
         <h2 className="text-2xl font-medium text-primary mb-6">Map & Itinerary</h2>
         
@@ -51,6 +52,14 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
             alt="Trip route map" 
             className="w-full h-full object-cover"
           />
+          
+          {/* Mapbox placeholder overlay with message */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 text-white">
+            <div className="text-center">
+              <p className="text-lg font-medium mb-2">Interactive Map</p>
+              <p className="text-sm opacity-80">Map visualization would appear here</p>
+            </div>
+          </div>
         </div>
         
         {/* Itinerary timeline */}
@@ -65,13 +74,14 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
               {processedItinerary.map((day, index) => (
                 <button
                   key={index}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors duration-150 ${
                     index <= activeIndex 
                       ? 'bg-accent text-white' 
                       : 'bg-white border border-gray-300 text-gray-600'
                   }`}
                   onClick={() => handleNavigation(index)}
                   aria-label={`Day ${day.day}`}
+                  aria-current={index === activeIndex ? 'step' : undefined}
                 >
                   {day.day}
                 </button>
@@ -80,7 +90,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
           </div>
           
           {/* Location indicators */}
-          <div className="flex overflow-x-auto hide-scrollbar pb-6">
+          <div className="flex overflow-x-auto hide-scrollbar pb-6 scrollbar-hide">
             {processedItinerary.map((day, index) => (
               <div
                 key={index}
@@ -102,16 +112,22 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
         
         {/* Download itinerary button */}
         <div className="flex justify-center mb-8">
-          <button className="flex items-center space-x-2 text-primary font-medium">
+          <Button 
+            variant="outline" 
+            className="flex items-center space-x-2 text-primary font-medium border-primary hover:bg-primary/5 transition-colors duration-150"
+          >
             <span>DOWNLOAD ITINERARY</span>
-          </button>
+          </Button>
         </div>
         
         {/* Expand all days button */}
         <div className="flex justify-end mb-4">
-          <button className="text-secondary text-sm font-medium">
+          <Button 
+            variant="ghost" 
+            className="text-secondary text-sm font-medium hover:bg-secondary/5 transition-colors duration-150"
+          >
             EXPAND ALL DAYS
-          </button>
+          </Button>
         </div>
       </div>
     </section>
