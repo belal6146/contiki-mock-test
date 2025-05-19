@@ -16,24 +16,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 0%; /* Black */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 72 100% 50%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 72 100% 50%; /* Chartreuse #CCFF00 */
+    --secondary-foreground: 0 0% 0%; /* Black */
 
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 72 100% 50%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 72 100% 50%; /* Chartreuse #CCFF00 */
+    --accent-foreground: 0 0% 0%; /* Black */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 72 100% 50%;
+    --ring: 72 100% 50%; /* Chartreuse #CCFF00 */
 
     --radius: 0.5rem;
   }
@@ -70,19 +70,19 @@
     disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply btn bg-black text-white hover:bg-black/90;
   }
   .btn-secondary {
-    @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/90;
+    @apply btn bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90;
   }
   .btn-accent {
-    @apply btn bg-accent text-accent-foreground hover:bg-accent/90;
+    @apply btn bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90;
   }
   .btn-outline {
-    @apply btn border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+    @apply btn border border-input bg-background hover:bg-[#CCFF00] hover:text-black;
   }
   .btn-ghost {
-    @apply btn hover:bg-accent/10 hover:text-accent-foreground;
+    @apply btn hover:bg-[#CCFF00]/10 hover:text-black;
   }
 
   .heading-xl {

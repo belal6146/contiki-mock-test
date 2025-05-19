@@ -28,12 +28,12 @@ const Header = () => {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center" onClick={() => handleLinkClick('Home')} aria-label="Contiki Home">
-          <span className="font-bold text-2xl text-primary">Contiki</span>
+          <span className="font-bold text-2xl text-black">Contiki</span>
         </Link>
         
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 rounded-md text-primary"
+          className="md:hidden p-2 rounded-md text-black"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
@@ -46,7 +46,7 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
           <Link 
             to="/" 
-            className={`font-medium ${location.pathname === '/' ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname === '/' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('Home')}
             aria-current={location.pathname === '/' ? 'page' : undefined}
           >
@@ -54,7 +54,7 @@ const Header = () => {
           </Link>
           <Link 
             to="/destinations" 
-            className={`font-medium ${location.pathname.startsWith('/destinations') ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname.startsWith('/destinations') ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('Destinations')}
             aria-current={location.pathname.startsWith('/destinations') ? 'page' : undefined}
           >
@@ -62,7 +62,7 @@ const Header = () => {
           </Link>
           <Link 
             to="/tours" 
-            className={`font-medium ${location.pathname.startsWith('/tours') ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname.startsWith('/tours') ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('Tours')}
             aria-current={location.pathname.startsWith('/tours') ? 'page' : undefined}
           >
@@ -70,7 +70,7 @@ const Header = () => {
           </Link>
           <Link 
             to="/about" 
-            className={`font-medium ${location.pathname === '/about' ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname === '/about' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('About Us')}
             aria-current={location.pathname === '/about' ? 'page' : undefined}
           >
@@ -78,7 +78,7 @@ const Header = () => {
           </Link>
           <Link 
             to="/contact" 
-            className={`font-medium ${location.pathname === '/contact' ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname === '/contact' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('Contact')}
             aria-current={location.pathname === '/contact' ? 'page' : undefined}
           >
@@ -90,7 +90,7 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <Link 
             to="/login" 
-            className={`font-medium ${location.pathname === '/login' ? 'text-accent' : 'text-primary'} hover:text-accent transition-colors`}
+            className={`font-medium ${location.pathname === '/login' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00] transition-colors`}
             onClick={() => handleLinkClick('Login')}
             aria-current={location.pathname === '/login' ? 'page' : undefined}
           >
@@ -98,7 +98,7 @@ const Header = () => {
           </Link>
           <Link 
             to="/book-now" 
-            className="btn-primary px-4 py-2"
+            className="bg-[#CCFF00] text-black px-4 py-2 rounded hover:bg-[#CCFF00]/90 transition-colors"
             onClick={() => handleLinkClick('Book Now')}
           >
             Book Now
@@ -112,7 +112,7 @@ const Header = () => {
           <div className="container mx-auto py-4 space-y-4">
             <Link 
               to="/" 
-              className={`block font-medium ${location.pathname === '/' ? 'text-accent' : 'text-primary'} hover:text-accent`}
+              className={`block font-medium ${location.pathname === '/' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
               onClick={() => handleLinkClick('Home')}
               aria-current={location.pathname === '/' ? 'page' : undefined}
             >
@@ -120,7 +120,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/destinations" 
-              className={`block font-medium ${location.pathname.startsWith('/destinations') ? 'text-accent' : 'text-primary'} hover:text-accent`}
+              className={`block font-medium ${location.pathname.startsWith('/destinations') ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
               onClick={() => handleLinkClick('Destinations')}
               aria-current={location.pathname.startsWith('/destinations') ? 'page' : undefined}
             >
@@ -128,7 +128,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/tours" 
-              className={`block font-medium ${location.pathname.startsWith('/tours') ? 'text-accent' : 'text-primary'} hover:text-accent`}
+              className={`block font-medium ${location.pathname.startsWith('/tours') ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
               onClick={() => handleLinkClick('Tours')}
               aria-current={location.pathname.startsWith('/tours') ? 'page' : undefined}
             >
@@ -136,7 +136,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/about" 
-              className={`block font-medium ${location.pathname === '/about' ? 'text-accent' : 'text-primary'} hover:text-accent`}
+              className={`block font-medium ${location.pathname === '/about' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
               onClick={() => handleLinkClick('About Us')}
               aria-current={location.pathname === '/about' ? 'page' : undefined}
             >
@@ -144,7 +144,7 @@ const Header = () => {
             </Link>
             <Link 
               to="/contact" 
-              className={`block font-medium ${location.pathname === '/contact' ? 'text-accent' : 'text-primary'} hover:text-accent`}
+              className={`block font-medium ${location.pathname === '/contact' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
               onClick={() => handleLinkClick('Contact')}
               aria-current={location.pathname === '/contact' ? 'page' : undefined}
             >
@@ -153,7 +153,7 @@ const Header = () => {
             <div className="pt-4 mt-4 border-t border-gray-200 flex flex-col space-y-4">
               <Link 
                 to="/login" 
-                className={`font-medium ${location.pathname === '/login' ? 'text-accent' : 'text-primary'} hover:text-accent`}
+                className={`font-medium ${location.pathname === '/login' ? 'text-[#CCFF00]' : 'text-black'} hover:text-[#CCFF00]`}
                 onClick={() => handleLinkClick('Login')}
                 aria-current={location.pathname === '/login' ? 'page' : undefined}
               >
@@ -161,7 +161,7 @@ const Header = () => {
               </Link>
               <Link 
                 to="/book-now" 
-                className="btn-primary px-4 py-2 text-center"
+                className="bg-[#CCFF00] text-black px-4 py-2 text-center rounded hover:bg-[#CCFF00]/90 transition-colors"
                 onClick={() => handleLinkClick('Book Now')}
               >
                 Book Now
