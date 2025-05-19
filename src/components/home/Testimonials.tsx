@@ -36,13 +36,8 @@ const testimonials = [
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Auto-advance testimonials
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length);
-    }, 8000);
-    
-    return () => clearInterval(interval);
+    console.debug('[Testimonials] mounted');
   }, []);
   
   const settings = {
@@ -58,7 +53,7 @@ const Testimonials = () => {
     customPaging: (i: number) => (
       <button
         className={`w-3 h-3 rounded-full transition-colors ${
-          i === activeIndex ? "bg-accent" : "bg-white/30 hover:bg-white/50"
+          i === activeIndex ? "bg-[#CCFF00]" : "bg-white/30 hover:bg-white/50"
         }`}
         aria-label={`Go to testimonial ${i + 1}`}
       />
@@ -67,7 +62,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-primary text-white">
+    <section className="py-16 md:py-24 bg-black text-white">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="heading-lg mb-4">What Our Travelers Say</h2>
@@ -81,7 +76,7 @@ const Testimonials = () => {
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="px-4">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-xl">
-                  <svg className="w-12 h-12 text-accent mb-6 opacity-80" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                  <svg className="w-12 h-12 text-[#CCFF00] mb-6 opacity-80" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                     <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                   </svg>
                   

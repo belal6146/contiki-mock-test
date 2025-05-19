@@ -39,46 +39,6 @@ const TrendingDestinations = () => {
     }
   };
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    pauseOnHover: true,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1280,
-        settings: {
-          slidesToShow: 4,
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1.5,
-          centerMode: true,
-          centerPadding: '40px',
-        }
-      }
-    ]
-  };
-
   return (
     <section className="py-12">
       <div className="container">
@@ -106,29 +66,28 @@ const TrendingDestinations = () => {
           </div>
         </div>
         
-        <div className="relative overflow-hidden">
-          <Slider ref={sliderRef} {...settings} className="slick-slider">
-            {destinations.map((destination) => (
-              <div key={destination.id} className="px-2">
-                <Link 
-                  to={`/tours/${destination.id}`}
-                  className="block w-full hover:opacity-90 transition-opacity"
-                >
-                  <div className="relative aspect-square rounded-lg overflow-hidden">
-                    <img 
-                      src={destination.image} 
-                      alt={destination.name} 
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <p className="mt-2 text-center font-medium text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {destinations.map((destination) => (
+            <Link 
+              key={destination.id}
+              to={`/tours/${destination.id}`}
+              className="block hover:scale-105 transition-all duration-150 shadow-sm hover:shadow-md"
+            >
+              <div className="relative h-[300px] w-[200px] rounded-lg overflow-hidden">
+                <img 
+                  src={destination.image} 
+                  alt={destination.name} 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute bottom-0 left-0 p-3 bg-black/40 w-full">
+                  <p className="font-medium text-white">
                     {destination.name}
                   </p>
-                </Link>
+                </div>
               </div>
-            ))}
-          </Slider>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

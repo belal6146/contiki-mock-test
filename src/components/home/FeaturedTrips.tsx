@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
@@ -9,7 +10,7 @@ import { trackEvent } from '@/lib/analytics';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Custom arrow components instead of importing from carousel
+// Custom arrow components
 const PrevArrow = (props: any) => {
   const { className, style, onClick } = props;
   return (
@@ -49,11 +50,13 @@ const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
   
   useEffect(() => {
+    console.debug('[FeaturedTrips] mounted');
     trackEvent('component_mounted', { name: 'FeaturedTrips' });
   }, []);
   
   useEffect(() => {
     if (trips.length > 0) {
+      console.debug('[FeaturedTrips] data loaded', { count: trips.length });
       trackEvent('trips_loaded', { count: trips.length });
     }
   }, [trips]);
@@ -110,12 +113,11 @@ const FeaturedTrips = () => {
         {loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="flex flex-col">
-                <Skeleton className="aspect-w-16 aspect-h-9 h-48 rounded-t-lg" />
+              <div key={i} className="flex flex-col w-[300px] h-[400px] mx-auto">
+                <Skeleton className="h-[250px] rounded-t-lg w-full" />
                 <Skeleton className="h-8 mt-4 w-3/4" />
                 <Skeleton className="h-6 mt-2 w-1/2" />
                 <Skeleton className="h-6 mt-2 w-1/4" />
-                <Skeleton className="h-10 mt-4 w-1/3" />
               </div>
             ))}
           </div>
@@ -140,12 +142,11 @@ const FeaturedTrips = () => {
             <Suspense fallback={
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex flex-col">
-                    <Skeleton className="aspect-w-16 aspect-h-9 h-48 rounded-t-lg" />
+                  <div key={i} className="flex flex-col w-[300px] h-[400px] mx-auto">
+                    <Skeleton className="h-[250px] rounded-t-lg w-full" />
                     <Skeleton className="h-8 mt-4 w-3/4" />
                     <Skeleton className="h-6 mt-2 w-1/2" />
                     <Skeleton className="h-6 mt-2 w-1/4" />
-                    <Skeleton className="h-10 mt-4 w-1/3" />
                   </div>
                 ))}
               </div>
@@ -153,21 +154,22 @@ const FeaturedTrips = () => {
               <Slider {...sliderSettings} className="slick-slider">
                 {trips.map((trip) => (
                   <div key={trip.id} className="px-4">
-                    <div className="group transition-all duration-300 hover:scale-105">
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                    <div className="group w-[300px] h-[400px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-all duration-150 hover:shadow-lg">
+                      <div className="h-[250px] overflow-hidden">
                         <img 
                           src={trip.image || '/placeholder.svg'} 
                           alt={`${trip.name} tour in ${trip.destination}`}
-                          className="w-full h-full object-cover group-hover:shadow-lg transition-all"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           loading="lazy"
                         />
                       </div>
-                      <TripCard
-                        id={trip.id}
-                        title={trip.name}
-                        region={trip.destination}
-                        price={trip.price}
-                      />
+                      <div className="p-4">
+                        <h3 className="font-montserrat font-medium text-lg truncate">{trip.name}</h3>
+                        <p className="font-montserrat text-gray-600">{trip.destination}</p>
+                        <p className="font-montserrat font-bold mt-2 bg-[#CCFF00]/30 inline-block px-2 py-1 rounded">
+                          From ${trip.price.toLocaleString()}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
