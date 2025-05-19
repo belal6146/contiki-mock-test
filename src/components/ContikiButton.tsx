@@ -22,8 +22,8 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
 }) => {
   const variantClasses = {
     primary: 'bg-primary text-white hover:bg-primary/90',
-    secondary: 'bg-secondary text-white hover:bg-secondary/90',
-    accent: 'bg-accent text-white hover:bg-accent/90',
+    secondary: 'bg-secondary text-black hover:bg-secondary/90',
+    accent: 'bg-accent text-black hover:bg-accent/90',
     outline: 'border border-primary text-primary hover:bg-primary hover:text-white',
     ghost: 'text-primary hover:bg-primary/10',
   };

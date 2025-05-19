@@ -30,24 +30,24 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#003459',
+          DEFAULT: '#000000', // Changed from blue to black
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#007EA7',
-          foreground: '#FFFFFF',
+          DEFAULT: '#CCFF00', // Changed from blue to chartreuse (#cf0)
+          foreground: '#000000', // Black text on chartreuse background
         },
         accent: {
-          DEFAULT: '#00A8E8',
-          foreground: '#FFFFFF',
+          DEFAULT: '#CCFF00', // Changed from blue to chartreuse
+          foreground: '#000000',
         },
         highlight: {
-          DEFAULT: '#DFFF00',
-          foreground: '#003459',
+          DEFAULT: '#CCFF00',
+          foreground: '#000000',
         },
         bgLight: {
-          DEFAULT: '#F1F6F9',
-          foreground: '#003459',
+          DEFAULT: '#FFFFFF', // Changed to white
+          foreground: '#000000',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
