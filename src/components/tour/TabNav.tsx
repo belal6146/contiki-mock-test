@@ -8,14 +8,26 @@ interface TabNavProps {
     id: string;
     label: string;
   }[];
+  activeTab?: string;
+  onChange?: (tabId: string) => void;
 }
 
-const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
-  const [activeTab, setActiveTab] = useState(tabs[0]?.id);
+const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActiveTab, onChange }) => {
+  const [internalActiveTab, setInternalActiveTab] = useState(externalActiveTab || tabs[0]?.id);
+  
+  // Sync internal state with external prop if provided
+  useEffect(() => {
+    if (externalActiveTab) {
+      setInternalActiveTab(externalActiveTab);
+    }
+  }, [externalActiveTab]);
 
   useEffect(() => {
-    console.debug('[TabNav] mounted', { initialActiveTab: activeTab, tabsCount: tabs.length });
+    console.debug('[TabNav] mounted', { initialActiveTab: internalActiveTab, tabsCount: tabs.length });
   }, []);
+
+  // Get the active tab id to use
+  const activeTab = externalActiveTab || internalActiveTab;
 
   // Filter and get the active tab's children
   const activeContent = React.Children.toArray(children).find(
@@ -24,7 +36,12 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
 
   const handleTabClick = (tabId: string) => {
     console.debug('[TabNav] tabClicked', { tab: tabs.find(tab => tab.id === tabId)?.label });
-    setActiveTab(tabId);
+    
+    if (onChange) {
+      onChange(tabId);
+    } else {
+      setInternalActiveTab(tabId);
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
@@ -35,7 +52,12 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
       const nextIndex = (currentIndex + direction + tabs.length) % tabs.length;
       const nextTabId = tabs[nextIndex].id;
       
-      setActiveTab(nextTabId);
+      if (onChange) {
+        onChange(nextTabId);
+      } else {
+        setInternalActiveTab(nextTabId);
+      }
+      
       document.getElementById(`tab-${nextTabId}`)?.focus();
       
       console.debug('[TabNav] keyNavigation', { 
