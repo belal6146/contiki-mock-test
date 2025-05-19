@@ -1,15 +1,6 @@
-
 import React from 'react';
 import { formatCurrency, formatDate } from '@/lib/utils';
-
-interface Variation {
-  id: string;
-  name: string;
-  startDate: string;
-  endDate: string;
-  price: number;
-  availability: 'available' | 'limited' | 'soldout';
-}
+import { Variation } from '@/types/trip'; // Import from our types file
 
 interface VariationCardsProps {
   variations: Variation[];

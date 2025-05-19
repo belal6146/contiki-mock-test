@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTour, useTrips } from '@/hooks/useTrips';
@@ -13,6 +12,7 @@ import TourDetailContent from '@/components/tour-detail/TourDetailContent';
 import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
+import { Trip } from '@/types/trip';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
