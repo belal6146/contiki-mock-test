@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -9,7 +8,7 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  safelist: [/^slick-/, /^slick$/, /^slick-theme$/],
+  safelist: [/^slick-/, /^slick$/, /^slick-theme$/, /slick-active/, /slick-current/, /slick-slide/, /slick-cloned/, /slick-dots/, /slick-list/, /slick-track/],
   prefix: "",
   theme: {
     container: {
@@ -75,9 +74,17 @@ export default {
         '8': '8px',
         '12': '12px',
         '16': '16px',
+        '20': '20px',
         '24': '24px',
+        '28': '28px',
         '32': '32px',
+        '36': '36px',
+        '40': '40px',
+        '44': '44px',
         '48': '48px',
+        '52': '52px',
+        '56': '56px',
+        '60': '60px',
         '64': '64px',
       },
       fontSize: {
@@ -111,11 +118,21 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        // Add fade-in animation for BackToTopButton
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        // Add fade-in animation
+        "fade-in": "fade-in 0.3s ease-out",
       },
+      transitionDuration: {
+        '150': '150ms',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

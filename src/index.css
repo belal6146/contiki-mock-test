@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
 @tailwind base;
@@ -55,6 +56,7 @@
     letter-spacing: 0.015em;
   }
 
+  /* Typography refinements to match Contiki exactly */
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
     margin: 0;
@@ -109,9 +111,20 @@
     margin: 0 auto;
   }
 
-  /* Add transition to all interactive elements */
+  /* Add uniform transition to interactive elements */
   a, button, input, select, textarea {
     @apply transition-all duration-150 ease-in-out;
+  }
+  
+  /* Global focus styles */
+  a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+
+  /* Smooth scroll behavior for all anchor links */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Adjust for fixed headers */
   }
 }
 
@@ -141,6 +154,7 @@
     @apply btn hover:bg-[#CCFF00]/10 hover:text-black;
   }
 
+  /* Typography utility classes with exact Contiki specs */
   .heading-xl {
     @apply text-4xl md:text-5xl lg:text-6xl font-bold;
     letter-spacing: -0.025em;
@@ -183,5 +197,28 @@
   /* Focus styles for form elements */
   .form-input {
     @apply focus:outline-none focus:ring focus:ring-accent;
+  }
+  
+  /* Slick carousel customizations */
+  .slick-slider {
+    @apply relative;
+  }
+  
+  .slick-dots {
+    @apply flex justify-center mt-4;
+  }
+  
+  .slick-dots li {
+    @apply mx-1;
+  }
+  
+  .slick-dots li button {
+    @apply w-3 h-3 rounded-full bg-gray-300 transition-colors duration-150 ease-in-out hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-accent;
+    text-indent: -9999px;
+    overflow: hidden;
+  }
+  
+  .slick-dots li.slick-active button {
+    @apply bg-accent;
   }
 }
