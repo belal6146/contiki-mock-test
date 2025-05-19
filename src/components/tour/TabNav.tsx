@@ -27,7 +27,6 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
     setActiveTab(tabId);
   };
 
-  // Updated the type here to match the event from button elements
   const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       e.preventDefault();
@@ -62,9 +61,11 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
                 onClick={() => handleTabClick(tab.id)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "px-4 md:px-6 py-3 font-medium font-montserrat whitespace-nowrap text-sm md:text-base transition-colors relative",
+                  "px-4 md:px-6 py-3 font-medium font-montserrat whitespace-nowrap text-sm md:text-base",
+                  "focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+                  "relative transition-colors",
                   activeTab === tab.id
-                    ? "text-primary border-b-2 border-primary"
+                    ? "text-primary"
                     : "text-gray-500 hover:text-primary"
                 )}
                 aria-selected={activeTab === tab.id}
@@ -75,12 +76,14 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs }) => {
                 type="button"
               >
                 {tab.label}
-                {activeTab === tab.id && (
-                  <span 
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-primary" 
-                    aria-hidden="true"
-                  />
-                )}
+                <span 
+                  className={cn(
+                    "absolute bottom-0 left-0 w-full h-0.5 bg-primary",
+                    "transition-transform duration-150 ease-in-out",
+                    activeTab === tab.id ? "scale-x-100" : "scale-x-0"
+                  )}
+                  aria-hidden="true"
+                />
               </button>
             ))}
           </div>
