@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { ArrowUp } from 'lucide-react';
 
 const BackToTopButton: React.FC = () => {
@@ -33,13 +32,13 @@ const BackToTopButton: React.FC = () => {
   }
   
   return (
-    <Button
-      className="fixed bottom-8 right-8 rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+    <button
+      className="fixed bottom-8 right-8 rounded-full w-12 h-12 flex items-center justify-center shadow-lg bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 transition-colors"
       onClick={scrollToTop}
       aria-label="Back to top"
     >
       <ArrowUp className="w-6 h-6" />
-    </Button>
+    </button>
   );
 };
 

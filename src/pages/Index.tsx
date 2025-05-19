@@ -6,14 +6,18 @@ import Hero from '@/components/home/Hero';
 import SearchBar from '@/components/home/SearchBar';
 import FeaturedTrips from '@/components/home/FeaturedTrips';
 import Testimonials from '@/components/home/Testimonials';
+import TrendingDestinations from '@/components/home/TrendingDestinations';
+import PartnerLogos from '@/components/home/PartnerLogos';
+import SixTwoCTA from '@/components/home/SixTwoCTA';
+import BackToTopButton from '@/components/BackToTopButton';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import BackToTopButton from '@/components/BackToTopButton';
 import { trackPageView } from '@/lib/analytics';
 
 const Index = () => {
   useEffect(() => {
     trackPageView(window.location.pathname);
+    console.debug('[Homepage] loaded');
   }, []);
 
   return (
@@ -70,6 +74,24 @@ const Index = () => {
         
         <ErrorBoundary>
           <Testimonials />
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <div className="mt-12">
+            <TrendingDestinations />
+          </div>
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <div className="mt-12">
+            <PartnerLogos />
+          </div>
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <div className="mt-12">
+            <SixTwoCTA />
+          </div>
         </ErrorBoundary>
       </main>
       
