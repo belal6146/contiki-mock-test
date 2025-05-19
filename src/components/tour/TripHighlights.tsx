@@ -125,14 +125,16 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({ highlights }) => {
         </div>
       </div>
 
-      <style jsx>{`
-        :global(.highlights-slider .slick-dots) {
+      <style>
+        {`
+        .highlights-slider .slick-dots {
           bottom: -30px;
         }
-        :global(.highlights-slider .slick-dots li button:before) {
+        .highlights-slider .slick-dots li button:before {
           font-size: 10px;
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };
