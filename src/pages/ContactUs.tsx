@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { trackPageView } from '@/lib/analytics';
+import { trackPageView, trackEvent } from '@/lib/analytics';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
@@ -19,7 +20,6 @@ const ContactUs = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    console.debug('[ContactUs] page loaded');
     trackPageView(window.location.pathname);
   }, []);
 
@@ -30,7 +30,7 @@ const ContactUs = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.debug('[ContactUs] form submitted', formData);
+    trackEvent('contact_form_submit', formData);
     setIsSubmitting(true);
 
     // Simulate API call
@@ -51,6 +51,48 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Contact Us | Contiki</title>
+        <meta name="description" content="Get in touch with Contiki. Our team is ready to answer your questions about our trips, booking process, and travel experiences." />
+        <meta name="keywords" content="contact contiki, contiki support, travel help, contiki questions" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Contact Us | Contiki" />
+        <meta property="og:description" content="Get in touch with Contiki. Our team is ready to answer your questions about our trips, booking process, and travel experiences." />
+        <meta property="og:image" content="https://www.contiki.com/contact-og-image.jpg" />
+        <meta property="og:url" content="https://www.contiki.com/contact" />
+        
+        {/* JSON-LD for Contact Page */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contiki Contact Page",
+            "description": "Contact Contiki for travel inquiries",
+            "url": "https://www.contiki.com/contact",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Contiki",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+1-123-456-7890",
+                "email": "info@contiki-clone.com",
+                "contactType": "customer service",
+                "availableLanguage": ["English"]
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "123 Adventure St",
+                "addressLocality": "Travel City",
+                "postalCode": "10001",
+                "addressCountry": "US"
+              }
+            }
+          }
+        `}</script>
+      </Helmet>
+      
       <Header />
       
       <main className="flex-grow container mx-auto py-12">

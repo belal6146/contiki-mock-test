@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -7,6 +6,7 @@ import { debounce } from '@/lib/utils';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
+import { trackPageView, trackEvent } from '@/lib/analytics';
 
 // Lazy load the TripCard component
 const TripCard = lazy(() => import('@/components/TripCard'));
@@ -29,7 +29,7 @@ const Tours = () => {
   
   // Set up debounced filter update
   const debouncedFilterUpdate = debounce((newFilters: typeof filters) => {
-    console.debug('[TripListing] filtersChanged', { filters: newFilters });
+    trackEvent('tours_filter_change', { filters: newFilters });
     setFilters(newFilters);
   }, 300);
   
@@ -40,8 +40,8 @@ const Tours = () => {
   });
   
   useEffect(() => {
-    console.debug('[TripListing] mounted', { filters });
-  }, []);
+    trackPageView(window.location.pathname + location.search);
+  }, [location.pathname, location.search]);
   
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFilters = { ...filters, destination: e.target.value };
@@ -63,10 +63,33 @@ const Tours = () => {
       <Helmet>
         <title>Find Your Perfect Trip | Contiki Tours</title>
         <meta name="description" content="Explore our range of trips for 18-35 year olds. Filter by destination, date, and number of travelers to find your perfect adventure." />
+        <meta name="keywords" content="contiki tours, travel packages, young adult travel, group travel" />
+        
+        {/* Open Graph / Social Media */}
         <meta property="og:title" content="Find Your Perfect Trip | Contiki Tours" />
         <meta property="og:description" content="Explore our range of trips for 18-35 year olds. Filter by destination, date, and number of travelers to find your perfect adventure." />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.contiki.com/tours-og-image.jpg" />
+        <meta property="og:url" content="https://www.contiki.com/tours" />
+        
+        {/* Canonical URL */}
         <link rel="canonical" href="https://www.contiki.com/tours" />
+        
+        {/* JSON-LD for Tour Listing */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Contiki Tours",
+            "description": "Explore our range of trips for 18-35 year olds",
+            "url": "https://www.contiki.com/tours",
+            "provider": {
+              "@type": "Organization",
+              "name": "Contiki",
+              "url": "https://www.contiki.com"
+            }
+          }
+        `}</script>
       </Helmet>
       
       <Header />

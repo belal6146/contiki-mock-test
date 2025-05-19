@@ -17,7 +17,6 @@ import { trackPageView } from '@/lib/analytics';
 const Index = () => {
   useEffect(() => {
     trackPageView(window.location.pathname);
-    console.debug('[Homepage] loaded');
   }, []);
 
   return (

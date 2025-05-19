@@ -1,7 +1,6 @@
 
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { useTrips } from '@/hooks/useTrips';
 import { useTour } from '@/hooks/useTour';
 import { trackPageView, trackEvent } from '@/lib/analytics';

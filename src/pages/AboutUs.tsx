@@ -1,17 +1,55 @@
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { trackPageView } from '@/lib/analytics';
 
 const AboutUs = () => {
   useEffect(() => {
-    console.debug('[AboutUs] page loaded');
     trackPageView(window.location.pathname);
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>About Contiki | Travel for 18-35 Year Olds</title>
+        <meta name="description" content="Learn about Contiki's 60-year history of providing unforgettable travel experiences for 18-35 year olds around the world." />
+        <meta name="keywords" content="about contiki, contiki history, travel company, young adult travel" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="About Contiki | Travel for 18-35 Year Olds" />
+        <meta property="og:description" content="Learn about Contiki's 60-year history of providing unforgettable travel experiences for 18-35 year olds around the world." />
+        <meta property="og:image" content="https://www.contiki.com/about-og-image.jpg" />
+        <meta property="og:url" content="https://www.contiki.com/about" />
+        
+        {/* JSON-LD for About Us */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Contiki",
+              "description": "Travel company for 18-35 year olds",
+              "foundingDate": "1962",
+              "founder": {
+                "@type": "Person",
+                "name": "John Anderson"
+              },
+              "url": "https://www.contiki.com",
+              "logo": "https://www.contiki.com/logo.png",
+              "sameAs": [
+                "https://www.facebook.com/contiki",
+                "https://www.instagram.com/contiki",
+                "https://twitter.com/contiki"
+              ]
+            }
+          }
+        `}</script>
+      </Helmet>
+      
       <Header />
       
       <main className="flex-grow container mx-auto py-12">

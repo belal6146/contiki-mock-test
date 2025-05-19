@@ -1,8 +1,10 @@
 
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { trackPageView } from '@/lib/analytics';
 
 const DestinationCard = ({ name, image, description }: { name: string; image: string; description: string }) => (
   <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
@@ -54,11 +56,79 @@ const destinations = [
 
 const Destinations = () => {
   useEffect(() => {
-    console.debug('[Destinations] page mounted');
+    trackPageView(window.location.pathname);
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Explore Destinations | Contiki</title>
+        <meta name="description" content="Discover amazing destinations around the world with Contiki. Find the perfect location for your next adventure." />
+        <meta name="keywords" content="travel destinations, europe, asia, north america, south america, africa, oceania" />
+        
+        {/* Open Graph / Social Media */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Explore Destinations | Contiki" />
+        <meta property="og:description" content="Discover amazing destinations around the world with Contiki. Find the perfect location for your next adventure." />
+        <meta property="og:image" content="https://www.contiki.com/destinations-og-image.jpg" />
+        <meta property="og:url" content="https://www.contiki.com/destinations" />
+        
+        {/* JSON-LD for Destinations */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "TravelAgency",
+            "name": "Contiki",
+            "url": "https://www.contiki.com/destinations",
+            "description": "Explore destinations around the world with Contiki",
+            "makesOffer": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "Europe"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "Asia"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "North America"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "South America"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "Africa"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "TouristDestination",
+                  "name": "Oceania"
+                }
+              }
+            ]
+          }
+        `}</script>
+      </Helmet>
+      
       <Header />
       
       <main className="flex-grow">
