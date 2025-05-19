@@ -1,4 +1,3 @@
-
 import React from 'react';
 import TripHighlights from '@/components/tour/TripHighlights';
 import MapItinerary from '@/components/tour/MapItinerary';
@@ -7,7 +6,7 @@ import WhereYouWillStay from '@/components/tour/WhereYouWillStay';
 import FlexDepositBar from '@/components/tour/FlexDepositBar';
 import RelatedTrips from '@/components/tour/RelatedTrips';
 import FAQAccordion from '@/components/tour/FAQAccordion';
-import { Trip } from '@/types/trip';
+import { Trip } from '@/types/trips';
 
 interface TourOverviewTabProps {
   trip: Trip;

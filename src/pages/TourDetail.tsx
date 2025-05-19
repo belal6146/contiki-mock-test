@@ -1,8 +1,8 @@
-
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useTour, useTrips } from '@/hooks/useTrips';
+import { useTrips } from '@/hooks/useTrips';
+import { useTour } from '@/hooks/useTour';
 import { trackPageView, trackEvent } from '@/lib/analytics';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,7 +13,7 @@ import TourDetailHead from '@/components/tour-detail/TourDetailHead';
 import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
-import { Trip } from '@/types/trip';
+import { Trip } from '@/types/trips';
 import HeroImage from '@/components/tour/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import Breadcrumb from '@/components/Breadcrumb';
