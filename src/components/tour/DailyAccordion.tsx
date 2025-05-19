@@ -40,7 +40,7 @@ const DailyAccordion: React.FC<DailyAccordionProps> = ({ days }) => {
           >
             <AccordionTrigger 
               className="py-4 px-4 w-full text-left flex items-center justify-between hover:no-underline"
-              onOpenChange={(isOpen) => handleToggle(isOpen, day.day)}
+              onClick={() => handleToggle(true, day.day)} // Changed from onOpenChange to onClick
             >
               <div className="flex items-center">
                 <span className="inline-block w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-sm font-medium mr-4">
