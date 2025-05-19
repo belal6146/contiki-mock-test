@@ -1,90 +1,175 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Twitter, Youtube, Search } from 'lucide-react';
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+
+const subscribeSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address" }),
+});
+
+type SubscribeFormValues = z.infer<typeof subscribeSchema>;
 
 const Footer = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
   useEffect(() => {
     console.debug('[Footer] mounted');
   }, []);
   
+  const form = useForm<SubscribeFormValues>({
+    resolver: zodResolver(subscribeSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  function onSubmit(data: SubscribeFormValues) {
+    console.debug('Newsletter signup:', data);
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 3000);
+  }
+
   return (
-    <footer className="bg-black text-white pt-16 pb-8">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <footer className="bg-black text-white pt-12 pb-8 font-montserrat">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-4">
           <div>
-            <h3 className="text-xl font-bold font-montserrat mb-6">Contiki</h3>
-            <p className="mb-6 font-montserrat">
-              The world's leading travel company for young travelers, providing unforgettable experiences since 1962.
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" className="text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]" aria-label="Facebook">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd"></path>
-                </svg>
-              </a>
-              <a href="https://instagram.com" className="text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]" aria-label="Instagram">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd"></path>
-                </svg>
-              </a>
-              <a href="https://twitter.com" className="text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]" aria-label="Twitter">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-                </svg>
-              </a>
+            <h3 className="text-xl font-bold mb-6">About</h3>
+            <ul className="space-y-3">
+              <li><Link to="/about-us" className="text-white hover:text-[#CCFF00] transition-colors">About Us</Link></li>
+              <li><Link to="/careers" className="text-white hover:text-[#CCFF00] transition-colors">Careers</Link></li>
+              <li><Link to="/contact-us" className="text-white hover:text-[#CCFF00] transition-colors">Contact Us</Link></li>
+              <li><Link to="/sustainability" className="text-white hover:text-[#CCFF00] transition-colors">Sustainability</Link></li>
+              <li><Link to="/travel-alerts" className="text-white hover:text-[#CCFF00] transition-colors">Travel Alerts</Link></li>
+              <li><Link to="/why-contiki" className="text-white hover:text-[#CCFF00] transition-colors">Why Contiki?</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-xl font-bold mb-6">Help</h3>
+            <ul className="space-y-3">
+              <li><Link to="/help/manage-booking" className="text-white hover:text-[#CCFF00] transition-colors">Manage My Booking</Link></li>
+              <li><Link to="/help/faqs" className="text-white hover:text-[#CCFF00] transition-colors">FAQs</Link></li>
+              <li><Link to="/terms-conditions" className="text-white hover:text-[#CCFF00] transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/privacy-policy" className="text-white hover:text-[#CCFF00] transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/cookie-policy" className="text-white hover:text-[#CCFF00] transition-colors">Cookie Policy</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-xl font-bold mb-6">Resources</h3>
+            <ul className="space-y-3">
+              <li><Link to="/brochures" className="text-white hover:text-[#CCFF00] transition-colors">Brochures</Link></li>
+              <li><Link to="/360-travel-updates" className="text-white hover:text-[#CCFF00] transition-colors">360° Travel Updates</Link></li>
+              <li><Link to="/travel-insurance" className="text-white hover:text-[#CCFF00] transition-colors">Travel Insurance</Link></li>
+              <li><Link to="/events" className="text-white hover:text-[#CCFF00] transition-colors">Events</Link></li>
+              <li><Link to="/blog" className="text-white hover:text-[#CCFF00] transition-colors">Blog</Link></li>
+              <li><Link to="/travel-checklist" className="text-white hover:text-[#CCFF00] transition-colors">Travel Checklist</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-xl font-bold mb-6">Newsletter</h3>
+            <p className="mb-4">Sign up to receive deals, trip inspo and FOMO-inducing travel news straight to your inbox.</p>
+            
+            {isSubmitted ? (
+              <div className="text-[#CCFF00] font-medium mb-4">
+                Thanks for subscribing!
+              </div>
+            ) : (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              placeholder="Your email address" 
+                              className="pr-14 bg-white text-black" 
+                              {...field} 
+                            />
+                            <Button 
+                              type="submit" 
+                              size="sm"
+                              className="absolute right-1 top-1 bottom-1 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90"
+                              aria-label="Subscribe"
+                            >
+                              <Search size={16} />
+                            </Button>
+                          </div>
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </form>
+              </Form>
+            )}
+            
+            <div className="mt-8">
+              <h4 className="font-medium mb-4">Connect with us</h4>
+              <div className="flex space-x-4">
+                <a href="https://facebook.com/contiki" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#CCFF00]" aria-label="Facebook">
+                  <Facebook size={20} />
+                </a>
+                <a href="https://instagram.com/contiki" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#CCFF00]" aria-label="Instagram">
+                  <Instagram size={20} />
+                </a>
+                <a href="https://twitter.com/contiki" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#CCFF00]" aria-label="Twitter">
+                  <Twitter size={20} />
+                </a>
+                <a href="https://youtube.com/user/contiki" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#CCFF00]" aria-label="Youtube">
+                  <Youtube size={20} />
+                </a>
+              </div>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold font-montserrat mb-6">Destinations</h3>
-            <ul className="space-y-3">
-              <li><Link to="/destinations/europe" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Europe</Link></li>
-              <li><Link to="/destinations/asia" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Asia</Link></li>
-              <li><Link to="/destinations/latin-america" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Latin America</Link></li>
-              <li><Link to="/destinations/australia" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Australia & New Zealand</Link></li>
-              <li><Link to="/destinations/north-america" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">USA & Canada</Link></li>
-              <li><Link to="/destinations/africa" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Africa & Middle East</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold font-montserrat mb-6">Travel Styles</h3>
-            <ul className="space-y-3">
-              <li><Link to="/styles/group-tours" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Group Tours</Link></li>
-              <li><Link to="/styles/sailing" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Sailing & Cruise</Link></li>
-              <li><Link to="/styles/festivals" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Festivals & Events</Link></li>
-              <li><Link to="/styles/ski-snow" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Ski & Snow</Link></li>
-              <li><Link to="/styles/independent" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Independent Travel</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold font-montserrat mb-6">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <span className="mr-3" aria-hidden="true">📍</span>
-                <span className="font-montserrat">123 Adventure St, Travel City, TC 10001</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-3" aria-hidden="true">📞</span>
-                <a href="tel:+11234567890" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">+1 (123) 456-7890</a>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-3" aria-hidden="true">✉️</span>
-                <a href="mailto:info@contiki-clone.com" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">info@contiki-clone.com</a>
-              </li>
-            </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="font-montserrat mb-4 md:mb-0">&copy; {new Date().getFullYear()} Contiki Clone. All rights reserved.</p>
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
-              <Link to="/terms" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Terms & Conditions</Link>
-              <Link to="/privacy" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Privacy Policy</Link>
-              <Link to="/cookies" className="font-montserrat text-[#CCFF00] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]">Cookie Policy</Link>
+        <div className="px-4">
+          <Separator className="bg-white/20" />
+        </div>
+        
+        <div className="px-4 pt-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+            <div className="mb-6 md:mb-0">
+              <h4 className="font-medium mb-4">We're proud members of</h4>
+              <div className="flex items-center space-x-6">
+                <div className="bg-white p-2 rounded-md">
+                  <img src="https://www.contiki.com/assets/images/footer/abta_logo.svg" alt="ABTA" className="h-8" />
+                </div>
+                <div>
+                  <img src="https://www.contiki.com/assets/images/footer/tripadvisor.svg" alt="TripAdvisor" className="h-10" />
+                </div>
+              </div>
             </div>
+            
+            <div>
+              <h4 className="font-medium mb-4">Payment options</h4>
+              <div className="flex flex-wrap gap-2">
+                <img src="https://www.contiki.com/assets/images/footer/visa.svg" alt="Visa" className="h-8" />
+                <img src="https://www.contiki.com/assets/images/footer/mastercard.svg" alt="Mastercard" className="h-8" />
+                <img src="https://www.contiki.com/assets/images/footer/paypal.svg" alt="PayPal" className="h-8" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-xs text-white/70">
+            <p className="mb-4">
+              Copyright © {new Date().getFullYear()} Contiki. All Rights Reserved. Contiki is part of The Travel Corporation family of companies.
+            </p>
+            <p>
+              Travel is an exciting and important part of people's lives. It connects us to new places, experiences and people. It's magical when it all comes together, but we know that the realities of travel can sometimes be complicated. That's why we are here to help. By partnering with us, you are trusting us to make sure your holiday plans go smoothly. We want you to have a fantastic time, and to ensure this happens we want to make sure that the way we work is clear and fair.
+            </p>
           </div>
         </div>
       </div>
