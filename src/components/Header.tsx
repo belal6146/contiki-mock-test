@@ -47,22 +47,24 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      {/* Top utility links - visible on desktop only */}
-      <div className="hidden md:flex justify-end border-b border-gray-100 px-8">
-        <div className="flex space-x-6 text-xs py-2">
-          <Link to="/contact" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Contact us')}>Contact us</Link>
-          <Link to="/future-travel-credit" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
-          <Link to="/subscribe" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
-          <Link to="/login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Traveller log in')}>Traveller log in</Link>
-          <Link to="/agent-login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Agent log in')}>Agent log in</Link>
+    <nav id="navbar" className="navbar navbar__ch-active bg-white shadow-sm sticky top-0 z-50">
+      <div className="navbar-wrapper flex flex-col">
+        {/* Top utility links - visible on desktop only */}
+        <div className="navbar_links hidden md:flex justify-end border-b border-gray-100 px-8">
+          <div className="flex space-x-6 text-xs py-2">
+            <Link to="/contact" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Contact us')}>Contact us</Link>
+            <Link to="/future-travel-credit" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
+            <Link to="/subscribe" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
+            <Link to="/login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Traveller log in')}>Traveller log in</Link>
+            <Link to="/agent-login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Agent log in')}>Agent log in</Link>
+          </div>
         </div>
-      </div>
-      
-      <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20 md:h-24">
+        
+        <div className="navbar_menu flex items-center justify-between h-20 md:h-24 px-4 md:px-8 max-w-7xl mx-auto w-full">
           {/* Logo */}
-          <Logo onClick={() => handleLinkClick('Logo')} />
+          <div className="navbar_logo">
+            <Logo onClick={() => handleLinkClick('Logo')} />
+          </div>
           
           {/* Desktop Navigation */}
           <DesktopNav onLinkClick={handleLinkClick} />
@@ -74,6 +76,8 @@ const Header = () => {
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
+            data-item-name="open-main-menu"
+            data-item-type="General Interaction"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -89,7 +93,7 @@ const Header = () => {
         inspiredItems={inspiredItems}
         onLinkClick={handleLinkClick}
       />
-    </header>
+    </nav>
   );
 };
 
