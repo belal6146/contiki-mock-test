@@ -1,23 +1,18 @@
 
-import React, { lazy, Suspense, useEffect } from 'react';
-import { TabPanel } from '@/components/tour/TabNav';
-import TabNav from '@/components/tour/TabNav';
-import HeroImage from '@/components/tour/HeroImage';
-import PriceBar from '@/components/tour/PriceBar';
-import BasicDetailsGrid from '@/components/DetailsGrid';
-import BreadcrumbNav from '@/components/Breadcrumb';
-import BookingBar from '@/components/BookingBar';
-import TourOverviewTab from './TourOverviewTab';
-import ErrorBoundary from '@/components/ErrorBoundary';
+import React from 'react';
 import { Trip } from '@/types/trip';
-
-// Lazy load heavy components
-const TourDatesTab = lazy(() => import('./TourDatesTab'));
-const TourReviewsTab = lazy(() => import('./TourReviewsTab'));
+import TabNav from '@/components/tour/TabNav';
+import TripHighlights from '@/components/tour/TripHighlights';
+import DetailsGrid from '@/components/tour/DetailsGrid';
+import DailyAccordion from '@/components/tour/DailyAccordion';
+import RelatedTrips from '@/components/tour/RelatedTrips';
+import FAQAccordion from '@/components/tour/FAQAccordion';
+import WhereYouWillStay from '@/components/tour/WhereYouWillStay';
+import FlexDepositBar from '@/components/tour/FlexDepositBar';
 
 interface TourDetailContentProps {
   trip: Trip;
-  tripDetails: any[];
+  tripDetails: Array<{ label: string; value: string }>;
   relatedTrips: Trip[];
 }
 
@@ -26,85 +21,68 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
   tripDetails,
   relatedTrips
 }) => {
-  useEffect(() => {
-    console.debug('[TourDetailContent] mounted', { tripId: trip.id });
-  }, [trip.id]);
-
-  // Define tabs for TabNav
-  const tabs = [
-    { id: 'overview', label: 'The Trip' },
-    { id: 'dates', label: 'Dates & Pricing' },
-    { id: 'reviews', label: 'Reviews' },
-  ];
+  // Default empty array for itinerary if it doesn't exist on trip
+  const itinerary = trip.itinerary || [];
+  
+  // We'll check if these properties exist before passing them to components
+  // If they don't exist, we'll pass empty arrays or null
+  const highlights = trip.highlights || [];
+  const accommodation = trip.accommodation || [];
+  const faqs = trip.faqs || [];
 
   return (
-    <>
-      <ErrorBoundary>
-        <BreadcrumbNav title={trip.name} destination={trip.destination} />
-      </ErrorBoundary>
+    <main className="flex-1">
+      {/* Price Bar and Flex Deposit Bar will be at the top */}
+      <FlexDepositBar />
       
-      <main className="flex-grow transition-all duration-150 ease-in-out" id="main-content">
-        <ErrorBoundary>
-          <HeroImage
-            imageUrl={trip.image}
-            title={trip.name}
-            subtitle={trip.destination}
-          />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <PriceBar 
-            oldPrice={trip.price * 1.2} // Adding 20% to create an "old price"
-            newPrice={trip.price}
-            rating={trip.rating}
-            reviewCount={trip.reviewCount}
-          />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <div className="container py-6">
-            <BasicDetailsGrid details={tripDetails} />
-          </div>
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <TabNav tabs={tabs}>
-            <TabPanel id="overview">
-              <TourOverviewTab 
-                trip={trip}
-                highlights={trip.highlights || []}
-                trips={relatedTrips}
-                accommodation={trip.accommodation || {}}
-                tripFAQs={trip.faqs?.filter(faq => faq.type === 'trip') || []}
-                generalFAQs={trip.faqs?.filter(faq => faq.type === 'general') || []}
-              />
-            </TabPanel>
-            
-            <TabPanel id="dates">
-              <Suspense fallback={
-                <div className="flex justify-center py-8">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                </div>
-              }>
-                <TourDatesTab trip={trip} />
-              </Suspense>
-            </TabPanel>
-            
-            <TabPanel id="reviews">
-              <Suspense fallback={
-                <div className="flex justify-center py-8">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                </div>
-              }>
-                <TourReviewsTab />
-              </Suspense>
-            </TabPanel>
-          </TabNav>
-        </ErrorBoundary>
-      </main>
+      {/* Tab Navigation and Content */}
+      <TabNav 
+        tabs={[
+          { id: 'overview', label: 'Overview', content: (
+            <div className="py-8 space-y-12">
+              {/* Trip Highlights */}
+              <TripHighlights highlights={highlights} />
+              
+              {/* Trip Details Grid */}
+              <DetailsGrid details={tripDetails} />
+              
+              {/* Daily Itinerary */}
+              <section className="container mx-auto">
+                <h2 className="text-2xl font-bold mb-6">Day by Day</h2>
+                <DailyAccordion itinerary={itinerary} />
+              </section>
+              
+              {/* Where You'll Stay */}
+              <WhereYouWillStay accommodation={accommodation} />
+            </div>
+          ) },
+          { id: 'dates-pricing', label: 'Dates & Pricing', content: (
+            <div className="py-8">
+              <p className="text-xl">Dates and pricing content would go here</p>
+            </div>
+          ) },
+          { id: 'reviews', label: 'Reviews', content: (
+            <div className="py-8">
+              <p className="text-xl">Reviews content would go here</p>
+            </div>
+          ) },
+        ]}
+      />
       
-      <BookingBar price={trip.price} slug={trip.slug} />
-    </>
+      {/* Related Trips */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Related Trips</h2>
+          <RelatedTrips trips={relatedTrips} />
+        </div>
+      </section>
+      
+      {/* FAQs */}
+      <section className="py-12 container mx-auto">
+        <h2 className="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
+        <FAQAccordion faqs={faqs} />
+      </section>
+    </main>
   );
 };
 
