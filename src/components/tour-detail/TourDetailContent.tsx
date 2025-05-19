@@ -8,8 +8,6 @@ import BasicDetailsGrid from '@/components/DetailsGrid';
 import BreadcrumbNav from '@/components/Breadcrumb';
 import BookingBar from '@/components/BookingBar';
 import TourOverviewTab from './TourOverviewTab';
-import TourDatesTab from './TourDatesTab';
-import TourReviewsTab from './TourReviewsTab';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { Trip } from '@/types/trip';
 
@@ -103,7 +101,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
         <BreadcrumbNav title={trip.name} destination={trip.destination} />
       </ErrorBoundary>
       
-      <main className="flex-grow" id="main-content">
+      <main className="flex-grow transition-all duration-150 ease-in-out" id="main-content">
         <ErrorBoundary>
           <HeroImage
             imageUrl={trip.image}
