@@ -229,7 +229,9 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
         </div>
       </div>
       
-      <style jsx global>{`
+      {/* Fix: Removing jsx and global properties, use regular style tag */}
+      <style>
+        {`
         .mapboxgl-popup-content {
           border-radius: 8px;
           padding: 12px;
@@ -239,7 +241,8 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
           font-size: 16px;
           padding: 5px;
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };

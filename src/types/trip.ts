@@ -23,6 +23,7 @@ export interface Trip {
   description: string;
   destination: string;
   price: number;
+  oldPrice?: number; // Added oldPrice as an optional property
   duration: number;
   image: string;
   rating: number;

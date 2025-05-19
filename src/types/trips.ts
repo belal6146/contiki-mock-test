@@ -7,6 +7,7 @@ export interface Trip {
   destination: string;
   duration: number;
   price: number;
+  oldPrice?: number; // Added oldPrice as an optional property
   image: string;
   rating: number;
   reviewCount: number;
