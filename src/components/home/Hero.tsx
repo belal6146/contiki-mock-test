@@ -42,7 +42,7 @@ const Hero = () => {
         aria-hidden="true"
       />
       
-      {/* Gradient Overlay - Stops at exactly 20% & 80% */}
+      {/* Gradient Overlay - Stops at exactly 50% */}
       <div 
         className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent z-10"
         style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 80%)' }}
@@ -145,7 +145,7 @@ const Hero = () => {
           <div className="mt-6">
             <Button 
               type="submit" 
-              className="w-full bg-primary text-white hover:bg-secondary hover:text-primary font-medium px-6 py-4 rounded-lg transition-colors duration-300"
+              className="w-full bg-accent text-primary hover:bg-accent/90 font-medium px-6 py-4 rounded-lg transition-colors duration-300"
               aria-label="Search trips"
             >
               Search Trips
