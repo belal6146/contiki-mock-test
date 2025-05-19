@@ -7,6 +7,11 @@ import NextArrow from '../carousel/NextArrow';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Import highlight images
+import culturalHighlight from '/images/highlight-cultural.jpg';
+import adventureHighlight from '/images/highlight-adventure.jpg';
+import foodHighlight from '/images/highlight-food.jpg';
+
 interface Highlight {
   id: string;
   title: string;
@@ -27,6 +32,13 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
   useEffect(() => {
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
   }, [highlights.length]);
+  
+  // Add default images if not provided
+  const getDefaultImage = (type: string, index: number) => {
+    if (type.toLowerCase().includes('cultural')) return culturalHighlight;
+    if (type.toLowerCase().includes('adventure')) return adventureHighlight;
+    return foodHighlight;
+  };
   
   if (!highlights || highlights.length === 0) {
     return null;
@@ -74,7 +86,7 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
         
         <div className="relative highlights-slider overflow-hidden">
           <Slider {...sliderSettings} className="slick-slider">
-            {highlights.map((highlight) => (
+            {highlights.map((highlight, index) => (
               <div
                 key={highlight.id}
                 className="px-2"
@@ -83,7 +95,7 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
                   <div className="min-w-[280px] max-w-[280px] bg-white rounded-lg overflow-hidden shadow hover:shadow-lg">
                     <div className="relative aspect-w-16 aspect-h-9">
                       <img
-                        src={highlight.image}
+                        src={highlight.image || getDefaultImage(highlight.type, index)}
                         alt={highlight.title}
                         className="w-full h-full object-cover"
                       />

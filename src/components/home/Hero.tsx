@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import heroImage from '/images/hero-croatia-beach.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Hero = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('https://www.contiki.com/assets/1200x800/image/croatia/2022_croatia_isle_of_hvar_guapa_beach_club_party_contiki_group_sunset_07.jpg')" }}
+        style={{ backgroundImage: `url(${heroImage})` }}
         aria-hidden="true"
       />
       

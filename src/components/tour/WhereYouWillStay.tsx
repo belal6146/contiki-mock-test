@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
+import hotelImage from '/images/accommodation-luxury.jpg';
 
 interface Accommodation {
   name: string;
@@ -32,7 +33,7 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
             <Card className="overflow-hidden rounded-2xl shadow-md h-full">
               <div className="relative h-72">
                 <img 
-                  src={accommodation.image} 
+                  src={accommodation.image || hotelImage} 
                   alt={accommodation.name}
                   className="w-full h-full object-cover"
                 />

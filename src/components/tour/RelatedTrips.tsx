@@ -8,6 +8,7 @@ import NextArrow from '../carousel/NextArrow';
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import defaultTripImage from '/images/trip-default.jpg';
 
 interface RelatedTripsProps {
   trips: Trip[];
@@ -69,7 +70,7 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
                 <div className="min-w-[300px] max-w-[300px] flex-shrink-0 bg-white rounded-lg overflow-hidden shadow">
                   <div className="relative">
                     <img 
-                      src={trip.image || '/placeholder.svg'} 
+                      src={trip.image || defaultTripImage} 
                       alt={trip.name}
                       className="w-full h-48 object-cover"
                     />

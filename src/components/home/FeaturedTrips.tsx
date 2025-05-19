@@ -9,6 +9,10 @@ import { trackEvent } from '@/lib/analytics';
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import tripDefault from '/images/trip-default.jpg';
+import tripGreece from '/images/trip-greece.jpg';
+import tripItaly from '/images/trip-italy.jpg';
+import tripThailand from '/images/trip-thailand.jpg';
 
 // Custom arrow components
 const PrevArrow = (props: any) => {
@@ -45,6 +49,13 @@ const NextArrow = (props: any) => {
 
 // Lazy load the Slider component
 const Slider = lazy(() => import("react-slick"));
+
+// Map of trip IDs to images
+const tripImages: {[key: string]: string} = {
+  'trip-1': tripGreece,
+  'trip-2': tripItaly,
+  'trip-3': tripThailand,
+};
 
 const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
@@ -98,6 +109,11 @@ const FeaturedTrips = () => {
   const handleRetry = () => {
     window.location.reload();
     trackEvent('retry_clicked', { component: 'FeaturedTrips' });
+  };
+
+  // Get image for a trip
+  const getTripImage = (tripId: string) => {
+    return tripImages[tripId] || tripDefault;
   };
 
   return (
@@ -157,7 +173,7 @@ const FeaturedTrips = () => {
                     <div className="group w-[300px] h-[400px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-all duration-150 hover:shadow-lg">
                       <div className="h-[250px] overflow-hidden">
                         <img 
-                          src={trip.image || '/placeholder.svg'} 
+                          src={trip.image || getTripImage(trip.id)}
                           alt={`${trip.name} tour in ${trip.destination}`}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           loading="lazy"

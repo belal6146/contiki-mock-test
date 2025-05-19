@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import defaultCarouselImage from '/images/carousel-default.jpg';
 
 interface CustomCarouselProps {
   images: { src: string; alt: string }[];
@@ -18,6 +19,11 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Use default image if no images provided
+  const carouselImages = images && images.length > 0 
+    ? images 
+    : [{ src: defaultCarouselImage, alt: 'Default carousel image' }];
+
   useEffect(() => {
     // Clear any existing timers
     if (timerRef.current) {
@@ -27,7 +33,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
     // Set up auto-rotation if enabled and not paused
     if (autoRotate && !isPaused) {
       timerRef.current = setInterval(() => {
-        const nextIndex = (currentIndex + 1) % images.length;
+        const nextIndex = (currentIndex + 1) % carouselImages.length;
         setCurrentIndex(nextIndex);
         console.debug('[Carousel] slideChanged', nextIndex);
       }, interval);
@@ -39,16 +45,16 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
         clearInterval(timerRef.current);
       }
     };
-  }, [autoRotate, isPaused, currentIndex, interval, images.length]);
+  }, [autoRotate, isPaused, currentIndex, interval, carouselImages.length]);
 
   const handlePrev = () => {
-    const nextIndex = (currentIndex - 1 + images.length) % images.length;
+    const nextIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
     setCurrentIndex(nextIndex);
     console.debug('[Carousel] slideChanged', nextIndex);
   };
 
   const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % images.length;
+    const nextIndex = (currentIndex + 1) % carouselImages.length;
     setCurrentIndex(nextIndex);
     console.debug('[Carousel] slideChanged', nextIndex);
   };
@@ -72,7 +78,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
     >
       {/* Image container */}
       <div className="relative h-96">
-        {images.map((image, index) => (
+        {carouselImages.map((image, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-500 ${
@@ -113,7 +119,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       
       {/* Indicator dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" role="tablist">
-        {images.map((_, index) => (
+        {carouselImages.map((_, index) => (
           <button
             key={index}
             className={`w-3 h-3 rounded-full transition-all duration-150 ease-in-out hover:scale-125 ${

@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import defaultHeroImage from '/images/hero-default.jpg';
 
 interface HeroImageProps {
   imageUrl: string;
@@ -15,7 +16,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   return (
     <div 
       className="bg-cover bg-center h-96 relative w-full"
-      style={{ backgroundImage: `url(${imageUrl})` }}
+      style={{ backgroundImage: `url(${imageUrl || defaultHeroImage})` }}
       role="img"
       aria-label={`Hero image: ${title}`}
     >
