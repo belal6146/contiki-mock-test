@@ -166,7 +166,7 @@ const MapDisplay: React.FC<MapDisplayProps> = ({
   // Check if we should render the token input form
   const showTokenInput = !token && itinerary.some(day => day.coordinates);
   
-  // Add custom CSS for mapbox popups
+  // Add custom CSS for mapbox popups using useEffect instead of style jsx
   useEffect(() => {
     // Add custom styles for mapbox popups
     const styleElement = document.createElement('style');

@@ -13,9 +13,9 @@ import TourDetailHead from '@/components/tour-detail/TourDetailHead';
 import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
-import { Trip } from '@/types/trips';
 import HeroImage from '@/components/tour/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
+import BookingBar from '@/components/BookingBar';
 import Breadcrumb from '@/components/Breadcrumb';
 import ErrorMessage from '@/components/ui/error-message';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -26,10 +26,11 @@ const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetail
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { tour: trip, loading, error } = useTour(slug || '');
+  const { tour, loading, error } = useTour(slug || '');
   const { trips } = useTrips({ limit: 3 });
   
   useEffect(() => {
+    console.debug('[TourDetail] mounted', { slug });
     trackEvent('page_loaded', { page: 'TourDetail', slug });
     trackPageView(window.location.pathname);
   }, [slug]);
@@ -40,7 +41,7 @@ const TourDetail = () => {
   };
   
   // If trip is not found (after loading is complete), render "Tour not found" message
-  if (!loading && !trip) {
+  if (!loading && !tour) {
     return <TourNotFound />;
   }
   
@@ -52,23 +53,19 @@ const TourDetail = () => {
   // Error state
   if (error) {
     return (
-      <ErrorMessage
-        title="Unable to load tour"
-        message={error}
-        onRetry={handleRetry}
-      />
+      <TourErrorState error={error} />
     );
   }
 
   // Ensure trip is defined before rendering
-  if (!trip) {
+  if (!tour) {
     return <Skeleton className="h-screen w-full" />;
   }
 
   // Prepare details for DetailsGrid
   const tripDetails = [
-    { label: 'Duration', value: `${trip.duration} days` },
-    { label: 'Destination', value: trip.destination },
+    { label: 'Duration', value: `${tour.duration} days` },
+    { label: 'Destination', value: tour.destination },
     { label: 'Group Size', value: '18-35 year olds' },
     { label: 'Trip Style', value: 'Adventure' }
   ];
@@ -76,28 +73,34 @@ const TourDetail = () => {
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col">
-        <TourDetailHead trip={trip} slug={slug} />
+        <TourDetailHead trip={tour} slug={slug} />
         <Header />
         
         {/* Hero Image Section */}
         <HeroImage 
-          imageUrl={trip.image} 
-          title={trip.name} 
-          subtitle={trip.destination}
+          imageUrl={tour.image} 
+          title={tour.name} 
+          subtitle={tour.destination}
         />
         
         {/* Price Bar */}
         <PriceBar 
-          oldPrice={trip.oldPrice} 
-          newPrice={trip.price} 
-          rating={trip.rating} 
-          reviewCount={trip.reviewCount}
+          oldPrice={tour.oldPrice} 
+          newPrice={tour.price} 
+          rating={tour.rating} 
+          reviewCount={tour.reviewCount}
+        />
+        
+        {/* Booking Bar */}
+        <BookingBar 
+          price={tour.price} 
+          slug={tour.slug} 
         />
         
         {/* Breadcrumb Navigation */}
         <Breadcrumb 
-          title={trip.name} 
-          destination={trip.destination} 
+          title={tour.name} 
+          destination={tour.destination} 
         />
         
         <ErrorBoundary fallback={
@@ -109,7 +112,7 @@ const TourDetail = () => {
         }>
           <Suspense fallback={<TourDetailSkeleton />}>
             <TourDetailContent 
-              trip={trip}
+              trip={tour}
               tripDetails={tripDetails}
               relatedTrips={trips}
             />

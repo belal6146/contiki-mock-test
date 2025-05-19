@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { trackEvent, trackError } from '@/lib/analytics';
 import { mockTrips } from '@/data/mockTrips';
-import { Trip } from './types';
+import { Trip } from '@/types/trip';
 
 export const useTour = (slugOrId: string) => {
   const [tour, setTour] = useState<Trip | null>(null);
