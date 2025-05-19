@@ -48,7 +48,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           {/* Mobile navigation */}
           <div className="space-y-4 py-2">
-            <MenuLink to="/destinations" label="Destinations" hasDropdown isMobile onLinkClick={onLinkClick}>
+            <MenuLink to="/destinations" label="Destinations" hasDropdown isMobile onClick={onLinkClick}>
               {destinationItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -61,9 +61,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/deals" label="Deals" isMobile onLinkClick={onLinkClick} />
+            <MenuLink to="/deals" label="Deals" isMobile onClick={onLinkClick} />
             
-            <MenuLink to="/travel-styles" label="Travel Styles" hasDropdown isMobile onLinkClick={onLinkClick}>
+            <MenuLink to="/travel-styles" label="Travel Styles" hasDropdown isMobile onClick={onLinkClick}>
               {travelStyleItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -76,7 +76,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/about-contiki" label="About Contiki" hasDropdown isMobile onLinkClick={onLinkClick}>
+            <MenuLink to="/about-contiki" label="About Contiki" hasDropdown isMobile onClick={onLinkClick}>
               {aboutItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -89,7 +89,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/get-inspired" label="Get Inspired" hasDropdown isMobile onLinkClick={onLinkClick}>
+            <MenuLink to="/get-inspired" label="Get Inspired" hasDropdown isMobile onClick={onLinkClick}>
               {inspiredItems.map((item, index) => (
                 <Link 
                   key={index}
