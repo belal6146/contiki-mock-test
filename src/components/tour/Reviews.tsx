@@ -1,6 +1,10 @@
 
 import React from 'react';
 
+interface ReviewsProps {
+  tripId?: string;  // Make tripId optional to avoid breaking existing usages
+}
+
 const mockReviews = [
   {
     id: 1,
@@ -28,11 +32,13 @@ const mockReviews = [
   }
 ];
 
-const Reviews = () => {
+const Reviews: React.FC<ReviewsProps> = ({ tripId }) => {
+  // For now, we're just using mock data, but in the future,
+  // we could use the tripId to fetch specific reviews for a trip
+  console.debug('[Reviews] Rendering reviews for trip:', tripId);
+  
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="heading-md mb-6">Traveler Reviews</h2>
-      
       <div className="space-y-6">
         {mockReviews.map((review) => (
           <div key={review.id} className="bg-white rounded-lg p-6 shadow-sm">
