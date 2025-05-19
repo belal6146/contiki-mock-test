@@ -7,6 +7,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { BookingProvider } from "@/context/BookingContext";
+import { trackPageView } from "@/lib/analytics";
+
+// Import API setup to ensure interceptors are registered
+import "@/lib/api";
 
 import Index from "./pages/Index";
 import Destinations from "./pages/Destinations";
@@ -16,11 +20,19 @@ import Tours from "./pages/tours";
 import TourDetail from "./pages/TourDetail";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 5 * 60 * 1000,
+    },
+  },
+});
 
 const App = () => {
   useEffect(() => {
-    console.debug('[App] routes initialized');
+    trackPageView(window.location.pathname);
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { trackEvent, trackError } from '@/lib/analytics';
 
 // Define the Trip type
 export interface Trip {
@@ -301,9 +302,15 @@ export const useTrips = (options: UseTripsOptions = {}) => {
         
         setTrips(filteredTrips);
         setError(null);
+        
+        trackEvent('trips_fetched', { 
+          count: filteredTrips.length,
+          filters: { ...options }
+        });
       } catch (err) {
-        console.error('Error fetching trips:', err);
-        setError('Failed to fetch trips. Please try again later.');
+        const errorMessage = 'Failed to fetch trips. Please try again later.';
+        trackError('useTrips', err, options);
+        setError(errorMessage);
         setTrips([]);
       } finally {
         setLoading(false);
@@ -352,11 +359,16 @@ export const useTour = (slugOrId: string) => {
         } else {
           setTour(foundTour);
           setError(null);
-          console.debug('[useTour] fetched', foundTour);
+          trackEvent('tour_fetched', { 
+            id: foundTour.id,
+            slug: foundTour.slug,
+            name: foundTour.name
+          });
         }
       } catch (err) {
-        console.error('Error fetching tour:', err);
-        setError('Failed to fetch tour details. Please try again later.');
+        const errorMessage = 'Failed to fetch tour details. Please try again later.';
+        trackError('useTour', err, { slugOrId });
+        setError(errorMessage);
         setTour(null);
       } finally {
         setLoading(false);

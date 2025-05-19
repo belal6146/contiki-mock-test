@@ -3,13 +3,45 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
 import TripCard from '@/components/TripCard';
-import { 
-  CarouselPrevious as PrevArrow,
-  CarouselNext as NextArrow
-} from '@/components/ui/carousel';
+import { Skeleton } from '@/components/ui/skeleton';
+import ErrorMessage from '@/components/ui/error-message';
+import { trackEvent } from '@/lib/analytics';
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+// Custom arrow components instead of importing from carousel
+const PrevArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <button
+      className={`${className} absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10 bg-white p-2 rounded-full shadow-md`}
+      style={{ ...style }}
+      onClick={onClick}
+      aria-label="View previous trips"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
+  );
+};
+
+const NextArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <button
+      className={`${className} absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10 bg-white p-2 rounded-full shadow-md`}
+      style={{ ...style }}
+      onClick={onClick}
+      aria-label="View next trips"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
+  );
+};
 
 // Lazy load the Slider component
 const Slider = lazy(() => import("react-slick"));
@@ -18,17 +50,14 @@ const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
   
   useEffect(() => {
-    console.debug('[FeaturedTrips] mounted');
+    trackEvent('component_mounted', { name: 'FeaturedTrips' });
   }, []);
   
   useEffect(() => {
     if (trips.length > 0) {
-      console.debug('[FeaturedTrips] fetched', { count: trips.length });
+      trackEvent('trips_loaded', { count: trips.length });
     }
-    if (error) {
-      console.debug('[FeaturedTrips] error', { error });
-    }
-  }, [trips, error]);
+  }, [trips]);
 
   const sliderSettings = {
     dots: true,
@@ -39,8 +68,8 @@ const FeaturedTrips = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    prevArrow: <PrevArrow className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10" aria-label="View previous trips" />,
-    nextArrow: <NextArrow className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10" aria-label="View next trips" />,
+    prevArrow: <PrevArrow aria-label="View previous trips" />,
+    nextArrow: <NextArrow aria-label="View next trips" />,
     responsive: [
       {
         breakpoint: 1024,
@@ -64,6 +93,11 @@ const FeaturedTrips = () => {
     dotsClass: 'slick-dots custom-dots'
   };
 
+  const handleRetry = () => {
+    window.location.reload();
+    trackEvent('retry_clicked', { component: 'FeaturedTrips' });
+  };
+
   return (
     <section className="py-16 md:py-24 bg-bgLight" aria-labelledby="featured-trips-heading">
       <div className="container">
@@ -75,22 +109,25 @@ const FeaturedTrips = () => {
         </div>
         
         {loading && (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary" aria-label="Loading trips"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex flex-col">
+                <Skeleton className="aspect-w-16 aspect-h-9 h-48 rounded-t-lg" />
+                <Skeleton className="h-8 mt-4 w-3/4" />
+                <Skeleton className="h-6 mt-2 w-1/2" />
+                <Skeleton className="h-6 mt-2 w-1/4" />
+                <Skeleton className="h-10 mt-4 w-1/3" />
+              </div>
+            ))}
           </div>
         )}
         
         {error && (
-          <div className="text-center py-10 bg-red-50 rounded-lg">
-            <p className="text-red-500" role="alert">{error}</p>
-            <button 
-              className="mt-4 btn-primary px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-150 ease-in-out"
-              onClick={() => window.location.reload()}
-              aria-label="Retry loading trips"
-            >
-              Retry
-            </button>
-          </div>
+          <ErrorMessage
+            title="Unable to load featured trips"
+            message={error}
+            onRetry={handleRetry}
+          />
         )}
         
         {!loading && !error && trips.length === 0 && (
@@ -102,8 +139,16 @@ const FeaturedTrips = () => {
         {!loading && !error && trips.length > 0 && (
           <div className="featured-trips-slider overflow-hidden">
             <Suspense fallback={
-              <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex flex-col">
+                    <Skeleton className="aspect-w-16 aspect-h-9 h-48 rounded-t-lg" />
+                    <Skeleton className="h-8 mt-4 w-3/4" />
+                    <Skeleton className="h-6 mt-2 w-1/2" />
+                    <Skeleton className="h-6 mt-2 w-1/4" />
+                    <Skeleton className="h-10 mt-4 w-1/3" />
+                  </div>
+                ))}
               </div>
             }>
               <Slider {...sliderSettings} className="slick-slider">
@@ -113,7 +158,7 @@ const FeaturedTrips = () => {
                       <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
                         <img 
                           src={trip.image || '/placeholder.svg'} 
-                          alt={`${trip.name} in ${trip.destination}`}
+                          alt={`${trip.name} tour in ${trip.destination}`}
                           className="w-full h-full object-cover group-hover:shadow-lg transition-all"
                           loading="lazy"
                         />
@@ -137,6 +182,7 @@ const FeaturedTrips = () => {
             to="/tours"
             className="btn-primary px-6 py-3 text-lg inline-block focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-150 ease-in-out"
             aria-label="View all available trips"
+            onClick={() => trackEvent('view_all_trips_clicked')}
           >
             View All Trips
           </Link>

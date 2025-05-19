@@ -3,7 +3,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTour, useTrips } from '@/hooks/useTrips';
-import { trackPageView } from '@/lib/analytics';
+import { trackPageView, trackEvent } from '@/lib/analytics';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -17,6 +17,8 @@ import { Trip } from '@/types/trip';
 import HeroImage from '@/components/tour/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import Breadcrumb from '@/components/Breadcrumb';
+import ErrorMessage from '@/components/ui/error-message';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
@@ -27,19 +29,14 @@ const TourDetail = () => {
   const { trips } = useTrips({ limit: 3 });
   
   useEffect(() => {
-    console.debug('[TourDetail] mounted', { slug });
+    trackEvent('page_loaded', { page: 'TourDetail', slug });
     trackPageView(window.location.pathname);
-    
-    if (loading) {
-      console.debug('[TourDetail] loading');
-    }
-  }, [slug, loading]);
+  }, [slug]);
   
-  useEffect(() => {
-    if (trip) {
-      console.debug('[TourDetail] fetched', trip);
-    }
-  }, [trip]);
+  const handleRetry = () => {
+    window.location.reload();
+    trackEvent('retry_clicked', { component: 'TourDetail', slug });
+  };
   
   // If trip is not found (after loading is complete), render "Tour not found" message
   if (!loading && !trip) {
@@ -53,16 +50,27 @@ const TourDetail = () => {
   
   // Error state
   if (error) {
-    return <TourErrorState error={error} />;
+    return (
+      <ErrorMessage
+        title="Unable to load tour"
+        message={error}
+        onRetry={handleRetry}
+      />
+    );
+  }
+
+  // Ensure trip is defined before rendering
+  if (!trip) {
+    return <Skeleton className="h-screen w-full" />;
   }
 
   // Prepare details for DetailsGrid
-  const tripDetails = trip ? [
+  const tripDetails = [
     { label: 'Duration', value: `${trip.duration} days` },
     { label: 'Destination', value: trip.destination },
     { label: 'Group Size', value: '18-35 year olds' },
     { label: 'Trip Style', value: 'Adventure' }
-  ] : [];
+  ];
 
   return (
     <BookingProvider>
@@ -70,39 +78,41 @@ const TourDetail = () => {
         <TourDetailHead trip={trip} slug={slug} />
         <Header />
         
-        {trip && (
-          <>
-            {/* Hero Image Section */}
-            <HeroImage 
-              imageUrl={trip.image} 
-              title={trip.name} 
-              subtitle={trip.destination}
+        {/* Hero Image Section */}
+        <HeroImage 
+          imageUrl={trip.image} 
+          title={trip.name} 
+          subtitle={trip.destination}
+        />
+        
+        {/* Price Bar */}
+        <PriceBar 
+          newPrice={trip.price} 
+          rating={trip.rating} 
+          reviewCount={trip.reviewCount}
+        />
+        
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          title={trip.name} 
+          destination={trip.destination} 
+        />
+        
+        <ErrorBoundary fallback={
+          <ErrorMessage 
+            title="Something went wrong"
+            message="We encountered an error while loading tour details."
+            onRetry={handleRetry}
+          />
+        }>
+          <Suspense fallback={<TourDetailSkeleton />}>
+            <TourDetailContent 
+              trip={trip}
+              tripDetails={tripDetails}
+              relatedTrips={trips}
             />
-            
-            {/* Price Bar */}
-            <PriceBar 
-              newPrice={trip.price} 
-              rating={trip.rating} 
-              reviewCount={trip.reviewCount}
-            />
-            
-            {/* Breadcrumb Navigation */}
-            <Breadcrumb 
-              title={trip.name} 
-              destination={trip.destination} 
-            />
-            
-            <ErrorBoundary>
-              <Suspense fallback={<TourDetailSkeleton />}>
-                <TourDetailContent 
-                  trip={trip}
-                  tripDetails={tripDetails}
-                  relatedTrips={trips}
-                />
-              </Suspense>
-            </ErrorBoundary>
-          </>
-        )}
+          </Suspense>
+        </ErrorBoundary>
         
         <Footer />
         <BackToTopButton />

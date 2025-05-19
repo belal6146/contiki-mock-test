@@ -5,6 +5,7 @@ import { Calendar, Users } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
+import { trackEvent } from '@/lib/analytics';
 
 interface BookingBarProps {
   price: number;
@@ -17,7 +18,7 @@ const BookingBar: React.FC<BookingBarProps> = ({ price, slug }) => {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    console.debug('[BookingBar] mounted', { price });
+    trackEvent('booking_bar_mounted', { price, slug });
     
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -26,10 +27,10 @@ const BookingBar: React.FC<BookingBarProps> = ({ price, slug }) => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [price]);
+  }, [price, slug]);
 
   const handleBookNowClick = () => {
-    console.debug('[BookingBar] bookNow', { slug });
+    trackEvent('book_now_clicked', { slug });
     
     // Scroll to booking section if on the same page
     const bookingSection = document.getElementById('booking');
@@ -44,22 +45,23 @@ const BookingBar: React.FC<BookingBarProps> = ({ price, slug }) => {
   return (
     <div 
       className={`${isSticky ? 'fixed top-0' : 'relative'} left-0 right-0 bg-white shadow-lg p-4 flex justify-between items-center z-40 border-t border-gray-200 transition-all duration-300`}
+      aria-label="Booking information bar"
     >
       <div className="flex items-center gap-6">
         <div className="flex flex-col">
-          <span className="text-sm text-gray-600">From</span>
-          <span className="text-xl font-bold text-primary">${price}</span>
+          <span className="text-sm text-gray-600" id="price-label">From</span>
+          <span className="text-xl font-bold text-primary" aria-labelledby="price-label">${price}</span>
         </div>
         
         <div className="hidden md:flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
-            <Calendar className="h-4 w-4" />
-            <span>{date ? format(new Date(date), 'MMM d, yyyy') : 'Select dates'}</span>
+            <Calendar className="h-4 w-4" aria-hidden="true" />
+            <span aria-label="Selected date">{date ? format(new Date(date), 'MMM d, yyyy') : 'Select dates'}</span>
           </div>
           
           <div className="flex items-center gap-2 text-sm">
-            <Users className="h-4 w-4" />
-            <span>{travelers} traveler{travelers !== 1 ? 's' : ''}</span>
+            <Users className="h-4 w-4" aria-hidden="true" />
+            <span aria-label="Number of travelers">{travelers} traveler{travelers !== 1 ? 's' : ''}</span>
           </div>
         </div>
       </div>
@@ -67,6 +69,7 @@ const BookingBar: React.FC<BookingBarProps> = ({ price, slug }) => {
       <Button 
         onClick={handleBookNowClick}
         className="bg-[#CCFF00] hover:bg-[#CCFF00]/90 text-black font-medium"
+        aria-label="Book this tour now"
       >
         Book Now
       </Button>
