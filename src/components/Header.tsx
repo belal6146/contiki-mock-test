@@ -1,17 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Menu, X, ChevronDown, Phone } from 'lucide-react';
+import { Search, Menu, X, Phone } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from '@/lib/utils';
 import { Input } from "@/components/ui/input";
-import ContikiButton from './ContikiButton';
+import { cn } from '@/lib/utils';
+import MenuLink from './header/MenuLink';
+import DropdownItems from './header/DropdownItems';
+import MobileMenu from './header/MobileMenu';
+import {
+  destinationItems,
+  travelStyleItems,
+  aboutItems,
+  inspiredItems
+} from './header/NavigationData';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,114 +47,6 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const MenuLink = ({
-    to,
-    label,
-    hasDropdown = false,
-    children,
-    isMobile = false,
-  }: {
-    to: string;
-    label: string;
-    hasDropdown?: boolean;
-    children?: React.ReactNode;
-    isMobile?: boolean;
-  }) => {
-    if (hasDropdown && !isMobile) {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger className="group focus:outline-none">
-            <div className="flex items-center uppercase text-sm font-medium tracking-wide hover:text-black text-black py-2 px-3 group-data-[state=open]:text-black relative">
-              {label}
-              <ChevronDown className="h-4 w-4 ml-1" />
-              <span className="absolute -bottom-[1px] left-3 w-0 h-[2px] bg-[#CCFF00] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-24px)] group-data-[state=open]:w-[calc(100%-24px)]"></span>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white shadow-lg rounded-md p-4 min-w-[220px]">
-            {children}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    }
-
-    if (hasDropdown && isMobile) {
-      return (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between py-2 uppercase text-sm font-medium text-black tracking-wide">
-            {label}
-            <ChevronDown className="h-4 w-4" />
-          </div>
-          <div className="pl-4 space-y-3">
-            {children}
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <Link 
-        to={to} 
-        className={`uppercase text-sm font-medium tracking-wide text-black py-2 ${isMobile ? '' : 'px-3'} hover:text-black relative group`}
-        onClick={() => handleLinkClick(label)}
-      >
-        {label}
-        {!isMobile && (
-          <span className="absolute -bottom-[1px] left-3 w-0 h-[2px] bg-[#CCFF00] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-24px)]"></span>
-        )}
-      </Link>
-    );
-  };
-
-  const DropdownItems = ({ items, onClick }: { items: { label: string; to: string }[], onClick: (label: string) => void }) => {
-    return (
-      <>
-        {items.map((item, index) => (
-          <DropdownMenuItem key={index} asChild className="p-0 focus:bg-gray-50">
-            <Link 
-              to={item.to} 
-              className="block w-full px-3 py-2 text-sm text-black hover:bg-gray-50"
-              onClick={() => onClick(item.label)}
-            >
-              {item.label}
-            </Link>
-          </DropdownMenuItem>
-        ))}
-      </>
-    );
-  };
-
-  const destinationItems = [
-    { label: 'Europe', to: '/destinations/europe' },
-    { label: 'Asia', to: '/destinations/asia' },
-    { label: 'Latin America', to: '/destinations/latin-america' },
-    { label: 'USA & Canada', to: '/destinations/usa-canada' },
-    { label: 'Australia & New Zealand', to: '/destinations/australia-new-zealand' },
-    { label: 'Africa & Middle East', to: '/destinations/africa-middle-east' },
-  ];
-
-  const travelStyleItems = [
-    { label: 'Adventure', to: '/travel-styles/adventure' },
-    { label: 'Sailing & Cruise', to: '/travel-styles/sailing-cruise' },
-    { label: 'Camping', to: '/travel-styles/camping' },
-    { label: 'Festivals', to: '/travel-styles/festivals' },
-    { label: 'Winter & Ski', to: '/travel-styles/winter-ski' },
-  ];
-
-  const aboutItems = [
-    { label: 'About Us', to: '/about' },
-    { label: 'Sustainability', to: '/about/sustainability' },
-    { label: 'Travel FAQ', to: '/about/faq' },
-    { label: 'Contact Us', to: '/contact' },
-    { label: 'Careers', to: '/about/careers' },
-  ];
-
-  const inspiredItems = [
-    { label: 'Travel Articles', to: '/articles' },
-    { label: 'Travel Guides', to: '/guides' },
-    { label: 'Travel Podcast', to: '/podcast' },
-    { label: 'Contiki Reviews', to: '/reviews' },
-  ];
-
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container max-w-7xl mx-auto">
@@ -174,25 +68,45 @@ const Header = () => {
           <nav className="hidden md:flex items-center justify-center flex-1 mx-8">
             <ul className="flex space-x-2">
               <li>
-                <MenuLink to="/destinations" label="Destinations" hasDropdown>
+                <MenuLink 
+                  to="/destinations" 
+                  label="Destinations" 
+                  hasDropdown 
+                  onClick={handleLinkClick}
+                >
                   <DropdownItems items={destinationItems} onClick={handleLinkClick} />
                 </MenuLink>
               </li>
               <li>
-                <MenuLink to="/deals" label="Deals" />
+                <MenuLink to="/deals" label="Deals" onClick={handleLinkClick} />
               </li>
               <li>
-                <MenuLink to="/travel-styles" label="Travel Styles" hasDropdown>
+                <MenuLink 
+                  to="/travel-styles" 
+                  label="Travel Styles" 
+                  hasDropdown 
+                  onClick={handleLinkClick}
+                >
                   <DropdownItems items={travelStyleItems} onClick={handleLinkClick} />
                 </MenuLink>
               </li>
               <li>
-                <MenuLink to="/about-contiki" label="About Contiki" hasDropdown>
+                <MenuLink 
+                  to="/about-contiki" 
+                  label="About Contiki" 
+                  hasDropdown 
+                  onClick={handleLinkClick}
+                >
                   <DropdownItems items={aboutItems} onClick={handleLinkClick} />
                 </MenuLink>
               </li>
               <li>
-                <MenuLink to="/get-inspired" label="Get Inspired" hasDropdown>
+                <MenuLink 
+                  to="/get-inspired" 
+                  label="Get Inspired" 
+                  hasDropdown 
+                  onClick={handleLinkClick}
+                >
                   <DropdownItems items={inspiredItems} onClick={handleLinkClick} />
                 </MenuLink>
               </li>
@@ -244,105 +158,14 @@ const Header = () => {
       </div>
       
       {/* Mobile menu dropdown */}
-      <div 
-        className={cn(
-          "md:hidden bg-white shadow-md transition-all duration-300 ease-in-out overflow-hidden", 
-          isMenuOpen ? "max-h-[80vh] border-t" : "max-h-0"
-        )}
-        id="mobile-menu"
-      >
-        <div className="container max-w-7xl mx-auto py-4 px-4">
-          <div className="flex flex-col space-y-4">
-            {/* Mobile search bar */}
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Search className="h-4 w-4 text-gray-400" />
-              </div>
-              <Input 
-                type="search" 
-                placeholder="Age 18–35? Find your adventure" 
-                className="pl-10 text-sm h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
-              />
-            </div>
-            
-            {/* Mobile navigation */}
-            <div className="space-y-4 py-2">
-              <MenuLink to="/destinations" label="Destinations" hasDropdown isMobile>
-                {destinationItems.map((item, index) => (
-                  <Link 
-                    key={index}
-                    to={item.to} 
-                    className="block py-2 text-sm text-black"
-                    onClick={() => handleLinkClick(item.label)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </MenuLink>
-              
-              <MenuLink to="/deals" label="Deals" isMobile />
-              
-              <MenuLink to="/travel-styles" label="Travel Styles" hasDropdown isMobile>
-                {travelStyleItems.map((item, index) => (
-                  <Link 
-                    key={index}
-                    to={item.to} 
-                    className="block py-2 text-sm text-black"
-                    onClick={() => handleLinkClick(item.label)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </MenuLink>
-              
-              <MenuLink to="/about-contiki" label="About Contiki" hasDropdown isMobile>
-                {aboutItems.map((item, index) => (
-                  <Link 
-                    key={index}
-                    to={item.to} 
-                    className="block py-2 text-sm text-black"
-                    onClick={() => handleLinkClick(item.label)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </MenuLink>
-              
-              <MenuLink to="/get-inspired" label="Get Inspired" hasDropdown isMobile>
-                {inspiredItems.map((item, index) => (
-                  <Link 
-                    key={index}
-                    to={item.to} 
-                    className="block py-2 text-sm text-black"
-                    onClick={() => handleLinkClick(item.label)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </MenuLink>
-            </div>
-            
-            {/* Mobile phone button */}
-            <a 
-              href="tel:08082811120" 
-              className="flex items-center justify-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-colors duration-150"
-              onClick={() => handleLinkClick('Phone')}
-            >
-              <Phone className="h-4 w-4 mr-2" />
-              0808 281 1120
-            </a>
-            
-            {/* Mobile subscribe button */}
-            <Link 
-              to="/subscribe" 
-              className="flex items-center justify-center px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-colors duration-150"
-              onClick={() => handleLinkClick('Subscribe')}
-            >
-              Subscribe
-            </Link>
-          </div>
-        </div>
-      </div>
+      <MobileMenu 
+        isOpen={isMenuOpen}
+        destinationItems={destinationItems}
+        travelStyleItems={travelStyleItems}
+        aboutItems={aboutItems}
+        inspiredItems={inspiredItems}
+        onLinkClick={handleLinkClick}
+      />
     </header>
   );
 };
