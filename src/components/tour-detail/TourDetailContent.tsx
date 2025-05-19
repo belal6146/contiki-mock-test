@@ -13,14 +13,6 @@ interface TourDetailContentProps {
   relatedTrips: Trip[];
 }
 
-// Define more comprehensive interface for TabNav
-interface TabNavProps {
-  tabs: { id: string; label: string }[];
-  activeTab: string;
-  setActiveTab: (id: string) => void;
-  children: React.ReactNode;
-}
-
 const TourDetailContent: React.FC<TourDetailContentProps> = ({
   trip,
   tripDetails,
@@ -100,8 +92,8 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
       <div className="container">
         <TabNav 
           tabs={tabs} 
-          activeTab={activeTab}
-          setActiveTab={handleTabChange}
+          currentTab={activeTab}
+          onTabChange={handleTabChange}
         >
           {activeTab === 'overview' && (
             <TourOverviewTab
@@ -113,8 +105,8 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
               generalFAQs={mockGeneralFAQs}
             />
           )}
-          {activeTab === 'dates' && <TourDatesTab trip={trip} />}
-          {activeTab === 'reviews' && <TourReviewsTab trip={trip} />}
+          {activeTab === 'dates' && <TourDatesTab tripId={trip.id} />}
+          {activeTab === 'reviews' && <TourReviewsTab tripId={trip.id} />}
         </TabNav>
       </div>
     </div>

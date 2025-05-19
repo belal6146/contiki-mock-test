@@ -21,7 +21,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
     <>
       {/* Desktop navigation */}
       <nav className="hidden md:flex items-center justify-center flex-1 mx-8">
-        <ul className="flex space-x-2">
+        <ul className="flex space-x-4">
           <li>
             <MenuLink 
               to="/destinations" 
@@ -79,7 +79,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
       </nav>
       
       {/* Right side elements - search box, phone, etc. */}
-      <div className="hidden md:flex items-center space-x-4">
+      <div className="hidden md:flex items-center space-x-5">
         <div className="relative">
           <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
             <div className="bg-[#CCFF00] rounded-full p-1">
@@ -89,13 +89,13 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <Input 
             type="search" 
             placeholder="Aged 18-35? Find your adventure" 
-            className="pr-12 text-sm w-64 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00] transition-all duration-150 ease-in-out"
+            className="pr-12 text-sm w-72 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00] transition-all duration-150 ease-in-out"
           />
         </div>
         
         <a 
           href="tel:08082811120" 
-          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
+          className="flex items-center px-5 py-2.5 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
           onClick={() => onLinkClick('Phone')}
         >
           <Phone className="h-4 w-4 mr-2" />
@@ -104,7 +104,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         
         <Link 
           to="/subscribe" 
-          className="px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-all duration-150 ease-in-out"
+          className="px-5 py-2.5 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-all duration-150 ease-in-out"
           onClick={() => onLinkClick('Subscribe')}
         >
           Subscribe

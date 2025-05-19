@@ -49,8 +49,8 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       {/* Top utility links - visible on desktop only */}
-      <div className="hidden md:flex justify-end border-b border-gray-100 px-4">
-        <div className="flex space-x-4 text-sm py-1">
+      <div className="hidden md:flex justify-end border-b border-gray-100 px-8">
+        <div className="flex space-x-6 text-xs py-2">
           <Link to="/contact" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Contact us')}>Contact us</Link>
           <Link to="/future-travel-credit" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
           <Link to="/subscribe" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
@@ -60,7 +60,7 @@ const Header = () => {
       </div>
       
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Logo onClick={() => handleLinkClick('Logo')} />
           
