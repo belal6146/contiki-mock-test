@@ -8,6 +8,9 @@ import {
   CarouselPrevious as PrevArrow,
   CarouselNext as NextArrow
 } from '@/components/ui/carousel';
+// Import slick carousel CSS
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
@@ -95,8 +98,8 @@ const FeaturedTrips = () => {
         )}
         
         {!loading && !error && trips.length > 0 && (
-          <div className="featured-trips-slider">
-            <Slider {...sliderSettings}>
+          <div className="featured-trips-slider overflow-hidden">
+            <Slider {...sliderSettings} className="slick-slider">
               {trips.map((trip) => (
                 <div key={trip.id} className="px-4">
                   <div className="group transition-all duration-300 hover:scale-105">

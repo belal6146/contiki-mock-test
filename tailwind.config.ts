@@ -9,6 +9,7 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  safelist: [/^slick-/, /^slick$/, /^slick-theme$/],
   prefix: "",
   theme: {
     container: {

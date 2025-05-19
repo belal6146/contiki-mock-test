@@ -3,6 +3,10 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Slider from 'react-slick';
+// Import slick carousel CSS
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Sample trending destinations data
 const destinations = [
@@ -15,26 +19,64 @@ const destinations = [
 ];
 
 const TrendingDestinations = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<Slider | null>(null);
 
   useEffect(() => {
     console.debug('[TrendingDestinations] mounted');
   }, []);
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.offsetWidth;
-      const scrollPosition = direction === 'left' 
-        ? scrollContainerRef.current.scrollLeft - scrollAmount
-        : scrollContainerRef.current.scrollLeft + scrollAmount;
-        
-      scrollContainerRef.current.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
-      
-      console.debug('[TrendingDestinations] scroll', direction);
+  const handlePrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+      console.debug('[TrendingDestinations] scroll', 'left');
     }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+      console.debug('[TrendingDestinations] scroll', 'right');
+    }
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1.5,
+          centerMode: true,
+          centerPadding: '40px',
+        }
+      }
+    ]
   };
 
   return (
@@ -47,7 +89,7 @@ const TrendingDestinations = () => {
               variant="outline"
               size="icon"
               className="rounded-full bg-white shadow-md"
-              onClick={() => handleScroll('left')}
+              onClick={handlePrev}
               aria-label="Scroll left"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -56,7 +98,7 @@ const TrendingDestinations = () => {
               variant="outline"
               size="icon"
               className="rounded-full bg-white shadow-md"
-              onClick={() => handleScroll('right')}
+              onClick={handleNext}
               aria-label="Scroll right"
             >
               <ChevronRight className="h-6 w-6" />
@@ -64,18 +106,13 @@ const TrendingDestinations = () => {
           </div>
         </div>
         
-        <div className="relative">
-          <div 
-            ref={scrollContainerRef} 
-            className="overflow-x-auto whitespace-nowrap pb-4 scrollbar-hide"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            <div className="grid grid-flow-col auto-cols-max gap-4">
-              {destinations.map((destination) => (
+        <div className="relative overflow-hidden">
+          <Slider ref={sliderRef} {...settings} className="slick-slider">
+            {destinations.map((destination) => (
+              <div key={destination.id} className="px-2">
                 <Link 
-                  key={destination.id}
                   to={`/tours/${destination.id}`}
-                  className="block w-40 hover:opacity-90 transition-opacity"
+                  className="block w-full hover:opacity-90 transition-opacity"
                 >
                   <div className="relative aspect-square rounded-lg overflow-hidden">
                     <img 
@@ -89,9 +126,9 @@ const TrendingDestinations = () => {
                     {destination.name}
                   </p>
                 </Link>
-              ))}
-            </div>
-          </div>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
     </section>

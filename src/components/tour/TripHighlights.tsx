@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Slider from "react-slick";
 import PrevArrow from '../carousel/PrevArrow';
 import NextArrow from '../carousel/NextArrow';
-// Import slick carousel css
+// Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -72,8 +72,8 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
         <h2 className="text-2xl font-medium text-primary mb-6">Trip Highlights</h2>
         <p className="text-gray-600 mb-8">The must-do experiences that you can cross off your bucket list</p>
         
-        <div className="relative highlights-slider">
-          <Slider {...sliderSettings}>
+        <div className="relative highlights-slider overflow-hidden">
+          <Slider {...sliderSettings} className="slick-slider">
             {highlights.map((highlight) => (
               <div
                 key={highlight.id}
