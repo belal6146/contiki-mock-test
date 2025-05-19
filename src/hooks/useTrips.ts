@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 
 // Define the Trip type
@@ -330,7 +329,7 @@ export const useTrips = (options: UseTripsOptions = {}) => {
   return { trips, loading, error, getTripBySlug };
 };
 
-export const useTour = (slug: string) => {
+export const useTour = (slugOrId: string) => {
   const [tour, setTour] = useState<Trip | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -342,8 +341,10 @@ export const useTour = (slug: string) => {
         // Simulate API call delay
         await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Find tour by slug
-        const foundTour = mockTrips.find(trip => trip.slug === slug);
+        // Find tour by slug or ID
+        const foundTour = mockTrips.find(trip => 
+          trip.slug === slugOrId || trip.id === slugOrId
+        );
         
         if (!foundTour) {
           setError('Tour not found');
@@ -362,14 +363,14 @@ export const useTour = (slug: string) => {
       }
     };
 
-    if (slug) {
+    if (slugOrId) {
       fetchTour();
     } else {
       setLoading(false);
       setError('No tour ID provided');
       setTour(null);
     }
-  }, [slug]);
+  }, [slugOrId]);
 
   return { tour, loading, error };
 };
