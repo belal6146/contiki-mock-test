@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Trip } from '@/types/trip';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TripHighlights from '@/components/tour/TripHighlights';
 import DetailsGrid from '@/components/tour/DetailsGrid';
 import DailyAccordion from '@/components/tour/DailyAccordion';
@@ -9,6 +8,9 @@ import RelatedTrips from '@/components/tour/RelatedTrips';
 import FAQAccordion from '@/components/tour/FAQAccordion';
 import WhereYouWillStay from '@/components/tour/WhereYouWillStay';
 import FlexDepositBar from '@/components/tour/FlexDepositBar';
+import TabNav, { TabPanel } from '@/components/tour/TabNav';
+import TourDatesTab from '@/components/tour-detail/TourDatesTab';
+import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
 
 interface TourDetailContentProps {
   trip: Trip;
@@ -24,7 +26,15 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
   // Default empty array for itinerary if it doesn't exist on trip
   const itinerary = trip.itinerary || [];
   
-  // Define mock data for components that expect properties not in our Trip type
+  // Create properly structured highlight objects from the string array
+  const formattedHighlights = trip.highlights?.map((highlight, index) => ({
+    id: `highlight-${index}`,
+    title: highlight,
+    description: highlight,
+    image: '/placeholder.svg',
+    type: 'Featured'
+  })) || [];
+  
   // Create proper Accommodation object with all required properties
   const mockAccommodation = {
     name: 'Comfortable Hotels',
@@ -32,15 +42,6 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
     image: '/placeholder.svg',
     nightsCount: 5
   };
-  
-  // Create properly structured highlight objects from the string array
-  const formattedHighlights = trip.highlights.map((highlight, index) => ({
-    id: `highlight-${index}`,
-    title: highlight,
-    description: highlight,
-    image: '/placeholder.svg',
-    type: 'Featured'
-  }));
   
   const mockFAQs = [
     { 
@@ -53,26 +54,26 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
     }
   ];
 
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'dates-pricing', label: 'Dates & Pricing' },
+    { id: 'reviews', label: 'Reviews' }
+  ];
+
   return (
     <main className="flex-1">
       {/* Price Bar and Flex Deposit Bar will be at the top */}
       <FlexDepositBar />
       
       {/* Tab Navigation and Content */}
-      <div className="container mx-auto">
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="mb-6 border-b border-gray-200 w-full flex justify-start">
-            <TabsTrigger value="overview" className="px-4 py-2">Overview</TabsTrigger>
-            <TabsTrigger value="dates-pricing" className="px-4 py-2">Dates & Pricing</TabsTrigger>
-            <TabsTrigger value="reviews" className="px-4 py-2">Reviews</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="overview" className="py-8 space-y-12">
+      <TabNav tabs={tabs}>
+        <TabPanel id="overview">
+          <div className="py-8 space-y-12">
             {/* Trip Highlights */}
             <TripHighlights highlights={formattedHighlights} />
             
             {/* Trip Details Grid */}
-            <DetailsGrid highlights={trip.highlights} included={trip.included} />
+            <DetailsGrid highlights={trip.highlights || []} included={trip.included || []} />
             
             {/* Daily Itinerary */}
             <section className="container mx-auto">
@@ -82,21 +83,17 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
             
             {/* Where You'll Stay */}
             <WhereYouWillStay accommodation={mockAccommodation} />
-          </TabsContent>
-          
-          <TabsContent value="dates-pricing">
-            <div className="py-8">
-              <p className="text-xl">Dates and pricing content would go here</p>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="reviews">
-            <div className="py-8">
-              <p className="text-xl">Reviews content would go here</p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
+          </div>
+        </TabPanel>
+        
+        <TabPanel id="dates-pricing">
+          <TourDatesTab trip={trip} />
+        </TabPanel>
+        
+        <TabPanel id="reviews">
+          <TourReviewsTab />
+        </TabPanel>
+      </TabNav>
       
       {/* Related Trips */}
       <section className="py-12 bg-gray-50">
