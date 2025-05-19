@@ -14,7 +14,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
 
   return (
     <section 
-      className="relative h-[60vh] min-h-[400px] max-h-[600px]"
+      className="relative h-[60vh] min-h-[400px] max-h-[600px] w-full"
       role="banner"
       aria-label={`${title} - ${subtitle}`}
     >
@@ -35,7 +35,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
       <div className="container relative h-full flex items-end pb-12 z-10">
         <div className="text-white max-w-3xl">
           <div className="flex items-center mb-4 space-x-4">
-            <span className="bg-accent px-3 py-1 rounded-full text-sm font-medium transition-all duration-150 ease-in-out">
+            <span className="bg-[#CCFF00] px-3 py-1 rounded-full text-black text-sm font-medium transition-all duration-150 ease-in-out">
               {subtitle}
             </span>
           </div>

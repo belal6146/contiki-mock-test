@@ -24,7 +24,7 @@ const TourDetail = () => {
   const { trips } = useTrips({ limit: 3 });
   
   useEffect(() => {
-    console.debug('[TourDetail] slug:', slug);
+    console.debug('[TourDetail] mounted', { slug });
     trackPageView(window.location.pathname);
     
     if (loading) {
@@ -34,7 +34,7 @@ const TourDetail = () => {
   
   useEffect(() => {
     if (trip) {
-      console.debug('[TourDetail] loaded');
+      console.debug('[TourDetail] fetched', trip);
     }
   }, [trip]);
   
@@ -63,7 +63,7 @@ const TourDetail = () => {
 
   return (
     <BookingProvider>
-      <div className="min-h-screen flex flex-col pb-20">
+      <div className="min-h-screen flex flex-col">
         <Helmet>
           <title>{trip?.name ? `${trip.name} | Contiki Tours` : 'Tour Detail | Contiki'}</title>
           <meta name="description" content={trip?.description ? trip.description.substring(0, 160) : 'Explore our amazing tours for 18-35 year olds'} />
