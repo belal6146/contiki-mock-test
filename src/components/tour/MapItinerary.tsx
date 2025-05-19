@@ -6,8 +6,10 @@ interface ItineraryDay {
   day: number;
   title: string;
   description: string;
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
+  meals?: string[];
+  accommodation?: string;
 }
 
 interface MapItineraryProps {
@@ -29,6 +31,13 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
     setActiveIndex(index);
     console.debug('[MapItinerary] slide', { index, title: itinerary[index].title });
   };
+  
+  // Ensure each day has from/to fields (use defaults if missing)
+  const processedItinerary = itinerary.map(day => ({
+    ...day,
+    from: day.from || day.title.split(' to ')[0] || 'Location',
+    to: day.to || day.title.split(' to ')[1] || day.from || 'Location'
+  }));
   
   return (
     <section className="py-12">
@@ -53,7 +62,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
             
             {/* Day dots */}
             <div className="flex justify-between w-full relative z-0">
-              {itinerary.map((day, index) => (
+              {processedItinerary.map((day, index) => (
                 <button
                   key={index}
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
@@ -72,11 +81,11 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
           
           {/* Location indicators */}
           <div className="flex overflow-x-auto hide-scrollbar pb-6">
-            {itinerary.map((day, index) => (
+            {processedItinerary.map((day, index) => (
               <div
                 key={index}
                 className={`min-w-[180px] ${
-                  index < itinerary.length - 1 ? 'border-r border-gray-300' : ''
+                  index < processedItinerary.length - 1 ? 'border-r border-gray-300' : ''
                 } px-4 first:pl-0 last:border-0`}
               >
                 <div className="font-medium text-sm mb-1">
