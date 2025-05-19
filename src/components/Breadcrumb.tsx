@@ -12,12 +12,13 @@ import {
 
 interface BreadcrumbNavProps {
   title: string;
+  destination?: string;
 }
 
-const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title }) => {
+const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title, destination }) => {
   useEffect(() => {
-    console.debug('[Breadcrumb] mounted', { title });
-  }, [title]);
+    console.debug('[Breadcrumb] mounted', { title, destination });
+  }, [title, destination]);
 
   return (
     <div className="container py-4">
@@ -36,6 +37,17 @@ const BreadcrumbNav: React.FC<BreadcrumbNavProps> = ({ title }) => {
               <Link to="/tours">Tours</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
+          
+          {destination && (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to={`/destinations/${destination.toLowerCase()}`}>{destination}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </>
+          )}
           
           <BreadcrumbSeparator />
           
