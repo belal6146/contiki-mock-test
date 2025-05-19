@@ -1,3 +1,4 @@
+
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -19,6 +20,7 @@ import PriceBar from '@/components/tour/PriceBar';
 import Breadcrumb from '@/components/Breadcrumb';
 import ErrorMessage from '@/components/ui/error-message';
 import { Skeleton } from '@/components/ui/skeleton';
+import ChatNowButton from '@/components/tour/ChatNowButton';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
@@ -87,6 +89,7 @@ const TourDetail = () => {
         
         {/* Price Bar */}
         <PriceBar 
+          oldPrice={trip.oldPrice} 
           newPrice={trip.price} 
           rating={trip.rating} 
           reviewCount={trip.reviewCount}
@@ -113,6 +116,9 @@ const TourDetail = () => {
             />
           </Suspense>
         </ErrorBoundary>
+        
+        {/* Chat Now Button */}
+        <ChatNowButton />
         
         <Footer />
         <BackToTopButton />
