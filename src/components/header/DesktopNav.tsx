@@ -25,7 +25,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <li>
             <MenuLink 
               to="/destinations" 
-              label="Destinations" 
+              label="DESTINATIONS" 
               hasDropdown 
               onClick={onLinkClick}
             >
@@ -33,12 +33,22 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
             </MenuLink>
           </li>
           <li>
-            <MenuLink to="/deals" label="Deals" onClick={onLinkClick} />
+            <MenuLink 
+              to="/deals" 
+              label="DEALS" 
+              hasDropdown 
+              onClick={onLinkClick}
+            >
+              <DropdownItems 
+                items={[{ label: 'Current Deals', to: '/deals/current-deals' }]} 
+                onClick={onLinkClick} 
+              />
+            </MenuLink>
           </li>
           <li>
             <MenuLink 
               to="/travel-styles" 
-              label="Travel Styles" 
+              label="TRAVEL STYLES" 
               hasDropdown 
               onClick={onLinkClick}
             >
@@ -48,7 +58,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <li>
             <MenuLink 
               to="/about-contiki" 
-              label="About Contiki" 
+              label="ABOUT CONTIKI" 
               hasDropdown 
               onClick={onLinkClick}
             >
@@ -58,7 +68,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <li>
             <MenuLink 
               to="/get-inspired" 
-              label="Get Inspired" 
+              label="GET INSPIRED" 
               hasDropdown 
               onClick={onLinkClick}
             >
@@ -71,13 +81,15 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
       {/* Right side elements - search box, phone, etc. */}
       <div className="hidden md:flex items-center space-x-4">
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400" />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+            <div className="bg-[#CCFF00] rounded-full p-1">
+              <Search className="h-4 w-4 text-black" />
+            </div>
           </div>
           <Input 
             type="search" 
-            placeholder="Age 18–35? Find your adventure" 
-            className="pl-10 text-sm w-64 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
+            placeholder="Aged 18-35? Find your adventure" 
+            className="pr-12 text-sm w-64 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
           />
         </div>
         

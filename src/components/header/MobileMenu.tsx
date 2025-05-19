@@ -27,7 +27,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   return (
     <div 
       className={cn(
-        "md:hidden bg-white shadow-md transition-all duration-300 ease-in-out overflow-hidden", 
+        "md:hidden bg-white shadow-md transition-all duration-200 ease-in-out overflow-hidden", 
         isOpen ? "max-h-[80vh] border-t" : "max-h-0"
       )}
       id="mobile-menu"
@@ -36,19 +36,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         <div className="flex flex-col space-y-4">
           {/* Mobile search bar */}
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="h-4 w-4 text-gray-400" />
+            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+              <div className="bg-[#CCFF00] rounded-full p-1">
+                <Search className="h-4 w-4 text-black" />
+              </div>
             </div>
             <Input 
               type="search" 
-              placeholder="Age 18–35? Find your adventure" 
-              className="pl-10 text-sm h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
+              placeholder="Aged 18-35? Find your adventure" 
+              className="pr-12 text-sm h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
             />
           </div>
           
           {/* Mobile navigation */}
           <div className="space-y-4 py-2">
-            <MenuLink to="/destinations" label="Destinations" hasDropdown isMobile onClick={onLinkClick}>
+            <MenuLink to="/destinations" label="DESTINATIONS" hasDropdown isMobile onClick={onLinkClick}>
               {destinationItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -61,9 +63,17 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/deals" label="Deals" isMobile onClick={onLinkClick} />
+            <MenuLink to="/deals" label="DEALS" hasDropdown isMobile onClick={onLinkClick}>
+              <Link 
+                to="/deals/current-deals" 
+                className="block py-2 text-sm text-black"
+                onClick={() => onLinkClick('Current Deals')}
+              >
+                Current Deals
+              </Link>
+            </MenuLink>
             
-            <MenuLink to="/travel-styles" label="Travel Styles" hasDropdown isMobile onClick={onLinkClick}>
+            <MenuLink to="/travel-styles" label="TRAVEL STYLES" hasDropdown isMobile onClick={onLinkClick}>
               {travelStyleItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -76,7 +86,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/about-contiki" label="About Contiki" hasDropdown isMobile onClick={onLinkClick}>
+            <MenuLink to="/about-contiki" label="ABOUT CONTIKI" hasDropdown isMobile onClick={onLinkClick}>
               {aboutItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -89,7 +99,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               ))}
             </MenuLink>
             
-            <MenuLink to="/get-inspired" label="Get Inspired" hasDropdown isMobile onClick={onLinkClick}>
+            <MenuLink to="/get-inspired" label="GET INSPIRED" hasDropdown isMobile onClick={onLinkClick}>
               {inspiredItems.map((item, index) => (
                 <Link 
                   key={index}
@@ -101,6 +111,15 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 </Link>
               ))}
             </MenuLink>
+          </div>
+          
+          {/* Mobile utility links */}
+          <div className="space-y-2 pt-2 border-t border-gray-200">
+            <Link to="/contact" className="block py-2 text-sm text-gray-600" onClick={() => onLinkClick('Contact us')}>Contact us</Link>
+            <Link to="/future-travel-credit" className="block py-2 text-sm text-gray-600" onClick={() => onLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
+            <Link to="/subscribe" className="block py-2 text-sm text-gray-600" onClick={() => onLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
+            <Link to="/login" className="block py-2 text-sm text-gray-600" onClick={() => onLinkClick('Traveller log in')}>Traveller log in</Link>
+            <Link to="/agent-login" className="block py-2 text-sm text-gray-600" onClick={() => onLinkClick('Agent log in')}>Agent log in</Link>
           </div>
           
           {/* Mobile phone button */}
