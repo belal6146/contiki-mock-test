@@ -29,7 +29,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
     return (
       <DropdownMenu>
         <DropdownMenuTrigger className="group focus:outline-none" aria-haspopup="true">
-          <div className="flex items-center text-sm font-medium tracking-tight hover:text-black text-black py-2 px-3 group-data-[state=open]:text-black relative">
+          <div className="flex items-center text-sm font-medium tracking-tight hover:text-[#007EA7] text-black py-2 px-3 group-data-[state=open]:text-[#007EA7] relative transition-all duration-150 ease-in-out">
             {label}
             <ChevronDown className="h-4 w-4 ml-1" />
             <span className="absolute -bottom-[1px] left-3 w-0 h-[2px] bg-[#CCFF00] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-24px)] group-data-[state=open]:w-[calc(100%-24px)]"></span>
@@ -45,7 +45,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   if (hasDropdown && isMobile) {
     return (
       <div className="space-y-2">
-        <div className="flex items-center justify-between py-2 text-sm font-medium text-black tracking-tight">
+        <div className="flex items-center justify-between py-2 text-sm font-medium text-black tracking-tight transition-all duration-150 ease-in-out">
           {label}
           <ChevronDown className="h-4 w-4" />
         </div>
@@ -59,7 +59,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   return (
     <Link 
       to={to} 
-      className={`text-sm font-medium tracking-tight text-black py-2 ${isMobile ? '' : 'px-3'} hover:text-black relative group`}
+      className={`text-sm font-medium tracking-tight text-black py-2 ${isMobile ? '' : 'px-3'} hover:text-[#007EA7] relative group transition-all duration-150 ease-in-out`}
       onClick={() => onClick(label)}
     >
       {label}

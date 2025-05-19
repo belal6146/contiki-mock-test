@@ -89,13 +89,13 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <Input 
             type="search" 
             placeholder="Aged 18-35? Find your adventure" 
-            className="pr-12 text-sm w-64 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00]"
+            className="pr-12 text-sm w-64 h-10 border border-gray-300 rounded-full focus:ring-[#CCFF00] focus:border-[#CCFF00] transition-all duration-150 ease-in-out"
           />
         </div>
         
         <a 
           href="tel:08082811120" 
-          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-colors duration-150"
+          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
           onClick={() => onLinkClick('Phone')}
         >
           <Phone className="h-4 w-4 mr-2" />
@@ -104,7 +104,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         
         <Link 
           to="/subscribe" 
-          className="px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-colors duration-150"
+          className="px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-all duration-150 ease-in-out"
           onClick={() => onLinkClick('Subscribe')}
         >
           Subscribe

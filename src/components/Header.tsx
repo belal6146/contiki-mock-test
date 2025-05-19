@@ -1,15 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Phone, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, Phone, Menu, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { trackEvent } from '@/lib/analytics';
 import {
   destinationItems,
@@ -57,11 +51,11 @@ const Header = () => {
       {/* Top utility links - visible on desktop only */}
       <div className="hidden md:flex justify-end border-b border-gray-100 px-4">
         <div className="flex space-x-4 text-sm py-1">
-          <Link to="/contact" className="text-gray-600 hover:text-black" onClick={() => handleLinkClick('Contact us')}>Contact us</Link>
-          <Link to="/future-travel-credit" className="text-gray-600 hover:text-black" onClick={() => handleLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
-          <Link to="/subscribe" className="text-gray-600 hover:text-black" onClick={() => handleLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
-          <Link to="/login" className="text-gray-600 hover:text-black" onClick={() => handleLinkClick('Traveller log in')}>Traveller log in</Link>
-          <Link to="/agent-login" className="text-gray-600 hover:text-black" onClick={() => handleLinkClick('Agent log in')}>Agent log in</Link>
+          <Link to="/contact" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Contact us')}>Contact us</Link>
+          <Link to="/future-travel-credit" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
+          <Link to="/subscribe" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
+          <Link to="/login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Traveller log in')}>Traveller log in</Link>
+          <Link to="/agent-login" className="text-gray-600 hover:text-black transition-all duration-150 ease-in-out" onClick={() => handleLinkClick('Agent log in')}>Agent log in</Link>
         </div>
       </div>
       
@@ -75,7 +69,7 @@ const Header = () => {
           
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-md text-black"
+            className="md:hidden p-2 rounded-md text-black transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-accent"
             onClick={toggleMenu}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}

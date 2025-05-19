@@ -20,7 +20,7 @@ const DropdownItems: React.FC<DropdownItemsProps> = ({ items, onClick }) => {
         <DropdownMenuItem key={index} asChild className="p-0 focus:bg-gray-50">
           <Link 
             to={item.to} 
-            className="block w-full px-3 py-2 text-sm text-black hover:bg-gray-50"
+            className="block w-full px-3 py-2 text-sm text-black hover:text-[#007EA7] hover:bg-gray-50 transition-all duration-150 ease-in-out"
             onClick={() => onClick(item.label)}
           >
             {item.label}
