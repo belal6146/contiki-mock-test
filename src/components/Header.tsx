@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from '@/lib/utils';
 import { Input } from "@/components/ui/input";
+import ContikiButton from './ContikiButton';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -219,6 +220,14 @@ const Header = () => {
               <Phone className="h-4 w-4 mr-2" />
               0808 281 1120
             </a>
+            
+            <Link 
+              to="/subscribe" 
+              className="px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-colors duration-150"
+              onClick={() => handleLinkClick('Subscribe')}
+            >
+              Subscribe
+            </Link>
           </div>
           
           {/* Mobile menu button */}
@@ -322,6 +331,15 @@ const Header = () => {
               <Phone className="h-4 w-4 mr-2" />
               0808 281 1120
             </a>
+            
+            {/* Mobile subscribe button */}
+            <Link 
+              to="/subscribe" 
+              className="flex items-center justify-center px-4 py-2 bg-[#CCFF00] rounded-full text-black font-medium text-sm hover:bg-[#CCFF00]/90 transition-colors duration-150"
+              onClick={() => handleLinkClick('Subscribe')}
+            >
+              Subscribe
+            </Link>
           </div>
         </div>
       </div>
