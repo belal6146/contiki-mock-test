@@ -18,11 +18,13 @@ interface ItineraryDay {
 interface MapItineraryProps {
   itinerary: ItineraryDay[];
   mapImageUrl?: string;
+  mapboxToken?: string; // Optional prop to pass a Mapbox token
 }
 
 const MapItinerary: React.FC<MapItineraryProps> = ({ 
   itinerary,
-  mapImageUrl = '/placeholder.svg'
+  mapImageUrl = '/placeholder.svg',
+  mapboxToken
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   
@@ -41,6 +43,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({
           <MapDisplay 
             itinerary={itinerary} 
             onMarkerClick={handleNavigation}
+            mapboxToken={mapboxToken}
           />
         </div>
         
