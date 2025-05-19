@@ -166,6 +166,28 @@ const MapDisplay: React.FC<MapDisplayProps> = ({
   // Check if we should render the token input form
   const showTokenInput = !token && itinerary.some(day => day.coordinates);
   
+  // Add custom CSS for mapbox popups
+  useEffect(() => {
+    // Add custom styles for mapbox popups
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      .mapboxgl-popup-content {
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      .mapboxgl-popup-close-button {
+        font-size: 16px;
+        padding: 5px;
+      }
+    `;
+    document.head.appendChild(styleElement);
+    
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
+  
   return (
     <div className="bg-gray-200 rounded-lg overflow-hidden h-[400px] relative">
       {showTokenInput ? (
@@ -210,18 +232,6 @@ const MapDisplay: React.FC<MapDisplayProps> = ({
           )}
         </>
       )}
-      
-      <style jsx>{`
-        .mapboxgl-popup-content {
-          border-radius: 8px;
-          padding: 12px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .mapboxgl-popup-close-button {
-          font-size: 16px;
-          padding: 5px;
-        }
-      `}</style>
     </div>
   );
 };
