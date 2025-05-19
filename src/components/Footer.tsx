@@ -1,7 +1,6 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Search, Tiktok } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Search } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -136,7 +135,23 @@ const Footer = () => {
                   <Youtube size={18} />
                 </a>
                 <a href="https://tiktok.com/@contiki" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="bg-white hover:bg-[#CCFF00] text-black p-2 rounded-full transition-colors">
-                  <Tiktok size={18} />
+                  {/* Using a SVG for TikTok since it's not available in lucide-react */}
+                  <svg 
+                    width="18" 
+                    height="18" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 12a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path>
+                    <path d="M16 8v8"></path>
+                    <path d="M12 16v4"></path>
+                    <path d="M20 12V8h-4"></path>
+                    <path d="M16 5.95a4 4 0 0 0-4 0"></path>
+                  </svg>
                 </a>
               </div>
             </div>
