@@ -1,7 +1,7 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, Search, Users } from 'lucide-react';
+import { Calendar, MapPin, Search, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -15,7 +15,7 @@ const Hero = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [travelers, setTravelers] = useState<number>(1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.debug('[Hero] mounted');
   }, []);
 
@@ -34,7 +34,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full bg-primary h-[calc(100vh-80px)] flex items-center justify-center">
+    <section className="relative bg-primary h-screen md:h-screen h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
@@ -42,19 +42,20 @@ const Hero = () => {
         aria-hidden="true"
       />
       
-      {/* Gradient Overlay */}
+      {/* Gradient Overlay - Stops at exactly 20% & 80% */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent z-10"
+        className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent z-10"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 80%)' }}
         aria-hidden="true"
       />
 
       {/* Content Container */}
-      <div className="container relative z-20 px-4 md:px-8 flex flex-col items-center justify-center">
+      <div className="container relative z-20 px-6 md:px-8 flex flex-col items-center justify-center">
         <div className="text-center mb-8">
-          <h1 className="font-montserrat font-bold text-5xl lg:text-7xl text-white leading-tight">
+          <h1 className="font-montserrat font-bold text-5xl md:text-7xl text-white leading-tight tracking-wide">
             ADVENTURE AWAITS
           </h1>
-          <p className="font-montserrat font-normal text-lg lg:text-2xl text-white mt-4">
+          <p className="font-montserrat font-normal text-lg md:text-2xl text-white mt-4">
             Discover the world with us
           </p>
         </div>
@@ -68,7 +69,7 @@ const Hero = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Destination */}
             <div className="space-y-2">
-              <label htmlFor="destination" className="text-sm font-medium text-primary">
+              <label htmlFor="destination" className="text-sm font-medium text-gray-700">
                 Destination
               </label>
               <div className="relative">
@@ -77,17 +78,17 @@ const Hero = () => {
                   placeholder="Where to?"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full pl-10 border-secondary placeholder-secondary focus:ring-accent"
+                  className="w-full pl-10"
                   type="text"
                   aria-label="Enter destination"
                 />
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary" />
+                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>
             </div>
 
             {/* Date */}
             <div className="space-y-2">
-              <label htmlFor="date" className="text-sm font-medium text-primary">
+              <label htmlFor="date" className="text-sm font-medium text-gray-700">
                 Date
               </label>
               <Popover>
@@ -97,12 +98,14 @@ const Hero = () => {
                     id="date"
                     aria-label="Select travel date"
                     className={cn(
-                      "w-full flex items-center justify-between text-left font-normal border-secondary focus:ring-accent",
-                      !date && "text-secondary"
+                      "w-full pl-10 text-left font-normal relative",
+                      !date && "text-gray-400"
                     )}
                   >
-                    {date ? format(date, "PPP") : "Select date"}
-                    <Calendar className="ml-auto h-4 w-4 opacity-50" />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <span className="block truncate">
+                      {date ? format(date, "PPP") : "Select date"}
+                    </span>
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="center">
@@ -119,7 +122,7 @@ const Hero = () => {
 
             {/* Travelers */}
             <div className="space-y-2">
-              <label htmlFor="travelers" className="text-sm font-medium text-primary">
+              <label htmlFor="travelers" className="text-sm font-medium text-gray-700">
                 Travelers
               </label>
               <div className="relative">
@@ -130,10 +133,10 @@ const Hero = () => {
                   max="20"
                   value={travelers}
                   onChange={(e) => setTravelers(parseInt(e.target.value) || 1)}
-                  className="w-full pl-10 border-secondary focus:ring-accent"
+                  className="w-full pl-10"
                   aria-label="Number of travelers"
                 />
-                <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary" />
+                <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>
             </div>
           </div>
@@ -142,7 +145,7 @@ const Hero = () => {
           <div className="mt-6">
             <Button 
               type="submit" 
-              className="w-full bg-accent hover:bg-accent/90 text-white font-medium px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              className="w-full bg-primary text-white hover:bg-secondary hover:text-primary font-medium px-6 py-4 rounded-lg transition-colors duration-300"
               aria-label="Search trips"
             >
               Search Trips
