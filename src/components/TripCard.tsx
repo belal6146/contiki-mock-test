@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '@/lib/utils';
+import { trackEvent } from '@/lib/analytics';
 
 interface TripCardProps {
   id: string;
@@ -17,6 +18,7 @@ const TripCard = ({ id, title, region, price }: TripCardProps) => {
 
   const handleClick = () => {
     console.debug('[TripCard] clicked', { id });
+    trackEvent('trip_card_click', { id, title, region });
   };
 
   return (
