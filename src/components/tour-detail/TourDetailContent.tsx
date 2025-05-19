@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Trip } from '@/types/trip';
-import TabNav from '@/components/tour/TabNav';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TripHighlights from '@/components/tour/TripHighlights';
 import DetailsGrid from '@/components/tour/DetailsGrid';
 import DailyAccordion from '@/components/tour/DailyAccordion';
@@ -24,11 +24,21 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
   // Default empty array for itinerary if it doesn't exist on trip
   const itinerary = trip.itinerary || [];
   
-  // We'll check if these properties exist before passing them to components
-  // If they don't exist, we'll pass empty arrays or null
-  const highlights = trip.highlights || [];
-  const accommodation = trip.accommodation || [];
-  const faqs = trip.faqs || [];
+  // Define mock data for components that expect properties not in our Trip type
+  const mockAccommodation = [
+    { name: 'Hotel Stay', description: 'Comfortable accommodations throughout the trip' }
+  ];
+  
+  const mockFAQs = [
+    { 
+      question: 'What is included in the trip price?', 
+      answer: 'The trip price includes accommodations, transportation, certain meals, and guided tours as specified in the itinerary.' 
+    },
+    { 
+      question: 'What should I pack for this trip?', 
+      answer: 'We recommend packing comfortable walking shoes, weather-appropriate clothing, and travel essentials.' 
+    }
+  ];
 
   return (
     <main className="flex-1">
@@ -36,38 +46,44 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
       <FlexDepositBar />
       
       {/* Tab Navigation and Content */}
-      <TabNav 
-        tabs={[
-          { id: 'overview', label: 'Overview', content: (
-            <div className="py-8 space-y-12">
-              {/* Trip Highlights */}
-              <TripHighlights highlights={highlights} />
-              
-              {/* Trip Details Grid */}
-              <DetailsGrid details={tripDetails} />
-              
-              {/* Daily Itinerary */}
-              <section className="container mx-auto">
-                <h2 className="text-2xl font-bold mb-6">Day by Day</h2>
-                <DailyAccordion itinerary={itinerary} />
-              </section>
-              
-              {/* Where You'll Stay */}
-              <WhereYouWillStay accommodation={accommodation} />
-            </div>
-          ) },
-          { id: 'dates-pricing', label: 'Dates & Pricing', content: (
+      <div className="container mx-auto">
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="mb-6 border-b border-gray-200 w-full flex justify-start">
+            <TabsTrigger value="overview" className="px-4 py-2">Overview</TabsTrigger>
+            <TabsTrigger value="dates-pricing" className="px-4 py-2">Dates & Pricing</TabsTrigger>
+            <TabsTrigger value="reviews" className="px-4 py-2">Reviews</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="overview" className="py-8 space-y-12">
+            {/* Trip Highlights */}
+            <TripHighlights highlights={trip.highlights} />
+            
+            {/* Trip Details Grid */}
+            <DetailsGrid highlights={trip.highlights} included={trip.included} />
+            
+            {/* Daily Itinerary */}
+            <section className="container mx-auto">
+              <h2 className="text-2xl font-bold mb-6">Day by Day</h2>
+              <DailyAccordion days={itinerary} />
+            </section>
+            
+            {/* Where You'll Stay */}
+            <WhereYouWillStay accommodation={mockAccommodation} />
+          </TabsContent>
+          
+          <TabsContent value="dates-pricing">
             <div className="py-8">
               <p className="text-xl">Dates and pricing content would go here</p>
             </div>
-          ) },
-          { id: 'reviews', label: 'Reviews', content: (
+          </TabsContent>
+          
+          <TabsContent value="reviews">
             <div className="py-8">
               <p className="text-xl">Reviews content would go here</p>
             </div>
-          ) },
-        ]}
-      />
+          </TabsContent>
+        </Tabs>
+      </div>
       
       {/* Related Trips */}
       <section className="py-12 bg-gray-50">
@@ -80,7 +96,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
       {/* FAQs */}
       <section className="py-12 container mx-auto">
         <h2 className="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
-        <FAQAccordion faqs={faqs} />
+        <FAQAccordion tripFAQs={mockFAQs} generalFAQs={mockFAQs} />
       </section>
     </main>
   );
