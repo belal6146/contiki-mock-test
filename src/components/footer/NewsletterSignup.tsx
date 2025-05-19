@@ -31,8 +31,8 @@ const NewsletterSignup: React.FC = () => {
 
   return (
     <div>
-      <h3 className="text-xl font-bold mb-6">Newsletter</h3>
-      <p className="mb-4 text-sm">Sign up for travel tips, trip inspo and exclusive offers straight to your inbox</p>
+      <h3 className="text-2xl font-bold mb-6">Newsletter</h3>
+      <p className="mb-4 text-base text-white/90">Sign up for travel tips, trip inspo and exclusive offers straight to your inbox</p>
       
       {isSubmitted ? (
         <div className="text-[#CCFF00] font-medium mb-4">
@@ -50,13 +50,13 @@ const NewsletterSignup: React.FC = () => {
                     <div className="relative">
                       <Input 
                         placeholder="Your email address" 
-                        className="pr-14 bg-white text-black rounded-full" 
+                        className="pr-24 bg-white text-black rounded-full h-12" 
                         {...field} 
                       />
                       <Button 
                         type="submit" 
                         size="sm"
-                        className="absolute right-1 top-1 bottom-1 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 rounded-full px-4"
+                        className="absolute right-1 top-1 bottom-1 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 rounded-full px-6 font-medium"
                       >
                         Subscribe
                       </Button>

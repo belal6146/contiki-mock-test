@@ -3,7 +3,7 @@ import React from 'react';
 
 const CopyrightInfo: React.FC = () => {
   return (
-    <div className="text-xs text-white/70">
+    <div className="text-sm text-white/80">
       <p className="mb-4">
         Copyright © {new Date().getFullYear()} Contiki. All Rights Reserved. Contiki is part of The Travel Corporation family of companies.
       </p>

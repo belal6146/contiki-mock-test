@@ -5,22 +5,22 @@ import { Facebook, Instagram, Youtube } from 'lucide-react';
 const SocialLinks: React.FC = () => {
   return (
     <div>
-      <h4 className="font-medium mb-4">Connect with us</h4>
+      <h4 className="text-lg font-bold mb-4">Connect with us</h4>
       <div className="flex space-x-4">
-        <a href="https://facebook.com/contiki" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="bg-white hover:bg-[#CCFF00] text-black p-2 rounded-full transition-colors">
-          <Facebook size={18} />
+        <a href="https://facebook.com/contiki" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="bg-white hover:bg-[#CCFF00] text-black p-2.5 rounded-full transition-colors">
+          <Facebook size={20} />
         </a>
-        <a href="https://instagram.com/contiki" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-white hover:bg-[#CCFF00] text-black p-2 rounded-full transition-colors">
-          <Instagram size={18} />
+        <a href="https://instagram.com/contiki" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="bg-white hover:bg-[#CCFF00] text-black p-2.5 rounded-full transition-colors">
+          <Instagram size={20} />
         </a>
-        <a href="https://youtube.com/user/contiki" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="bg-white hover:bg-[#CCFF00] text-black p-2 rounded-full transition-colors">
-          <Youtube size={18} />
+        <a href="https://youtube.com/user/contiki" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="bg-white hover:bg-[#CCFF00] text-black p-2.5 rounded-full transition-colors">
+          <Youtube size={20} />
         </a>
-        <a href="https://tiktok.com/@contiki" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="bg-white hover:bg-[#CCFF00] text-black p-2 rounded-full transition-colors">
+        <a href="https://tiktok.com/@contiki" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="bg-white hover:bg-[#CCFF00] text-black p-2.5 rounded-full transition-colors">
           {/* Using a SVG for TikTok since it's not available in lucide-react */}
           <svg 
-            width="18" 
-            height="18" 
+            width="20" 
+            height="20" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
