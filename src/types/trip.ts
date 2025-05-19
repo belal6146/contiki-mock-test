@@ -9,6 +9,7 @@ export interface DayDetails {
 
 export interface Variation {
   id: string;
+  name: string; // Added this field to fix the TypeScript error
   startDate: string;
   endDate: string;
   price: number;
@@ -28,4 +29,6 @@ export interface Trip {
   reviewCount: number;
   itinerary: DayDetails[];
   variations: Variation[];
+  highlights?: any[]; // Added to match useTrips.ts Trip type
+  included?: string[]; // Added to match useTrips.ts Trip type
 }

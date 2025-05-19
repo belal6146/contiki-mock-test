@@ -4,36 +4,11 @@ import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
 import TripCard from '@/components/TripCard';
 import Slider from "react-slick";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import PrevArrow from '../carousel/PrevArrow';
+import NextArrow from '../carousel/NextArrow';
 // Import slick carousel css
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-const PrevArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/80 rounded-full p-2 shadow-lg hover:bg-white/90 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
-      aria-label="Previous slide"
-    >
-      <ChevronLeft className="h-6 w-6" />
-    </button>
-  );
-};
-
-const NextArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/80 rounded-full p-2 shadow-lg hover:bg-white/90 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
-      aria-label="Next slide"
-    >
-      <ChevronRight className="h-6 w-6" />
-    </button>
-  );
-};
 
 const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
@@ -60,8 +35,8 @@ const FeaturedTrips = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow variant="circle" />,
+    nextArrow: <NextArrow variant="circle" />,
     responsive: [
       {
         breakpoint: 1024,
@@ -157,18 +132,20 @@ const FeaturedTrips = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>
+        {`
         .custom-dots {
           bottom: -40px;
         }
         .custom-dots li button:before {
           font-size: 12px;
         }
-        :global(.slick-prev),
-        :global(.slick-next) {
+        .slick-prev,
+        .slick-next {
           z-index: 10;
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };

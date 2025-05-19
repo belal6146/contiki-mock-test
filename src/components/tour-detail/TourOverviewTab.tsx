@@ -31,7 +31,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
       <h2 className="heading-md mb-6">Trip Overview</h2>
       <p className="text-lg text-gray-700 mb-8 container">{trip.description}</p>
       
-      <TripHighlights highlights={highlights} />
+      <TripHighlights highlights={highlights} arrowVariant="outline" />
       
       <MapItinerary itinerary={trip.itinerary} />
       

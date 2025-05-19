@@ -1,7 +1,8 @@
 
 import React, { useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Slider from "react-slick";
+import PrevArrow from '../carousel/PrevArrow';
+import NextArrow from '../carousel/NextArrow';
 // Import slick carousel css
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,35 +17,13 @@ interface Highlight {
 
 interface TripHighlightsProps {
   highlights: Highlight[];
+  arrowVariant?: 'default' | 'outline' | 'circle' | 'minimal';
 }
 
-const PrevArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white/80 rounded-full p-2 shadow-lg hover:bg-white/90 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
-      aria-label="Previous highlight"
-    >
-      <ChevronLeft className="h-6 w-6" />
-    </button>
-  );
-};
-
-const NextArrow = (props: any) => {
-  const { onClick } = props;
-  return (
-    <button
-      onClick={onClick}
-      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white/80 rounded-full p-2 shadow-lg hover:bg-white/90 transition-all focus:outline-none focus:ring-2 focus:ring-accent"
-      aria-label="Next highlight"
-    >
-      <ChevronRight className="h-6 w-6" />
-    </button>
-  );
-};
-
-const TripHighlights: React.FC<TripHighlightsProps> = ({ highlights }) => {
+const TripHighlights: React.FC<TripHighlightsProps> = ({ 
+  highlights,
+  arrowVariant = 'default'
+}) => {
   useEffect(() => {
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
   }, [highlights.length]);
@@ -62,8 +41,8 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({ highlights }) => {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow variant={arrowVariant} />,
+    nextArrow: <NextArrow variant={arrowVariant} />,
     responsive: [
       {
         breakpoint: 1024,
