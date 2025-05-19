@@ -29,11 +29,6 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
   // Get the active tab id to use
   const activeTab = externalActiveTab || internalActiveTab;
 
-  // Filter and get the active tab's children
-  const activeContent = React.Children.toArray(children).find(
-    (child) => React.isValidElement(child) && child.props.id === activeTab
-  );
-
   const handleTabClick = (tabId: string) => {
     console.debug('[TabNav] tabClicked', { tab: tabs.find(tab => tab.id === tabId)?.label });
     
@@ -119,16 +114,11 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
           aria-labelledby={`tab-${activeTab}`}
           tabIndex={0}
         >
-          {activeContent}
+          {children}
         </div>
       </div>
     </section>
   );
-};
-
-// TabPanel component to wrap each tab's content
-export const TabPanel: React.FC<{ id: string; children: React.ReactNode }> = ({ children, id }) => {
-  return <div id={id}>{children}</div>;
 };
 
 export default TabNav;

@@ -4,8 +4,7 @@ import TourOverviewTab from './TourOverviewTab';
 import TourDatesTab from './TourDatesTab';
 import TourReviewsTab from './TourReviewsTab';
 import TabNav from '../tour/TabNav';
-import RelatedTrips from '../tour/RelatedTrips';
-import { Trip } from '@/types/trips';
+import { Trip } from '@/types/trip';
 
 interface TourDetailContentProps {
   trip: Trip;
@@ -87,6 +86,29 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
     setActiveTab(tabId);
   };
 
+  // Determine which content to show based on active tab
+  const renderTabContent = () => {
+    switch(activeTab) {
+      case 'overview':
+        return (
+          <TourOverviewTab
+            trip={trip}
+            highlights={mockHighlights}
+            trips={relatedTrips}
+            accommodation={mockAccommodation}
+            tripFAQs={mockTripFAQs}
+            generalFAQs={mockGeneralFAQs}
+          />
+        );
+      case 'dates':
+        return <TourDatesTab trip={trip} />;
+      case 'reviews':
+        return <TourReviewsTab tripId={trip.id} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="pb-16">
       <div className="container">
@@ -95,18 +117,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
           activeTab={activeTab}
           onChange={handleTabChange}
         >
-          {activeTab === 'overview' && (
-            <TourOverviewTab
-              trip={trip}
-              highlights={mockHighlights}
-              trips={relatedTrips}
-              accommodation={mockAccommodation}
-              tripFAQs={mockTripFAQs}
-              generalFAQs={mockGeneralFAQs}
-            />
-          )}
-          {activeTab === 'dates' && <TourDatesTab trip={trip} />}
-          {activeTab === 'reviews' && <TourReviewsTab tripId={trip.id} />}
+          {renderTabContent()}
         </TabNav>
       </div>
     </div>
