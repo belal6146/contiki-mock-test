@@ -14,6 +14,9 @@ import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
 import { Trip } from '@/types/trip';
+import HeroImage from '@/components/tour/HeroImage';
+import PriceBar from '@/components/tour/PriceBar';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
@@ -64,29 +67,41 @@ const TourDetail = () => {
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col">
-        <Helmet>
-          <title>{trip?.name ? `${trip.name} | Contiki Tours` : 'Tour Detail | Contiki'}</title>
-          <meta name="description" content={trip?.description ? trip.description.substring(0, 160) : 'Explore our amazing tours for 18-35 year olds'} />
-          <meta property="og:title" content={trip?.name ? `${trip.name} | Contiki Tours` : 'Tour Detail | Contiki'} />
-          <meta property="og:description" content={trip?.description ? trip.description.substring(0, 160) : 'Explore our amazing tours for 18-35 year olds'} />
-          <meta property="og:type" content="website" />
-          {trip?.image && <meta property="og:image" content={trip.image} />}
-          <link rel="canonical" href={`https://www.contiki.com/tours/${slug}`} />
-        </Helmet>
-        
         <TourDetailHead trip={trip} slug={slug} />
         <Header />
         
         {trip && (
-          <ErrorBoundary>
-            <Suspense fallback={<TourDetailSkeleton />}>
-              <TourDetailContent 
-                trip={trip}
-                tripDetails={tripDetails}
-                relatedTrips={trips}
-              />
-            </Suspense>
-          </ErrorBoundary>
+          <>
+            {/* Hero Image Section */}
+            <HeroImage 
+              imageUrl={trip.image} 
+              title={trip.name} 
+              subtitle={trip.destination}
+            />
+            
+            {/* Price Bar */}
+            <PriceBar 
+              newPrice={trip.price} 
+              rating={trip.rating} 
+              reviewCount={trip.reviewCount}
+            />
+            
+            {/* Breadcrumb Navigation */}
+            <Breadcrumb 
+              title={trip.name} 
+              destination={trip.destination} 
+            />
+            
+            <ErrorBoundary>
+              <Suspense fallback={<TourDetailSkeleton />}>
+                <TourDetailContent 
+                  trip={trip}
+                  tripDetails={tripDetails}
+                  relatedTrips={trips}
+                />
+              </Suspense>
+            </ErrorBoundary>
+          </>
         )}
         
         <Footer />
