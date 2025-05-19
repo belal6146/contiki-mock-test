@@ -50,10 +50,58 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.015em;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 48px;
+    line-height: 52px;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.0125em;
+  }
+
+  h4 {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  h5 {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  h6 {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.015em;
   }
 
   .container {
@@ -68,6 +116,10 @@
     @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors
     focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none
     disabled:opacity-50;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.025em;
+    padding: 8px 16px;
   }
   .btn-primary {
     @apply btn bg-black text-white hover:bg-black/90;
@@ -86,15 +138,41 @@
   }
 
   .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
   }
   .heading-lg {
-    @apply text-3xl md:text-4xl font-bold leading-tight;
+    @apply text-3xl md:text-4xl font-bold;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
   .heading-md {
-    @apply text-2xl md:text-3xl font-bold leading-snug;
+    @apply text-2xl md:text-3xl font-bold;
+    letter-spacing: -0.0125em;
+    line-height: 1.2;
   }
   .heading-sm {
     @apply text-xl md:text-2xl font-bold;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .text-small {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.025em;
+  }
+
+  .text-large {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  .text-caption {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.025em;
   }
 }
