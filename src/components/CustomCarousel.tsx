@@ -66,6 +66,9 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       className="relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Image carousel"
     >
       {/* Image container */}
       <div className="relative h-96">
@@ -75,11 +78,13 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
             className={`absolute inset-0 transition-opacity duration-500 ${
               index === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
+            aria-hidden={index !== currentIndex}
           >
             <img
               src={image.src}
               alt={image.alt}
               className="w-full h-full object-cover object-center"
+              loading="lazy"
             />
           </div>
         ))}
@@ -89,7 +94,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       <Button
         variant="outline"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out"
         onClick={handlePrev}
         aria-label="Previous slide"
       >
@@ -99,7 +104,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       <Button
         variant="outline"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out"
         onClick={handleNext}
         aria-label="Next slide"
       >
@@ -107,11 +112,11 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       </Button>
       
       {/* Indicator dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" role="tablist">
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-3 h-3 rounded-full transition-all duration-150 ease-in-out ${
               index === currentIndex ? 'bg-white' : 'bg-white/50'
             }`}
             onClick={() => {
@@ -119,6 +124,9 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
               console.debug('[Carousel] slideChanged', index);
             }}
             aria-label={`Go to slide ${index + 1}`}
+            aria-selected={index === currentIndex}
+            role="tab"
+            tabIndex={0}
           />
         ))}
       </div>

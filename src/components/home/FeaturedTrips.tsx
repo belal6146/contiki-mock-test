@@ -1,9 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
 import TripCard from '@/components/TripCard';
-import Slider from "react-slick";
 import { 
   CarouselPrevious as PrevArrow,
   CarouselNext as NextArrow
@@ -11,6 +10,9 @@ import {
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+// Lazy load the Slider component
+const Slider = lazy(() => import("react-slick"));
 
 const FeaturedTrips = () => {
   const { trips, loading, error } = useTrips({ featured: true, limit: 3 });
@@ -37,8 +39,8 @@ const FeaturedTrips = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    prevArrow: <PrevArrow className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10" />,
-    nextArrow: <NextArrow className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10" />,
+    prevArrow: <PrevArrow className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10" aria-label="View previous trips" />,
+    nextArrow: <NextArrow className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10" aria-label="View next trips" />,
     responsive: [
       {
         breakpoint: 1024,
@@ -63,10 +65,10 @@ const FeaturedTrips = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-bgLight">
+    <section className="py-16 md:py-24 bg-bgLight" aria-labelledby="featured-trips-heading">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Featured Trips</h2>
+          <h2 id="featured-trips-heading" className="font-montserrat font-bold text-3xl md:text-4xl mb-4">Featured Trips</h2>
           <p className="font-montserrat text-lg text-gray-600 max-w-3xl mx-auto">
             Discover our most popular trips and start planning your next adventure today.
           </p>
@@ -82,7 +84,7 @@ const FeaturedTrips = () => {
           <div className="text-center py-10 bg-red-50 rounded-lg">
             <p className="text-red-500" role="alert">{error}</p>
             <button 
-              className="mt-4 btn-primary px-4 py-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="mt-4 btn-primary px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-150 ease-in-out"
               onClick={() => window.location.reload()}
               aria-label="Retry loading trips"
             >
@@ -99,34 +101,41 @@ const FeaturedTrips = () => {
         
         {!loading && !error && trips.length > 0 && (
           <div className="featured-trips-slider overflow-hidden">
-            <Slider {...sliderSettings} className="slick-slider">
-              {trips.map((trip) => (
-                <div key={trip.id} className="px-4">
-                  <div className="group transition-all duration-300 hover:scale-105">
-                    <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
-                      <img 
-                        src={trip.image || '/placeholder.svg'} 
-                        alt={trip.name}
-                        className="w-full h-full object-cover group-hover:shadow-lg transition-all"
+            <Suspense fallback={
+              <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+              </div>
+            }>
+              <Slider {...sliderSettings} className="slick-slider">
+                {trips.map((trip) => (
+                  <div key={trip.id} className="px-4">
+                    <div className="group transition-all duration-300 hover:scale-105">
+                      <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-t-lg">
+                        <img 
+                          src={trip.image || '/placeholder.svg'} 
+                          alt={`${trip.name} in ${trip.destination}`}
+                          className="w-full h-full object-cover group-hover:shadow-lg transition-all"
+                          loading="lazy"
+                        />
+                      </div>
+                      <TripCard
+                        id={trip.id}
+                        title={trip.name}
+                        region={trip.destination}
+                        price={trip.price}
                       />
                     </div>
-                    <TripCard
-                      id={trip.id}
-                      title={trip.name}
-                      region={trip.destination}
-                      price={trip.price}
-                    />
                   </div>
-                </div>
-              ))}
-            </Slider>
+                ))}
+              </Slider>
+            </Suspense>
           </div>
         )}
         
         <div className="text-center mt-12">
           <Link 
             to="/tours"
-            className="btn-primary px-6 py-3 text-lg inline-block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            className="btn-primary px-6 py-3 text-lg inline-block focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-150 ease-in-out"
             aria-label="View all available trips"
           >
             View All Trips

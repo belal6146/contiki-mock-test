@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { TabPanel } from '@/components/tour/TabNav';
 import TabNav from '@/components/tour/TabNav';
 import HeroImage from '@/components/tour/HeroImage';
@@ -13,6 +13,10 @@ import TourReviewsTab from './TourReviewsTab';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { Trip } from '@/types/trip';
 
+// Lazy load heavy components
+const TourDatesTab = lazy(() => import('./TourDatesTab'));
+const TourReviewsTab = lazy(() => import('./TourReviewsTab'));
+
 interface TourDetailContentProps {
   trip: Trip;
   tripDetails: any[];
@@ -24,6 +28,10 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
   tripDetails,
   relatedTrips
 }) => {
+  useEffect(() => {
+    console.debug('[TourDetailContent] mounted', { tripId: trip.id });
+  }, [trip.id]);
+
   // Mock data for the components
   const mockHighlights = [
     {
@@ -95,7 +103,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
         <BreadcrumbNav title={trip.name} destination={trip.destination} />
       </ErrorBoundary>
       
-      <main className="flex-grow">
+      <main className="flex-grow" id="main-content">
         <ErrorBoundary>
           <HeroImage
             imageUrl={trip.image}
@@ -132,11 +140,23 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
             </TabPanel>
             
             <TabPanel id="dates">
-              <TourDatesTab trip={trip} />
+              <Suspense fallback={
+                <div className="flex justify-center py-8">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                </div>
+              }>
+                <TourDatesTab trip={trip} />
+              </Suspense>
             </TabPanel>
             
             <TabPanel id="reviews">
-              <TourReviewsTab />
+              <Suspense fallback={
+                <div className="flex justify-center py-8">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                </div>
+              }>
+                <TourReviewsTab />
+              </Suspense>
             </TabPanel>
           </TabNav>
         </ErrorBoundary>

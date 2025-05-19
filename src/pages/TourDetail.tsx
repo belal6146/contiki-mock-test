@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { useTour, useTrips } from '@/hooks/useTrips';
 import { trackPageView } from '@/lib/analytics';
 import Header from '@/components/Header';
@@ -8,11 +10,13 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import BackToTopButton from '@/components/BackToTopButton';
 import { BookingProvider } from '@/context/BookingContext';
 import TourDetailHead from '@/components/tour-detail/TourDetailHead';
-import TourDetailContent from '@/components/tour-detail/TourDetailContent';
 import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
 import { Trip } from '@/types/trip';
+
+// Lazy load the heavyweight component
+const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -60,16 +64,28 @@ const TourDetail = () => {
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col pb-20">
+        <Helmet>
+          <title>{trip?.name ? `${trip.name} | Contiki Tours` : 'Tour Detail | Contiki'}</title>
+          <meta name="description" content={trip?.description ? trip.description.substring(0, 160) : 'Explore our amazing tours for 18-35 year olds'} />
+          <meta property="og:title" content={trip?.name ? `${trip.name} | Contiki Tours` : 'Tour Detail | Contiki'} />
+          <meta property="og:description" content={trip?.description ? trip.description.substring(0, 160) : 'Explore our amazing tours for 18-35 year olds'} />
+          <meta property="og:type" content="website" />
+          {trip?.image && <meta property="og:image" content={trip.image} />}
+          <link rel="canonical" href={`https://www.contiki.com/tours/${slug}`} />
+        </Helmet>
+        
         <TourDetailHead trip={trip} slug={slug} />
         <Header />
         
         {trip && (
           <ErrorBoundary>
-            <TourDetailContent 
-              trip={trip}
-              tripDetails={tripDetails}
-              relatedTrips={trips}
-            />
+            <Suspense fallback={<TourDetailSkeleton />}>
+              <TourDetailContent 
+                trip={trip}
+                tripDetails={tripDetails}
+                relatedTrips={trips}
+              />
+            </Suspense>
           </ErrorBoundary>
         )}
         

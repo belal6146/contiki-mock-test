@@ -17,7 +17,7 @@ const PrevArrow: React.FC<PrevArrowProps> = ({
 }) => {
   // Define styles based on variant
   const getStyles = () => {
-    const baseStyles = "absolute left-0 top-1/2 -translate-y-1/2 z-10 transition-all focus:outline-none focus:ring-2 focus:ring-accent";
+    const baseStyles = "absolute left-0 top-1/2 -translate-y-1/2 z-10 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-accent";
     
     switch(variant) {
       case 'outline':

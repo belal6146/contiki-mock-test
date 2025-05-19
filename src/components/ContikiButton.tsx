@@ -37,8 +37,9 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00] focus-visible:ring-offset-2',
+        'inline-flex items-center justify-center rounded-md font-medium',
+        'transition-all duration-150 ease-in-out',
+        'focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:ring-offset-2',
         'disabled:opacity-50 disabled:pointer-events-none',
         variantClasses[variant],
         sizeClasses[size],
