@@ -25,9 +25,22 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
   const itinerary = trip.itinerary || [];
   
   // Define mock data for components that expect properties not in our Trip type
-  const mockAccommodation = [
-    { name: 'Hotel Stay', description: 'Comfortable accommodations throughout the trip' }
-  ];
+  // Create proper Accommodation object with all required properties
+  const mockAccommodation = {
+    name: 'Comfortable Hotels',
+    location: 'Various locations',
+    image: '/placeholder.svg',
+    nightsCount: 5
+  };
+  
+  // Create properly structured highlight objects from the string array
+  const formattedHighlights = trip.highlights.map((highlight, index) => ({
+    id: `highlight-${index}`,
+    title: highlight,
+    description: highlight,
+    image: '/placeholder.svg',
+    type: 'Featured'
+  }));
   
   const mockFAQs = [
     { 
@@ -56,7 +69,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
           
           <TabsContent value="overview" className="py-8 space-y-12">
             {/* Trip Highlights */}
-            <TripHighlights highlights={trip.highlights} />
+            <TripHighlights highlights={formattedHighlights} />
             
             {/* Trip Details Grid */}
             <DetailsGrid highlights={trip.highlights} included={trip.included} />
