@@ -1,12 +1,21 @@
 
 import React, { useState, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MapPin, Calendar, Users } from 'lucide-react';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>('');
-  const [duration, setDuration] = useState<string>('');
-  const [budget, setBudget] = useState<string>('');
+  const [date, setDate] = useState<string>('');
+  const [travelers, setTravelers] = useState<string>('1');
+  const [errors, setErrors] = useState<{
+    destination?: boolean;
+    date?: boolean;
+    travelers?: boolean;
+  }>({});
 
   useEffect(() => {
     console.debug('[SearchBar] mounted');
@@ -15,13 +24,13 @@ const SearchBar = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     
-    console.debug('[SearchBar] submit', { destination, duration, budget });
+    console.debug('[SearchBar] submit', { destination, date, travelers });
     
     // Build query params
     const params = new URLSearchParams();
     if (destination) params.append('destination', destination);
-    if (duration) params.append('duration', duration);
-    if (budget) params.append('budget', budget);
+    if (date) params.append('date', date);
+    if (travelers) params.append('travelers', travelers);
     
     // Navigate to the search results page
     navigate(`/tours?${params.toString()}`);
@@ -32,70 +41,87 @@ const SearchBar = () => {
       <div className="container">
         <div className="max-w-5xl mx-auto -mt-24 relative z-20">
           <div className="bg-white rounded-lg shadow-xl p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-primary mb-6 text-center">Find Your Perfect Trip</h2>
+            <h2 className="text-2xl font-bold text-primary mb-6 text-center font-montserrat">
+              Find Your Perfect Trip
+            </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6 md:space-y-0 md:grid md:grid-cols-12 md:gap-4">
+              {/* Destination Input */}
               <div className="md:col-span-4">
-                <label htmlFor="destination" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="destination" className="block text-sm font-medium text-gray-700 mb-1 font-montserrat">
                   Where do you want to go?
                 </label>
-                <select
-                  id="destination"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  <option value="">All Destinations</option>
-                  <option value="europe">Europe</option>
-                  <option value="asia">Asia</option>
-                  <option value="latin-america">Latin America</option>
-                  <option value="australia">Australia & New Zealand</option>
-                  <option value="north-america">USA & Canada</option>
-                  <option value="africa">Africa & Middle East</option>
-                </select>
+                <div className="relative">
+                  <Input
+                    id="destination"
+                    type="text"
+                    placeholder="Where to?"
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    className={cn(
+                      "pl-10 w-full rounded-md",
+                      "focus-visible:ring-accent focus-visible:ring-2",
+                      errors.destination ? "border-red-500" : ""
+                    )}
+                    aria-invalid={errors.destination ? "true" : "false"}
+                  />
+                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>
               </div>
               
-              <div className="md:col-span-3">
-                <label htmlFor="duration" className="block text-sm font-medium text-gray-700 mb-1">
-                  Trip Duration
+              {/* Date Input */}
+              <div className="md:col-span-4">
+                <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1 font-montserrat">
+                  When are you traveling?
                 </label>
-                <select
-                  id="duration"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  <option value="">Any Duration</option>
-                  <option value="short">3-5 days</option>
-                  <option value="medium">6-12 days</option>
-                  <option value="long">13+ days</option>
-                </select>
+                <div className="relative">
+                  <Input
+                    id="date"
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className={cn(
+                      "pl-10 w-full rounded-md",
+                      "focus-visible:ring-accent focus-visible:ring-2",
+                      errors.date ? "border-red-500" : ""
+                    )}
+                    aria-invalid={errors.date ? "true" : "false"}
+                  />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>
               </div>
               
-              <div className="md:col-span-3">
-                <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
-                  Budget Range
+              {/* Travelers Input */}
+              <div className="md:col-span-2">
+                <label htmlFor="travelers" className="block text-sm font-medium text-gray-700 mb-1 font-montserrat">
+                  Travelers
                 </label>
-                <select
-                  id="budget"
-                  value={budget}
-                  onChange={(e) => setBudget(e.target.value)}
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  <option value="">Any Budget</option>
-                  <option value="economy">Under $1,500</option>
-                  <option value="standard">$1,500 - $3,000</option>
-                  <option value="premium">$3,000+</option>
-                </select>
+                <div className="relative">
+                  <Input
+                    id="travelers"
+                    type="number"
+                    min="1"
+                    value={travelers}
+                    onChange={(e) => setTravelers(e.target.value)}
+                    className={cn(
+                      "pl-10 w-full rounded-md",
+                      "focus-visible:ring-accent focus-visible:ring-2",
+                      errors.travelers ? "border-red-500" : ""
+                    )}
+                    aria-invalid={errors.travelers ? "true" : "false"}
+                  />
+                  <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                </div>
               </div>
               
+              {/* Search Button */}
               <div className="md:col-span-2 flex items-end">
-                <button 
+                <Button 
                   type="submit" 
-                  className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+                  className="w-full bg-accent hover:bg-accent/90 text-primary font-medium py-4 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Search
-                </button>
+                  Search Trips
+                </Button>
               </div>
             </form>
           </div>
