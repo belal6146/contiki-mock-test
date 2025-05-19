@@ -50,12 +50,12 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
   };
   
   return (
-    <section className="py-12">
+    <section className="py-12 mb-8">
       <div className="container">
         {/* Trip FAQs */}
         {tripFAQs && tripFAQs.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-medium text-primary mb-6">Trip FAQs</h2>
+          <div className="mb-16">
+            <h2 className="heading-md mb-8">Trip FAQs</h2>
             
             <div className="divide-y divide-gray-200">
               {tripFAQs.map((faq, index) => {
@@ -89,7 +89,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
         {/* General FAQs */}
         {generalFAQs && generalFAQs.length > 0 && (
           <div>
-            <h2 className="text-2xl font-medium text-primary mb-6">General FAQs</h2>
+            <h2 className="heading-md mb-8">General FAQs</h2>
             
             <div className="bg-bgLight rounded-lg p-6">
               <div className="divide-y divide-gray-200">

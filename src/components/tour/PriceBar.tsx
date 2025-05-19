@@ -38,14 +38,14 @@ const PriceBar: React.FC<PriceBarProps> = ({
         <div className="py-4 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
             <div className="mr-6">
-              <p className="text-sm text-gray-500">From</p>
+              <p className="text-sm text-gray-500 mb-1">From</p>
               <div className="flex items-end gap-2">
                 {oldPrice && (
-                  <p className="text-lg text-gray-400 line-through font-montserrat" aria-label={`Original price: ${formatCurrency(oldPrice)}`}>
+                  <p className="text-lg text-gray-400 line-through font-medium" aria-label={`Original price: ${formatCurrency(oldPrice)}`}>
                     {formatCurrency(oldPrice)}
                   </p>
                 )}
-                <p className="text-2xl font-bold text-primary font-montserrat" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
+                <p className="text-2xl font-bold text-primary" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
                   {formatCurrency(newPrice)}
                 </p>
               </div>
@@ -71,7 +71,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
                     </svg>
                   ))}
                 </div>
-                <span className="text-gray-600 font-montserrat">
+                <span className="text-gray-600">
                   {rating > 0 ? `${rating} ` : ''}
                   {reviewCount > 0 ? `(${reviewCount} reviews)` : ''}
                 </span>
@@ -79,16 +79,16 @@ const PriceBar: React.FC<PriceBarProps> = ({
             )}
           </div>
           
-          <div className="flex space-x-3">
+          <div className="flex space-x-4">
             <button 
-              className="btn-outline px-4 py-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-montserrat focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+              className="btn-outline px-4 py-2 border-secondary text-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
               REQUEST INFO
             </button>
             <button 
-              className="btn-primary px-6 py-2 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-montserrat focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              className="btn-primary px-6 py-2 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
               onClick={handleViewDates}
               aria-label="View available dates"
             >

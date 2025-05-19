@@ -27,23 +27,37 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
   generalFAQs
 }) => {
   return (
-    <div>
-      <h2 className="heading-md mb-6">Trip Overview</h2>
-      <p className="text-lg text-gray-700 mb-8 container">{trip.description}</p>
+    <div className="mb-16">
+      <h2 className="heading-md mb-8">Trip Overview</h2>
+      <p className="text-lg text-gray-700 mb-12 container max-w-4xl">{trip.description}</p>
       
-      <TripHighlights highlights={highlights} arrowVariant="outline" />
+      <div className="mb-16">
+        <TripHighlights highlights={highlights} arrowVariant="outline" />
+      </div>
       
-      <MapItinerary itinerary={trip.itinerary} />
+      <div className="mb-16">
+        <MapItinerary itinerary={trip.itinerary} />
+      </div>
       
-      <DailyAccordion days={trip.itinerary} />
+      <div className="mb-16">
+        <DailyAccordion days={trip.itinerary} />
+      </div>
       
-      <WhereYouWillStay accommodation={accommodation} />
+      <div className="mb-16">
+        <WhereYouWillStay accommodation={accommodation} />
+      </div>
       
-      <FlexDepositBar />
+      <div className="mb-16">
+        <FlexDepositBar />
+      </div>
       
-      <RelatedTrips trips={trips} />
+      <div className="mb-16">
+        <RelatedTrips trips={trips} />
+      </div>
       
-      <FAQAccordion tripFAQs={tripFAQs} generalFAQs={generalFAQs} />
+      <div className="mb-16">
+        <FAQAccordion tripFAQs={tripFAQs} generalFAQs={generalFAQs} />
+      </div>
     </div>
   );
 };

@@ -9,16 +9,17 @@ const FlexDepositBar: React.FC = () => {
   }, []);
   
   return (
-    <section className="py-12 bg-bgLight">
+    <section className="py-16 bg-bgLight">
       <div className="container">
+        <h3 className="heading-sm mb-8">Flexible Booking Options</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex items-center gap-4">
             <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
               <span className="text-secondary-foreground text-xl font-bold">£</span>
             </div>
             <div>
-              <p className="font-medium text-lg">Only £60 deposit</p>
-              <p className="text-gray-600">to book</p>
+              <p className="font-medium text-base">Only £60 deposit</p>
+              <p className="text-gray-600 text-sm">to book</p>
             </div>
           </div>
           
@@ -27,8 +28,8 @@ const FlexDepositBar: React.FC = () => {
               <span className="text-secondary-foreground text-xl font-bold">⏱</span>
             </div>
             <div>
-              <p className="font-medium text-lg">Pay over time</p>
-              <p className="text-gray-600">interest free</p>
+              <p className="font-medium text-base">Pay over time</p>
+              <p className="text-gray-600 text-sm">interest free</p>
             </div>
           </div>
           
@@ -37,8 +38,8 @@ const FlexDepositBar: React.FC = () => {
               <span className="text-secondary-foreground text-xl font-bold">✓</span>
             </div>
             <div>
-              <p className="font-medium text-lg">No booking fee</p>
-              <p className="text-gray-600">no change fee</p>
+              <p className="font-medium text-base">No booking fee</p>
+              <p className="text-gray-600 text-sm">no change fee</p>
             </div>
           </div>
           
@@ -47,8 +48,8 @@ const FlexDepositBar: React.FC = () => {
               <span className="text-secondary-foreground text-xl font-bold">⚡</span>
             </div>
             <div>
-              <p className="font-medium text-lg">FlexDeposit</p>
-              <p className="text-gray-600">options</p>
+              <p className="font-medium text-base">FlexDeposit</p>
+              <p className="text-gray-600 text-sm">options</p>
             </div>
           </div>
         </div>

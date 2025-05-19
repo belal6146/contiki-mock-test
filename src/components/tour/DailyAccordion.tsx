@@ -23,7 +23,8 @@ const DailyAccordion: React.FC<DailyAccordionProps> = ({ days }) => {
   };
 
   return (
-    <div className="container mb-12">
+    <div className="container mb-16">
+      <h3 className="heading-sm mb-8">Daily Itinerary</h3>
       <Accordion type="multiple" className="space-y-4">
         {days.map((day) => (
           <AccordionItem 
@@ -36,7 +37,7 @@ const DailyAccordion: React.FC<DailyAccordionProps> = ({ days }) => {
               onClick={() => handleToggle(true, day.day)}
             >
               <div className="flex items-center">
-                <span className="inline-block w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-sm font-medium mr-4">
+                <span className="inline-flex items-center justify-center w-8 h-8 bg-accent text-accent-foreground rounded-full text-sm font-medium mr-4">
                   {day.day}
                 </span>
                 <div>
@@ -51,10 +52,10 @@ const DailyAccordion: React.FC<DailyAccordionProps> = ({ days }) => {
                 <p className="text-gray-700 mb-4">{day.description}</p>
                 
                 <div className="flex flex-wrap gap-4">
-                  <div className="bg-bgLight rounded-md px-3 py-2 text-sm">
+                  <div className="bg-bgLight rounded-md px-4 py-2 text-sm">
                     <span className="font-medium">Meals:</span> {day.meals.join(', ') || 'Not included'}
                   </div>
-                  <div className="bg-bgLight rounded-md px-3 py-2 text-sm">
+                  <div className="bg-bgLight rounded-md px-4 py-2 text-sm">
                     <span className="font-medium">Stay:</span> {day.accommodation}
                   </div>
                 </div>
