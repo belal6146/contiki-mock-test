@@ -41,6 +41,7 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
         'transition-all duration-150 ease-in-out',
         'focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:ring-offset-2',
         'disabled:opacity-50 disabled:pointer-events-none',
+        'hover:transform hover:scale-[1.02]',
         variantClasses[variant],
         sizeClasses[size],
         fullWidth ? 'w-full' : '',
@@ -48,9 +49,9 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
       )}
       {...props}
     >
-      {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
+      {icon && iconPosition === 'left' && <span className="mr-2 transition-transform duration-150 ease-in-out">{icon}</span>}
       {children}
-      {icon && iconPosition === 'right' && <span className="ml-2">{icon}</span>}
+      {icon && iconPosition === 'right' && <span className="ml-2 transition-transform duration-150 ease-in-out">{icon}</span>}
     </button>
   );
 };

@@ -8,7 +8,7 @@ interface TourReviewsTabProps {
 
 const TourReviewsTab: React.FC<TourReviewsTabProps> = ({ tripId }) => {
   return (
-    <div className="mb-16">
+    <div className="mb-16 animate-fade-in">
       <h2 className="heading-md mb-8">Traveler Reviews</h2>
       <Reviews tripId={tripId} />
     </div>

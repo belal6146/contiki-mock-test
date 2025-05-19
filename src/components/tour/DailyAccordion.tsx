@@ -30,10 +30,10 @@ const DailyAccordion: React.FC<DailyAccordionProps> = ({ days }) => {
           <AccordionItem 
             key={day.day} 
             value={`day-${day.day}`}
-            className="border-b border-gray-200 data-[state=open]:bg-[#F1F6F9] rounded-md overflow-hidden"
+            className="border-b border-gray-200 data-[state=open]:bg-[#F1F6F9] rounded-md overflow-hidden transition-all duration-300 ease-in-out hover:bg-gray-50"
           >
             <AccordionTrigger 
-              className="py-4 px-4 w-full text-left flex items-center justify-between hover:no-underline"
+              className="py-4 px-4 w-full text-left flex items-center justify-between hover:no-underline transition-all duration-300 ease-in-out"
               onClick={() => handleToggle(true, day.day)}
             >
               <div className="flex items-center">

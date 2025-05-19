@@ -27,15 +27,15 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
   generalFAQs
 }) => {
   return (
-    <div className="mb-16">
+    <div className="mb-16 animate-fade-in">
       <h2 className="heading-md mb-8">Trip Overview</h2>
       <p className="text-lg text-gray-700 mb-12 container max-w-4xl">{trip.description}</p>
       
-      <div className="mb-16">
+      <div className="mb-16 transition-all duration-300 ease-in-out hover:translate-y-[-4px]">
         <TripHighlights highlights={highlights} arrowVariant="outline" />
       </div>
       
-      <div className="mb-16">
+      <div className="mb-16 transition-all duration-300 ease-in-out">
         <MapItinerary itinerary={trip.itinerary} />
       </div>
       
@@ -43,7 +43,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
         <DailyAccordion days={trip.itinerary} />
       </div>
       
-      <div className="mb-16">
+      <div className="mb-16 transition-all duration-300 ease-in-out hover:translate-y-[-4px]">
         <WhereYouWillStay accommodation={accommodation} />
       </div>
       
@@ -51,7 +51,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
         <FlexDepositBar />
       </div>
       
-      <div className="mb-16">
+      <div className="mb-16 transition-all duration-300 ease-in-out">
         <RelatedTrips trips={trips} />
       </div>
       

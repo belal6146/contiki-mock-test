@@ -64,21 +64,21 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
                 return (
                   <div key={index} className="py-4">
                     <button
-                      className="w-full text-left flex justify-between items-start"
+                      className="w-full text-left flex justify-between items-start hover:text-accent-foreground transition-colors duration-150 ease-in-out"
                       onClick={() => toggleTripFAQ(index)}
                       aria-expanded={isOpen}
                     >
                       <h3 className="text-lg font-medium pr-8">{faq.question}</h3>
-                      <div className={`bg-primary rounded-full p-1 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                      <div className={`bg-primary rounded-full p-1 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                         <ChevronDown className="h-5 w-5 text-white" />
                       </div>
                     </button>
                     
-                    {isOpen && (
-                      <div className="mt-4 text-gray-600">
-                        <p>{faq.answer}</p>
-                      </div>
-                    )}
+                    <div 
+                      className={`mt-4 text-gray-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                    >
+                      <p>{faq.answer}</p>
+                    </div>
                   </div>
                 );
               })}
@@ -99,21 +99,21 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
                   return (
                     <div key={index} className="py-4">
                       <button
-                        className="w-full text-left flex justify-between items-start"
+                        className="w-full text-left flex justify-between items-start hover:text-accent-foreground transition-colors duration-150 ease-in-out"
                         onClick={() => toggleGeneralFAQ(index)}
                         aria-expanded={isOpen}
                       >
                         <h3 className="text-lg font-medium pr-8">{faq.question}</h3>
-                        <div className={`bg-primary rounded-full p-1 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+                        <div className={`bg-primary rounded-full p-1 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
                           <ChevronDown className="h-5 w-5 text-white" />
                         </div>
                       </button>
                       
-                      {isOpen && (
-                        <div className="mt-4 text-gray-600">
-                          <p>{faq.answer}</p>
-                        </div>
-                      )}
+                      <div 
+                        className={`mt-4 text-gray-600 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                      >
+                        <p>{faq.answer}</p>
+                      </div>
                     </div>
                   );
                 })}

@@ -83,7 +83,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center transition-transform duration-300 ease-in-out"
               loading="lazy"
             />
           </div>
@@ -94,7 +94,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       <Button
         variant="outline"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out hover:scale-110"
         onClick={handlePrev}
         aria-label="Previous slide"
       >
@@ -104,7 +104,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
       <Button
         variant="outline"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm hover:bg-white/90 rounded-full transition-all duration-150 ease-in-out hover:scale-110"
         onClick={handleNext}
         aria-label="Next slide"
       >
@@ -116,7 +116,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-150 ease-in-out ${
+            className={`w-3 h-3 rounded-full transition-all duration-150 ease-in-out hover:scale-125 ${
               index === currentIndex ? 'bg-white' : 'bg-white/50'
             }`}
             onClick={() => {

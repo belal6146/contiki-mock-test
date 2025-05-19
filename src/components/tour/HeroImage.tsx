@@ -27,7 +27,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300 ease-in-out"
         style={{ 
           backgroundImage: `url(${imageUrl})`,
           filter: 'brightness(0.7)' 
@@ -37,7 +37,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
       
       {/* Gradient Overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-300 ease-in-out"
         aria-hidden="true"
       />
       
@@ -45,12 +45,12 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
       <div className="container relative h-full flex items-end pb-12 z-10">
         <div className="text-white max-w-3xl">
           <div className="flex items-center mb-4 space-x-4">
-            <span className="bg-[#CCFF00] px-4 py-2 rounded-full text-black text-sm font-medium transition-all duration-150 ease-in-out">
+            <span className="bg-[#CCFF00] px-4 py-2 rounded-full text-black text-sm font-medium transition-all duration-150 ease-in-out hover:bg-[#CCFF00]/90 hover:scale-105">
               {subtitle}
             </span>
           </div>
           
-          <h1 className="heading-xl mb-4 text-white">
+          <h1 className="heading-xl mb-4 text-white transition-all duration-300 ease-in-out">
             {title}
           </h1>
         </div>
