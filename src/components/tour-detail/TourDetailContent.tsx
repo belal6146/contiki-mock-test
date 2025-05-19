@@ -92,8 +92,8 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
       <div className="container">
         <TabNav 
           tabs={tabs} 
-          currentTab={activeTab}
-          onTabChange={handleTabChange}
+          activeTab={activeTab}
+          onChange={handleTabChange}
         >
           {activeTab === 'overview' && (
             <TourOverviewTab
@@ -105,7 +105,7 @@ const TourDetailContent: React.FC<TourDetailContentProps> = ({
               generalFAQs={mockGeneralFAQs}
             />
           )}
-          {activeTab === 'dates' && <TourDatesTab tripId={trip.id} />}
+          {activeTab === 'dates' && <TourDatesTab trip={trip} />}
           {activeTab === 'reviews' && <TourReviewsTab tripId={trip.id} />}
         </TabNav>
       </div>

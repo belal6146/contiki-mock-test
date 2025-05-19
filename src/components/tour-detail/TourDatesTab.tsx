@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import VariationCards from '@/components/tour/VariationCards';
 import BookingFlow from '@/components/BookingFlow';
-import { Trip } from '@/types/trip';
+import { Trip } from '@/types/trips';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 

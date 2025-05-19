@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
-import { Trip } from '@/hooks/useTrips';
+import { Trip } from '@/types/trips';
 import PrevArrow from '../carousel/PrevArrow';
 import NextArrow from '../carousel/NextArrow';
 // Import slick carousel CSS

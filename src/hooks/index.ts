@@ -1,4 +1,4 @@
 
 export * from './useTrips';
-export * from './useTour';
+export { useTour } from './useTour';
 export * from './useApi';
