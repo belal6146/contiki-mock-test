@@ -8,22 +8,38 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Import destination images
-import japanImage from '/images/destination-japan.jpg';
-import costaRicaImage from '/images/destination-costa-rica.jpg';
-import thailandImage from '/images/destination-thailand.jpg';
-import moroccoImage from '/images/destination-morocco.jpg';
-import croatiaImage from '/images/destination-croatia.jpg';
-import icelandImage from '/images/destination-iceland.jpg';
-
 // Sample trending destinations data
 const destinations = [
-  { id: 'japan', name: 'JAPAN', image: japanImage },
-  { id: 'costa-rica', name: 'COSTA RICA', image: costaRicaImage },
-  { id: 'thailand', name: 'THAILAND', image: thailandImage },
-  { id: 'morocco', name: 'MOROCCO', image: moroccoImage },
-  { id: 'croatia', name: 'CROATIA', image: croatiaImage }, 
-  { id: 'iceland', name: 'ICELAND', image: icelandImage }
+  { 
+    id: 'japan', 
+    name: 'JAPAN', 
+    image: `https://source.unsplash.com/random/200x300/?japan,travel` 
+  },
+  { 
+    id: 'costa-rica', 
+    name: 'COSTA RICA', 
+    image: `https://source.unsplash.com/random/200x300/?costa,rica,travel` 
+  },
+  { 
+    id: 'thailand', 
+    name: 'THAILAND', 
+    image: `https://source.unsplash.com/random/200x300/?thailand,travel` 
+  },
+  { 
+    id: 'morocco', 
+    name: 'MOROCCO', 
+    image: `https://source.unsplash.com/random/200x300/?morocco,travel` 
+  },
+  { 
+    id: 'croatia', 
+    name: 'CROATIA', 
+    image: `https://source.unsplash.com/random/200x300/?croatia,travel` 
+  },
+  { 
+    id: 'iceland', 
+    name: 'ICELAND', 
+    image: `https://source.unsplash.com/random/200x300/?iceland,travel` 
+  }
 ];
 
 const TrendingDestinations = () => {
