@@ -1,6 +1,5 @@
 
 import React, { useEffect } from 'react';
-import defaultHeroImage from '/images/hero-default.jpg';
 
 interface HeroImageProps {
   imageUrl: string;
@@ -9,6 +8,13 @@ interface HeroImageProps {
 }
 
 const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
+  // Generate a fallback image based on the title if imageUrl is not provided
+  const getFallbackImage = () => {
+    // Convert title to URL-friendly search term
+    const searchTerm = title.toLowerCase().replace(/\s+/g, ',');
+    return `https://source.unsplash.com/random/1600x900/?travel,${searchTerm}`;
+  };
+
   useEffect(() => {
     console.debug('[HeroImage] mounted', { imageUrl, title });
   }, [imageUrl, title]);
@@ -16,7 +22,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   return (
     <div 
       className="bg-cover bg-center h-96 relative w-full"
-      style={{ backgroundImage: `url(${imageUrl || defaultHeroImage})` }}
+      style={{ backgroundImage: `url(${imageUrl || getFallbackImage()})` }}
       role="img"
       aria-label={`Hero image: ${title}`}
     >

@@ -2,27 +2,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import defaultCarouselImage from '/images/carousel-default.jpg';
 
 interface CustomCarouselProps {
   images: { src: string; alt: string }[];
   autoRotate?: boolean;
   interval?: number;
+  category?: string;
 }
 
 const CustomCarousel: React.FC<CustomCarouselProps> = ({ 
   images, 
   autoRotate = true, 
-  interval = 5000 
+  interval = 5000,
+  category = 'travel'
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Use default image if no images provided
-  const carouselImages = images && images.length > 0 
-    ? images 
-    : [{ src: defaultCarouselImage, alt: 'Default carousel image' }];
+  // Generate default carousel images from Unsplash if none provided
+  const getCarouselImages = () => {
+    if (images && images.length > 0) {
+      return images;
+    }
+    
+    // Create 5 placeholder images
+    return Array.from({ length: 5 }, (_, i) => ({
+      src: `https://source.unsplash.com/random/1200x800/?${category},landscape&sig=${i}`,
+      alt: `${category} image ${i + 1}`
+    }));
+  };
+
+  const carouselImages = getCarouselImages();
 
   useEffect(() => {
     // Clear any existing timers

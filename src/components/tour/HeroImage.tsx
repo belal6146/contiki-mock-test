@@ -10,14 +10,23 @@ interface HeroImageProps {
 }
 
 const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
+  // Generate a fallback hero image based on the title and subtitle
+  const getFallbackImage = () => {
+    // Convert title and subtitle to URL-friendly search terms
+    const searchTerms = `${title},${subtitle}`.toLowerCase().replace(/\s+/g, ',');
+    return `https://source.unsplash.com/random/1920x1080/?travel,${searchTerms}`;
+  };
+
   React.useEffect(() => {
     trackEvent('hero_image_rendered', { title, subtitle });
   }, [title, subtitle]);
 
   // Guard against undefined props
-  if (!imageUrl) {
+  if (!title || !subtitle) {
     return <Skeleton className="h-[60vh] min-h-[400px] max-h-[600px] w-full" />;
   }
+  
+  const displayImageUrl = imageUrl || getFallbackImage();
 
   return (
     <section 
@@ -29,7 +38,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-300 ease-in-out"
         style={{ 
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: `url(${displayImageUrl})`,
           filter: 'brightness(0.7)' 
         }}
         aria-hidden="true"

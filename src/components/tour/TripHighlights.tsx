@@ -7,11 +7,6 @@ import NextArrow from '../carousel/NextArrow';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Import highlight images
-import culturalHighlight from '/images/highlight-cultural.jpg';
-import adventureHighlight from '/images/highlight-adventure.jpg';
-import foodHighlight from '/images/highlight-food.jpg';
-
 interface Highlight {
   id: string;
   title: string;
@@ -33,11 +28,28 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
   }, [highlights.length]);
   
-  // Add default images if not provided
-  const getDefaultImage = (type: string, index: number) => {
-    if (type.toLowerCase().includes('cultural')) return culturalHighlight;
-    if (type.toLowerCase().includes('adventure')) return adventureHighlight;
-    return foodHighlight;
+  // Get a dynamic image from Unsplash based on highlight type
+  const getHighlightImage = (highlight: Highlight, index: number) => {
+    if (highlight.image && !highlight.image.includes('placeholder')) {
+      return highlight.image;
+    }
+    
+    // Different image categories based on highlight type
+    const type = highlight.type.toLowerCase();
+    let searchTerm = 'travel';
+    
+    if (type.includes('cultural')) {
+      searchTerm = 'cultural,travel,landmarks';
+    } else if (type.includes('adventure')) {
+      searchTerm = 'adventure,travel,outdoor';
+    } else if (type.includes('food')) {
+      searchTerm = 'food,cuisine,restaurant';
+    } else if (type.includes('nature')) {
+      searchTerm = 'nature,landscape,scenery';
+    }
+    
+    // Add index to make each image unique
+    return `https://source.unsplash.com/random/400x300/?${searchTerm}&sig=${index}`;
   };
   
   if (!highlights || highlights.length === 0) {
@@ -95,9 +107,10 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
                   <div className="min-w-[280px] max-w-[280px] bg-white rounded-lg overflow-hidden shadow hover:shadow-lg">
                     <div className="relative aspect-w-16 aspect-h-9">
                       <img
-                        src={highlight.image || getDefaultImage(highlight.type, index)}
+                        src={getHighlightImage(highlight, index)}
                         alt={highlight.title}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                       <div className="absolute top-3 left-3 bg-accent text-white text-xs font-medium px-2 py-1 rounded-md">
                         {highlight.type} Experience

@@ -8,7 +8,6 @@ import NextArrow from '../carousel/NextArrow';
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import defaultTripImage from '/images/trip-default.jpg';
 
 interface RelatedTripsProps {
   trips: Trip[];
@@ -53,6 +52,17 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
       }
     ]
   };
+
+  // Get a dynamic Unsplash image based on the trip's destination
+  const getTripImage = (trip: Trip) => {
+    if (trip.image && !trip.image.includes('placeholder')) {
+      return trip.image;
+    }
+    
+    // Replace spaces with commas and lowercase for better search results
+    const searchTerm = trip.destination.toLowerCase().replace(/\s+/g, ',');
+    return `https://source.unsplash.com/random/600x400/?travel,${searchTerm}`;
+  };
   
   return (
     <section className="py-12">
@@ -70,9 +80,10 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
                 <div className="min-w-[300px] max-w-[300px] flex-shrink-0 bg-white rounded-lg overflow-hidden shadow">
                   <div className="relative">
                     <img 
-                      src={trip.image || defaultTripImage} 
+                      src={getTripImage(trip)} 
                       alt={trip.name}
                       className="w-full h-48 object-cover"
+                      loading="lazy"
                     />
                     {trip.duration && (
                       <div className="absolute top-4 left-4 bg-accent text-white px-2 py-1 text-xs font-medium rounded">

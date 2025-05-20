@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
-import hotelImage from '/images/accommodation-luxury.jpg';
 
 interface Accommodation {
   name: string;
@@ -21,6 +20,16 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
     console.debug('[WhereYouWillStay] mounted', { accommodation });
   }, [accommodation]);
   
+  // Get hotel image from Unsplash or use the provided one
+  const getAccommodationImage = (accommodation: Accommodation) => {
+    if (accommodation.image && !accommodation.image.includes('placeholder')) {
+      return accommodation.image;
+    }
+    
+    const searchTerms = `hotel,luxury,accommodation,${accommodation.location.toLowerCase().replace(/\s+/g, ',')}`;
+    return `https://source.unsplash.com/random/800x600/?${searchTerms}`;
+  };
+  
   return (
     <section className="py-16">
       <div className="container">
@@ -33,9 +42,10 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
             <Card className="overflow-hidden rounded-2xl shadow-md h-full">
               <div className="relative h-72">
                 <img 
-                  src={accommodation.image || hotelImage} 
+                  src={getAccommodationImage(accommodation)} 
                   alt={accommodation.name}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
               <CardContent className="p-8">

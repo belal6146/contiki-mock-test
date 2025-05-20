@@ -5,12 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Import testimonial images
-import testimonial1Image from '/images/testimonial-sarah.jpg';
-import testimonial2Image from '/images/testimonial-mike.jpg';
-import testimonial3Image from '/images/testimonial-emily.jpg';
-
-// Mock testimonial data
+// Mock testimonial data with Unsplash images
 const testimonials = [
   {
     id: 1,
@@ -18,7 +13,7 @@ const testimonials = [
     author: "Sarah Johnson",
     location: "Australia",
     trip: "European Discovery",
-    image: testimonial1Image
+    image: "https://source.unsplash.com/random/100x100/?portrait,woman,blonde&sig=1"
   },
   {
     id: 2,
@@ -26,7 +21,7 @@ const testimonials = [
     author: "Mike Reynolds",
     location: "United States",
     trip: "Thai Island Hopper",
-    image: testimonial2Image
+    image: "https://source.unsplash.com/random/100x100/?portrait,man&sig=2"
   },
   {
     id: 3,
@@ -34,7 +29,7 @@ const testimonials = [
     author: "Emily Chen",
     location: "Canada",
     trip: "Costa Rica Adventure",
-    image: testimonial3Image
+    image: "https://source.unsplash.com/random/100x100/?portrait,woman,asian&sig=3"
   }
 ];
 
@@ -95,6 +90,7 @@ const Testimonials = () => {
                         src={testimonial.image} 
                         alt={testimonial.author}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                     <div>
