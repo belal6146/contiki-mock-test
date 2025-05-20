@@ -8,7 +8,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import heroImage from '/images/hero-croatia-beach.jpg';
+
+// Use Unsplash for a Croatia beach image instead of local file
+const heroImageUrl = "https://source.unsplash.com/random/1920x1080/?croatia,beach,travel";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const Hero = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${heroImageUrl})` }}
         aria-hidden="true"
       />
       
