@@ -6,55 +6,20 @@ import TripCard from '@/components/TripCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import ErrorMessage from '@/components/ui/error-message';
 import { trackEvent } from '@/lib/analytics';
+import PrevArrow from '@/components/carousel/PrevArrow';
+import NextArrow from '@/components/carousel/NextArrow';
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import tripDefault from '/images/trip-default.jpg';
-import tripGreece from '/images/trip-greece.jpg';
-import tripItaly from '/images/trip-italy.jpg';
-import tripThailand from '/images/trip-thailand.jpg';
-
-// Custom arrow components
-const PrevArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <button
-      className={`${className} absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full z-10 bg-white p-2 rounded-full shadow-md`}
-      style={{ ...style }}
-      onClick={onClick}
-      aria-label="View previous trips"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
-  );
-};
-
-const NextArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <button
-      className={`${className} absolute right-0 top-1/2 -translate-y-1/2 translate-x-full z-10 bg-white p-2 rounded-full shadow-md`}
-      style={{ ...style }}
-      onClick={onClick}
-      aria-label="View next trips"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </button>
-  );
-};
 
 // Lazy load the Slider component
 const Slider = lazy(() => import("react-slick"));
 
-// Map of trip IDs to images
-const tripImages: {[key: string]: string} = {
-  'trip-1': tripGreece,
-  'trip-2': tripItaly,
-  'trip-3': tripThailand,
+// Map of trip IDs to descriptions for fallback
+const tripDescriptions = {
+  'trip-1': 'Experience the beautiful islands of Greece',
+  'trip-2': 'Tour the ancient wonders of Italy',
+  'trip-3': 'Discover the exotic beaches of Thailand',
 };
 
 const FeaturedTrips = () => {
@@ -111,9 +76,10 @@ const FeaturedTrips = () => {
     trackEvent('retry_clicked', { component: 'FeaturedTrips' });
   };
 
-  // Get image for a trip
-  const getTripImage = (tripId: string) => {
-    return tripImages[tripId] || tripDefault;
+  // This function can now rely directly on the trip's image property
+  // We no longer need references to static image files that don't exist
+  const getDescription = (tripId: string) => {
+    return tripDescriptions[tripId] || 'Explore this amazing destination';
   };
 
   return (
@@ -173,7 +139,7 @@ const FeaturedTrips = () => {
                     <div className="group w-[300px] h-[400px] mx-auto bg-white rounded-lg shadow-md overflow-hidden transition-all duration-150 hover:shadow-lg">
                       <div className="h-[250px] overflow-hidden">
                         <img 
-                          src={trip.image || getTripImage(trip.id)}
+                          src={trip.image || `https://source.unsplash.com/random/300x250/?${trip.destination.toLowerCase().replace(' ', '')}`}
                           alt={`${trip.name} tour in ${trip.destination}`}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                           loading="lazy"
