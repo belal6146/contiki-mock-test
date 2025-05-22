@@ -10,6 +10,7 @@ import HeroImage from '@/components/tour/HeroImage';
 import ErrorMessage from '@/components/ui/error-message';
 import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
+import FAQAccordion from '@/components/tour/FAQAccordion';
 import { ItineraryDay } from '@/components/tour/MapItinerary';
 
 // Lazy load the heavyweight component
@@ -84,62 +85,127 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
     nightsCount: 10
   };
 
+  // Mock FAQ data that will be consistent across all tabs
+  const mockGeneralFAQs = [
+    {
+      question: "What is Contiki?",
+      answer: "Contiki is a travel company that specializes in group tours for 18-35 year olds. We offer unforgettable experiences across the globe."
+    },
+    {
+      question: "Why pay 18-35?",
+      answer: "Our trips are designed specifically for young travelers looking for authentic experiences with like-minded people."
+    },
+    {
+      question: "Will I be pressured to participate on any trip?",
+      answer: "Never. All activities are optional, allowing you to customize your travel experience to your preferences."
+    },
+    {
+      question: "What destinations can I go to with Contiki?",
+      answer: "We offer trips across Europe, Asia, North America, Latin America, Australia, New Zealand, and Africa."
+    },
+    {
+      question: "How does it work?",
+      answer: "Choose your trip, book with a deposit, meet your group and Trip Manager, then enjoy the adventure of a lifetime!"
+    },
+    {
+      question: "Do I need a visa?",
+      answer: "Visa requirements vary depending on your nationality and destination. We recommend checking with the relevant embassies or consulates."
+    },
+    {
+      question: "Do you always travel by coach on a Contiki trip?",
+      answer: "While many of our trips include coach travel, we also use trains, boats, and flights depending on the itinerary."
+    },
+    {
+      question: "How many other travelers will be on each trip?",
+      answer: "Group sizes vary by trip but typically range from 20-45 travelers, all between the ages of 18-35."
+    }
+  ];
+
+  // Trip-specific FAQs
+  const mockTripFAQs = [
+    {
+      question: "Can I book online?",
+      answer: "Yes, you can book your Contiki trip online through our website, or contact our travel experts by phone."
+    },
+    {
+      question: "What's included?",
+      answer: "Your trip includes accommodation, transportation, many meals, a professional Trip Manager, Local Guides, and all listed activities."
+    }
+  ];
+
+  // Determine which content to show based on active tab
+  const renderTabContent = () => {
+    switch(activeTab) {
+      case 'trip':
+        return (
+          <ErrorBoundary fallback={
+            <ErrorMessage 
+              title="Could not load trip content"
+              message="We encountered an error while loading trip details."
+              onRetry={onRetry}
+            />
+          }>
+            <div>
+              {/* Hero Image */}
+              <HeroImage 
+                imageUrl={tour.image} 
+                title={tour.name} 
+                subtitle={tour.destination}
+              />
+              
+              {/* Trip Highlights */}
+              <TripHighlights highlights={mockHighlights} />
+              
+              {/* Map & Itinerary */}
+              <MapItinerary itinerary={mockItinerary} />
+              
+              {/* Where You Will Stay */}
+              <WhereYouWillStay accommodation={mockAccommodation} />
+              
+              {/* Other trips you might like */}
+              <RelatedTrips trips={trips} />
+            </div>
+          </ErrorBoundary>
+        );
+      case 'dates':
+        return (
+          <ErrorBoundary fallback={
+            <ErrorMessage 
+              title="Could not load dates content"
+              message="We encountered an error while loading dates and pricing."
+              onRetry={onRetry}
+            />
+          }>
+            <TourDatesTab trip={tour} />
+          </ErrorBoundary>
+        );
+      case 'reviews':
+        return (
+          <ErrorBoundary fallback={
+            <ErrorMessage 
+              title="Could not load reviews content"
+              message="We encountered an error while loading reviews."
+              onRetry={onRetry}
+            />
+          }>
+            <TourReviewsTab tripId={tour.id} />
+          </ErrorBoundary>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
-      {activeTab === 'trip' && (
-        <ErrorBoundary fallback={
-          <ErrorMessage 
-            title="Could not load trip content"
-            message="We encountered an error while loading trip details."
-            onRetry={onRetry}
-          />
-        }>
-          <div>
-            {/* Hero Image */}
-            <HeroImage 
-              imageUrl={tour.image} 
-              title={tour.name} 
-              subtitle={tour.destination}
-            />
-            
-            {/* Trip Highlights */}
-            <TripHighlights highlights={mockHighlights} />
-            
-            {/* Map & Itinerary */}
-            <MapItinerary itinerary={mockItinerary} />
-            
-            {/* Where You Will Stay */}
-            <WhereYouWillStay accommodation={mockAccommodation} />
-            
-            {/* Other trips you might like */}
-            <RelatedTrips trips={trips} />
-          </div>
-        </ErrorBoundary>
-      )}
+      {/* Tab-specific content */}
+      {renderTabContent()}
       
-      {activeTab === 'dates' && (
-        <ErrorBoundary fallback={
-          <ErrorMessage 
-            title="Could not load dates content"
-            message="We encountered an error while loading dates and pricing."
-            onRetry={onRetry}
-          />
-        }>
-          <TourDatesTab trip={tour} />
-        </ErrorBoundary>
-      )}
-      
-      {activeTab === 'reviews' && (
-        <ErrorBoundary fallback={
-          <ErrorMessage 
-            title="Could not load reviews content"
-            message="We encountered an error while loading reviews."
-            onRetry={onRetry}
-          />
-        }>
-          <TourReviewsTab tripId={tour.id} />
-        </ErrorBoundary>
-      )}
+      {/* FAQ section - consistent across all tabs */}
+      <FAQAccordion 
+        tripFAQs={mockTripFAQs} 
+        generalFAQs={mockGeneralFAQs} 
+      />
     </>
   );
 };
