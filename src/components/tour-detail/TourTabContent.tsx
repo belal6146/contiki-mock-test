@@ -12,6 +12,7 @@ import ErrorMessage from '@/components/ui/error-message';
 import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
 import { ItineraryDay } from '@/components/tour/MapItinerary';
+import FAQAccordion from '@/components/tour/FAQAccordion';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
