@@ -6,10 +6,14 @@ import Hero from '@/components/home/Hero';
 import SearchBar from '@/components/home/SearchBar';
 import FeaturedTrips from '@/components/home/FeaturedTrips';
 import Testimonials from '@/components/home/Testimonials';
-import TrendingDestinations from '@/components/home/TrendingDestinations';
-import PartnerLogos from '@/components/home/PartnerLogos';
+import PayOverTime from '@/components/home/PayOverTime';
+import BookWithConfidence from '@/components/home/BookWithConfidence';
+import TopTripsPromo from '@/components/home/TopTripsPromo';
+import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
+import LogosCarousel from '@/components/home/LogosCarousel';
 import SixTwoCTA from '@/components/home/SixTwoCTA';
 import BackToTopButton from '@/components/BackToTopButton';
+import HelpButton from '@/components/home/HelpButton';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackPageView } from '@/lib/analytics';
@@ -75,27 +79,35 @@ const Index = () => {
           <Testimonials />
         </ErrorBoundary>
         
+        {/* New sections added below Testimonials */}
         <ErrorBoundary>
-          <div className="mt-12">
-            <TrendingDestinations />
-          </div>
+          <PayOverTime />
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <div className="mt-12">
-            <PartnerLogos />
-          </div>
+          <BookWithConfidence />
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <div className="mt-12">
-            <SixTwoCTA />
-          </div>
+          <TopTripsPromo />
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <TravelDestinationsGrid />
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <LogosCarousel />
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <SixTwoCTA />
         </ErrorBoundary>
       </main>
       
       <Footer />
       <BackToTopButton />
+      <HelpButton />
     </div>
   );
 };
