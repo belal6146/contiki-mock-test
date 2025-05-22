@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { Map, MapPin, Ship } from 'lucide-react';
+import { DayDetails } from '@/types/trip';
 
 // Define proper ItineraryDay type with coordinates as tuple
 export interface ItineraryDay {
@@ -12,8 +13,9 @@ export interface ItineraryDay {
   to?: string;
 }
 
+// Props that accept either ItineraryDay[] or DayDetails[]
 interface MapItineraryProps {
-  itinerary: ItineraryDay[];
+  itinerary: ItineraryDay[] | DayDetails[];
 }
 
 const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary }) => {
@@ -73,19 +75,21 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary }) => {
                   <div className="mt-2 ml-6">
                     <p className="text-gray-600">{day.description}</p>
                     
-                    {day.from && day.to && (
+                    {'from' in day && day.from && 'to' in day && day.to && (
                       <div className="mt-2 flex items-center text-sm text-gray-500">
                         <Ship className="w-4 h-4 mr-2" />
                         <span>{day.from} to {day.to}</span>
                       </div>
                     )}
                     
-                    <div className="mt-3 flex items-center">
-                      <MapPin className="w-4 h-4 text-gray-400" />
-                      <span className="ml-1 text-sm text-gray-500">
-                        {day.coordinates[0].toFixed(2)}, {day.coordinates[1].toFixed(2)}
-                      </span>
-                    </div>
+                    {'coordinates' in day && (
+                      <div className="mt-3 flex items-center">
+                        <MapPin className="w-4 h-4 text-gray-400" />
+                        <span className="ml-1 text-sm text-gray-500">
+                          {day.coordinates[0].toFixed(2)}, {day.coordinates[1].toFixed(2)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

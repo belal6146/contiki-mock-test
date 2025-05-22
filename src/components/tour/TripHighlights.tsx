@@ -18,12 +18,12 @@ interface Highlight {
 
 interface TripHighlightsProps {
   highlights: Highlight[];
-  arrowVariant?: string; // Add this prop
+  arrowVariant?: "default" | "outline" | "circle" | "minimal"; // Fixed arrow variant type
 }
 
 const TripHighlights: React.FC<TripHighlightsProps> = ({ 
   highlights,
-  arrowVariant = 'default' // Default value
+  arrowVariant = "default" // Default value with proper type
 }) => {
   useEffect(() => {
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
