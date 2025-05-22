@@ -8,13 +8,13 @@ interface ItineraryTimelineProps {
     from?: string;
     to?: string;
   }>;
-  activeIndex: number;
+  activeDay: number;
   onDayClick: (index: number) => void;
 }
 
 const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
   itinerary = [],
-  activeIndex,
+  activeDay,
   onDayClick
 }) => {
   // Handle empty itinerary
@@ -48,13 +48,13 @@ const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
             <button
               key={index}
               className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors duration-150 ${
-                index <= activeIndex 
+                index <= activeDay 
                   ? 'bg-accent text-black' 
                   : 'bg-white border border-gray-300 text-gray-600'
               }`}
               onClick={() => onDayClick(index)}
               aria-label={`Day ${day.day}`}
-              aria-current={index === activeIndex ? 'step' : undefined}
+              aria-current={index === activeDay ? 'step' : undefined}
             >
               {day.day}
             </button>

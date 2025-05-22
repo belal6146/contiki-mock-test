@@ -9,7 +9,7 @@ interface MapDisplayProps {
   itinerary: Array<{
     day: number;
     title: string;
-    coordinates?: [number, number]; // [longitude, latitude]
+    coordinates: [number, number]; // [longitude, latitude]
   }>;
   onMarkerClick?: (index: number) => void;
   mapboxToken?: string;

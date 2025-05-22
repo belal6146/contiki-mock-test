@@ -29,22 +29,22 @@ export type MapItineraryProps = {
 };
 
 const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
-  const [activeDay, setActiveDay] = useState<number>(1);
+  const [activeDay, setActiveDay] = useState<number>(0); // Changed to 0-based index
   
   useEffect(() => {
     if (itinerary.length > 0) {
-      setActiveDay(itinerary[0].day);
+      setActiveDay(0); // Default to the first day (index 0)
     }
   }, [itinerary]);
 
   // Find currently selected day details
-  const currentDay = itinerary.find(day => day.day === activeDay);
+  const currentDay = itinerary[activeDay];
   
   // Safely check if coordinates exist before accessing
   const hasCoordinates = currentDay && 'coordinates' in currentDay && currentDay.coordinates;
 
-  const handleDayChange = (day: number) => {
-    setActiveDay(day);
+  const handleDayClick = (index: number) => {
+    setActiveDay(index);
   };
 
   return (
@@ -59,8 +59,8 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             <div className="h-[400px] bg-gray-100 rounded-lg overflow-hidden">
               {hasCoordinates ? (
                 <MapDisplay 
-                  itinerary={itinerary.filter((day): day is ItineraryDay => 'coordinates' in day)} 
-                  activeDay={activeDay}
+                  itinerary={itinerary.filter((day): day is ItineraryDay => 'coordinates' in day)}
+                  onMarkerClick={(index) => setActiveDay(index)}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
@@ -78,8 +78,8 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
               
               <ItineraryTimeline 
                 itinerary={itinerary} 
-                activeDay={activeDay} 
-                onDayChange={handleDayChange} 
+                activeDay={activeDay}
+                onDayClick={handleDayClick} 
               />
             </div>
           </div>
