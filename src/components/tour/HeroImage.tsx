@@ -13,6 +13,7 @@ interface HeroImageProps {
 const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
 
   // Generate a fallback hero image based on the title and subtitle
   const getFallbackImage = () => {
@@ -22,6 +23,18 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
     const searchTerms = `${searchTitleTerm},${searchSubtitleTerm}`;
     return `https://source.unsplash.com/random/1920x1080/?travel,${searchTerms}`;
   };
+
+  // Handle parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      // Limit the parallax effect to avoid too much movement
+      setParallaxOffset(scrollPosition * 0.15);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Preload the image
   useEffect(() => {
@@ -58,11 +71,12 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
         className={cn(
           "absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700",
           isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105",
-          "transform-gpu hover:scale-105 transition-transform duration-7000 ease-out" // Subtle zoom effect on hover
+          "transform-gpu transition-transform duration-7000 ease-out" // Subtle zoom effect on hover
         )}
         style={{ 
           backgroundImage: `url(${displayImageUrl})`,
-          filter: 'brightness(0.75)' 
+          filter: 'brightness(0.75)',
+          transform: `translateY(${parallaxOffset}px) scale(${1 + parallaxOffset * 0.001})` 
         }}
         aria-hidden="true"
       />
