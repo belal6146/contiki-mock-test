@@ -1,3 +1,4 @@
+
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
@@ -25,6 +26,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
 import ErrorMessage from '@/components/ui/error-message';
+import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
@@ -224,11 +226,15 @@ const TourDetail = () => {
           )}
           
           {activeTab === 'dates' && (
-            <div className="py-8">
-              <h2 className="text-2xl font-bold mb-6">Dates & Pricing</h2>
-              <p className="text-gray-600">Select your preferred departure date to see available options.</p>
-              {/* Dates content would go here */}
-            </div>
+            <ErrorBoundary fallback={
+              <ErrorMessage 
+                title="Could not load dates content"
+                message="We encountered an error while loading dates and pricing."
+                onRetry={handleRetry}
+              />
+            }>
+              <TourDatesTab trip={tour} />
+            </ErrorBoundary>
           )}
           
           {activeTab === 'reviews' && (

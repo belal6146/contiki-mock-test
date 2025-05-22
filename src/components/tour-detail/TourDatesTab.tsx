@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
 import VariationCards from '@/components/tour/VariationCards';
 import BookingFlow from '@/components/BookingFlow';
-import { Trip } from '@/types/trips';
+import { Trip } from '@/types/trip';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
 interface TourDatesTabProps {
   trip: Trip;
@@ -16,6 +17,7 @@ interface TourDatesTabProps {
 const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedVariation, setSelectedVariation] = useState<string | null>(null);
 
   useEffect(() => {
     console.debug('[TourDatesTab] mounted', { tripId: trip.id, variations: trip.variations?.length || 0 });
@@ -41,6 +43,22 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
     const prev = new Date(currentMonth);
     prev.setMonth(currentMonth.getMonth() - 1);
     setCurrentMonth(prev);
+  };
+
+  const handleVariationSelect = (variationId: string) => {
+    setSelectedVariation(variationId === selectedVariation ? null : variationId);
+    console.debug('[TourDatesTab] variationSelected', { variationId });
+  };
+
+  // Get departure dates from variations for the calendar highlights
+  const departureDates = trip.variations?.map(v => new Date(v.startDate)) || [];
+
+  const isDepartureDate = (date: Date) => {
+    return departureDates.some(d => 
+      d.getDate() === date.getDate() && 
+      d.getMonth() === date.getMonth() && 
+      d.getFullYear() === date.getFullYear()
+    );
   };
 
   return (
@@ -74,20 +92,34 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                       </button>
                     </div>
                   </div>
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={handleDateChange}
-                    month={currentMonth}
-                    onMonthChange={handleMonthChange}
-                    className="rounded-md border p-3 pointer-events-auto"
-                  />
+                  <TooltipProvider>
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={handleDateChange}
+                      month={currentMonth}
+                      onMonthChange={handleMonthChange}
+                      className="rounded-md border p-3 pointer-events-auto"
+                      modifiers={{
+                        departure: (date) => isDepartureDate(date)
+                      }}
+                      modifiersStyles={{
+                        departure: { 
+                          fontWeight: 'bold', 
+                          border: '2px solid #CCFF00',
+                          backgroundColor: '#f7f9ed'
+                        }
+                      }}
+                    />
+                  </TooltipProvider>
                 </div>
                 {selectedDate && (
                   <div className="mt-6 p-4 bg-gray-50 rounded-md">
                     <h4 className="font-bold mb-2">Selected Date</h4>
                     <p>{format(selectedDate, 'EEEE, MMMM d, yyyy')}</p>
-                    <p className="text-sm text-green-600 mt-1">Available</p>
+                    <p className={`text-sm mt-1 ${isDepartureDate(selectedDate) ? 'text-green-600' : 'text-gray-500'}`}>
+                      {isDepartureDate(selectedDate) ? 'Departure available' : 'No departure on this date'}
+                    </p>
                   </div>
                 )}
               </div>
@@ -95,45 +127,58 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
               {/* Pricing Table Section */}
               <div className="lg:col-span-7 p-6">
                 <h3 className="text-lg font-bold mb-4">Trip Options & Pricing</h3>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Departure</TableHead>
-                      <TableHead>Return</TableHead>
-                      <TableHead>Price</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {(trip.variations || []).map((variation, index) => (
-                      <TableRow key={variation.id || index}>
-                        <TableCell>{format(new Date(variation.startDate), 'MMM dd, yyyy')}</TableCell>
-                        <TableCell>{format(new Date(variation.endDate), 'MMM dd, yyyy')}</TableCell>
-                        <TableCell className="font-bold">${variation.price}</TableCell>
-                        <TableCell>
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            variation.availability === 'available' ? 'bg-green-100 text-green-800' :
-                            variation.availability === 'limited' ? 'bg-yellow-100 text-yellow-800' : 
-                            'bg-red-100 text-red-800'
-                          }`}>
-                            {variation.availability === 'available' ? 'Available' :
-                             variation.availability === 'limited' ? 'Limited' : 'Sold Out'}
-                          </span>
-                        </TableCell>
-                        <TableCell>
-                          <button 
-                            className={`btn ${variation.availability !== 'soldout' ? 'btn-primary' : 'btn-ghost opacity-50 cursor-not-allowed'}`}
-                            disabled={variation.availability === 'soldout'}
-                            onClick={() => console.debug('[TourDatesTab] bookNow clicked', { variationId: variation.id })}
-                          >
-                            {variation.availability !== 'soldout' ? 'Book Now' : 'Sold Out'}
-                          </button>
-                        </TableCell>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Departure</TableHead>
+                        <TableHead>Return</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead></TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {(trip.variations || []).map((variation, index) => {
+                        const isSelected = variation.id === selectedVariation;
+                        return (
+                          <TableRow 
+                            key={variation.id || index}
+                            className={`cursor-pointer ${isSelected ? 'bg-accent/20' : ''}`}
+                            onClick={() => handleVariationSelect(variation.id)}
+                          >
+                            <TableCell>{format(new Date(variation.startDate), 'MMM dd, yyyy')}</TableCell>
+                            <TableCell>{format(new Date(variation.endDate), 'MMM dd, yyyy')}</TableCell>
+                            <TableCell className="font-bold">${variation.price}</TableCell>
+                            <TableCell>
+                              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                                variation.availability === 'available' ? 'bg-green-100 text-green-800' :
+                                variation.availability === 'limited' ? 'bg-yellow-100 text-yellow-800' : 
+                                'bg-red-100 text-red-800'
+                              }`}>
+                                {variation.availability === 'available' ? 'Available' :
+                                variation.availability === 'limited' ? 'Limited' : 'Sold Out'}
+                              </span>
+                            </TableCell>
+                            <TableCell>
+                              <button 
+                                className={`btn ${variation.availability !== 'soldout' ? 'btn-primary' : 'btn-ghost opacity-50 cursor-not-allowed'}`}
+                                disabled={variation.availability === 'soldout'}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  console.debug('[TourDatesTab] bookNow clicked', { variationId: variation.id });
+                                  document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                              >
+                                {variation.availability !== 'soldout' ? 'Book Now' : 'Sold Out'}
+                              </button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             </div>
           </CardContent>
