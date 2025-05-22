@@ -1,101 +1,89 @@
 
-import React, { useEffect } from 'react';
-import { Map, MapPin, Ship } from 'lucide-react';
-import { DayDetails } from '@/types/trip';
+import React, { useState, useEffect } from 'react';
+import { Card } from '@/components/ui/card';
+import MapDisplay from './map/MapDisplay';
+import ItineraryTimeline from './map/ItineraryTimeline';
+import ActionButtons from './map/ActionButtons';
 
-// Define proper ItineraryDay type with coordinates as tuple
+// Define both types for compatibility
 export interface ItineraryDay {
   day: number;
   title: string;
   description: string;
-  coordinates: [number, number]; // This ensures exactly 2 elements
+  coordinates: [number, number]; // This is a tuple type
   from?: string;
   to?: string;
+  meals?: string[];
+  accommodation?: string;
 }
 
-// Props that accept either ItineraryDay[] or DayDetails[]
-interface MapItineraryProps {
-  itinerary: ItineraryDay[] | DayDetails[];
-}
+// Accept both the older DayDetails type and the newer ItineraryDay type
+export type MapItineraryProps = {
+  itinerary: Array<ItineraryDay | {
+    day: number;
+    title: string;
+    description: string;
+    meals?: string[];
+    accommodation?: string;
+  }>;
+};
 
-const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary }) => {
-  useEffect(() => {
-    console.debug('[MapItinerary] mounted', { daysCount: itinerary.length });
-  }, [itinerary.length]);
+const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
+  const [activeDay, setActiveDay] = useState<number>(1);
   
-  // For now we'll just show a placeholder for the map
+  useEffect(() => {
+    if (itinerary.length > 0) {
+      setActiveDay(itinerary[0].day);
+    }
+  }, [itinerary]);
+
+  // Find currently selected day details
+  const currentDay = itinerary.find(day => day.day === activeDay);
+  
+  // Safely check if coordinates exist before accessing
+  const hasCoordinates = currentDay && 'coordinates' in currentDay && currentDay.coordinates;
+
+  const handleDayChange = (day: number) => {
+    setActiveDay(day);
+  };
+
   return (
-    <section className="py-12 bg-slate-50">
+    <section className="py-12 bg-gray-50">
       <div className="container">
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Map Side */}
-          <div className="w-full md:w-1/2">
-            <div className="relative h-96 bg-slate-200 rounded-lg overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Map className="h-16 w-16 text-slate-400" />
-                <span className="sr-only">Map loading</span>
+        <h2 className="text-3xl font-bold mb-2">Trip Map & Itinerary</h2>
+        <p className="text-gray-600 mb-8">Follow the route of your trip and see the key places you'll visit</p>
+
+        <Card className="p-4 md:p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Map Component - Only show if we have coordinates */}
+            <div className="h-[400px] bg-gray-100 rounded-lg overflow-hidden">
+              {hasCoordinates ? (
+                <MapDisplay 
+                  itinerary={itinerary.filter((day): day is ItineraryDay => 'coordinates' in day)} 
+                  activeDay={activeDay}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500">
+                  <p>Map view not available for this itinerary</p>
+                </div>
+              )}
+            </div>
+
+            {/* Itinerary Timeline */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-semibold">Daily Itinerary</h3>
+                <ActionButtons />
               </div>
               
-              {/* Map would be rendered here with proper coordinates */}
-              <div className="absolute bottom-4 right-4 p-2 bg-white rounded-md shadow-md z-10">
-                <div className="flex items-center gap-2 text-sm">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-blue-500 mr-1"></div>
-                    <span>Location</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Ship className="w-4 h-4 text-blue-700 mr-1" />
-                    <span>Ferry</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-4 flex justify-center">
-              <div className="inline-flex p-2 rounded-md bg-white shadow-sm">
-                <button className="px-4 py-2 text-sm font-medium bg-blue-100 text-blue-700 rounded-md">Map</button>
-                <button className="px-4 py-2 text-sm font-medium text-gray-600">List</button>
-              </div>
+              <ItineraryTimeline 
+                itinerary={itinerary} 
+                activeDay={activeDay} 
+                onDayChange={handleDayChange} 
+              />
             </div>
           </div>
-          
-          {/* Itinerary Side */}
-          <div className="w-full md:w-1/2">
-            <h2 className="text-2xl font-bold mb-6">Itinerary</h2>
-            <div className="space-y-6">
-              {itinerary.map((day, index) => (
-                <div key={day.day} className="border-l-2 border-gray-200 pl-4">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 flex items-center justify-center bg-blue-500 rounded-full text-white text-sm font-bold -ml-6">
-                      {day.day}
-                    </div>
-                    <h3 className="ml-4 text-lg font-semibold">{day.title}</h3>
-                  </div>
-                  
-                  <div className="mt-2 ml-6">
-                    <p className="text-gray-600">{day.description}</p>
-                    
-                    {'from' in day && day.from && 'to' in day && day.to && (
-                      <div className="mt-2 flex items-center text-sm text-gray-500">
-                        <Ship className="w-4 h-4 mr-2" />
-                        <span>{day.from} to {day.to}</span>
-                      </div>
-                    )}
-                    
-                    {'coordinates' in day && (
-                      <div className="mt-3 flex items-center">
-                        <MapPin className="w-4 h-4 text-gray-400" />
-                        <span className="ml-1 text-sm text-gray-500">
-                          {day.coordinates[0].toFixed(2)}, {day.coordinates[1].toFixed(2)}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        </Card>
       </div>
     </section>
   );

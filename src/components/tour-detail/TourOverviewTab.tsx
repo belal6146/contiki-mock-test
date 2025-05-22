@@ -8,6 +8,7 @@ import FlexDepositBar from '@/components/tour/FlexDepositBar';
 import RelatedTrips from '@/components/tour/RelatedTrips';
 import FAQAccordion from '@/components/tour/FAQAccordion';
 import { Trip } from '@/types/trip';
+import { ItineraryDay } from '@/components/tour/MapItinerary';
 
 interface TourOverviewTabProps {
   trip: Trip;

@@ -12,7 +12,7 @@ interface Highlight {
   title: string;
   description: string;
   image: string;
-  isIncluded: boolean;
+  isIncluded?: boolean;
   type: string;
 }
 
