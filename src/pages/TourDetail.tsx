@@ -1,4 +1,3 @@
-
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
@@ -27,6 +26,7 @@ import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
 import ErrorMessage from '@/components/ui/error-message';
 import TourDatesTab from '@/components/tour-detail/TourDatesTab';
+import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
 
 // Lazy load the heavyweight component
 const TourDetailContent = lazy(() => import('@/components/tour-detail/TourDetailContent'));
@@ -238,11 +238,15 @@ const TourDetail = () => {
           )}
           
           {activeTab === 'reviews' && (
-            <div className="py-8">
-              <h2 className="text-2xl font-bold mb-6">Reviews</h2>
-              <p className="text-gray-600">See what other travelers are saying about this trip.</p>
-              {/* Reviews content would go here */}
-            </div>
+            <ErrorBoundary fallback={
+              <ErrorMessage 
+                title="Could not load reviews content"
+                message="We encountered an error while loading reviews."
+                onRetry={handleRetry}
+              />
+            }>
+              <TourReviewsTab tripId={tour.id} />
+            </ErrorBoundary>
           )}
         </TabNav>
         
