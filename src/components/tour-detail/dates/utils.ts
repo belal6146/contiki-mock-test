@@ -43,11 +43,11 @@ export const generateDepartureOptions = (trip: Trip): DepartureOptionData[] => {
         startDate: addMonths(today, 1),
         endDate: addMonths(today, 1.3),
         types: ['plus', 'standard'],
-        basePrice: 1868,
-        discount: 467,
-        dealLabel: 'Last minute deal',
+        basePrice: 1751,
+        discount: 0,
+        dealLabel: '',
         variants: [
-          { id: 'plus', name: 'PLUS', price: 1868 },
+          { id: 'plus', name: 'PLUS', price: 1751 },
           { id: 'standard', name: 'STANDARD', price: 1401 }
         ]
       },
@@ -56,11 +56,11 @@ export const generateDepartureOptions = (trip: Trip): DepartureOptionData[] => {
         startDate: addMonths(today, 2),
         endDate: addMonths(today, 2.3),
         types: ['plus', 'pride'],
-        basePrice: 1920,
-        discount: 350,
-        dealLabel: 'Early bird offer',
+        basePrice: 1751,
+        discount: 0,
+        dealLabel: '',
         variants: [
-          { id: 'plus', name: 'PLUS', price: 1920 },
+          { id: 'plus', name: 'PLUS', price: 1751 },
           { id: 'pride', name: 'PRIDE', price: 1570 }
         ]
       },
@@ -69,11 +69,11 @@ export const generateDepartureOptions = (trip: Trip): DepartureOptionData[] => {
         startDate: addMonths(today, 3),
         endDate: addMonths(today, 3.3),
         types: ['standard', 'chill'],
-        basePrice: 1750,
-        discount: 250,
-        dealLabel: 'Summer special',
+        basePrice: 1751,
+        discount: 0,
+        dealLabel: '',
         variants: [
-          { id: 'standard', name: 'STANDARD', price: 1750 },
+          { id: 'standard', name: 'STANDARD', price: 1751 },
           { id: 'chill', name: 'CHILL', price: 1500 }
         ]
       }
@@ -86,11 +86,11 @@ export const generateDepartureOptions = (trip: Trip): DepartureOptionData[] => {
     startDate: new Date(v.startDate),
     endDate: new Date(v.endDate),
     types: ['plus', idx % 2 === 0 ? 'standard' : 'pride'],
-    basePrice: v.price,
-    discount: Math.round(v.price * 0.15),
-    dealLabel: idx % 2 === 0 ? 'Last minute deal' : 'Early bird offer',
+    basePrice: 1751,
+    discount: 0,
+    dealLabel: '',
     variants: [
-      { id: 'plus', name: 'PLUS', price: v.price },
+      { id: 'plus', name: 'PLUS', price: 1751 },
       { id: 'standard', name: 'STANDARD', price: v.price - Math.round(v.price * 0.15) }
     ]
   }));

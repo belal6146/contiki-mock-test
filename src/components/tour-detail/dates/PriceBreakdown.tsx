@@ -48,7 +48,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
       <div className="border-t border-green-200 pt-4 mb-6">
         <div className="flex justify-between text-xl font-bold">
           <span>Total Price</span>
-          <span>£{basePrice}</span>
+          <span>£{basePrice - discount}</span>
         </div>
       </div>
       

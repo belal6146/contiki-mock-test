@@ -76,7 +76,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 <Badge 
                   key={type}
                   variant={type === 'plus' ? 'default' : 'outline'}
-                  className={type === 'plus' ? 'bg-gray-100 text-black' : ''}
+                  className={type === 'plus' ? 'bg-gray-100 text-black hover:bg-gray-100' : ''}
                 >
                   {tripTypeLabels[type] || type}
                 </Badge>

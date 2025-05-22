@@ -16,15 +16,14 @@ interface MonthFilterProps {
 const MonthFilter: React.FC<MonthFilterProps> = ({ months, selectedMonth, onMonthChange }) => {
   return (
     <div className="mb-6">
-      <p className="text-sm font-medium mb-2">Select Month</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-center">
         {months.map((month) => (
           <button
             key={month.code}
             disabled={!month.active}
             onClick={() => month.active && onMonthChange(month.code)}
             className={cn(
-              "h-10 px-4 py-2 rounded-full text-sm font-medium transition-colors tracking-wide",
+              "h-10 px-4 py-2 rounded-full text-sm font-medium tracking-wide",
               month.active && selectedMonth === month.code 
                 ? "bg-accent text-black" 
                 : month.active 

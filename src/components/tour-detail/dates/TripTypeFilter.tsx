@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
+import { ChevronDown } from 'lucide-react';
 
 export interface TripType {
   id: string;
@@ -18,7 +19,10 @@ interface TripTypeFilterProps {
 const TripTypeFilter: React.FC<TripTypeFilterProps> = ({ types, selectedTypes, onTypeToggle }) => {
   return (
     <div className="mb-8">
-      <p className="text-sm font-medium mb-2">Trip Type</p>
+      <div className="flex items-center mb-4">
+        <p className="text-sm font-medium mr-2">Trip Type</p>
+        <ChevronDown size={16} className="text-gray-500" />
+      </div>
       <div className="flex flex-wrap gap-2">
         {types.map((type) => (
           <label 
