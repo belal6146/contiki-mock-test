@@ -13,7 +13,7 @@ export interface Variation {
   startDate: string;
   endDate: string;
   price: number;
-  availability: 'available' | 'limited' | 'soldout'; // Updated to use specific string literals
+  availability: 'available' | 'limited' | 'soldout';
 }
 
 export interface Trip {
@@ -23,13 +23,14 @@ export interface Trip {
   description: string;
   destination: string;
   price: number;
-  oldPrice?: number; // Added oldPrice as an optional property
+  oldPrice?: number;
   duration: number;
   image: string;
   rating: number;
   reviewCount: number;
+  discountPercentage?: number; // Add this property
   itinerary: DayDetails[];
   variations: Variation[];
-  highlights: string[]; // Changed from optional to required to match useTrips.ts
-  included: string[]; // Changed from optional to required to match useTrips.ts
+  highlights: string[];
+  included: string[];
 }

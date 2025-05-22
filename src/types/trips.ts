@@ -7,13 +7,14 @@ export interface Trip {
   destination: string;
   duration: number;
   price: number;
-  oldPrice?: number; // Added oldPrice as an optional property
+  oldPrice?: number;
   image: string;
   rating: number;
   reviewCount: number;
   description: string;
   highlights: string[];
   included: string[];
+  discountPercentage?: number; // Add this property
   itinerary: {
     day: number;
     title: string;

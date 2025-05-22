@@ -50,7 +50,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
       <p className="text-lg text-gray-700 mb-12 container max-w-4xl">{safeTrip.description}</p>
       
       <div className="mb-16 transition-all duration-300 ease-in-out hover:translate-y-[-4px]">
-        <TripHighlights highlights={highlights} arrowVariant="outline" />
+        <TripHighlights highlights={highlights} />
       </div>
       
       <div className="mb-16 transition-all duration-300 ease-in-out">

@@ -85,7 +85,8 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
                       className="w-full h-48 object-cover"
                       loading="lazy"
                     />
-                    {trip.discountPercentage > 0 && (
+                    {/* Only show discount badge if discountPercentage exists and is > 0 */}
+                    {trip.discountPercentage && trip.discountPercentage > 0 && (
                       <div className="absolute top-4 left-4 bg-yellow-500 text-white px-2 py-1 text-xs font-bold rounded">
                         {trip.discountPercentage}% OFF
                       </div>

@@ -17,6 +17,7 @@ import HeroImage from '@/components/tour/HeroImage';
 import PriceBar from '@/components/tour/PriceBar';
 import TripHighlights from '@/components/tour/TripHighlights';
 import MapItinerary from '@/components/tour/MapItinerary';
+import { ItineraryDay } from '@/components/tour/MapItinerary';
 import WhereYouWillStay from '@/components/tour/WhereYouWillStay';
 import RelatedTrips from '@/components/tour/RelatedTrips';
 import BookingBar from '@/components/BookingBar';
@@ -95,8 +96,8 @@ const TourDetail = () => {
     }
   ];
 
-  // Mock data for itinerary
-  const mockItinerary = [
+  // Mock data for itinerary with proper coordinate tuples
+  const mockItinerary: ItineraryDay[] = [
     {
       day: 1,
       title: 'Start Athens',

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -208,7 +207,7 @@ const Tours = () => {
                     countries={1}
                     image={trip.image}
                     isSpotlight={trip.rating >= 4.5}
-                    discountPercentage={trip.discountPercentage}
+                    discountPercentage={trip.discountPercentage || 0}
                   />
                 ))}
               </Suspense>

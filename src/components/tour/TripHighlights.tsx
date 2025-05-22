@@ -18,10 +18,12 @@ interface Highlight {
 
 interface TripHighlightsProps {
   highlights: Highlight[];
+  arrowVariant?: string; // Add this prop
 }
 
 const TripHighlights: React.FC<TripHighlightsProps> = ({ 
-  highlights 
+  highlights,
+  arrowVariant = 'default' // Default value
 }) => {
   useEffect(() => {
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
@@ -64,8 +66,8 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow variant={arrowVariant} />,
+    nextArrow: <NextArrow variant={arrowVariant} />,
     responsive: [
       {
         breakpoint: 1024,
@@ -127,7 +129,8 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>
+        {`
         .highlights-slider .slick-dots {
           bottom: -30px;
         }
@@ -137,7 +140,8 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
         .highlights-slider .slick-slide {
           padding: 0 8px;
         }
-      `}</style>
+        `}
+      </style>
     </section>
   );
 };
