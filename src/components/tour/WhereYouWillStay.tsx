@@ -57,7 +57,7 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
                 />
               </div>
               <CardContent className="p-8">
-                <div className="uppercase text-xs font-semibold tracking-wider text-gray-500 mb-3">VIRTUAL TOUR</div>
+                <div className="uppercase text-xs font-semibold tracking-wider text-gray-500 mb-3">SPECIAL STAY</div>
                 <h3 className="text-2xl font-bold mb-2">{safeAccommodation.name}</h3>
                 <p className="text-gray-700 mb-4">{safeAccommodation.location}</p>
                 <div className="flex items-center mb-6">

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -6,7 +7,10 @@ import { debounce } from '@/lib/utils';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { trackPageView, trackEvent } from '@/lib/analytics';
+import BackToTopButton from '@/components/BackToTopButton';
+import HelpButton from '@/components/home/HelpButton';
 
 // Lazy load the TripCard component
 const TripCard = lazy(() => import('@/components/TripCard'));
@@ -17,20 +21,24 @@ const Tours = () => {
   // Parse query parameters
   const queryParams = new URLSearchParams(location.search);
   const initialDestination = queryParams.get('destination') || '';
-  const initialDate = queryParams.get('date') || '';
+  const initialYear = queryParams.get('year') || new Date().getFullYear().toString();
   const initialTravelers = parseInt(queryParams.get('travelers') || '1', 10);
   
   // Set up filter state
   const [filters, setFilters] = useState({
     destination: initialDestination,
-    date: initialDate,
+    year: initialYear,
     travelers: initialTravelers,
   });
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const tripsPerPage = 9;
   
   // Set up debounced filter update
   const debouncedFilterUpdate = debounce((newFilters: typeof filters) => {
     trackEvent('tours_filter_change', { filters: newFilters });
     setFilters(newFilters);
+    setCurrentPage(1); // Reset page when filters change
   }, 300);
   
   // Fetch trips based on filters
@@ -41,25 +49,40 @@ const Tours = () => {
   
   useEffect(() => {
     trackPageView(window.location.pathname + location.search);
+    console.debug('[TripListing] mounted');
   }, [location.pathname, location.search]);
   
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFilters = { ...filters, destination: e.target.value };
     debouncedFilterUpdate(newFilters);
+    console.debug('[TripListing] filtersChanged', { filters: newFilters });
   };
   
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilters = { ...filters, date: e.target.value };
+  const handleYearChange = (year: string) => {
+    const newFilters = { ...filters, year };
     debouncedFilterUpdate(newFilters);
+    console.debug('[TripListing] filtersChanged', { filters: newFilters });
   };
   
   const handleTravelersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilters = { ...filters, travelers: parseInt(e.target.value, 10) };
+    const travelers = parseInt(e.target.value, 10);
+    const newFilters = { ...filters, travelers: isNaN(travelers) ? 1 : travelers };
     debouncedFilterUpdate(newFilters);
+    console.debug('[TripListing] filtersChanged', { filters: newFilters });
   };
   
+  const handleLoadMore = () => {
+    setCurrentPage(prev => prev + 1);
+    console.debug('[TripListing] loadMore', { newPage: currentPage + 1 });
+    trackEvent('load_more_trips', { page: currentPage + 1 });
+  };
+  
+  // Calculate total number of trips to display
+  const displayedTrips = trips.slice(0, currentPage * tripsPerPage);
+  const hasMore = displayedTrips.length < trips.length;
+  
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Helmet>
         <title>Find Your Perfect Trip | Contiki Tours</title>
         <meta name="description" content="Explore our range of trips for 18-35 year olds. Filter by destination, date, and number of travelers to find your perfect adventure." />
@@ -74,35 +97,15 @@ const Tours = () => {
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://www.contiki.com/tours" />
-        
-        {/* JSON-LD for Tour Listing */}
-        <script type="application/ld+json">{`
-          {
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "name": "Contiki Tours",
-            "description": "Explore our range of trips for 18-35 year olds",
-            "url": "https://www.contiki.com/tours",
-            "provider": {
-              "@type": "Organization",
-              "name": "Contiki",
-              "url": "https://www.contiki.com"
-            }
-          }
-        `}</script>
       </Helmet>
       
       <Header />
       
-      <main className="flex-grow container py-8">
-        <h1 className="heading-lg mb-6">Find Your Perfect Trip</h1>
-        
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8" aria-labelledby="filter-heading">
-          <h2 id="filter-heading" className="heading-md mb-4">Filter Trips</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
+      {/* Filter Bar */}
+      <div className="sticky top-16 z-30 bg-gray-100 shadow-sm">
+        <div className="container py-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="md:col-span-2">
               <label htmlFor="destination" className="block text-sm font-medium text-gray-700 mb-1">
                 Destination
               </label>
@@ -112,23 +115,29 @@ const Tours = () => {
                 placeholder="Where to?"
                 value={filters.destination}
                 onChange={handleDestinationChange}
-                className="transition-all duration-150 ease-in-out focus:ring-accent"
+                className="w-full transition-all duration-150 ease-in-out focus:ring-accent"
                 aria-label="Filter by destination"
               />
             </div>
             
             <div>
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                Date
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Year
               </label>
-              <Input
-                id="date"
-                type="date"
-                value={filters.date}
-                onChange={handleDateChange}
-                className="transition-all duration-150 ease-in-out focus:ring-accent"
-                aria-label="Filter by date"
-              />
+              <div className="flex rounded-md overflow-hidden border border-gray-300">
+                <button
+                  className={`flex-1 py-2 px-4 ${filters.year === '2025' ? 'bg-[#CCFF00] text-black' : 'bg-white text-gray-700'}`}
+                  onClick={() => handleYearChange('2025')}
+                >
+                  2025
+                </button>
+                <button
+                  className={`flex-1 py-2 px-4 ${filters.year === '2026' ? 'bg-[#CCFF00] text-black' : 'bg-white text-gray-700'}`}
+                  onClick={() => handleYearChange('2026')}
+                >
+                  2026
+                </button>
+              </div>
             </div>
             
             <div>
@@ -141,17 +150,34 @@ const Tours = () => {
                 min="1"
                 value={filters.travelers}
                 onChange={handleTravelersChange}
-                className="transition-all duration-150 ease-in-out focus:ring-accent"
+                className="w-full transition-all duration-150 ease-in-out focus:ring-accent"
                 aria-label="Number of travelers"
               />
             </div>
           </div>
+          
+          <div className="mt-4 flex justify-end">
+            <Button 
+              className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90"
+              onClick={() => {
+                console.debug('[TripListing] searchClicked', { filters });
+                trackEvent('search_trips', { filters });
+              }}
+            >
+              Search Trips
+            </Button>
+          </div>
         </div>
+      </div>
+      
+      <main className="flex-grow container py-8">
+        <h1 className="text-3xl font-bold mb-2">Find Your Perfect Trip</h1>
+        <p className="text-gray-600 mb-6">Discover adventures crafted for 18-35s across the globe</p>
         
         {/* Results */}
         {loading && (
           <div className="flex justify-center items-center py-12" aria-live="polite" aria-busy="true">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" role="status">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#CCFF00]" role="status">
               <span className="sr-only">Loading trips...</span>
             </div>
           </div>
@@ -168,14 +194,21 @@ const Tours = () => {
             <p className="mb-4 text-gray-600" aria-live="polite">{trips.length} trips found</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Suspense fallback={<div className="col-span-full flex justify-center py-12"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>}>
-                {trips.map((trip) => (
+              <Suspense fallback={<div className="col-span-full flex justify-center py-12"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#CCFF00]"></div></div>}>
+                {displayedTrips.map((trip) => (
                   <TripCard
                     key={trip.id}
                     id={trip.id}
+                    slug={trip.slug}
                     title={trip.name}
                     region={trip.destination}
                     price={trip.price}
+                    oldPrice={trip.oldPrice}
+                    duration={trip.duration}
+                    countries={1}
+                    image={trip.image}
+                    isSpotlight={trip.rating >= 4.5}
+                    discountPercentage={trip.discountPercentage}
                   />
                 ))}
               </Suspense>
@@ -187,11 +220,26 @@ const Tours = () => {
                 <p className="mt-2">Try adjusting your filters.</p>
               </div>
             )}
+            
+            {/* Load More Button */}
+            {hasMore && (
+              <div className="flex justify-center mt-8">
+                <Button 
+                  variant="outline"
+                  onClick={handleLoadMore}
+                  className="px-6 py-2 border-2 border-black text-black hover:bg-black hover:text-white transition-colors"
+                >
+                  Load More Trips
+                </Button>
+              </div>
+            )}
           </>
         )}
       </main>
       
       <Footer />
+      <BackToTopButton />
+      <HelpButton />
     </div>
   );
 };

@@ -81,14 +81,14 @@ const PriceBar: React.FC<PriceBarProps> = ({
           
           <div className="flex space-x-4">
             <button 
-              className="btn-outline px-4 py-2 border-secondary text-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary transition-all duration-150 ease-in-out hover:scale-105"
+              className="btn-outline px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-150 ease-in-out rounded-md"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
-              REQUEST INFO
+              REQUEST MORE INFO
             </button>
             <button 
-              className="btn-primary px-6 py-2 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-150 ease-in-out hover:scale-105"
+              className="btn-primary px-6 py-2 bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-150 ease-in-out rounded-md"
               onClick={handleViewDates}
               aria-label="View available dates"
             >

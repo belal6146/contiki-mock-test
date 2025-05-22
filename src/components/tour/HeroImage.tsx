@@ -99,7 +99,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
             </span>
           </div>
           
-          <h1 className="heading-xl mb-4 text-white transition-all duration-300 ease-in-out drop-shadow-lg">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white transition-all duration-300 ease-in-out drop-shadow-lg">
             {title || 'Discover Amazing Places'}
           </h1>
           

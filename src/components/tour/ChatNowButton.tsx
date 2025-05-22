@@ -1,39 +1,31 @@
 
-import React, { useEffect, useState } from 'react';
-import { MessageSquare } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { MessageCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { trackEvent } from '@/lib/analytics';
 
-const ChatNowButton: React.FC = () => {
-  const [visible, setVisible] = useState(false);
-  
+const ChatNowButton = () => {
   useEffect(() => {
-    // Show button after a delay
-    const timer = setTimeout(() => {
-      setVisible(true);
-      console.debug('[ChatNowButton] mounted and visible');
-    }, 3000);
-    
-    return () => clearTimeout(timer);
+    console.debug('[ChatNowButton] mounted');
   }, []);
-  
-  const handleChatClick = () => {
+
+  const handleClick = () => {
     console.debug('[ChatNowButton] clicked');
-    trackEvent('chat_now_clicked', {});
-    // In a real implementation, this would open a chat window
-    window.alert('Chat functionality would open here');
+    trackEvent('chat_now_clicked');
+    // Open chat dialog or redirect
+    window.open('/contact', '_blank');
   };
-  
-  if (!visible) return null;
-  
+
   return (
-    <button
-      onClick={handleChatClick}
-      className="fixed bottom-6 right-6 bg-[#CCFF00] text-black rounded-full shadow-lg p-4 z-50 flex items-center gap-2 hover:bg-[#CCFF00]/90 transition-all duration-150 font-montserrat font-medium"
-      aria-label="Chat with us"
+    <Button
+      variant="secondary"
+      size="icon"
+      className="fixed bottom-4 right-4 z-50 rounded-full w-14 h-14 bg-[#CCFF00] text-black shadow-lg hover:bg-[#CCFF00]/90 hover:shadow-xl hover:scale-105 transition-all duration-300"
+      onClick={handleClick}
+      aria-label="Chat now"
     >
-      <MessageSquare className="h-5 w-5" />
-      <span>Chat Now</span>
-    </button>
+      <MessageCircle className="w-6 h-6" />
+    </Button>
   );
 };
 

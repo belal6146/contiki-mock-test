@@ -64,7 +64,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
   };
 
   return (
-    <section className="py-8" aria-labelledby="tabNav-title">
+    <section className="py-4 border-t border-gray-200" aria-labelledby="tabNav-title">
       <div className="container">
         {/* Hidden accessible title for screen readers */}
         <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>
@@ -95,7 +95,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 {tab.label}
                 <span 
                   className={cn(
-                    "absolute bottom-0 left-0 w-full h-0.5 bg-primary",
+                    "absolute bottom-0 left-0 w-full h-0.5 bg-[#CCFF00]",
                     "transition-transform duration-150 ease-in-out",
                     activeTab === tab.id ? "scale-x-100" : "scale-x-0"
                   )}
