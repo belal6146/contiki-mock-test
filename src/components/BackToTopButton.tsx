@@ -24,7 +24,6 @@ const BackToTopButton: React.FC = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
-      // Add a longer duration for smoother scrolling
     });
   };
   
@@ -34,11 +33,11 @@ const BackToTopButton: React.FC = () => {
   
   return (
     <button
-      className="fixed bottom-8 right-8 rounded-full w-12 h-12 flex items-center justify-center shadow-lg bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 transition-all duration-500 ease-in-out hover:shadow-xl hover:transform hover:scale-105"
+      className="fixed bottom-20 right-4 rounded-full w-10 h-10 flex items-center justify-center shadow-md bg-white text-black hover:bg-gray-100 transition-all duration-300 ease-in-out"
       onClick={scrollToTop}
       aria-label="Back to top"
     >
-      <ArrowUp className="w-6 h-6" />
+      <ArrowUp className="w-4 h-4" />
     </button>
   );
 };

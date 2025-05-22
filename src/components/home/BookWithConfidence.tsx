@@ -29,16 +29,17 @@ const BookWithConfidence = () => {
   ];
 
   return (
-    <section className="w-full bg-[#F5F5F5] py-12 md:py-16">
+    <section className="w-full bg-[#F5F5F5] py-10">
       <div className="container">
         <div className="flex flex-col items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 max-w-5xl mx-auto">
+          <h2 className="text-xl font-bold text-center mb-6">Book with confidence</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 w-full max-w-4xl mx-auto">
             {confidenceItems.map((item, index) => (
               <div key={index} className="flex flex-col items-center text-center">
-                <div className="mb-4 text-primary">
+                <div className="mb-2 text-primary">
                   {item.icon}
                 </div>
-                <p className="text-sm md:text-base font-medium">
+                <p className="text-xs md:text-sm font-medium">
                   {item.text}
                 </p>
               </div>
@@ -47,7 +48,7 @@ const BookWithConfidence = () => {
           
           <Button 
             variant="default" 
-            className="bg-primary text-white hover:bg-primary/90 font-medium"
+            className="bg-primary text-white hover:bg-primary/90 font-medium text-sm"
             asChild
           >
             <Link to="/book-with-confidence">FIND OUT MORE</Link>

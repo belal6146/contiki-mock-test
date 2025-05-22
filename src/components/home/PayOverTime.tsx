@@ -9,7 +9,7 @@ const PayOverTime = () => {
   }, []);
 
   return (
-    <section className="w-full bg-accent py-8 md:py-10">
+    <section className="w-full bg-[#00A8E8] py-8">
       <div className="container">
         <div className="flex flex-col items-center justify-center text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
@@ -17,7 +17,7 @@ const PayOverTime = () => {
           </h2>
           <Button
             variant="outline"
-            className="bg-white text-accent border-white hover:bg-white/90 font-medium"
+            className="bg-white text-[#00A8E8] border-white hover:bg-white/90 font-medium"
             asChild
           >
             <Link to="/pay-monthly">LEARN MORE</Link>
