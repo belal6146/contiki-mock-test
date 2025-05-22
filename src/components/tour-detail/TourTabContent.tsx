@@ -26,6 +26,14 @@ interface TourTabContentProps {
 const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetry }) => {
   const { trips } = useTrips({ limit: 3 });
 
+  React.useEffect(() => {
+    console.debug('[ResponsiveQA] TourTabContent', { 
+      activeTab, 
+      breakpoint: window.innerWidth <= 640 ? 'mobile' : 
+                  window.innerWidth <= 1024 ? 'tablet' : 'desktop' 
+    });
+  }, [activeTab]);
+
   // Mock data for trip highlights
   const mockHighlights = [
     {
@@ -146,7 +154,7 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
               onRetry={onRetry}
             />
           }>
-            <div>
+            <div className="animate-fade-in">
               {/* Hero Image */}
               <HeroImage 
                 imageUrl={tour.image} 
@@ -203,18 +211,18 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
       {renderTabContent()}
       
       {/* FAQ section - consistent across all tabs */}
-      <div className="bg-white py-12 border-t border-gray-100">
+      <div className="bg-white py-8 md:py-12 border-t border-gray-100">
         <div className="container max-w-7xl">
           <div className="mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
-            <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center">Frequently Asked Questions</h2>
+            <p className="text-gray-600 text-center mb-8 md:mb-12 max-w-2xl mx-auto">
               Everything you need to know about this trip and booking with Contiki.
             </p>
           </div>
         </div>
       </div>
       <div className="bg-white">
-        <div className="container max-w-7xl pb-16">
+        <div className="container max-w-7xl pb-8 md:pb-16">
           <div className="mx-auto">
             <FAQAccordion 
               tripFAQs={mockTripFAQs} 

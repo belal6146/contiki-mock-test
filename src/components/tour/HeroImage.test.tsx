@@ -1,0 +1,93 @@
+
+import React from 'react';
+import { render, screen, act } from '@testing-library/react';
+import HeroImage from './HeroImage';
+
+// Mock analytics
+jest.mock('@/lib/analytics', () => ({
+  trackEvent: jest.fn(),
+}));
+
+// Mock the Image component
+global.Image = class {
+  onload: () => void = () => {};
+  onerror: () => void = () => {};
+  src: string = '';
+  constructor() {
+    setTimeout(() => {
+      this.onload();
+    }, 100);
+  }
+};
+
+describe('HeroImage', () => {
+  const defaultProps = {
+    imageUrl: 'https://example.com/image.jpg',
+    title: 'Test Title',
+    subtitle: 'Test Subtitle',
+  };
+
+  test('renders loading state initially', () => {
+    render(<HeroImage {...defaultProps} />);
+    
+    // Loading spinner should be visible
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  });
+
+  test('renders content after image loads', async () => {
+    jest.useFakeTimers();
+    render(<HeroImage {...defaultProps} />);
+    
+    // Fast forward time to trigger image onload
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
+    
+    // Title and subtitle should be visible
+    expect(screen.getByText('Test Title')).toBeInTheDocument();
+    expect(screen.getByText('Test Subtitle')).toBeInTheDocument();
+    
+    // Loading spinner should be gone
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    
+    jest.useRealTimers();
+  });
+
+  test('applies proper accessible attributes', () => {
+    render(<HeroImage {...defaultProps} />);
+    
+    // Check aria-label
+    const heroSection = screen.getByRole('banner');
+    expect(heroSection).toHaveAttribute('aria-label', 'Test Title - Test Subtitle');
+  });
+
+  test('handles missing props gracefully', () => {
+    render(<HeroImage imageUrl="" title="" subtitle="" />);
+    
+    // Should render a skeleton loader
+    expect(screen.getByText('Discover Amazing Places')).toBeInTheDocument();
+  });
+
+  test('renders fallback image when imageUrl is empty', async () => {
+    jest.useFakeTimers();
+    render(<HeroImage imageUrl="" title="Test Title" subtitle="Test Subtitle" />);
+    
+    // Fast forward time to trigger image onload
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
+    
+    // Content should still render
+    expect(screen.getByText('Test Title')).toBeInTheDocument();
+    
+    jest.useRealTimers();
+  });
+
+  test('renders with parallax effect container', () => {
+    render(<HeroImage {...defaultProps} />);
+    
+    // Check for the parallax container
+    const container = document.querySelector('.transition-transform');
+    expect(container).toBeInTheDocument();
+  });
+});
