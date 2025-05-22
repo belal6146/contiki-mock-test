@@ -12,8 +12,10 @@ interface HeroImageProps {
 const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   // Generate a fallback hero image based on the title and subtitle
   const getFallbackImage = () => {
-    // Convert title and subtitle to URL-friendly search terms
-    const searchTerms = `${title},${subtitle}`.toLowerCase().replace(/\s+/g, ',');
+    // Ensure title and subtitle are strings before using toLowerCase
+    const searchTitleTerm = title ? title.toLowerCase().replace(/\s+/g, ',') : 'travel';
+    const searchSubtitleTerm = subtitle ? subtitle.toLowerCase().replace(/\s+/g, ',') : '';
+    const searchTerms = `${searchTitleTerm},${searchSubtitleTerm}`;
     return `https://source.unsplash.com/random/1920x1080/?travel,${searchTerms}`;
   };
 

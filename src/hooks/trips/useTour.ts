@@ -16,17 +16,23 @@ export const useTour = (slugOrId: string) => {
         // Simulate API call delay
         await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Find tour by slug or ID
+        // Find tour by slug or ID - handle numeric IDs properly
         const foundTour = mockTrips.find(trip => 
-          trip.slug === slugOrId || trip.id === slugOrId
+          trip.slug === slugOrId || trip.id === slugOrId || trip.id === String(slugOrId)
         );
         
         if (!foundTour) {
           setError('Tour not found');
           setTour(null);
+          console.debug('[useTour] Tour not found', { slugOrId });
         } else {
           setTour(foundTour);
           setError(null);
+          console.debug('[useTour] Tour loaded successfully', { 
+            id: foundTour.id, 
+            slug: foundTour.slug,
+            name: foundTour.name
+          });
           trackEvent('tour_fetched', { 
             id: foundTour.id,
             slug: foundTour.slug,
@@ -36,6 +42,7 @@ export const useTour = (slugOrId: string) => {
       } catch (err) {
         const errorMessage = 'Failed to fetch tour details. Please try again later.';
         trackError('useTour', err, { slugOrId });
+        console.error('[useTour] Error fetching tour', err);
         setError(errorMessage);
         setTour(null);
       } finally {

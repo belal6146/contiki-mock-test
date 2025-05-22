@@ -16,17 +16,25 @@ interface WhereYouWillStayProps {
 }
 
 const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) => {
+  // Create a safe accommodation object that handles undefined props
+  const safeAccommodation = {
+    name: accommodation?.name || 'Luxury Accommodation',
+    location: accommodation?.location || 'Beautiful Location',
+    image: accommodation?.image || '',
+    nightsCount: accommodation?.nightsCount || 3
+  };
+
   useEffect(() => {
-    console.debug('[WhereYouWillStay] mounted', { accommodation });
-  }, [accommodation]);
+    console.debug('[WhereYouWillStay] mounted', { accommodation: safeAccommodation });
+  }, [safeAccommodation]);
   
   // Get hotel image from Unsplash or use the provided one
-  const getAccommodationImage = (accommodation: Accommodation) => {
-    if (accommodation.image && !accommodation.image.includes('placeholder')) {
-      return accommodation.image;
+  const getAccommodationImage = () => {
+    if (safeAccommodation.image && !safeAccommodation.image.includes('placeholder')) {
+      return safeAccommodation.image;
     }
     
-    const searchTerms = `hotel,luxury,accommodation,${accommodation.location.toLowerCase().replace(/\s+/g, ',')}`;
+    const searchTerms = `hotel,luxury,accommodation,${safeAccommodation.location.toLowerCase().replace(/\s+/g, ',')}`;
     return `https://source.unsplash.com/random/800x600/?${searchTerms}`;
   };
   
@@ -42,19 +50,19 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
             <Card className="overflow-hidden rounded-2xl shadow-md h-full">
               <div className="relative h-72">
                 <img 
-                  src={getAccommodationImage(accommodation)} 
-                  alt={accommodation.name}
+                  src={getAccommodationImage()} 
+                  alt={safeAccommodation.name}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <CardContent className="p-8">
                 <div className="uppercase text-xs font-semibold tracking-wider text-gray-500 mb-3">VIRTUAL TOUR</div>
-                <h3 className="text-2xl font-bold mb-2">{accommodation.name}</h3>
-                <p className="text-gray-700 mb-4">{accommodation.location}</p>
+                <h3 className="text-2xl font-bold mb-2">{safeAccommodation.name}</h3>
+                <p className="text-gray-700 mb-4">{safeAccommodation.location}</p>
                 <div className="flex items-center mb-6">
                   <div className="bg-secondary text-secondary-foreground text-xs font-medium px-4 py-1 rounded-full">
-                    {accommodation.nightsCount} nights
+                    {safeAccommodation.nightsCount} nights
                   </div>
                 </div>
                 <Button variant="ghost" className="text-secondary font-medium flex items-center gap-2 p-0 hover:bg-transparent hover:text-secondary/80">
@@ -68,11 +76,11 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
           <div className="h-full">
             <Card className="flex flex-col items-center justify-center text-center p-8 h-full rounded-2xl shadow-md">
               <div className="bg-secondary rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                <span className="text-secondary-foreground text-2xl font-bold">{accommodation.nightsCount}</span>
+                <span className="text-secondary-foreground text-2xl font-bold">{safeAccommodation.nightsCount}</span>
               </div>
               <h3 className="text-2xl font-bold mb-4">All Accommodation is Included</h3>
               <p className="text-gray-600">
-                {accommodation.nightsCount} nights in Hotels, 2 nights in Special Stay
+                {safeAccommodation.nightsCount} nights in Hotels, 2 nights in Special Stay
               </p>
             </Card>
           </div>

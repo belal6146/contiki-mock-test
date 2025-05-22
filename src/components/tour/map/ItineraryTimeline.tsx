@@ -13,15 +13,26 @@ interface ItineraryTimelineProps {
 }
 
 const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
-  itinerary,
+  itinerary = [],
   activeIndex,
   onDayClick
 }) => {
+  // Handle empty itinerary
+  if (!itinerary || itinerary.length === 0) {
+    return (
+      <div className="text-center py-8 text-gray-500">
+        Itinerary information not available
+      </div>
+    );
+  }
+
   // Ensure each day has from/to fields (use defaults if missing)
   const processedItinerary = itinerary.map(day => ({
     ...day,
-    from: day.from || day.title.split(' to ')[0] || 'Location',
-    to: day.to || day.title.split(' to ')[1] || day.from || 'Location'
+    day: day.day || 1,
+    title: day.title || 'Tour Day',
+    from: day.from || (day.title ? day.title.split(' to ')[0] : 'Location'),
+    to: day.to || (day.title ? day.title.split(' to ')[1] || day.from : 'Location')
   }));
 
   return (

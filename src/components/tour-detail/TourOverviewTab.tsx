@@ -20,27 +20,45 @@ interface TourOverviewTabProps {
 
 const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
   trip,
-  highlights,
-  trips,
-  accommodation,
-  tripFAQs,
-  generalFAQs
+  highlights = [],
+  trips = [],
+  accommodation = { hotels: [] },
+  tripFAQs = [],
+  generalFAQs = []
 }) => {
+  // If trip is undefined, provide fallback values
+  const safeTrip = trip || {
+    id: '',
+    slug: '',
+    name: 'Tour Information',
+    description: 'Tour description not available',
+    destination: 'Various Destinations',
+    price: 0,
+    duration: 0,
+    image: '',
+    rating: 0,
+    reviewCount: 0,
+    itinerary: [],
+    variations: [],
+    highlights: [],
+    included: [],
+  };
+
   return (
     <div className="mb-16 animate-fade-in">
       <h2 className="heading-md mb-8">Trip Overview</h2>
-      <p className="text-lg text-gray-700 mb-12 container max-w-4xl">{trip.description}</p>
+      <p className="text-lg text-gray-700 mb-12 container max-w-4xl">{safeTrip.description}</p>
       
       <div className="mb-16 transition-all duration-300 ease-in-out hover:translate-y-[-4px]">
         <TripHighlights highlights={highlights} arrowVariant="outline" />
       </div>
       
       <div className="mb-16 transition-all duration-300 ease-in-out">
-        <MapItinerary itinerary={trip.itinerary} />
+        <MapItinerary itinerary={safeTrip.itinerary} />
       </div>
       
       <div className="mb-16">
-        <DailyAccordion days={trip.itinerary} />
+        <DailyAccordion days={safeTrip.itinerary} />
       </div>
       
       <div className="mb-16 transition-all duration-300 ease-in-out hover:translate-y-[-4px]">
