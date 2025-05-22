@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense } from 'react';
 import { Trip } from '@/types/trip';
 import { useTrips } from '@/hooks/useTrips';
@@ -10,7 +11,6 @@ import HeroImage from '@/components/tour/HeroImage';
 import ErrorMessage from '@/components/ui/error-message';
 import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
-import FAQAccordion from '@/components/tour/FAQAccordion';
 import { ItineraryDay } from '@/components/tour/MapItinerary';
 
 // Lazy load the heavyweight component
@@ -202,10 +202,26 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
       {renderTabContent()}
       
       {/* FAQ section - consistent across all tabs */}
-      <FAQAccordion 
-        tripFAQs={mockTripFAQs} 
-        generalFAQs={mockGeneralFAQs} 
-      />
+      <div className="bg-white py-12 border-t border-gray-100">
+        <div className="container max-w-7xl">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+            <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+              Everything you need to know about this trip and booking with Contiki.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white">
+        <div className="container max-w-7xl pb-16">
+          <div className="mx-auto">
+            <FAQAccordion 
+              tripFAQs={mockTripFAQs} 
+              generalFAQs={mockGeneralFAQs} 
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 };

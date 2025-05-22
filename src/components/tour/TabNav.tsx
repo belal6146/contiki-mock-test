@@ -64,7 +64,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
   };
 
   return (
-    <section className="py-4 border-t border-gray-200" aria-labelledby="tabNav-title">
+    <section className="py-6 border-t border-gray-200" aria-labelledby="tabNav-title">
       <div className="container">
         {/* Hidden accessible title for screen readers */}
         <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>

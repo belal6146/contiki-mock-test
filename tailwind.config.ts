@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -35,14 +36,17 @@ export default {
         primary: {
           DEFAULT: '#000000', // Black
           foreground: '#FFFFFF', // White text on black background
+          hover: '#333333', // Slight lighter black for hover states
         },
         secondary: {
           DEFAULT: '#CCFF00', // Chartreuse
           foreground: '#000000', // Black text on chartreuse background
+          hover: '#B8E600', // Slightly darker chartreuse for hover states
         },
         accent: {
           DEFAULT: '#CCFF00', // Chartreuse
           foreground: '#000000', // Black text on chartreuse background
+          hover: '#B8E600', // Slightly darker chartreuse for hover states
         },
         highlight: {
           DEFAULT: '#CCFF00', // Chartreuse
@@ -118,7 +122,6 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        // Add fade-in animation for BackToTopButton
         "fade-in": {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" }
@@ -127,7 +130,6 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        // Add fade-in animation
         "fade-in": "fade-in 0.3s ease-out",
       },
       transitionDuration: {

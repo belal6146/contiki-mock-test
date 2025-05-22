@@ -25,7 +25,7 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
     secondary: 'bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90',
     accent: 'bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90',
     outline: 'border border-black text-black hover:bg-black hover:text-white',
-    ghost: 'text-black hover:bg-[#CCFF00]/10',
+    ghost: 'text-black hover:bg-[#CCFF00]/10 hover:text-black',
   };
 
   const sizeClasses = {
@@ -41,7 +41,6 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
         'transition-all duration-150 ease-in-out',
         'focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:ring-offset-2',
         'disabled:opacity-50 disabled:pointer-events-none',
-        'hover:transform hover:scale-[1.02]',
         variantClasses[variant],
         sizeClasses[size],
         fullWidth ? 'w-full' : '',

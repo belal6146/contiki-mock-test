@@ -54,6 +54,7 @@
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.015em;
+    font-weight: 400;
   }
 
   /* Typography refinements to match Contiki exactly */
@@ -220,5 +221,15 @@
   
   .slick-dots li.slick-active button {
     @apply bg-accent;
+  }
+
+  /* Contiki-specific styles */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

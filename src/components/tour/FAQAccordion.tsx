@@ -50,12 +50,12 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
   };
   
   return (
-    <section className="py-12">
+    <section className="py-16 bg-white">
       <div className="container max-w-4xl mx-auto px-4">
         {/* General FAQs */}
         {generalFAQs && generalFAQs.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-bold mb-8 text-center">General FAQs</h2>
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold mb-8 text-center">General FAQs</h2>
             
             <div className="bg-green-50 rounded-lg p-6">
               <div className="divide-y divide-gray-200">
@@ -90,10 +90,10 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
         
         {/* Trip FAQs */}
         {tripFAQs && tripFAQs.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-8 text-center">Trip FAQs</h2>
+          <div>
+            <h2 className="text-3xl font-bold mb-8 text-center">Trip FAQs</h2>
             
-            <div className="divide-y divide-gray-200">
+            <div className="bg-white divide-y divide-gray-200">
               {tripFAQs.map((faq, index) => {
                 const isOpen = openTripFAQ === index;
                 

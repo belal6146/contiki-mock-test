@@ -105,7 +105,7 @@ const Reviews: React.FC<ReviewsProps> = ({ tripId }) => {
     return (
       <>
         {text.substring(0, maxLength)}...{' '}
-        <a href="#" className="text-primary underline">Read more</a>
+        <a href="#" className="text-black font-medium underline">Read more</a>
       </>
     );
   };
@@ -149,7 +149,7 @@ const Reviews: React.FC<ReviewsProps> = ({ tripId }) => {
           console.debug('[Reviews] itemRendered', { id: review.id });
           
           return (
-            <div key={review.id} className="bg-white rounded-lg p-6 shadow-sm">
+            <div key={review.id} className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-4">
                   <img
@@ -184,8 +184,8 @@ const Reviews: React.FC<ReviewsProps> = ({ tripId }) => {
                   
                   {/* Support Reply */}
                   {review.supportReply && (
-                    <div className="bg-green-50 border-l-4 border-accent p-6 rounded mt-4">
-                      <p className="font-medium mb-2">From {review.supportReply.author}</p>
+                    <div className="bg-green-50 border-l-4 border-accent p-4 rounded mt-4">
+                      <p className="font-medium mb-2">{review.supportReply.author}</p>
                       <p className="text-sm text-gray-500 mb-2">{review.supportReply.date}</p>
                       <p className="text-gray-700">{review.supportReply.comment}</p>
                     </div>
