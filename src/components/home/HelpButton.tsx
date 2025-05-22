@@ -20,11 +20,11 @@ const HelpButton = () => {
     <Button
       variant="secondary"
       size="icon"
-      className="fixed bottom-4 right-4 z-50 rounded-full w-12 h-12 bg-[#CCFF00] text-black shadow-lg hover:bg-[#CCFF00]/90 hover:shadow-xl hover:scale-105 transition-all duration-300"
+      className="fixed bottom-4 right-4 z-50 rounded-full w-14 h-14 bg-[#CCFF00] text-black shadow-lg hover:bg-[#CCFF00]/90 hover:shadow-xl hover:scale-105 transition-all duration-300"
       onClick={handleClick}
       aria-label="Get help"
     >
-      <MessageCircle className="w-5 h-5" />
+      <MessageCircle className="w-6 h-6" />
     </Button>
   );
 };

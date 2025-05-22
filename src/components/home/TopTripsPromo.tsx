@@ -9,24 +9,23 @@ const TopTripsPromo = () => {
   }, []);
 
   return (
-    <section className="w-full py-8">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <section className="w-full py-16">
+      <div className="container max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Card - Top Trips 2025 */}
-          <div className="relative h-[300px] overflow-hidden rounded-md">
+          <div className="relative h-[400px] overflow-hidden rounded-lg">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('https://source.unsplash.com/random/800x600/?mountains,lake')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
-              <h3 className="text-xl md:text-2xl font-bold mb-1">Save on Top Trips for 2025</h3>
-              <p className="text-sm mb-4">Up to £200 off Ultimate Trips</p>
+              <h3 className="text-3xl font-bold mb-2">Save on Top Trips for 2025</h3>
+              <p className="text-xl mb-6">Up to £222 off Ultimate Trips</p>
               <Button 
                 variant="secondary" 
-                className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-medium text-xs"
+                className="bg-white text-black hover:bg-white/90 font-medium rounded-full px-6"
                 asChild
-                size="sm"
               >
                 <Link to="/tours?year=2025">BOOK FOR NEXT YEAR</Link>
               </Button>
@@ -34,20 +33,19 @@ const TopTripsPromo = () => {
           </div>
           
           {/* Right Card - Asia */}
-          <div className="relative h-[300px] overflow-hidden rounded-md">
+          <div className="relative h-[400px] overflow-hidden rounded-lg">
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('https://source.unsplash.com/random/800x600/?asia,street')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
-              <h3 className="text-xl md:text-2xl font-bold mb-1">All Aboard Asia</h3>
-              <p className="text-sm mb-4">Explore the Far East</p>
+              <h3 className="text-3xl font-bold mb-2">A is for Asia</h3>
+              <p className="text-xl mb-6">And Y is for "yes please"</p>
               <Button 
                 variant="secondary" 
-                className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-medium text-xs"
+                className="bg-white text-black hover:bg-white/90 font-medium rounded-full px-6"
                 asChild
-                size="sm"
               >
                 <Link to="/tours?region=asia">SHOW ME ASIA</Link>
               </Button>

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Calendar, Edit, Lock, Shield } from 'lucide-react';
+import { Lock, Calendar, Edit, Shield } from 'lucide-react';
 
 const BookWithConfidence = () => {
   useEffect(() => {
@@ -11,44 +11,45 @@ const BookWithConfidence = () => {
 
   const confidenceItems = [
     {
-      icon: <Lock className="h-6 w-6" />,
+      icon: <Lock className="h-8 w-8" />,
       text: "Lock in your spot with a £50 deposit"
     },
     {
-      icon: <Calendar className="h-6 w-6" />,
-      text: "Pay monthly at 0% APR"
+      icon: <Calendar className="h-8 w-8" />,
+      text: "Pay monthly or bi-weekly"
     },
     {
-      icon: <Edit className="h-6 w-6" />,
-      text: "Amend your booking up to 42 days before trip"
+      icon: <Edit className="h-8 w-8" />,
+      text: "Amend your booking up to 60 days pre-trip"
     },
     {
-      icon: <Shield className="h-6 w-6" />,
+      icon: <Shield className="h-8 w-8" />,
       text: "ABTA & ATOL protected"
     }
   ];
 
   return (
-    <section className="w-full bg-[#F5F5F5] py-10">
-      <div className="container">
-        <div className="flex flex-col items-center">
-          <h2 className="text-xl font-bold text-center mb-6">Book with confidence</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 w-full max-w-4xl mx-auto">
-            {confidenceItems.map((item, index) => (
-              <div key={index} className="flex flex-col items-center text-center">
-                <div className="mb-2 text-primary">
-                  {item.icon}
-                </div>
-                <p className="text-xs md:text-sm font-medium">
-                  {item.text}
-                </p>
+    <section className="w-full bg-[#F5FFE0] py-16">
+      <div className="container max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">Book with confidence</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {confidenceItems.map((item, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="mb-4 bg-black rounded-full p-4 text-white">
+                {item.icon}
               </div>
-            ))}
-          </div>
-          
+              <p className="text-lg font-medium">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="flex justify-center">
           <Button 
             variant="default" 
-            className="bg-primary text-white hover:bg-primary/90 font-medium text-sm"
+            className="bg-black text-white hover:bg-black/90 font-medium px-8 py-3 rounded-full text-lg"
             asChild
           >
             <Link to="/book-with-confidence">FIND OUT MORE</Link>
