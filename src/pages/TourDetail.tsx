@@ -1,7 +1,7 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
-import { useTour } from '@/hooks/useTour';
+import { useTour } from '@/hooks/trips/useTour';
 import { trackPageView, trackEvent } from '@/lib/analytics';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -102,7 +102,7 @@ const TourDetail = () => {
       day: 1,
       title: 'Start Athens',
       description: 'Arrive in Athens and meet your fellow travelers.',
-      coordinates: [23.7275, 37.9838]
+      coordinates: [23.7275, 37.9838] as [number, number]
     },
     {
       day: 2,
@@ -110,13 +110,13 @@ const TourDetail = () => {
       description: 'Morning ferry to Mykonos. Afternoon free to explore.',
       from: 'Athens',
       to: 'Mykonos',
-      coordinates: [25.3667, 37.4415]
+      coordinates: [25.3667, 37.4415] as [number, number]
     },
     {
       day: 3,
       title: 'Mykonos',
       description: 'Full day to enjoy the beaches and town of Mykonos.',
-      coordinates: [25.3667, 37.4415]
+      coordinates: [25.3667, 37.4415] as [number, number]
     }
   ];
 
