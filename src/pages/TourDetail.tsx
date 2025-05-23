@@ -74,7 +74,7 @@ const TourDetail = () => {
         <div className="relative h-[50vh] md:h-[60vh]">
           <div className="absolute inset-0 w-full h-full">
             <img 
-              src={tour.images?.[0] || "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"} 
+              src={tour.image || "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"} 
               alt={tour.name} 
               className="w-full h-full object-cover"
             />
@@ -101,7 +101,6 @@ const TourDetail = () => {
           newPrice={tour.price} 
           rating={tour.rating} 
           reviewCount={tour.reviewCount}
-          className="sticky top-16 z-30 bg-white shadow-md"
         />
         
         {/* TabNav */}
