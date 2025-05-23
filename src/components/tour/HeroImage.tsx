@@ -13,48 +13,14 @@ interface HeroImageProps {
 const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [parallaxOffset, setParallaxOffset] = useState(0);
 
-  // Generate a fallback hero image based on the title and subtitle
   const getFallbackImage = () => {
-    // Ensure title and subtitle are strings before using toLowerCase
     const searchTitleTerm = title ? title.toLowerCase().replace(/\s+/g, ',') : 'travel';
     const searchSubtitleTerm = subtitle ? subtitle.toLowerCase().replace(/\s+/g, ',') : '';
     const searchTerms = `${searchTitleTerm},${searchSubtitleTerm}`;
     return `https://source.unsplash.com/random/1920x1080/?travel,${searchTerms}`;
   };
 
-  // Handle parallax effect on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      // Only apply parallax effect on larger screens for performance
-      if (window.innerWidth > 768) {
-        const scrollPosition = window.scrollY;
-        setParallaxOffset(scrollPosition * 0.15);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    console.debug('[ResponsiveQA] HeroImage', { 
-      breakpoint: window.innerWidth <= 640 ? 'mobile' : 
-                 window.innerWidth <= 1024 ? 'tablet' : 'desktop'
-    });
-    
-    console.debug('[A11y] fixed', { 
-      componentName: 'HeroImage', 
-      issue: 'Added proper ARIA labels and roles' 
-    });
-    
-    console.debug('[Perf] optimized', { 
-      componentName: 'HeroImage',
-      changes: 'Added lazy loading and conditional parallax'
-    });
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Preload the image
   useEffect(() => {
     const img = new Image();
     img.src = imageUrl || getFallbackImage();
@@ -62,7 +28,6 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
     img.onerror = () => {
       console.debug('[HeroImage] Error loading primary image, using fallback');
       setImageError(true);
-      // Try loading the fallback
       const fallbackImg = new Image();
       fallbackImg.src = getFallbackImage();
       fallbackImg.onload = () => setIsLoaded(true);
@@ -71,70 +36,85 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
     trackEvent('hero_image_rendered', { title, subtitle });
   }, [imageUrl, title, subtitle]);
 
-  // Guard against undefined props
   if (!title && !subtitle) {
-    return <Skeleton className="h-[40vh] sm:h-[50vh] md:h-[60vh] min-h-[300px] md:min-h-[400px] max-h-[600px] w-full" />;
+    return <Skeleton className="h-[60vh] min-h-[500px] max-h-[700px] w-full" />;
   }
   
   const displayImageUrl = imageError || !imageUrl ? getFallbackImage() : imageUrl;
 
   return (
     <section 
-      className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] min-h-[300px] md:min-h-[400px] max-h-[600px] w-full overflow-hidden"
+      className="relative h-[60vh] min-h-[500px] max-h-[700px] w-full overflow-hidden"
       role="banner"
       aria-label={`${title || 'Tour'} - ${subtitle || 'Destination'}`}
     >
-      {/* Background Image with parallax effect */}
+      {/* Background Image */}
       <div 
         className={cn(
           "absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700",
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105",
-          "transform-gpu transition-transform duration-7000 ease-out" // Subtle zoom effect on hover
+          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
         )}
         style={{ 
-          backgroundImage: `url(${displayImageUrl})`,
-          filter: 'brightness(0.75)',
-          transform: `translateY(${parallaxOffset}px) scale(${1 + parallaxOffset * 0.001})` 
+          backgroundImage: `url(${displayImageUrl})`
         }}
         aria-hidden="true"
       />
       
-      {/* Enhanced gradient overlay with more depth */}
+      {/* Contiki brand gradient overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-500 ease-in-out"
+        className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+        style={{
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, rgba(255,105,0,0.1) 100%)'
+        }}
         aria-hidden="true"
       />
       
-      {/* Content with animation */}
-      <div className="container relative h-full flex items-end pb-6 sm:pb-8 md:pb-12 z-10">
+      {/* Content with Contiki styling */}
+      <div className="container relative h-full flex items-end pb-12 z-10">
         <div className={cn(
-          "text-white max-w-3xl transition-all duration-700 ease-out transform-gpu",
-          isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          "text-white max-w-4xl transition-all duration-700 ease-out transform-gpu",
+          isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         )}>
-          <div className="flex items-center mb-2 md:mb-4 space-x-4">
-            <span className="bg-[#CCFF00] px-3 py-1 sm:px-4 sm:py-2 rounded-full text-black text-xs sm:text-sm font-medium transition-all duration-150 ease-in-out hover:bg-[#CCFF00]/90 hover:scale-105 shadow-lg">
+          {/* Destination badge */}
+          <div className="flex items-center mb-6">
+            <span 
+              className="px-6 py-3 rounded-full text-white text-sm font-bold tracking-wider uppercase shadow-lg"
+              style={{ backgroundColor: '#FF6900' }}
+            >
               {subtitle || 'Explore'}
             </span>
           </div>
           
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 md:mb-4 text-white transition-all duration-300 ease-in-out drop-shadow-lg">
+          {/* Tour title */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-white leading-tight drop-shadow-2xl">
             {title || 'Discover Amazing Places'}
           </h1>
           
-          {/* Optional description line that animates in */}
-          <p className={cn(
-            "text-white/90 max-w-lg text-base md:text-lg transition-all duration-1000 delay-300 transform-gpu",
+          {/* Description */}
+          <div className={cn(
+            "text-white/95 max-w-2xl text-lg md:text-xl leading-relaxed transition-all duration-1000 delay-300 transform-gpu",
             isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
           )}>
-            Unforgettable adventures await with our carefully crafted experiences
-          </p>
+            <p className="mb-4">
+              Experience the adventure of a lifetime with like-minded travelers aged 18-35
+            </p>
+            <p className="text-white/80 text-base">
+              ★ Expert local guides • Small groups • Authentic experiences
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Loading overlay */}
+      {/* Loading overlay with Contiki branding */}
       {!isLoaded && (
         <div className="absolute inset-0 bg-gray-900/80 flex items-center justify-center z-20">
-          <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-t-[#CCFF00] border-gray-200 rounded-full animate-spin"></div>
+          <div className="text-center">
+            <div 
+              className="w-16 h-16 border-4 border-gray-200 rounded-full animate-spin mb-4"
+              style={{ borderTopColor: '#FF6900' }}
+            ></div>
+            <p className="text-white text-sm">Loading your adventure...</p>
+          </div>
         </div>
       )}
     </section>
