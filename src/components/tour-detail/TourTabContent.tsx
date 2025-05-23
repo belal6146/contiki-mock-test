@@ -9,6 +9,7 @@ import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
 import FAQAccordion from '@/components/tour/FAQAccordion';
 import FlexDepositBanner from '@/components/tour/FlexDepositBanner';
+import { trackEvent } from '@/lib/analytics';
 
 interface TourTabContentProps {
   activeTab: string;
@@ -25,7 +26,14 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
       breakpoint: window.innerWidth <= 640 ? 'mobile' : 
                   window.innerWidth <= 1024 ? 'tablet' : 'desktop' 
     });
-  }, [activeTab]);
+    
+    // Track tab view
+    trackEvent('tour_tab_viewed', { 
+      tab: activeTab,
+      tourId: tour.id,
+      tourName: tour.name
+    });
+  }, [activeTab, tour.id, tour.name]);
 
   // Mock data for trip highlights
   const mockHighlights = [
@@ -128,9 +136,11 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
               onRetry={onRetry}
             />
           }>
-            <div>
+            <div className="animate-fade-in">
               <TourDatesTab trip={tour} />
-              <FlexDepositBanner />
+              <div className="mt-12">
+                <FlexDepositBanner />
+              </div>
             </div>
           </ErrorBoundary>
         );
@@ -143,7 +153,9 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
               onRetry={onRetry}
             />
           }>
-            <TourReviewsTab tripId={tour.id} />
+            <div className="animate-fade-in">
+              <TourReviewsTab tripId={tour.id} />
+            </div>
           </ErrorBoundary>
         );
       default:
@@ -153,22 +165,44 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
 
   return (
     <>
+      {/* Banner that appears on all tabs */}
+      <div className="bg-[#F5F8FF] py-4 mb-8 border-b border-gray-200">
+        <div className="container">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-[#FF6900] rounded-full p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-semibold">Travel with Confidence</p>
+                <p className="text-sm text-gray-600">Flexible booking policies & health measures</p>
+              </div>
+            </div>
+            <button className="text-[#FF6900] font-semibold hover:underline">
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+      
       {/* Tab-specific content */}
       {renderTabContent()}
       
       {/* FAQ section - only show for trip tab */}
       {activeTab === 'trip' && (
         <>
-          <div className="bg-white py-8 md:py-12 border-t border-gray-100">
+          <div className="bg-white py-12 border-t border-gray-100">
             <div className="container max-w-7xl">
               <div className="mx-auto max-w-4xl">
-                <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center">Trip FAQs</h2>
+                <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
               </div>
             </div>
           </div>
-          <div className="bg-white">
-            <div className="container max-w-7xl pb-8 md:pb-16">
-              <div className="mx-auto">
+          <div className="bg-white pb-16">
+            <div className="container max-w-7xl">
+              <div className="mx-auto max-w-4xl">
                 <FAQAccordion 
                   tripFAQs={mockTripFAQs} 
                   generalFAQs={mockGeneralFAQs} 
@@ -178,6 +212,26 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
           </div>
         </>
       )}
+      
+      {/* Chat with us section - show on all tabs */}
+      <div className="bg-[#F7F7F7] py-12 border-t border-gray-200">
+        <div className="container">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Still have questions?</h2>
+              <p className="text-gray-600">Our travel experts are here to help you plan your perfect trip.</p>
+            </div>
+            <div className="flex gap-4">
+              <button className="bg-[#FF6900] text-white px-6 py-3 rounded-full hover:bg-[#E55F00] transition-colors font-semibold">
+                Chat with Us
+              </button>
+              <button className="border border-gray-300 bg-white text-gray-800 px-6 py-3 rounded-full hover:bg-gray-50 transition-colors font-semibold">
+                Call Us
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

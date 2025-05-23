@@ -70,6 +70,28 @@ const TourDetail = () => {
         <TourDetailHead trip={tour} slug={slug} />
         <Header />
         
+        {/* Hero Banner */}
+        <div className="relative h-[50vh] md:h-[60vh]">
+          <div className="absolute inset-0 w-full h-full">
+            <img 
+              src={tour.images?.[0] || "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"} 
+              alt={tour.name} 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60"></div>
+          </div>
+          <div className="container relative z-10 h-full flex flex-col justify-end pb-8">
+            <div className="text-white max-w-2xl">
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-4 uppercase text-shadow-lg">
+                {tour.name}
+              </h1>
+              <p className="text-lg md:text-xl opacity-90">
+                {tour.description && tour.description.slice(0, 120)}...
+              </p>
+            </div>
+          </div>
+        </div>
+        
         {/* Tour Header with Breadcrumb and Rating */}
         <TourHeader tour={tour} slug={slug} />
         
@@ -79,13 +101,17 @@ const TourDetail = () => {
           newPrice={tour.price} 
           rating={tour.rating} 
           reviewCount={tour.reviewCount}
+          className="sticky top-16 z-30 bg-white shadow-md"
         />
         
         {/* TabNav */}
         <TabNav 
           tabs={tabs} 
           activeTab={activeTab} 
-          onChange={(tabId) => setActiveTab(tabId)}
+          onChange={(tabId) => {
+            setActiveTab(tabId);
+            trackEvent('tab_changed', { component: 'TourDetail', tab: tabId });
+          }}
         >
           <TourTabContent 
             activeTab={activeTab}
@@ -96,6 +122,19 @@ const TourDetail = () => {
         
         {/* ChatNow Button */}
         <ChatNowButton />
+        
+        {/* Booking Bar */}
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg py-3 px-4 md:hidden">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-500">From</p>
+              <p className="text-xl font-bold text-[#FF6900]">${tour.price}</p>
+            </div>
+            <button className="bg-[#FF6900] text-white font-bold py-2 px-6 rounded-full hover:bg-[#FF6900]/90 transition-colors">
+              BOOK NOW
+            </button>
+          </div>
+        </div>
         
         <Footer />
         <BackToTopButton />

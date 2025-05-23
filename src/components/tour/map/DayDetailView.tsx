@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, ChevronUp, ChevronDown, Utensils, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -64,6 +64,12 @@ const DayDetailView: React.FC<DayDetailViewProps> = ({
           <div className="flex-1">
             <h4 className="font-semibold text-lg mb-2">{day.from || day.title}</h4>
             <p className="text-gray-700 text-sm leading-relaxed">{day.description}</p>
+            
+            {day.to && (
+              <div className="flex items-center gap-2 mt-3 text-sm text-gray-600">
+                <span className="font-medium">Full day to enjoy the beaches and town of {day.to}</span>
+              </div>
+            )}
           </div>
           <div className="w-64 h-40 bg-gray-200 rounded-lg overflow-hidden">
             <img
