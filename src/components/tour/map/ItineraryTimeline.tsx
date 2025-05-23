@@ -37,49 +37,60 @@ const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
 
   return (
     <div className="relative mb-8">
-      {/* Day indicators */}
-      <div className="flex justify-between items-center relative mb-8">
-        {/* Line connecting all days */}
-        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-300 -z-10" />
+      {/* Main timeline container */}
+      <div className="relative">
+        {/* Background line */}
+        <div className="absolute top-6 left-0 w-full h-0.5 bg-gray-300 z-0" />
         
-        {/* Day dots */}
-        <div className="flex justify-between w-full relative z-0">
-          {processedItinerary.map((day, index) => (
-            <button
-              key={index}
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors duration-150 ${
-                index <= activeDay 
-                  ? 'bg-accent text-black' 
-                  : 'bg-white border border-gray-300 text-gray-600'
-              }`}
-              onClick={() => onDayClick(index)}
-              aria-label={`Day ${day.day}`}
-              aria-current={index === activeDay ? 'step' : undefined}
-            >
-              {day.day}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      {/* Location indicators */}
-      <div className="flex overflow-x-auto hide-scrollbar pb-6 scrollbar-hide">
-        {processedItinerary.map((day, index) => (
-          <div
-            key={index}
-            className={`min-w-[180px] ${
-              index < processedItinerary.length - 1 ? 'border-r border-gray-300' : ''
-            } px-4 first:pl-0 last:border-0`}
-          >
-            <div className="font-medium text-sm mb-1">
-              {day.from}
-              {day.to && day.to !== day.from && (
-                <span className="mx-1">-</span>
-              )}
-              {day.to && day.to !== day.from && day.to}
-            </div>
+        {/* Day markers and labels */}
+        <div className="relative z-10">
+          {/* Day circles */}
+          <div className="flex justify-between items-center mb-6">
+            {processedItinerary.map((day, index) => (
+              <button
+                key={index}
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200 border-2 ${
+                  index === activeDay 
+                    ? 'bg-[#CCFF00] border-black text-black shadow-lg scale-110' 
+                    : index < activeDay
+                    ? 'bg-gray-800 border-gray-800 text-white'
+                    : 'bg-white border-gray-300 text-gray-600 hover:border-gray-400'
+                }`}
+                onClick={() => onDayClick(index)}
+                aria-label={`Day ${day.day}: ${day.title}`}
+                aria-current={index === activeDay ? 'step' : undefined}
+              >
+                {day.day}
+              </button>
+            ))}
           </div>
-        ))}
+          
+          {/* Location labels */}
+          <div className="flex justify-between">
+            {processedItinerary.map((day, index) => (
+              <div
+                key={index}
+                className="text-center max-w-[120px] px-2"
+              >
+                <div className={`text-xs font-medium transition-colors duration-200 ${
+                  index === activeDay 
+                    ? 'text-black font-bold' 
+                    : 'text-gray-600'
+                }`}>
+                  {day.title.includes(' to ') ? (
+                    <div className="flex flex-col">
+                      <span>{day.from}</span>
+                      <span className="text-gray-400">to</span>
+                      <span>{day.to}</span>
+                    </div>
+                  ) : (
+                    <span>{day.from}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -109,9 +109,18 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
     <div className="bg-white">
       {/* Hero Section with Trip Description */}
       <div className="container py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left side - Image */}
+          <div className="lg:col-span-1">
+            <img 
+              src="/lovable-uploads/5e0100cf-7b75-4182-a99a-02030aca7240.png"
+              alt="Greek islands tour - couple walking in Mykonos"
+              className="w-full h-[400px] object-cover rounded-lg"
+            />
+          </div>
+          
+          {/* Right side - Content */}
+          <div className="lg:col-span-1">
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <span className="bg-black text-white px-3 py-1 text-sm font-bold rounded">
@@ -127,19 +136,76 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
                 </div>
               </div>
               
-              <h1 className="text-3xl font-bold text-black mb-4">
+              <h1 className="text-2xl lg:text-3xl font-bold text-black mb-4">
                 The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.
               </h1>
               
-              <p className="text-gray-700 leading-relaxed mb-6">
+              {/* Trip Details Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                {/* Days */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">📅</span>
+                    <span className="font-bold text-sm">Days</span>
+                  </div>
+                  <p className="text-sm text-gray-700">11 days, 1 country</p>
+                </div>
+                
+                {/* Accommodation */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">🏨</span>
+                    <span className="font-bold text-sm">Accommodation</span>
+                  </div>
+                  <p className="text-sm text-gray-700">8 nights in Hotels, 2 nights in Special Stay</p>
+                </div>
+                
+                {/* Meals */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">🍽️</span>
+                    <span className="font-bold text-sm">Meals</span>
+                  </div>
+                  <p className="text-sm text-gray-700">10 Breakfasts, 3 Dinners</p>
+                </div>
+                
+                {/* Transport */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">🚢</span>
+                    <span className="font-bold text-sm">Transport</span>
+                  </div>
+                  <p className="text-sm text-gray-700">Ferry</p>
+                </div>
+                
+                {/* Group Size */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">👥</span>
+                    <span className="font-bold text-sm">Group Size</span>
+                  </div>
+                  <p className="text-sm text-gray-700">Average 30 people</p>
+                </div>
+                
+                {/* Team */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">👨‍💼</span>
+                    <span className="font-bold text-sm">Team</span>
+                  </div>
+                  <p className="text-sm text-gray-700">Expert Trip Manager, Local Guides</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 leading-relaxed mb-6 text-sm">
                 Embark on a Greek island hopping adventure, bouncing between Greece's major islands, where the nightlife's as endless as the architecture. You'll immerse yourself in Greece's wonderful city, sun, and sumptuous culture. Villages, volcanos, castles for days and enough grapes come to put glowing hearts in your eyes. By day you'll have ample time for exploring, and by night you'll sleep like a baby in accommodation that's specially selected for island hopping.
               </p>
               
               {/* On the road to Net Zero Banner */}
-              <div className="bg-lime-400 text-black p-4 rounded-lg flex items-center justify-between mb-8">
+              <div className="bg-[#CCFF00] text-black p-4 rounded-lg flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-black text-lime-400 w-8 h-8 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-bold">○</span>
+                  <div className="bg-black text-[#CCFF00] w-8 h-8 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold">🌱</span>
                   </div>
                   <span className="font-bold">On the road to Net Zero</span>
                 </div>
@@ -149,11 +215,14 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
               </div>
             </div>
           </div>
-          
-          {/* Right Sidebar */}
-          <div className="lg:col-span-1">
-            <TourDetailsGrid trip={trip} />
-          </div>
+        </div>
+      </div>
+      
+      {/* Selected Variation Section */}
+      <div className="bg-gray-50 py-8">
+        <div className="container">
+          <h2 className="text-xl font-bold mb-4">Selected Variation</h2>
+          {/* This would show the selected trip variation */}
         </div>
       </div>
       
