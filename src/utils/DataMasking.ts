@@ -44,3 +44,13 @@ export const maskLocation = (location: string): string => {
   
   return location;
 };
+
+/**
+ * Masks email to show only domain
+ */
+export const maskEmail = (email: string): string => {
+  if (!email) return '';
+  
+  const [, domain] = email.split('@');
+  return `***@${domain}`;
+};

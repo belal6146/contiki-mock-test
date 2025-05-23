@@ -18,7 +18,6 @@ import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
 import TourHeader from '@/components/tour-detail/TourHeader';
 import TourTabContent from '@/components/tour-detail/TourTabContent';
-import TripDetailAccordion from '@/components/tour/TripDetailAccordion';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -94,11 +93,6 @@ const TourDetail = () => {
             onRetry={handleRetry}
           />
         </TabNav>
-        
-        {/* Trip Detail Accordion with Travelers and Bus Seating */}
-        <div className="container max-w-7xl py-8">
-          <TripDetailAccordion />
-        </div>
         
         {/* ChatNow Button */}
         <ChatNowButton />
