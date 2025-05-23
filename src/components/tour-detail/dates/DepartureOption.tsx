@@ -1,10 +1,13 @@
 
 import React from 'react';
-import { ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { ChevronDown, ChevronUp, Info, Users, Bus } from 'lucide-react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import PriceBreakdown from './PriceBreakdown';
 import TripTimeline from './TripTimeline';
+import TravelersInfo, { BookingPassenger } from '../../tour/TravelersInfo';
+import BusSeatMap from '../../tour/BusSeatMap';
 
 // Export the interface that utils.ts is trying to import
 export interface DepartureOptionData {
@@ -52,6 +55,7 @@ interface DepartureOptionProps {
   onBookByPhone: (optionId: string) => void;
   onRequestInfo: (optionId: string) => void;
   tripTypeLabels: Record<string, string>;
+  passengers: BookingPassenger[];
 }
 
 const DepartureOption: React.FC<DepartureOptionProps> = ({
@@ -62,8 +66,12 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   onVariantSelect,
   onBookByPhone,
   onRequestInfo,
-  tripTypeLabels
+  tripTypeLabels,
+  passengers
 }) => {
+  const [travelersOpen, setTravelersOpen] = React.useState(false);
+  const [seatingOpen, setSeatingOpen] = React.useState(false);
+  
   const handleToggle = () => {
     onToggle(option.id);
   };
@@ -213,6 +221,46 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                   startDate={new Date(option.startDate)}
                   endDate={new Date(option.endDate)}
                 />
+              </div>
+
+              {/* See Who's Travelling Section */}
+              <div className="mt-8">
+                <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
+                  <div className="border border-gray-200 rounded-lg overflow-hidden">
+                    <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Users className="mr-3 h-5 w-5 text-gray-600" />
+                          <span className="font-medium text-gray-900">See Who's Travelling</span>
+                        </div>
+                        {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
+                      </div>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <TravelersInfo passengers={passengers} />
+                    </CollapsibleContent>
+                  </div>
+                </Collapsible>
+              </div>
+
+              {/* Bus Seating Plan Section */}
+              <div className="mt-4">
+                <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
+                  <div className="border border-gray-200 rounded-lg overflow-hidden">
+                    <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Bus className="mr-3 h-5 w-5 text-gray-600" />
+                          <span className="font-medium text-gray-900">Bus Seating Plan</span>
+                        </div>
+                        {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
+                      </div>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <BusSeatMap passengers={passengers} />
+                    </CollapsibleContent>
+                  </div>
+                </Collapsible>
               </div>
             </div>
             

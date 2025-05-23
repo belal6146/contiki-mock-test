@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Trip } from '@/types/trip';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -10,11 +11,9 @@ import {
   getTripTypeLabel,
   generateDepartureOptions
 } from './dates';
-import { Grid, List, Users, Bus, ChevronDown, ChevronUp } from 'lucide-react';
+import { Grid, List } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import TravelersInfo, { BookingPassenger } from '../tour/TravelersInfo';
-import BusSeatMap from '../tour/BusSeatMap';
+import { BookingPassenger } from '../tour/TravelersInfo';
 import { ConsentManagerProvider } from '@/context/ConsentManager';
 
 interface TourDatesTabProps {
@@ -54,8 +53,6 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [selectedYear, setSelectedYear] = useState<string>('2025');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [travelersOpen, setTravelersOpen] = useState(false);
-  const [seatingOpen, setSeatingOpen] = useState(false);
   
   // Generate departure options
   const options = generateDepartureOptions(trip);
@@ -205,47 +202,9 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                   onBookByPhone={handleBookByPhone}
                   onRequestInfo={handleRequestInfo}
                   tripTypeLabels={tripTypeLabels}
+                  passengers={mockBookingData}
                 />
               ))}
-            </div>
-
-            {/* Travelers and Seating Information */}
-            <div className="space-y-4 mb-8">
-              {/* See Who's Travelling */}
-              <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
-                  <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Users className="mr-3 h-5 w-5 text-gray-600" />
-                        <span className="font-medium text-gray-900">See Who's Travelling</span>
-                      </div>
-                      {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                    </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <TravelersInfo passengers={mockBookingData} />
-                  </CollapsibleContent>
-                </div>
-              </Collapsible>
-
-              {/* Bus Seating Plan */}
-              <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
-                  <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Bus className="mr-3 h-5 w-5 text-gray-600" />
-                        <span className="font-medium text-gray-900">Bus Seating Plan</span>
-                      </div>
-                      {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                    </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <BusSeatMap passengers={mockBookingData} />
-                  </CollapsibleContent>
-                </div>
-              </Collapsible>
             </div>
 
             {/* Load More Button */}
