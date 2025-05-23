@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -10,7 +11,8 @@ import BookWithConfidence from '@/components/home/BookWithConfidence';
 import TopTripsPromo from '@/components/home/TopTripsPromo';
 import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
 import LogosCarousel from '@/components/home/LogosCarousel';
-import SixTwoCTA from '@/components/home/SixTwoCTA';
+import AsSeenIn from '@/components/home/AsSeenIn';
+import SixTwoMap from '@/components/home/SixTwoMap';
 import BackToTopButton from '@/components/BackToTopButton';
 import HelpButton from '@/components/home/HelpButton';
 import Footer from '@/components/Footer';
@@ -75,10 +77,13 @@ const Index = () => {
         </ErrorBoundary>
         
         <ErrorBoundary>
+          <AsSeenIn />
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
           <Testimonials />
         </ErrorBoundary>
         
-        {/* New sections added below Testimonials */}
         <ErrorBoundary>
           <PayOverTime />
         </ErrorBoundary>
@@ -100,7 +105,7 @@ const Index = () => {
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <SixTwoCTA />
+          <SixTwoMap />
         </ErrorBoundary>
       </main>
       

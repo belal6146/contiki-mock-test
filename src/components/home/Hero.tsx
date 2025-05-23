@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Search, Users, ChevronRight } from 'lucide-react';
@@ -9,9 +10,6 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 
-// High-quality travel image for young adventurers
-const heroImageUrl = "https://source.unsplash.com/featured/1920x1080/?youth,travel,adventure,landscape,backpacking,europe";
-
 const Hero = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
@@ -19,6 +17,9 @@ const Hero = () => {
   const [travelers, setTravelers] = useState<number>(1);
   const [isLoaded, setIsLoaded] = useState(false);
   const [parallaxOffset, setParallaxOffset] = useState(0);
+
+  // Use a reliable Unsplash image URL
+  const heroImageUrl = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
 
   useEffect(() => {
     console.debug('[Hero] mounted');
@@ -33,6 +34,7 @@ const Hero = () => {
     };
     img.onerror = () => {
       setIsLoaded(true);
+      console.debug('[Hero] image failed to load, using fallback');
       trackEvent('hero_image_loaded', { status: 'error' });
     };
     
@@ -64,10 +66,7 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Background Image with parallax */}
       <div 
-        className={cn(
-          "absolute inset-0 w-full h-full bg-cover bg-center z-0 transition-all duration-1000",
-          isLoaded ? "opacity-100" : "opacity-0"
-        )}
+        className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ 
           backgroundImage: `url(${heroImageUrl})`,
           transform: `translateY(${parallaxOffset}px) scale(${1 + parallaxOffset * 0.0005})` 

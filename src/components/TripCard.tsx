@@ -32,6 +32,7 @@ const TripCard = ({
   slug = ''
 }: TripCardProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     console.debug('[TripCard] mounted', { id });
@@ -42,31 +43,25 @@ const TripCard = ({
     trackEvent('trip_card_click', { id, title, region });
   };
 
-  // Enhanced image selection with better travel photography
+  // Generate reliable Unsplash image based on region/title
   const getCardImage = () => {
     if (image && !image.includes('placeholder')) {
       return image;
     }
     
-    // Create more specific search terms based on region and title
-    const searchTerms = [];
+    // Use reliable Unsplash image URLs with specific IDs
+    const imageMap: { [key: string]: string } = {
+      'europe': 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      'asia': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      'america': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      'default': 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+    };
     
-    // Add region-specific terms
-    if (region.toLowerCase().includes('europe')) {
-      searchTerms.push('europe', 'backpacking', 'cities');
-    } else if (region.toLowerCase().includes('asia')) {
-      searchTerms.push('asia', 'temple', 'culture');
-    } else if (region.toLowerCase().includes('america')) {
-      searchTerms.push('america', 'adventure', 'landscape');
-    } else {
-      searchTerms.push(region.toLowerCase().replace(/\s+/g, ''));
-    }
+    const regionKey = region.toLowerCase().includes('europe') ? 'europe' :
+                     region.toLowerCase().includes('asia') ? 'asia' :
+                     region.toLowerCase().includes('america') ? 'america' : 'default';
     
-    // Add travel-related terms
-    searchTerms.push('travel', 'adventure', 'young');
-    
-    const searchQuery = searchTerms.join(',');
-    return `https://source.unsplash.com/featured/600x400/?${searchQuery}&sig=${id}`;
+    return imageMap[regionKey];
   };
 
   const imageUrl = getCardImage();
@@ -80,6 +75,8 @@ const TripCard = ({
       console.debug('[TripCard] imageLoaded', { id });
     };
     img.onerror = () => {
+      console.debug('[TripCard] image failed to load', { id, imageUrl });
+      setImageError(true);
       setIsImageLoaded(true);
     };
   }, [imageUrl, id]);
@@ -88,17 +85,18 @@ const TripCard = ({
     <Link to={linkUrl} onClick={handleClick} className="block group">
       <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
         {/* Card Image with enhanced loading */}
-        <div className="relative h-48 overflow-hidden">
-          <div 
-            className={`w-full h-full bg-cover bg-center transition-all duration-700 transform group-hover:scale-110 ${
-              isImageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{ backgroundImage: `url(${imageUrl})` }}
-          />
-          
-          {/* Loading placeholder */}
-          {!isImageLoaded && (
-            <div className="absolute inset-0 bg-gray-300 animate-pulse" />
+        <div className="relative h-48 overflow-hidden bg-gray-200">
+          {isImageLoaded && !imageError ? (
+            <img 
+              src={imageUrl}
+              alt={`${title} tour in ${region}`}
+              className="w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
+              <span className="text-gray-600 text-sm">Loading...</span>
+            </div>
           )}
           
           {/* Image overlay for better text readability */}

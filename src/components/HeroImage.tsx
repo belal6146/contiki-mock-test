@@ -15,20 +15,22 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   const [imageError, setImageError] = useState(false);
 
   const getFallbackImage = () => {
+    // Use reliable Unsplash image with proper parameters
     const searchTerm = title ? title.toLowerCase().replace(/\s+/g, ',') : 'travel';
     const subtitleTerm = subtitle ? subtitle.toLowerCase().replace(/\s+/g, ',') : '';
     const combinedTerms = [searchTerm, subtitleTerm, 'adventure', 'landscape', 'destination']
       .filter(Boolean)
       .join(',');
     
-    return `https://source.unsplash.com/featured/1600x900/?${combinedTerms}`;
+    return `https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=900&q=80`;
   };
 
   useEffect(() => {
     console.debug('[HeroImage] mounted', { imageUrl, title });
     
+    const targetUrl = imageUrl || getFallbackImage();
     const img = new Image();
-    img.src = imageUrl || getFallbackImage();
+    img.src = targetUrl;
     img.onload = () => {
       setIsLoaded(true);
       console.debug('[HeroImage] imageLoaded');
@@ -57,14 +59,14 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
       aria-label={`Hero image: ${title}`}
     >
       {/* Background image */}
-      <div 
+      <img 
+        src={displayImageUrl}
+        alt={title}
         className={cn(
-          "absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 transform",
+          "absolute inset-0 w-full h-full object-cover transition-all duration-1000 transform",
           isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
         )}
-        style={{ 
-          backgroundImage: `url(${displayImageUrl})`
-        }}
+        loading="lazy"
       />
       
       {/* Enhanced gradient overlay */}
