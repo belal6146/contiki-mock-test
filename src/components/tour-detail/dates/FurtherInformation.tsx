@@ -11,17 +11,17 @@ const FurtherInformation: React.FC<FurtherInformationProps> = ({
   additionalNote = "Flights there and back again aren't included."
 }) => {
   return (
-    <div className="mb-8">
-      <h4 className="font-bold text-black mb-4">Further Information</h4>
+    <div className="mb-8 font-montserrat">
+      <h4 className="font-bold text-black mb-4 uppercase tracking-wide">Further Information</h4>
       <div className="flex items-start gap-3 mb-4">
         <div className="bg-yellow-400 text-black rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mt-0.5">
           !
         </div>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 font-medium leading-relaxed">
           {information}
         </p>
       </div>
-      <p className="text-xs italic text-gray-600">
+      <p className="text-xs italic text-gray-600 font-medium">
         {additionalNote}
       </p>
     </div>

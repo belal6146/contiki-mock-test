@@ -20,12 +20,12 @@ const CollapsibleSection: React.FC<CollapsibleSectionProps> = ({
 }) => {
   return (
     <Collapsible open={isOpen} onOpenChange={onToggle}>
-      <div className="border border-gray-200 rounded-lg overflow-hidden">
+      <div className="border border-gray-200 rounded-lg overflow-hidden font-montserrat">
         <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Icon className="mr-3 h-5 w-5 text-black" />
-              <span className="font-medium text-gray-900">{title}</span>
+              <span className="font-bold text-gray-900 uppercase tracking-wide">{title}</span>
             </div>
             {isOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
           </div>

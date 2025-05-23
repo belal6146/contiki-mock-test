@@ -24,16 +24,16 @@ const OptionVariantSelector: React.FC<OptionVariantSelectorProps> = ({
   if (variants.length === 0) return null;
   
   return (
-    <div className="mb-8">
-      <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
+    <div className="mb-8 font-montserrat">
+      <h3 className="text-lg font-bold text-black mb-4 uppercase tracking-wide">Choose Variation</h3>
       <div className="space-y-3">
         {variants.map((variant) => (
           <div 
             key={variant.id}
             className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between ${
               selectedVariantId === variant.id 
-                ? 'border-[rgb(204,255,0)] bg-[rgb(204,255,0)/10]' 
-                : 'border-gray-200 hover:border-gray-300 bg-white'
+                ? 'border-[#CCFF00] bg-[#CCFF00]/10 shadow-sm' 
+                : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-sm'
             }`}
             onClick={() => onVariantSelect(variant.id)}
           >
@@ -47,12 +47,12 @@ const OptionVariantSelector: React.FC<OptionVariantSelectorProps> = ({
                   <div className="w-2 h-2 rounded-full bg-white"></div>
                 )}
               </div>
-              <span className="font-semibold text-black uppercase text-sm">
+              <span className="font-bold text-black uppercase text-sm tracking-wide">
                 {variant.name}
               </span>
             </div>
             <div className="text-right">
-              <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1 flex items-center">
+              <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1 flex items-center font-medium">
                 <Info size={12} className="mr-1" />
                 More info
               </button>
