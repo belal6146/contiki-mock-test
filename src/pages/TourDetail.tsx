@@ -18,7 +18,6 @@ import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
 import TourHeader from '@/components/tour-detail/TourHeader';
 import TourTabContent from '@/components/tour-detail/TourTabContent';
-import BookingSidebar from '@/components/tour/BookingSidebar';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -81,11 +80,6 @@ const TourDetail = () => {
           rating={tour.rating} 
           reviewCount={tour.reviewCount}
         />
-        
-        {/* Mobile Booking Bar - shown on small screens only */}
-        <div className="block md:hidden">
-          <BookingBar price={tour.price} slug={slug || ''} />
-        </div>
         
         {/* TabNav */}
         <TabNav 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -33,7 +32,6 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
   const [activeDay, setActiveDay] = useState<number>(0);
   const [viewType, setViewType] = useState<'list' | 'grid'>('list');
   const [isDayExpanded, setIsDayExpanded] = useState<boolean>(false);
-  const [expandAll, setExpandAll] = useState<boolean>(false);
   
   useEffect(() => {
     if (itinerary.length > 0) {
@@ -55,12 +53,6 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
     setIsDayExpanded(!isDayExpanded);
   };
 
-  const handleToggleExpandAll = () => {
-    setExpandAll(!expandAll);
-    // When expandAll changes, also update the current day's expanded state
-    setIsDayExpanded(!expandAll);
-  };
-
   const handlePreviousDay = () => {
     if (activeDay > 0) {
       setActiveDay(activeDay - 1);
@@ -71,11 +63,6 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
     if (activeDay < itinerary.length - 1) {
       setActiveDay(activeDay + 1);
     }
-  };
-
-  const handleDownloadItinerary = () => {
-    console.log('Downloading itinerary...');
-    // Logic to download itinerary would go here
   };
 
   return (
@@ -94,7 +81,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             <div className="flex border border-gray-300 rounded">
               <button
                 onClick={() => setViewType('list')}
-                className={`p-2 ${viewType === 'list' ? 'bg-[#CCFF00]' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'list' ? 'bg-[#FF6900]' : 'bg-white'}`}
                 aria-label="List view"
               >
                 <div className="w-4 h-4 flex flex-col gap-1">
@@ -105,7 +92,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
               </button>
               <button
                 onClick={() => setViewType('grid')}
-                className={`p-2 ${viewType === 'grid' ? 'bg-[#CCFF00]' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'grid' ? 'bg-[#FF6900]' : 'bg-white'}`}
                 aria-label="Grid view"
               >
                 <div className="w-4 h-4 grid grid-cols-2 gap-0.5">
@@ -124,7 +111,6 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
           <Button 
             variant="outline" 
             className="flex items-center space-x-2 text-black font-medium border-black hover:bg-gray-50"
-            onClick={handleDownloadItinerary}
           >
             <span>📥</span>
             <span>DOWNLOAD ITINERARY</span>
@@ -133,9 +119,8 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
           <Button 
             variant="ghost" 
             className="text-gray-600 text-sm font-medium hover:bg-gray-50"
-            onClick={handleToggleExpandAll}
           >
-            {expandAll ? 'COLLAPSE ALL DAYS' : 'EXPAND ALL DAYS'}
+            EXPAND ALL DAYS
           </Button>
         </div>
 
@@ -169,7 +154,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
           {currentDay && (
             <DayDetailView
               day={currentDay}
-              isExpanded={expandAll || isDayExpanded}
+              isExpanded={isDayExpanded}
               onToggle={handleToggleExpand}
               onPrevious={handlePreviousDay}
               onNext={handleNextDay}
