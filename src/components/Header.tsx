@@ -106,7 +106,7 @@ const Header = () => {
           </div>
           
           {/* Desktop Navigation on the right */}
-          <DesktopNav onLinkClick={(label) => handleClick(label)()} />
+          <DesktopNav onLinkClick={handleClick} />
         </div>
         
         {/* Mobile Menu */}
@@ -117,7 +117,7 @@ const Header = () => {
           aboutItems={aboutItems}
           inspiredItems={inspiredItems}
           onLinkClick={(label) => {
-            handleClick(label)();
+            handleClick(label);
             setMobileOpen(false);
           }}
         />
