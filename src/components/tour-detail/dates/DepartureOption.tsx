@@ -94,7 +94,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   const hasDiscount = option.discount && option.discount > 0;
   
   return (
-    <div className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 mb-6 ${isOpen ? 'shadow-lg border-orange-300' : 'hover:border-gray-300'}`}>
+    <div className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 mb-6 ${isOpen ? 'shadow-lg border-[#CCFF00]' : 'hover:border-gray-300'}`}>
       {/* Header row */}
       <div 
         className={`grid grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'bg-gray-50' : ''}`}
@@ -109,9 +109,9 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               <span className="text-gray-700">{option.year}</span>
             </div>
             <div className="mt-3">
-              <button className="flex items-center text-sm text-orange-500 hover:text-orange-600 transition-colors font-medium">
+              <button className="flex items-center text-sm text-black hover:text-gray-700 transition-colors font-medium">
                 <Info size={15} className="mr-1.5" />
-                <span>Trip Details</span>
+                <span>Further information</span>
               </button>
             </div>
           </div>
@@ -131,11 +131,6 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 </div>
               )}
             </div>
-            
-            <div className="text-sm text-gray-600 flex items-center">
-              <span className="font-medium">Duration:</span> 
-              <span className="ml-2">8 days, 7 nights</span>
-            </div>
           </div>
         </div>
         
@@ -143,20 +138,20 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
         <div className="col-span-4 p-5 flex justify-between items-center">
           <div className="flex flex-col">
             {hasDiscount && (
-              <div className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded mb-2 self-start">
+              <div className="inline-block text-red-600 text-xs font-bold mb-2 self-start">
                 LAST MINUTE DEAL
               </div>
             )}
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">From</span>
+              <span className="text-sm text-gray-500">Price</span>
               {option.oldPrice && hasDiscount && (
                 <span className="text-sm line-through text-gray-400">{formatCurrency(option.oldPrice)}</span>
               )}
-              <span className={`font-bold text-xl ${hasDiscount ? 'text-orange-600' : 'text-black'}`}>
+              <span className={`font-bold text-xl ${hasDiscount ? 'text-black' : 'text-black'}`}>
                 {formatCurrency(displayPrice)}
               </span>
               {hasDiscount && (
-                <span className="text-xs font-bold bg-yellow-300 text-yellow-800 px-2 py-0.5 rounded">
+                <span className="text-xs font-bold bg-[#CCFF00] text-black px-2 py-0.5 rounded">
                   {option.discount}% off
                 </span>
               )}
@@ -164,13 +159,9 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
           </div>
           
           <div className="flex items-center gap-3">
-            <button 
-              className={`bg-orange-500 text-white px-6 py-2.5 rounded-md font-bold text-sm hover:bg-orange-600 transition-colors ${isSoldOut ? 'opacity-50 cursor-not-allowed bg-gray-400 hover:bg-gray-400' : ''}`}
-              disabled={isSoldOut}
-              onClick={isSoldOut ? undefined : handleBookNow}
-            >
-              {isSoldOut ? 'SOLD OUT' : 'BOOK NOW'}
-            </button>
+            <div className="bg-[#CCFF00] text-black px-3 py-1 rounded font-bold text-sm">
+              CALL US
+            </div>
             <button className="text-gray-600 hover:text-black transition-colors" onClick={handleToggle}>
               {isOpen ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
             </button>
@@ -186,14 +177,14 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
             <div className="col-span-8">
               {option.variants.length > 0 ? (
                 <div className="space-y-4 mb-8">
-                  <h4 className="font-semibold text-xl text-black mb-4">Choose Room Type</h4>
+                  <h4 className="font-semibold text-xl text-black mb-4">Choose Variation</h4>
                   <div className="space-y-3">
                     {option.variants.map((variant) => (
                       <div 
                         key={variant.id}
                         className={`border rounded-lg p-5 cursor-pointer transition-all ${
                           selectedVariant === variant.id 
-                            ? 'border-orange-400 ring-2 ring-orange-200 bg-orange-50' 
+                            ? 'border-[#CCFF00] ring-2 ring-[#CCFF00]/20 bg-[#CCFF00]/10' 
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                         onClick={() => handleVariantSelect(variant.id)}
@@ -201,34 +192,43 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${
-                              selectedVariant === variant.id ? 'border-orange-500 bg-orange-500' : 'border-gray-300 bg-white'
+                              selectedVariant === variant.id ? 'border-black bg-black' : 'border-gray-300 bg-white'
                             }`}>
                               {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
                             </div>
-                            <span className="font-semibold text-gray-800">{variant.name}</span>
+                            <span className="font-semibold text-black uppercase">{variant.name}</span>
                           </div>
                           <div className="text-right">
-                            <div className="text-sm text-orange-500 font-medium hover:underline">View Details</div>
-                            <div className="font-bold text-lg">{formatCurrency(variant.price)}</div>
+                            <div className="text-sm text-black font-medium hover:underline">More info</div>
+                            <div className="font-bold text-lg">£{variant.price}</div>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              ) : (
-                <div className="text-center py-8 text-gray-600">
-                  No additional options available for this departure date.
-                </div>
-              )}
+              ) : null }
               
               {/* Trip Timeline */}
-              <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h4 className="font-semibold text-xl text-black mb-4">Trip Timeline</h4>
+              <div className="mb-8">
                 <TripTimeline 
                   startDate={new Date(option.startDate)}
                   endDate={new Date(option.endDate)}
                 />
+              </div>
+
+              {/* Additional information */}
+              <div className="mb-5">
+                <div className="font-bold mb-2">Further Information</div>
+                <div className="flex mb-4">
+                  <div className="bg-yellow-400 text-black rounded-full p-1 mr-2 flex-shrink-0 mt-1">
+                    <span className="text-sm">!</span>
+                  </div>
+                  <p className="text-sm text-gray-700">
+                    This trip ends at 10am in Athens. For those participating in the Athens Sightseeing Free Time Add On, the trip will end in Athens at 12pm.
+                  </p>
+                </div>
+                <p className="text-xs italic text-gray-600">Flights there and back again aren't included.</p>
               </div>
 
               {/* See Who's Travelling Section */}
@@ -238,7 +238,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                     <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Users className="mr-3 h-5 w-5 text-orange-500" />
+                          <Users className="mr-3 h-5 w-5 text-black" />
                           <span className="font-medium text-gray-900">See Who's Travelling</span>
                         </div>
                         {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
@@ -258,7 +258,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                     <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Bus className="mr-3 h-5 w-5 text-orange-500" />
+                          <Bus className="mr-3 h-5 w-5 text-black" />
                           <span className="font-medium text-gray-900">Bus Seating Plan</span>
                         </div>
                         {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
@@ -288,22 +288,6 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                   onBookByPhone={() => onBookByPhone(option.id)}
                   onRequestInfo={() => onRequestInfo(option.id)}
                 />
-                
-                <div className="mt-6 bg-black p-6 rounded-lg text-white">
-                  <h4 className="font-bold text-lg mb-3">Need Help?</h4>
-                  <p className="text-gray-300 mb-4">Our travel experts are here to assist you with your booking.</p>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <div className="text-sm text-gray-300">Call us at</div>
-                      <div className="font-bold text-lg">1-866-266-8454</div>
-                    </div>
-                    <img 
-                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=200&auto=format&fit=crop" 
-                      alt="Customer Support" 
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
