@@ -1,8 +1,23 @@
-
 import React from 'react';
 import { ChevronDown, ChevronUp, Info } from 'lucide-react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+// Export the interface that utils.ts is trying to import
+export interface DepartureOptionData {
+  id: string;
+  startDate: Date;
+  endDate: Date;
+  types: string[];
+  basePrice: number;
+  discount: number;
+  dealLabel: string;
+  variants: {
+    id: string;
+    name: string;
+    price: number;
+  }[];
+}
 
 interface OptionVariant {
   id: string;
