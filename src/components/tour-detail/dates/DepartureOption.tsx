@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Info, Users, Bus } from 'lucide-react';
+import { Info, Users, Bus, ChevronUp, ChevronDown } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import PriceBreakdown from './PriceBreakdown';
