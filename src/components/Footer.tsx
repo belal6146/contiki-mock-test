@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Separator } from "@/components/ui/separator";
+import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const Footer = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const Footer = () => {
     <footer className="bg-white text-black border-t border-gray-200">
       {/* Main Footer Content */}
       <div className="container mx-auto max-w-7xl py-12 px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           {/* About Contiki */}
           <div>
@@ -55,8 +56,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter Signup */}
-          <div>
+          {/* Newsletter Signup - Moved to right side */}
+          <div className="lg:col-span-2">
             <h3 className="font-bold text-lg mb-4 text-black">WANT UP TO £125* OFF?</h3>
             <p className="text-sm text-black mb-4">
               Get bigger savings than the rest of time to pay in full when you use the code 
@@ -109,7 +110,7 @@ const Footer = () => {
       <div className="container mx-auto max-w-7xl py-6 px-6">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0">
           
-          {/* Company Logos */}
+          {/* Company Logos - Left side */}
           <div className="flex items-center space-x-6">
             <div className="text-sm text-black">
               <strong>We're part of</strong>
@@ -133,19 +134,19 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Social Media Links */}
+          {/* Social Media Links - Right side */}
           <div className="flex items-center space-x-4">
             <a href="https://facebook.com/contiki" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-              <span className="text-white text-xs">f</span>
+              <Facebook className="w-4 h-4 text-white" />
             </a>
             <a href="https://instagram.com/contiki" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-              <span className="text-white text-xs">ig</span>
+              <Instagram className="w-4 h-4 text-white" />
             </a>
             <a href="https://twitter.com/contiki" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-              <span className="text-white text-xs">tw</span>
+              <Twitter className="w-4 h-4 text-white" />
             </a>
             <a href="https://youtube.com/contiki" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-              <span className="text-white text-xs">yt</span>
+              <Youtube className="w-4 h-4 text-white" />
             </a>
           </div>
         </div>

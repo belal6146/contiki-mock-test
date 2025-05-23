@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Hero from '@/components/home/Hero';
-import SearchBar from '@/components/home/SearchBar';
 import FeaturedTrips from '@/components/home/FeaturedTrips';
 import Testimonials from '@/components/home/Testimonials';
 import PayOverTime from '@/components/home/PayOverTime';
@@ -69,7 +68,6 @@ const Index = () => {
       <main className="flex-grow">
         <ErrorBoundary>
           <Hero />
-          <SearchBar />
         </ErrorBoundary>
         
         <ErrorBoundary>

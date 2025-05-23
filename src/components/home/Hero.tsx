@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, Search, Users, ChevronRight } from 'lucide-react';
+import { MapPin, Search, Calendar, ChevronDown } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from 'date-fns';
@@ -13,13 +14,12 @@ import { trackEvent } from '@/lib/analytics';
 const Hero = () => {
   const navigate = useNavigate();
   const [destination, setDestination] = useState<string>("");
+  const [activity, setActivity] = useState<string>("");
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [travelers, setTravelers] = useState<number>(1);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [parallaxOffset, setParallaxOffset] = useState(0);
 
-  // Use a reliable Unsplash image URL
-  const heroImageUrl = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
+  // Use the uploaded Colosseum image
+  const heroImageUrl = "/lovable-uploads/9b1c8cb6-c1a3-49d5-aa1f-7c7c676e34ae.png";
 
   useEffect(() => {
     console.debug('[Hero] mounted');
@@ -34,92 +34,86 @@ const Hero = () => {
     };
     img.onerror = () => {
       setIsLoaded(true);
-      console.debug('[Hero] image failed to load, using fallback');
+      console.debug('[Hero] image failed to load');
       trackEvent('hero_image_loaded', { status: 'error' });
     };
-    
-    // Parallax effect
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setParallaxOffset(scrollPosition * 0.2);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.debug('[Hero] search', { destination, date, travelers });
-    trackEvent('search_submitted', { destination, date: date ? format(date, 'yyyy-MM-dd') : undefined, travelers });
+    console.debug('[Hero] search', { destination, activity, date });
+    trackEvent('search_submitted', { destination, activity, date: date ? format(date, 'yyyy-MM-dd') : undefined });
     
     // Build query params
     const params = new URLSearchParams();
     if (destination) params.append('destination', destination);
+    if (activity) params.append('activity', activity);
     if (date) params.append('date', format(date, 'yyyy-MM-dd'));
-    params.append('travelers', travelers.toString());
     
     navigate(`/tours?${params.toString()}`);
   };
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero Background Image with parallax */}
+      {/* Hero Background Image */}
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
         style={{ 
           backgroundImage: `url(${heroImageUrl})`,
-          transform: `translateY(${parallaxOffset}px) scale(${1 + parallaxOffset * 0.0005})` 
         }}
         aria-hidden="true"
       />
       
-      {/* Enhanced Gradient Overlay */}
+      {/* Gradient Overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/40 z-10"
+        className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 z-10"
         aria-hidden="true"
       />
 
       {/* Content Container */}
       <div className="container relative z-20 px-6 md:px-8 flex flex-col items-center justify-center">
+        {/* Last Minute Deals Banner */}
         <div className={cn(
           "text-center mb-8 transform transition-all duration-700 ease-out",
           isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         )}>
-          <h1 className="font-bold text-5xl md:text-7xl text-white leading-tight tracking-tight drop-shadow-2xl mb-4">
-            ADVENTURE <span className="text-[#CCFF00]">AWAITS</span>
-          </h1>
-          <p className="font-normal text-lg md:text-2xl text-white/90 mt-4 max-w-2xl mx-auto drop-shadow-lg">
-            Discover the world with like-minded 18-35 year olds
-          </p>
-          
-          <div className="mt-8 animate-bounce">
-            <ChevronRight className="h-8 w-8 text-white/50 rotate-90 mx-auto" />
+          <div className="mb-6">
+            <h1 className="font-black text-6xl md:text-8xl text-white leading-none tracking-tight drop-shadow-2xl mb-2">
+              <span className="block">LAST MINUTE</span>
+              <span className="block text-[#CCFF00] stroke-black" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
+            </h1>
+            <p className="font-semibold text-xl md:text-2xl text-white mt-4 drop-shadow-lg">
+              Save BIG on trips departing soon
+            </p>
           </div>
+          
+          {/* View Deals Button */}
+          <Button 
+            className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-8 py-4 rounded-lg text-lg mb-12 shadow-lg"
+            onClick={() => navigate('/deals')}
+          >
+            VIEW DEALS
+          </Button>
         </div>
 
-        {/* Search Form with enhanced styling */}
+        {/* Search Form */}
         <form 
           onSubmit={handleSubmit}
           className={cn(
-            "bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-2xl max-w-4xl w-full mx-auto transition-all duration-1000 ease-out transform",
+            "bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-2xl max-w-6xl w-full mx-auto transition-all duration-1000 ease-out transform",
             isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95"
           )}
           aria-label="Trip search form"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Destination */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Where do you want to go? */}
             <div className="space-y-2">
-              <label htmlFor="destination" className="text-sm font-medium text-gray-700">
-                Destination
-              </label>
               <div className="relative">
                 <Input
-                  id="destination"
-                  placeholder="Where to?"
+                  placeholder="Where do you want to go?"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full pl-10 transition-all duration-200 focus:ring-[#CCFF00] focus:border-[#CCFF00]"
+                  className="w-full pl-10 h-12 border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent focus:border-red-500 focus:ring-0"
                   type="text"
                   aria-label="Enter destination"
                 />
@@ -127,71 +121,62 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Date */}
+            {/* What do you want to see? */}
             <div className="space-y-2">
-              <label htmlFor="date" className="text-sm font-medium text-gray-700">
-                Date
-              </label>
+              <Select value={activity} onValueChange={setActivity}>
+                <SelectTrigger className="w-full h-12 border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent focus:border-red-500 focus:ring-0">
+                  <SelectValue placeholder="What do you want to see?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="culture">Culture & History</SelectItem>
+                  <SelectItem value="adventure">Adventure</SelectItem>
+                  <SelectItem value="nightlife">Nightlife</SelectItem>
+                  <SelectItem value="nature">Nature</SelectItem>
+                  <SelectItem value="food">Food & Drink</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* When do you want to go? */}
+            <div className="space-y-2">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    id="date"
                     aria-label="Select travel date"
                     className={cn(
-                      "w-full pl-10 text-left font-normal relative transition-all duration-200",
-                      !date && "text-gray-400",
-                      "hover:bg-gray-50 focus:ring-[#CCFF00] focus:border-[#CCFF00]"
+                      "w-full h-12 text-left font-normal relative border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent hover:bg-transparent focus:border-red-500 focus:ring-0",
+                      !date && "text-gray-400"
                     )}
                   >
                     <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    <span className="block truncate">
-                      {date ? format(date, "PPP") : "Select date"}
+                    <span className="block truncate pl-8">
+                      {date ? format(date, "PPP") : "When do you want to go?"}
                     </span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 border-[#CCFF00]/20" align="center">
+                <PopoverContent className="w-auto p-0" align="center">
                   <CalendarComponent
                     mode="single"
                     selected={date}
                     onSelect={setDate}
                     initialFocus
-                    className="p-3 pointer-events-auto"
+                    className="p-3"
                   />
                 </PopoverContent>
               </Popover>
             </div>
 
-            {/* Travelers */}
-            <div className="space-y-2">
-              <label htmlFor="travelers" className="text-sm font-medium text-gray-700">
-                Travelers
-              </label>
-              <div className="relative">
-                <Input
-                  id="travelers"
-                  type="number"
-                  min="1"
-                  max="20"
-                  value={travelers}
-                  onChange={(e) => setTravelers(parseInt(e.target.value) || 1)}
-                  className="w-full pl-10 transition-all duration-200 focus:ring-[#CCFF00] focus:border-[#CCFF00]"
-                  aria-label="Number of travelers"
-                />
-                <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              </div>
+            {/* Search Button */}
+            <div className="flex items-end">
+              <Button 
+                type="submit" 
+                className="w-full bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-3 rounded-lg h-12 transition-all duration-300"
+                aria-label="Search trips"
+              >
+                SEARCH
+              </Button>
             </div>
-          </div>
-
-          <div className="mt-6">
-            <Button 
-              type="submit" 
-              className="w-full bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-medium px-6 py-6 rounded-lg transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg"
-              aria-label="Search trips"
-            >
-              <Search className="mr-2 h-5 w-5" />
-              Search Trips
-            </Button>
           </div>
         </form>
       </div>
