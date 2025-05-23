@@ -29,6 +29,12 @@ Object.defineProperty(window, 'IntersectionObserver', {
   value: IntersectionObserver,
 });
 
+Object.defineProperty(global, 'IntersectionObserver', {
+  writable: true,
+  configurable: true,
+  value: IntersectionObserver,
+});
+
 // Mock Image constructor for tests
 Object.defineProperty(global, 'Image', {
   writable: true,
