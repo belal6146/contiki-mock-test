@@ -64,7 +64,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             <div className="flex border border-gray-300 rounded">
               <button
                 onClick={() => setViewType('list')}
-                className={`p-2 ${viewType === 'list' ? 'bg-gray-200' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'list' ? 'bg-[#FF6900]' : 'bg-white'}`}
                 aria-label="List view"
               >
                 <div className="w-4 h-4 flex flex-col gap-1">
@@ -75,7 +75,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
               </button>
               <button
                 onClick={() => setViewType('grid')}
-                className={`p-2 ${viewType === 'grid' ? 'bg-[#CCFF00]' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'grid' ? 'bg-[#FF6900]' : 'bg-white'}`}
                 aria-label="Grid view"
               >
                 <div className="w-4 h-4 grid grid-cols-2 gap-0.5">
@@ -116,8 +116,8 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
 
         {/* Map and Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          {/* Map Component */}
-          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden">
+          {/* Map Component with updated styling to match Contiki */}
+          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-md">
             {hasCoordinates ? (
               <MapDisplay 
                 itinerary={itinerary.filter((day): day is ItineraryDay => 'coordinates' in day)}
@@ -133,11 +133,13 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             )}
           </div>
 
-          {/* Day Details */}
+          {/* Day Details with Contiki-style coloring */}
           {currentDay && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-bold mb-2">Day {currentDay.day}</h3>
+                <div className="bg-[#FF6900] text-white inline-block px-3 py-1 rounded-md mb-2">
+                  <h3 className="text-xl font-bold">Day {currentDay.day}</h3>
+                </div>
                 <h4 className="text-lg font-semibold mb-3 text-gray-800">{currentDay.title}</h4>
                 <p className="text-gray-700 mb-4">{currentDay.description}</p>
                 
@@ -161,13 +163,13 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
                 )}
               </div>
               
-              {/* Navigation */}
+              {/* Navigation with Contiki orange */}
               <div className="flex justify-between">
                 <Button
                   variant="outline"
                   onClick={() => setActiveDay(Math.max(0, activeDay - 1))}
                   disabled={activeDay === 0}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 hover:bg-[#FF6900]/10"
                 >
                   <span>←</span>
                   Previous Day
@@ -177,7 +179,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
                   variant="outline"
                   onClick={() => setActiveDay(Math.min(itinerary.length - 1, activeDay + 1))}
                   disabled={activeDay === itinerary.length - 1}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 hover:bg-[#FF6900]/10"
                 >
                   Next Day
                   <span>→</span>

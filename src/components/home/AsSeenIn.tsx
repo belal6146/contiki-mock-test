@@ -5,12 +5,33 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const AsSeenIn = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Updated list with actual Contiki partner logos
   const logos = [
-    { name: 'BuzzFeed', src: 'assets/logos/buzzfeed.png', className: 'text-black font-bold text-xl' },
-    { name: 'PinkNews', src: 'assets/logos/pinknews.png', className: 'text-pink-600 font-bold text-xl' },
-    { name: 'Traveler', src: 'assets/logos/traveler.png', className: 'text-black font-serif text-xl italic' },
-    { name: 'UNILAD', src: 'assets/logos/unilad.png', className: 'text-black font-bold text-xl' },
-    { name: 'COSMOPOLITAN', src: 'assets/logos/cosmopolitan.png', className: 'text-black font-bold text-xl tracking-wide' }
+    { 
+      name: 'BuzzFeed', 
+      src: 'https://www.contiki.com/media/voxkq3ue/feefo-lockup.png?height=126&mode=max&width=126', 
+      className: 'text-black font-bold text-xl' 
+    },
+    { 
+      name: 'PinkNews', 
+      src: 'https://www.contiki.com/media/2degaq2e/six-two-logo.svg?height=101&mode=max&width=123', 
+      className: 'text-pink-600 font-bold text-xl' 
+    },
+    { 
+      name: 'Traveler', 
+      src: 'https://www.contiki.com/media/opwmano4/treadright-1.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
+      className: 'text-black font-serif text-xl italic' 
+    },
+    { 
+      name: 'UNILAD', 
+      src: 'https://www.contiki.com/media/z0kkjtoj/ttc-core-logo-white-rgb.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
+      className: 'text-black font-bold text-xl' 
+    },
+    { 
+      name: 'COSMOPOLITAN', 
+      src: 'https://www.contiki.com/media/h2qob34a/unwto-2.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
+      className: 'text-black font-bold text-xl tracking-wide' 
+    }
   ];
 
   useEffect(() => {
@@ -56,7 +77,7 @@ const AsSeenIn = () => {
             <div className="flex items-center justify-center space-x-8 min-w-0 flex-1">
               {getVisibleLogos().map((logo, index) => (
                 <React.Fragment key={`${logo.name}-${index}`}>
-                  <div className="flex-shrink-0 flex items-center justify-center min-w-0">
+                  <div className="flex-shrink-0 flex items-center justify-center min-w-0 h-12">
                     {logo.src ? (
                       <img 
                         src={logo.src} 
@@ -70,7 +91,7 @@ const AsSeenIn = () => {
                     )}
                   </div>
                   {index < 4 && (
-                    <div className="w-px h-8 bg-red-500 flex-shrink-0" />
+                    <div className="w-px h-8 bg-[#FF6900] flex-shrink-0" />
                   )}
                 </React.Fragment>
               ))}
@@ -91,7 +112,7 @@ const AsSeenIn = () => {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-gray-800' : 'bg-gray-300'
+                  index === currentIndex ? 'bg-[#FF6900]' : 'bg-gray-300'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

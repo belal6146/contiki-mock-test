@@ -110,11 +110,11 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
       {/* Hero Section with Trip Description */}
       <div className="container py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left side - Image */}
+          {/* Left side - Image from Contiki */}
           <div className="lg:col-span-1">
             <img 
-              src="/lovable-uploads/5e0100cf-7b75-4182-a99a-02030aca7240.png"
-              alt="Greek islands tour - couple walking in Mykonos"
+              src="https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720"
+              alt="Greek islands tour - group of people in blue lake surrounded by mountains"
               className="w-full h-[400px] object-cover rounded-lg"
             />
           </div>
@@ -127,7 +127,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
                   I'm planning to travel in
                 </span>
                 <div className="flex bg-gray-100 rounded overflow-hidden">
-                  <button className="bg-black text-white px-4 py-1 text-sm font-bold">
+                  <button className="bg-[#FF6900] text-white px-4 py-1 text-sm font-bold">
                     2025
                   </button>
                   <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200">
@@ -201,15 +201,15 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
                 Embark on a Greek island hopping adventure, bouncing between Greece's major islands, where the nightlife's as endless as the architecture. You'll immerse yourself in Greece's wonderful city, sun, and sumptuous culture. Villages, volcanos, castles for days and enough grapes come to put glowing hearts in your eyes. By day you'll have ample time for exploring, and by night you'll sleep like a baby in accommodation that's specially selected for island hopping.
               </p>
               
-              {/* On the road to Net Zero Banner */}
-              <div className="bg-[#CCFF00] text-black p-4 rounded-lg flex items-center justify-between mb-6">
+              {/* On the road to Net Zero Banner - using Contiki orange instead of lime */}
+              <div className="bg-[#FF6900] text-white p-4 rounded-lg flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-black text-[#CCFF00] w-8 h-8 rounded-full flex items-center justify-center">
+                  <div className="bg-white text-[#FF6900] w-8 h-8 rounded-full flex items-center justify-center">
                     <span className="text-sm font-bold">🌱</span>
                   </div>
                   <span className="font-bold">On the road to Net Zero</span>
                 </div>
-                <button className="text-black underline font-semibold text-sm">
+                <button className="text-white underline font-semibold text-sm">
                   Find out more
                 </button>
               </div>
@@ -223,6 +223,23 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
         <div className="container">
           <h2 className="text-xl font-bold mb-4">Selected Variation</h2>
           {/* This would show the selected trip variation */}
+          <div className="flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+            <img 
+              src="https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720" 
+              alt="Group of travelers on bikes" 
+              className="w-full md:w-1/3 h-48 object-cover rounded-lg"
+            />
+            <div className="flex-1">
+              <h3 className="text-lg font-bold mb-2">Greek Island Hopping Plus</h3>
+              <p className="text-gray-600 mb-4">Our most popular variation with premium accommodations and additional experiences.</p>
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-bold text-[#FF6900]">From $1,899</span>
+                <button className="bg-[#FF6900] text-white px-4 py-2 rounded hover:bg-[#FF6900]/90 transition-colors">
+                  Select
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -232,13 +249,61 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
       {/* Map & Itinerary */}
       <MapItinerary itinerary={mockItinerary} />
       
-      {/* Trip Highlights */}
-      <TripHighlights highlights={highlights} />
+      {/* Trip Highlights with Contiki image */}
+      <div className="bg-gray-50 py-12">
+        <div className="container">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold">Trip Highlights</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <div className="flex flex-col space-y-6">
+                {highlights.slice(0, 3).map((highlight, index) => (
+                  <div key={index} className="flex gap-4">
+                    <span className="text-2xl">✨</span>
+                    <div>
+                      <h3 className="font-semibold mb-2">{highlight.title || 'Authentic Local Experiences'}</h3>
+                      <p className="text-gray-600 text-sm">{highlight.description || 'Immerse yourself in the local culture with unique experiences curated by our expert guides.'}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <img
+              src="https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920"
+              alt="The Colosseum, Rome"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
       
-      {/* Where You Will Stay */}
-      <WhereYouWillStay accommodation={accommodation} />
+      {/* Where You Will Stay with Contiki image */}
+      <div className="bg-white py-12 border-t border-gray-200">
+        <div className="container">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8">Where You Will Stay</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+              <img
+                src="https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"
+                alt="Dubrovnik, Croatia"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="font-bold text-lg mb-2">Premium Hotels</h3>
+                <p className="text-gray-600 text-sm">Comfortable and centrally located accommodations to make your stay memorable.</p>
+              </div>
+            </div>
+            
+            {/* Additional accommodation cards would go here */}
+          </div>
+        </div>
+      </div>
       
-      {/* Social Media Gallery */}
+      {/* Social Media Gallery using Contiki images */}
       <SocialMediaGallery />
       
       {/* Related Trips */}

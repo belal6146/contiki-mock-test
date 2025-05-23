@@ -18,8 +18,8 @@ const Hero = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Use the uploaded hero image
-  const heroImageUrl = "/lovable-uploads/cfabc9ea-e3e5-4e31-b5f1-bc5dc8c9e5ea.png";
+  // Using Contiki's actual hero image
+  const heroImageUrl = "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920";
 
   useEffect(() => {
     console.debug('[Hero] mounted');
@@ -80,7 +80,7 @@ const Hero = () => {
           <div className="mb-6">
             <h1 className="font-black text-6xl md:text-8xl text-white leading-none tracking-tight drop-shadow-2xl mb-2">
               <span className="block text-white" style={{ WebkitTextStroke: '2px black' }}>LAST MINUTE</span>
-              <span className="block text-[#CCFF00]" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
+              <span className="block text-[#FF6900]" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
             </h1>
             <p className="font-semibold text-xl md:text-2xl text-white mt-4 drop-shadow-lg">
               Save BIG on trips departing soon
@@ -89,7 +89,7 @@ const Hero = () => {
           
           {/* View Deals Button */}
           <Button 
-            className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-8 py-4 rounded-lg text-lg mb-12 shadow-lg"
+            className="bg-[#FF6900] text-white hover:bg-[#FF6900]/90 font-bold px-8 py-4 rounded-lg text-lg mb-12 shadow-lg"
             onClick={() => navigate('/deals')}
           >
             VIEW DEALS
@@ -167,11 +167,11 @@ const Hero = () => {
               </Popover>
             </div>
 
-            {/* Search Button */}
+            {/* Search Button - changed to Contiki orange */}
             <div className="flex items-end">
               <Button 
                 type="submit" 
-                className="w-full bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-3 rounded-lg h-12 transition-all duration-300"
+                className="w-full bg-[#FF6900] text-white hover:bg-[#FF6900]/90 font-bold px-6 py-3 rounded-lg h-12 transition-all duration-300"
                 aria-label="Search trips"
               >
                 SEARCH
@@ -184,7 +184,7 @@ const Hero = () => {
       {/* Loading indicator */}
       {!isLoaded && (
         <div className="absolute inset-0 z-30 flex items-center justify-center bg-black">
-          <div className="w-16 h-16 border-4 border-t-[#CCFF00] border-gray-700 rounded-full animate-spin"></div>
+          <div className="w-16 h-16 border-4 border-t-[#FF6900] border-gray-700 rounded-full animate-spin"></div>
         </div>
       )}
     </section>
