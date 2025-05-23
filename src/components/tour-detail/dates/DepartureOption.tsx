@@ -94,49 +94,56 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   const hasDiscount = option.discount && option.discount > 0;
   
   return (
-    <div className={`border border-gray-200 rounded-md overflow-hidden transition-all duration-200 ${isOpen ? 'border-gray-400 shadow-md' : 'hover:border-gray-300'}`}>
+    <div className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 mb-6 ${isOpen ? 'shadow-lg border-orange-300' : 'hover:border-gray-300'}`}>
       {/* Header row */}
       <div 
         className={`grid grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'bg-gray-50' : ''}`}
         onClick={handleToggle}
       >
         {/* Date info */}
-        <div className="col-span-3 p-4 border-r border-gray-200">
+        <div className="col-span-3 p-5 border-r border-gray-200">
           <div className="flex flex-col">
             <span className="text-sm text-gray-600 font-medium">{option.dayOfWeek}</span>
             <div className="flex gap-1 items-baseline mt-1">
-              <span className="font-bold text-lg text-black">{option.month} {option.day},</span>
+              <span className="font-bold text-xl text-black">{option.month} {option.day},</span>
               <span className="text-gray-700">{option.year}</span>
             </div>
-            <div className="mt-2">
-              <button className="flex items-center text-sm text-gray-600 hover:text-black transition-colors">
-                <Info size={14} className="mr-1" />
-                <span>Further Information</span>
+            <div className="mt-3">
+              <button className="flex items-center text-sm text-orange-500 hover:text-orange-600 transition-colors font-medium">
+                <Info size={15} className="mr-1.5" />
+                <span>Trip Details</span>
               </button>
             </div>
           </div>
         </div>
         
         {/* Type & Trip Info */}
-        <div className="col-span-5 p-4 border-r border-gray-200 flex items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-gray-100 px-3 py-1 text-sm font-semibold rounded-full text-gray-800">
-              {tripTypeLabels[option.type] || option.type}
+        <div className="col-span-5 p-5 border-r border-gray-200 flex items-center">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3">
+              <div className="bg-gray-100 px-4 py-1.5 text-sm font-semibold rounded-full text-gray-800">
+                {tripTypeLabels[option.type] || option.type}
+              </div>
+              
+              {option.variants.length > 0 && (
+                <div className="text-sm text-gray-600">
+                  + {option.variants.length} other option{option.variants.length > 1 ? 's' : ''}
+                </div>
+              )}
             </div>
             
-            {option.variants.length > 0 && (
-              <div className="text-sm text-gray-600">
-                + {option.variants.length} other{option.variants.length > 1 ? 's' : ''}
-              </div>
-            )}
+            <div className="text-sm text-gray-600 flex items-center">
+              <span className="font-medium">Duration:</span> 
+              <span className="ml-2">8 days, 7 nights</span>
+            </div>
           </div>
         </div>
         
         {/* Price & Action */}
-        <div className="col-span-4 p-4 flex justify-between items-center">
+        <div className="col-span-4 p-5 flex justify-between items-center">
           <div className="flex flex-col">
             {hasDiscount && (
-              <div className="inline-block bg-yellow-200 text-yellow-800 text-xs font-bold px-2 py-1 rounded mb-2 self-start">
+              <div className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded mb-2 self-start">
                 LAST MINUTE DEAL
               </div>
             )}
@@ -145,11 +152,11 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               {option.oldPrice && hasDiscount && (
                 <span className="text-sm line-through text-gray-400">{formatCurrency(option.oldPrice)}</span>
               )}
-              <span className={`font-bold text-lg ${hasDiscount ? 'text-orange-600' : 'text-black'}`}>
+              <span className={`font-bold text-xl ${hasDiscount ? 'text-orange-600' : 'text-black'}`}>
                 {formatCurrency(displayPrice)}
               </span>
               {hasDiscount && (
-                <span className="text-xs font-bold bg-yellow-300 text-yellow-800 px-2 py-1 rounded">
+                <span className="text-xs font-bold bg-yellow-300 text-yellow-800 px-2 py-0.5 rounded">
                   {option.discount}% off
                 </span>
               )}
@@ -158,14 +165,14 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
           
           <div className="flex items-center gap-3">
             <button 
-              className={`bg-lime-400 text-black px-6 py-2 rounded font-bold text-sm hover:bg-lime-500 transition-colors ${isSoldOut ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-orange-500 text-white px-6 py-2.5 rounded-md font-bold text-sm hover:bg-orange-600 transition-colors ${isSoldOut ? 'opacity-50 cursor-not-allowed bg-gray-400 hover:bg-gray-400' : ''}`}
               disabled={isSoldOut}
               onClick={isSoldOut ? undefined : handleBookNow}
             >
-              {isSoldOut ? 'SOLD OUT' : 'BOOK BY PHONE'}
+              {isSoldOut ? 'SOLD OUT' : 'BOOK NOW'}
             </button>
             <button className="text-gray-600 hover:text-black transition-colors" onClick={handleToggle}>
-              {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              {isOpen ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
             </button>
           </div>
         </div>
@@ -174,19 +181,19 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
       {/* Expanded content */}
       {isOpen && (
         <div className="bg-white border-t border-gray-200">
-          <div className="grid grid-cols-12 gap-6 p-6">
+          <div className="grid grid-cols-12 gap-6 p-8">
             {/* Left side - Variant selection and trip details */}
             <div className="col-span-8">
               {option.variants.length > 0 ? (
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-lg text-black mb-4">Choose Variation</h4>
+                <div className="space-y-4 mb-8">
+                  <h4 className="font-semibold text-xl text-black mb-4">Choose Room Type</h4>
                   <div className="space-y-3">
                     {option.variants.map((variant) => (
                       <div 
                         key={variant.id}
-                        className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                        className={`border rounded-lg p-5 cursor-pointer transition-all ${
                           selectedVariant === variant.id 
-                            ? 'border-black ring-2 ring-black ring-opacity-20 bg-gray-50' 
+                            ? 'border-orange-400 ring-2 ring-orange-200 bg-orange-50' 
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                         onClick={() => handleVariantSelect(variant.id)}
@@ -194,14 +201,14 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${
-                              selectedVariant === variant.id ? 'border-black bg-black' : 'border-gray-300 bg-white'
+                              selectedVariant === variant.id ? 'border-orange-500 bg-orange-500' : 'border-gray-300 bg-white'
                             }`}>
                               {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
                             </div>
-                            <span className="font-semibold text-black">{variant.name}</span>
+                            <span className="font-semibold text-gray-800">{variant.name}</span>
                           </div>
                           <div className="text-right">
-                            <div className="text-sm text-gray-500">More Info</div>
+                            <div className="text-sm text-orange-500 font-medium hover:underline">View Details</div>
                             <div className="font-bold text-lg">{formatCurrency(variant.price)}</div>
                           </div>
                         </div>
@@ -216,7 +223,8 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               )}
               
               {/* Trip Timeline */}
-              <div className="mt-8">
+              <div className="mb-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h4 className="font-semibold text-xl text-black mb-4">Trip Timeline</h4>
                 <TripTimeline 
                   startDate={new Date(option.startDate)}
                   endDate={new Date(option.endDate)}
@@ -224,13 +232,13 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               </div>
 
               {/* See Who's Travelling Section */}
-              <div className="mt-8">
+              <div className="mb-4">
                 <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
                   <div className="border border-gray-200 rounded-lg overflow-hidden">
                     <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Users className="mr-3 h-5 w-5 text-gray-600" />
+                          <Users className="mr-3 h-5 w-5 text-orange-500" />
                           <span className="font-medium text-gray-900">See Who's Travelling</span>
                         </div>
                         {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
@@ -244,20 +252,26 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               </div>
 
               {/* Bus Seating Plan Section */}
-              <div className="mt-4">
+              <div className="mb-4">
                 <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
                   <div className="border border-gray-200 rounded-lg overflow-hidden">
                     <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                          <Bus className="mr-3 h-5 w-5 text-gray-600" />
+                          <Bus className="mr-3 h-5 w-5 text-orange-500" />
                           <span className="font-medium text-gray-900">Bus Seating Plan</span>
                         </div>
                         {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
                       </div>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                      <BusSeatMap passengers={passengers} />
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-4">
+                          <h4 className="font-semibold text-lg">Choose Your Seat</h4>
+                          <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
+                        </div>
+                        <BusSeatMap passengers={passengers} />
+                      </div>
                     </CollapsibleContent>
                   </div>
                 </Collapsible>
@@ -266,13 +280,31 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
             
             {/* Right side - Price breakdown */}
             <div className="col-span-4">
-              <PriceBreakdown
-                basePrice={displayPrice}
-                discount={option.discount || 0}
-                dealLabel={hasDiscount ? "Last minute deal" : undefined}
-                onBookByPhone={() => onBookByPhone(option.id)}
-                onRequestInfo={() => onRequestInfo(option.id)}
-              />
+              <div className="sticky top-4">
+                <PriceBreakdown
+                  basePrice={displayPrice}
+                  discount={option.discount || 0}
+                  dealLabel={hasDiscount ? "Last minute deal" : undefined}
+                  onBookByPhone={() => onBookByPhone(option.id)}
+                  onRequestInfo={() => onRequestInfo(option.id)}
+                />
+                
+                <div className="mt-6 bg-black p-6 rounded-lg text-white">
+                  <h4 className="font-bold text-lg mb-3">Need Help?</h4>
+                  <p className="text-gray-300 mb-4">Our travel experts are here to assist you with your booking.</p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <div className="text-sm text-gray-300">Call us at</div>
+                      <div className="font-bold text-lg">1-866-266-8454</div>
+                    </div>
+                    <img 
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=200&auto=format&fit=crop" 
+                      alt="Customer Support" 
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

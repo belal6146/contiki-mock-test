@@ -15,12 +15,12 @@ interface TripTypeFilterProps {
 
 const TripTypeFilter: React.FC<TripTypeFilterProps> = ({ types, selectedTypes, onTypeToggle }) => {
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
-      <span className="text-sm font-medium self-center mr-2">Trip Type:</span>
+    <div className="flex flex-wrap items-center gap-2 mb-4">
+      <span className="text-sm font-medium text-gray-700 mr-2">Trip Type:</span>
       {types.map(type => (
         <button
           key={type.id}
-          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
             selectedTypes.includes(type.id)
               ? `bg-${type.color} text-black border border-${type.color}`
               : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'

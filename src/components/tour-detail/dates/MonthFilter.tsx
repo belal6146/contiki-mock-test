@@ -9,15 +9,15 @@ interface MonthFilterProps {
 
 const MonthFilter: React.FC<MonthFilterProps> = ({ months, selectedMonth, onMonthChange }) => {
   return (
-    <div className="mb-6 w-full overflow-x-auto">
-      <div className="flex gap-1 min-w-max">
+    <div className="mb-8 w-full overflow-x-auto">
+      <div className="flex justify-center gap-2 min-w-max">
         {months.map(month => (
           <button
             key={month.id}
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
               selectedMonth === month.id
-                ? 'bg-[#CCFF00] text-black'
-                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                ? 'bg-[#CCFF00] text-black shadow-md'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
             onClick={() => onMonthChange(month.id)}
           >
