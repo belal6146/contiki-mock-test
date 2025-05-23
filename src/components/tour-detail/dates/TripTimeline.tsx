@@ -8,6 +8,12 @@ interface TimelineProps {
 }
 
 const TripTimeline: React.FC<TimelineProps> = ({ startDate, endDate }) => {
+  // Format the dates nicely
+  const formatDay = (date: Date) => format(date, 'd');
+  const formatMonth = (date: Date) => format(date, 'MMM').toUpperCase();
+  const formatWeekday = (date: Date) => format(date, 'EEEE');
+  const formatTime = (date: Date) => format(date, 'HH:mm');
+  
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold text-black mb-4">TRIP START</h3>
@@ -23,11 +29,11 @@ const TripTimeline: React.FC<TimelineProps> = ({ startDate, endDate }) => {
           </div>
           <div className="flex-1">
             <div className="text-4xl font-bold">
-              23
+              {formatDay(startDate)}
             </div>
-            <div className="uppercase text-sm font-bold">MAY</div>
+            <div className="uppercase text-sm font-bold">{formatMonth(startDate)}</div>
             <div className="text-gray-600">
-              Friday, 18:00 (Local Time)<br />
+              {formatWeekday(startDate)}, {formatTime(startDate)} (Local Time)<br />
               Athens, Greece
             </div>
           </div>
@@ -41,11 +47,11 @@ const TripTimeline: React.FC<TimelineProps> = ({ startDate, endDate }) => {
           </div>
           <div className="flex-1">
             <div className="text-4xl font-bold">
-              2
+              {formatDay(endDate)}
             </div>
-            <div className="uppercase text-sm font-bold">JUN</div>
+            <div className="uppercase text-sm font-bold">{formatMonth(endDate)}</div>
             <div className="text-gray-600">
-              Monday, 12:00 (Local Time)<br />
+              {formatWeekday(endDate)}, {formatTime(endDate)} (Local Time)<br />
               Athens, Greece
             </div>
           </div>

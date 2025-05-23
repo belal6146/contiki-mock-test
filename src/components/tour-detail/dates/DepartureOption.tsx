@@ -1,13 +1,15 @@
 
 import React from 'react';
-import { ChevronDown, ChevronUp, Info, Users, Bus } from 'lucide-react';
-import { formatCurrency, formatDate } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Info, Users, Bus } from 'lucide-react';
+import { formatCurrency } from '@/lib/utils';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import PriceBreakdown from './PriceBreakdown';
 import TripTimeline from './TripTimeline';
 import TravelersInfo, { BookingPassenger } from '../../tour/TravelersInfo';
 import BusSeatMap from '../../tour/BusSeatMap';
+import OptionVariantSelector from './OptionVariantSelector';
+import FurtherInformation from './FurtherInformation';
+import CollapsibleSection from './CollapsibleSection';
 
 export interface DepartureOptionData {
   id: string;
@@ -179,45 +181,11 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
             <div className="col-span-8 p-6 border-r border-gray-100">
               {/* Choose Variation Section - moved to top */}
               {option.variants.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
-                  <div className="space-y-3">
-                    {option.variants.map((variant) => (
-                      <div 
-                        key={variant.id}
-                        className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between ${
-                          selectedVariant === variant.id 
-                            ? 'border-[rgb(204,255,0)] bg-[rgb(204,255,0)/10]' 
-                            : 'border-gray-200 hover:border-gray-300 bg-white'
-                        }`}
-                        onClick={() => handleVariantSelect(variant.id)}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                            selectedVariant === variant.id 
-                              ? 'border-black bg-black' 
-                              : 'border-gray-300 bg-white'
-                          }`}>
-                            {selectedVariant === variant.id && (
-                              <div className="w-2 h-2 rounded-full bg-white"></div>
-                            )}
-                          </div>
-                          <span className="font-semibold text-black uppercase text-sm">
-                            {variant.name}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1">
-                            More info
-                          </button>
-                          <div className="font-bold text-lg text-black">
-                            {formatCurrency(variant.price)}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <OptionVariantSelector 
+                  variants={option.variants}
+                  selectedVariantId={selectedVariant || ''}
+                  onVariantSelect={handleVariantSelect}
+                />
               )}
               
               {/* Trip Timeline Section */}
@@ -229,20 +197,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
               </div>
               
               {/* Further Information Section */}
-              <div className="mb-8">
-                <h4 className="font-bold text-black mb-4">Further Information</h4>
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="bg-yellow-400 text-black rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mt-0.5">
-                    !
-                  </div>
-                  <p className="text-sm text-gray-700">
-                    This trip ends at 10am in Athens. For those participating in the Athens Sightseeing Free Time Add On, the trip will end in Athens at 12pm.
-                  </p>
-                </div>
-                <p className="text-xs italic text-gray-600">
-                  Flights there and back again aren't included.
-                </p>
-              </div>
+              <FurtherInformation />
             </div>
             
             {/* Right side - Price Breakdown Card */}
@@ -261,48 +216,32 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
           <div className="p-6 border-t border-gray-100">
             {/* See Who's Travelling Section */}
             <div className="mb-4">
-              <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
-                  <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Users className="mr-3 h-5 w-5 text-black" />
-                        <span className="font-medium text-gray-900">See Who's Travelling</span>
-                      </div>
-                      {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                    </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <TravelersInfo passengers={passengers} />
-                  </CollapsibleContent>
-                </div>
-              </Collapsible>
+              <CollapsibleSection 
+                title="See Who's Travelling" 
+                icon={Users}
+                isOpen={travelersOpen}
+                onToggle={setTravelersOpen}
+              >
+                <TravelersInfo passengers={passengers} />
+              </CollapsibleSection>
             </div>
 
             {/* Bus Seating Plan Section */}
             <div className="mb-4">
-              <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
-                  <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Bus className="mr-3 h-5 w-5 text-black" />
-                        <span className="font-medium text-gray-900">Bus Seating Plan</span>
-                      </div>
-                      {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                    </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="font-semibold text-lg">Choose Your Seat</h4>
-                        <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
-                      </div>
-                      <BusSeatMap passengers={passengers} />
-                    </div>
-                  </CollapsibleContent>
+              <CollapsibleSection 
+                title="Bus Seating Plan" 
+                icon={Bus}
+                isOpen={seatingOpen}
+                onToggle={setSeatingOpen}
+              >
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-semibold text-lg">Choose Your Seat</h4>
+                    <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
+                  </div>
+                  <BusSeatMap passengers={passengers} />
                 </div>
-              </Collapsible>
+              </CollapsibleSection>
             </div>
           </div>
         </div>
