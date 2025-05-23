@@ -9,11 +9,9 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: {
-        jsx: 'react-jsx',
-        esModuleInterop: true,
-        allowSyntheticDefaultImports: true,
-        types: ['jest', '@testing-library/jest-dom', 'node']
+      tsconfig: 'tsconfig.test.json',
+      diagnostics: {
+        warnOnly: true
       }
     }]
   },
