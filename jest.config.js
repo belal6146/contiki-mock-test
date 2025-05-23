@@ -1,11 +1,11 @@
 
 module.exports = {
-  preset: 'ts-jest',
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+  ],
   testEnvironment: 'jsdom',
-  moduleNameMapping: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
-  },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
@@ -15,17 +15,16 @@ module.exports = {
       }
     }]
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  collectCoverage: true,
-  collectCoverageFrom: [
-    'src/components/**/*.{ts,tsx}',
-    '!src/components/**/*.d.ts',
-    '!src/components/**/*.test.{ts,tsx}'
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.css$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/src/__mocks__/fileMock.js'
+  },
+  testPathIgnorePatterns: [
+    '/node_modules/',
   ],
-  coverageReporters: ['text', 'lcov', 'html'],
-  testMatch: [
-    '**/__tests__/**/*.{ts,tsx}',
-    '**/?(*.)+(test|spec).{ts,tsx}'
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
   ],
-  verbose: true
 };

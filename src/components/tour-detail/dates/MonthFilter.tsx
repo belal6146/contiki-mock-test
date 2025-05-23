@@ -1,37 +1,27 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-
-interface MonthOption {
-  code: string;
-  active: boolean;
-}
 
 interface MonthFilterProps {
-  months: MonthOption[];
+  months: { id: string; label: string; }[];
   selectedMonth: string;
   onMonthChange: (month: string) => void;
 }
 
 const MonthFilter: React.FC<MonthFilterProps> = ({ months, selectedMonth, onMonthChange }) => {
   return (
-    <div className="mb-6">
-      <div className="flex flex-wrap gap-2 justify-center">
-        {months.map((month) => (
+    <div className="mb-6 w-full overflow-x-auto">
+      <div className="flex gap-1 min-w-max">
+        {months.map(month => (
           <button
-            key={month.code}
-            disabled={!month.active}
-            onClick={() => month.active && onMonthChange(month.code)}
-            className={cn(
-              "h-10 px-4 py-2 rounded-full text-sm font-medium tracking-wide",
-              month.active && selectedMonth === month.code 
-                ? "bg-accent text-black" 
-                : month.active 
-                  ? "bg-white border border-gray-200 hover:bg-gray-50" 
-                  : "bg-gray-100 text-gray-300 cursor-not-allowed"
-            )}
+            key={month.id}
+            className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
+              selectedMonth === month.id
+                ? 'bg-[#CCFF00] text-black'
+                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+            }`}
+            onClick={() => onMonthChange(month.id)}
           >
-            {month.code}
+            {month.label}
           </button>
         ))}
       </div>

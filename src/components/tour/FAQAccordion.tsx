@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { 
   Accordion,
@@ -45,17 +45,20 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
         {/* General FAQs */}
         {generalFAQs && generalFAQs.length > 0 && (
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">General FAQs</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center relative">
+              General FAQs
+              <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 h-1 w-16 bg-red-500"></span>
+            </h2>
             
-            <div className="bg-green-50 rounded-lg p-4 md:p-6">
+            <div className="bg-green-50 rounded-lg">
               <Accordion type="single" collapsible className="w-full">
                 {generalFAQs.map((faq, index) => (
-                  <AccordionItem key={`general-faq-${index}`} value={`item-${index}`} className="border-b border-green-100 py-1">
-                    <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-2 focus:ring-accent rounded-md px-1">
+                  <AccordionItem key={`general-faq-${index}`} value={`item-${index}`} className="border-b border-green-100">
+                    <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-4 py-3 text-left">
                       <h3 className="text-base md:text-lg font-medium text-left pr-8">{faq.question}</h3>
                     </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-gray-600 pt-2">{faq.answer}</p>
+                    <AccordionContent className="px-4 pb-4">
+                      <p className="text-gray-600">{faq.answer}</p>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -71,12 +74,12 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
             
             <Accordion type="single" collapsible className="w-full">
               {tripFAQs.map((faq, index) => (
-                <AccordionItem key={`trip-faq-${index}`} value={`trip-item-${index}`} className="border-b border-gray-200 py-1">
-                  <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-2 focus:ring-accent rounded-md px-1">
+                <AccordionItem key={`trip-faq-${index}`} value={`trip-item-${index}`} className="border-b border-gray-200">
+                  <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-4 py-3 text-left">
                     <h3 className="text-base md:text-lg font-medium text-left pr-8">{faq.question}</h3>
                   </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="text-gray-600 pt-2">{faq.answer}</p>
+                  <AccordionContent className="px-4 pb-4">
+                    <p className="text-gray-600">{faq.answer}</p>
                   </AccordionContent>
                 </AccordionItem>
               ))}

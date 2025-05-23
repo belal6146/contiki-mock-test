@@ -1,29 +1,32 @@
 
 import React from 'react';
-import { format } from 'date-fns';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { formatCurrency, formatDate } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-import VariantSelector, { VariantOption } from './VariantSelector';
-import TripTimeline from './TripTimeline';
-import PriceBreakdown from './PriceBreakdown';
-
-export interface DepartureOptionData {
+interface OptionVariant {
   id: string;
-  startDate: Date;
-  endDate: Date;
-  types: string[];
-  basePrice: number;
-  discount: number;
-  dealLabel: string;
-  variants: VariantOption[];
+  name: string;
+  price: number;
+  availability: 'available' | 'limited' | 'soldOut';
 }
 
 interface DepartureOptionProps {
-  option: DepartureOptionData;
+  option: {
+    id: string;
+    startDate: string;
+    endDate: string;
+    dayOfWeek: string;
+    day: number;
+    month: string;
+    year: number;
+    price: number;
+    oldPrice?: number;
+    discount?: number;
+    availability: 'available' | 'limited' | 'soldOut';
+    variants: OptionVariant[];
+    type: string;
+  };
   isOpen: boolean;
   selectedVariant: string | null;
   onToggle: (id: string) => void;
@@ -43,116 +46,176 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   onRequestInfo,
   tripTypeLabels
 }) => {
+  const handleToggle = () => {
+    onToggle(option.id);
+  };
+  
+  const handleVariantSelect = (variantId: string) => {
+    onVariantSelect(option.id, variantId);
+  };
+
+  const handleBookNow = () => {
+    if (option.availability === 'soldOut') return;
+    onBookByPhone(option.id);
+  };
+
+  const isSoldOut = option.availability === 'soldOut';
+  const variant = selectedVariant 
+    ? option.variants.find(v => v.id === selectedVariant) 
+    : option.variants[0];
+
+  const displayPrice = variant?.price || option.price;
+  const hasDiscount = option.discount && option.discount > 0;
+  
   return (
-    <Collapsible
-      key={option.id}
-      open={isOpen}
-      onOpenChange={() => onToggle(option.id)}
-      className="border rounded-md overflow-hidden"
-    >
-      <CollapsibleTrigger className="w-full">
-        <div className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-white hover:bg-gray-50">
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 text-left">
-            <div>
-              <div className="font-bold">
-                {format(option.startDate, 'EEEE')} {format(option.startDate, 'MMM d, yyyy')}
-              </div>
-              <div className="text-sm text-gray-500">
-                Depart
-              </div>
+    <div className={`border rounded-md overflow-hidden ${isOpen ? 'border-black' : 'border-gray-200 hover:border-gray-300'} transition-colors`}>
+      {/* Header row */}
+      <div 
+        className={`grid grid-cols-3 md:grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'shadow-md' : ''}`}
+        onClick={handleToggle}
+      >
+        {/* Date info */}
+        <div className="col-span-1 md:col-span-3 p-4 border-r border-gray-200">
+          <div className="flex flex-col">
+            <span className="text-sm text-gray-500">{option.dayOfWeek}</span>
+            <div className="flex gap-1 items-baseline">
+              <span className="font-bold text-lg">{option.month} {option.day},</span>
+              <span>{option.year}</span>
+            </div>
+            <div className="hidden md:block mt-1">
+              <button className="flex items-center text-sm text-gray-600 hover:text-black">
+                <Info size={14} className="mr-1" />
+                <span>Further Information</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Type & Trip Info */}
+        <div className="col-span-1 md:col-span-5 p-4 border-r border-gray-200 flex items-center">
+          <div className="flex items-center gap-2">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-medium rounded">
+              {tripTypeLabels[option.type] || option.type}
             </div>
             
-            <div>
-              <div className="font-bold">
-                {format(option.endDate, 'EEEE')} {format(option.endDate, 'MMM d, yyyy')}
+            {option.variants.length > 0 && (
+              <div className="text-sm text-gray-700">
+                + {option.variants.length} other{option.variants.length > 1 ? 's' : ''}
               </div>
-              <div className="text-sm text-gray-500">
-                Return
+            )}
+          </div>
+        </div>
+        
+        {/* Price & Action */}
+        <div className="col-span-1 md:col-span-4 p-4 flex flex-col md:flex-row justify-between items-center">
+          <div>
+            {hasDiscount && (
+              <div className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded mb-1">
+                LAST MINUTE DEAL
               </div>
-            </div>
-            
-            <div className="flex items-center gap-1">
-              {option.types.slice(0, 1).map(type => (
-                <Badge 
-                  key={type}
-                  variant={type === 'plus' ? 'default' : 'outline'}
-                  className={type === 'plus' ? 'bg-gray-100 text-black hover:bg-gray-100' : ''}
-                >
-                  {tripTypeLabels[type] || type}
-                </Badge>
-              ))}
-              
-              {option.types.length > 1 && (
-                <span className="text-xs text-gray-500">
-                  +{option.types.length - 1} other
+            )}
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm text-gray-500">Price</span>
+              {option.oldPrice && hasDiscount && (
+                <span className="text-sm line-through text-gray-400">{formatCurrency(option.oldPrice)}</span>
+              )}
+              <span className={`font-bold ${hasDiscount ? 'text-red-600' : ''}`}>
+                {formatCurrency(displayPrice)}
+              </span>
+              {hasDiscount && (
+                <span className="text-xs font-bold bg-yellow-400 text-black px-1 py-0.5 rounded">
+                  {option.discount}% off
                 </span>
               )}
             </div>
           </div>
           
-          <div className="flex items-center justify-between mt-2 md:mt-0">
-            <Button 
-              variant="secondary" 
-              className="flex items-center gap-1 ml-auto"
-              onClick={(e) => {
-                e.stopPropagation();
-                onBookByPhone(option.id);
-              }}
+          <div className="flex items-center mt-2 md:mt-0">
+            <button 
+              className={`text-black bg-[#CCFF00] px-4 py-1 rounded text-sm font-bold hover:bg-[#b8e600] ${isSoldOut ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={isSoldOut}
+              onClick={isSoldOut ? undefined : handleBookNow}
             >
-              CALL US £{option.basePrice}
-            </Button>
-            
-            <div className="ml-4">
+              CALL US
+            </button>
+            <button className="ml-2" onClick={handleToggle}>
               {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-            </div>
+            </button>
           </div>
         </div>
-      </CollapsibleTrigger>
+      </div>
       
-      <CollapsibleContent>
-        <Card className="border-t-0 rounded-t-none m-4 shadow-md">
-          <CardContent className="p-0">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6">
-              {/* Left Column - Variants & Timeline */}
-              <div className="lg:col-span-7">
-                {/* Variant Selector */}
-                <VariantSelector 
-                  variants={option.variants} 
-                  selectedVariantId={selectedVariant || option.variants[0].id}
-                  onSelectVariant={(variantId) => onVariantSelect(option.id, variantId)}
-                />
-                
-                {/* Itinerary Timeline */}
-                <TripTimeline
-                  startDate={option.startDate}
-                  endDate={option.endDate}
-                />
-                
-                {/* Further Information */}
-                <div className="bg-blue-50 border-l-4 border-blue-400 rounded-md p-4">
-                  <h4 className="text-sm font-medium text-blue-800">Further Information</h4>
-                  <p className="text-sm text-blue-700 leading-relaxed">
-                    The meeting point for this trip is at the designated hotel at 18:00.
-                    Make sure to arrive with enough time to check in and get settled.
-                  </p>
-                </div>
-              </div>
-              
-              {/* Right Column - Price Breakdown */}
-              <div className="lg:col-span-5">
-                <PriceBreakdown 
-                  basePrice={option.basePrice}
-                  discount={option.discount}
-                  dealLabel={option.dealLabel}
-                  onBookByPhone={() => onBookByPhone(option.id)}
-                  onRequestInfo={() => onRequestInfo(option.id)}
-                />
+      {/* Expanded content */}
+      {isOpen && (
+        <div className="bg-gray-50 p-4 border-t border-gray-200">
+          {option.variants.length > 0 ? (
+            <div className="space-y-4">
+              <h4 className="font-medium text-sm">Select your option:</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {option.variants.map((variant) => (
+                  <div 
+                    key={variant.id}
+                    className={`border rounded p-3 cursor-pointer transition-all ${
+                      selectedVariant === variant.id 
+                        ? 'border-black ring-2 ring-black ring-opacity-10' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                    onClick={() => handleVariantSelect(variant.id)}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-medium">{variant.name}</span>
+                      <div className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
+                        selectedVariant === variant.id ? 'bg-black border-black' : 'bg-white'
+                      }`}>
+                        {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-sm text-gray-500">From</span>
+                        <div className="font-bold">{formatCurrency(variant.price)}</div>
+                      </div>
+                      <div className="flex items-center">
+                        <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
+                          variant.availability === 'available' ? 'bg-green-500' :
+                          variant.availability === 'limited' ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}></span>
+                        <span className="text-xs font-medium">
+                          {variant.availability === 'available' ? 'Available' :
+                           variant.availability === 'limited' ? 'Limited' : 'Sold Out'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </CardContent>
-        </Card>
-      </CollapsibleContent>
-    </Collapsible>
+          ) : (
+            <div className="text-center py-4 text-gray-600">
+              No additional options available for this departure date.
+            </div>
+          )}
+          
+          <div className="mt-6 flex justify-end gap-4">
+            <button 
+              className="px-4 py-2 border border-gray-300 text-gray-800 rounded hover:bg-gray-50"
+              onClick={() => onRequestInfo(option.id)}
+            >
+              Request Info
+            </button>
+            <button 
+              className={`px-4 py-2 bg-[#CCFF00] text-black rounded font-medium hover:bg-[#b8e600] ${
+                isSoldOut ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              disabled={isSoldOut}
+              onClick={!isSoldOut ? () => onBookByPhone(option.id) : undefined}
+            >
+              {isSoldOut ? 'Sold Out' : 'Call Us'}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

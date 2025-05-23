@@ -1,6 +1,4 @@
 
-"use client";
-
 import React, { useEffect, useState } from 'react';
 import { Trip } from '@/types/trip';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -13,6 +11,7 @@ import {
   getTripTypeLabel,
   generateDepartureOptions
 } from './dates';
+import { Grid, List } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 interface TourDatesTabProps {
@@ -25,6 +24,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
   const [openOptionId, setOpenOptionId] = useState<string | null>(null);
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [selectedYear, setSelectedYear] = useState<string>('2025');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   
   // Generate departure options
   const options = generateDepartureOptions(trip);
@@ -99,7 +99,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
         <div className="container py-8">
           <div className="flex justify-center mb-8">
             <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)}>
-              <ToggleGroupItem value="2025" className="bg-black text-white rounded-l-full px-6 py-2">
+              <ToggleGroupItem value="2025" className="bg-black text-white rounded-l-full px-6 py-2 border border-black">
                 2025
               </ToggleGroupItem>
               <ToggleGroupItem value="2026" className="bg-white text-black border border-gray-300 rounded-r-full px-6 py-2">
@@ -116,7 +116,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
           />
 
           {/* Trip Type Filters */}
-          <div className="flex items-start gap-6">
+          <div className="flex items-start justify-between gap-6">
             <div className="flex-1">
               <TripTypeFilter 
                 types={TRIP_TYPES}
@@ -127,24 +127,17 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">View:</span>
               <div className="flex border border-gray-200 rounded-md overflow-hidden">
-                <button className="bg-black text-white p-2 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="9" y1="3" x2="9" y2="21"></line>
-                    <line x1="15" y1="3" x2="15" y2="21"></line>
-                    <line x1="3" y1="9" x2="21" y2="9"></line>
-                    <line x1="3" y1="15" x2="21" y2="15"></line>
-                  </svg>
+                <button 
+                  className={`p-2 flex items-center justify-center ${viewMode === 'grid' ? 'bg-black text-white' : 'bg-white text-gray-700'}`}
+                  onClick={() => setViewMode('grid')}
+                >
+                  <Grid size={18} />
                 </button>
-                <button className="bg-white p-2 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                  </svg>
+                <button 
+                  className={`p-2 flex items-center justify-center ${viewMode === 'list' ? 'bg-black text-white' : 'bg-white text-gray-700'}`}
+                  onClick={() => setViewMode('list')}
+                >
+                  <List size={18} />
                 </button>
               </div>
             </div>
@@ -165,6 +158,76 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 tripTypeLabels={tripTypeLabels}
               />
             ))}
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <button className="px-6 py-3 border border-gray-300 rounded-full font-semibold hover:bg-gray-50">
+              LOAD MORE
+            </button>
+          </div>
+        </div>
+
+        {/* FlexDeposit Banner */}
+        <div className="py-12 bg-gray-50">
+          <div className="container">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+              <div className="flex items-center gap-4">
+                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                  <span className="text-secondary-foreground text-xl font-bold">£</span>
+                </div>
+                <div>
+                  <p className="font-medium text-base">Only £60 deposit</p>
+                  <p className="text-gray-600 text-sm">to book</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                  <span className="text-secondary-foreground text-xl font-bold">⏱</span>
+                </div>
+                <div>
+                  <p className="font-medium text-base">Pay over time</p>
+                  <p className="text-gray-600 text-sm">interest free</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                  <span className="text-secondary-foreground text-xl font-bold">✓</span>
+                </div>
+                <div>
+                  <p className="font-medium text-base">No booking fee</p>
+                  <p className="text-gray-600 text-sm">no change fee</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
+                  <span className="text-secondary-foreground text-xl font-bold">⚡</span>
+                </div>
+                <div>
+                  <p className="font-medium text-base">FlexDeposit</p>
+                  <p className="text-gray-600 text-sm">options</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Flexibility Promise banner */}
+            <div className="bg-black text-white p-8 rounded-lg">
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                  <h3 className="text-2xl font-bold mb-2">Flexibility Promise</h3>
+                  <p>
+                    Your money is safe with us and the TTC Promise. Book today and enjoy the benefits of flexible travel dates and money guarantee.
+                  </p>
+                </div>
+                <button 
+                  className="mt-6 md:mt-0 border-2 border-white text-white hover:bg-white hover:text-black px-6 py-2 font-semibold transition-all duration-200 ease-in-out"
+                >
+                  FIND OUT MORE
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

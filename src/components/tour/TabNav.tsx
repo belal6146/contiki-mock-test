@@ -74,13 +74,13 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
   };
 
   return (
-    <section className="py-4 md:py-6 border-t border-gray-200" aria-labelledby="tabNav-title">
+    <section className="py-0 border-t border-gray-200" aria-labelledby="tabNav-title">
       <div className="container">
         {/* Hidden accessible title for screen readers */}
         <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>
         
         {/* Tab Navigation */}
-        <div className="border-b border-gray-200 mb-6 md:mb-8" role="tablist" aria-label="Tour details">
+        <div className="border-b border-gray-200" role="tablist" aria-label="Tour details">
           <div className="flex overflow-x-auto hide-scrollbar">
             {tabs.map((tab, index) => (
               <button
@@ -88,8 +88,8 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 onClick={() => handleTabClick(tab.id)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "px-3 sm:px-4 md:px-6 py-2 md:py-3 font-medium font-montserrat whitespace-nowrap text-xs sm:text-sm md:text-base",
-                  "focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+                  "px-4 md:px-6 py-3 font-semibold font-montserrat whitespace-nowrap text-sm md:text-base uppercase tracking-wider",
+                  "focus:outline-none focus:ring-0",
                   "relative transition-colors",
                   activeTab === tab.id
                     ? "text-primary"
@@ -105,7 +105,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 {tab.label}
                 <span 
                   className={cn(
-                    "absolute bottom-0 left-0 w-full h-0.5 bg-[#CCFF00]",
+                    "absolute bottom-0 left-0 w-full h-1 bg-[#CCFF00]",
                     "transition-transform duration-150 ease-in-out",
                     activeTab === tab.id ? "scale-x-100" : "scale-x-0"
                   )}

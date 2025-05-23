@@ -1,13 +1,10 @@
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-import { Checkbox } from '@/components/ui/checkbox';
-import { ChevronDown } from 'lucide-react';
 
-export interface TripType {
+interface TripType {
   id: string;
   label: string;
-  variant: 'solid-light' | 'outline' | 'rainbow' | 'solid-primary';
+  color: string;
 }
 
 interface TripTypeFilterProps {
@@ -18,39 +15,24 @@ interface TripTypeFilterProps {
 
 const TripTypeFilter: React.FC<TripTypeFilterProps> = ({ types, selectedTypes, onTypeToggle }) => {
   return (
-    <div className="mb-8">
-      <div className="flex items-center mb-4">
-        <p className="text-sm font-medium mr-2">Trip Type</p>
-        <ChevronDown size={16} className="text-gray-500" />
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {types.map((type) => (
-          <label 
-            key={type.id}
-            htmlFor={`type-${type.id}`}
-            className={cn(
-              "flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium cursor-pointer transition-all",
-              type.variant === 'solid-light' && "bg-gray-100 text-black",
-              type.variant === 'outline' && "bg-white border border-gray-200",
-              type.variant === 'rainbow' && "bg-white border-2 border-transparent",
-              type.variant === 'solid-primary' && "bg-primary text-white",
-              selectedTypes.includes(type.id) && "ring-2 ring-accent ring-offset-2"
-            )}
-            style={type.variant === 'rainbow' ? {
-              background: `linear-gradient(white, white) padding-box, 
-                          linear-gradient(to right, #FF5A5F, #FF9966, #FFCD38, #5CFF87, #5BBEFF, #CD5FFE) border-box`
-            } : {}}
-          >
-            <Checkbox 
-              id={`type-${type.id}`}
-              checked={selectedTypes.includes(type.id)}
-              onCheckedChange={() => onTypeToggle(type.id)}
-              className="sr-only"
-            />
-            {type.label}
-          </label>
-        ))}
-      </div>
+    <div className="flex flex-wrap gap-2 mb-6">
+      <span className="text-sm font-medium self-center mr-2">Trip Type:</span>
+      {types.map(type => (
+        <button
+          key={type.id}
+          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            selectedTypes.includes(type.id)
+              ? `bg-${type.color} text-black border border-${type.color}`
+              : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+          }`}
+          style={{
+            backgroundColor: selectedTypes.includes(type.id) ? type.color : 'white'
+          }}
+          onClick={() => onTypeToggle(type.id)}
+        >
+          {type.label}
+        </button>
+      ))}
     </div>
   );
 };

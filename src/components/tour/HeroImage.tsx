@@ -86,7 +86,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
           </div>
           
           {/* Tour title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-white leading-tight drop-shadow-2xl">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-white leading-tight drop-shadow-2xl uppercase">
             {title || 'Discover Amazing Places'}
           </h1>
           
