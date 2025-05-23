@@ -20,10 +20,10 @@
     --primary: 0 0% 0%; /* Black */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 72 100% 50%; /* Contiki Orange #FF6900 */
+    --secondary: 142 100% 40%; /* Contiki Green #00CC66 */
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 72 100% 50%; /* Contiki Orange #FF6900 */
+    --accent: 142 100% 40%; /* Contiki Green #00CC66 */
     --accent-foreground: 0 0% 100%;
 
     --muted: 0 0% 96.1%;
@@ -39,7 +39,7 @@
     --radius: 0.5rem;
 
     /* Contiki specific colors */
-    --contiki-orange: 25 100% 53%; /* #FF6900 */
+    --contiki-green: 142 100% 40%; /* #00CC66 */
     --contiki-black: 0 0% 0%; /* #000000 */
     --contiki-gray: 0 0% 97%; /* #F7F7F7 */
     --contiki-dark-gray: 0 0% 20%; /* #333333 */
@@ -136,7 +136,7 @@
   
   /* Focus styles matching Contiki */
   a:focus, button:focus, input:focus, select:focus, textarea:focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
   }
 }
 
@@ -144,7 +144,7 @@
   /* Contiki Button System */
   .btn {
     @apply inline-flex items-center justify-center rounded-md text-sm font-semibold transition-all duration-200 ease-in-out
-    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus:outline-none focus:ring-2 focus:ring-green-500
     disabled:pointer-events-none disabled:opacity-50;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -156,8 +156,8 @@
   }
 
   .btn-primary {
-    @apply btn bg-orange-500 text-white hover:bg-orange-600 active:bg-orange-700;
-    background-color: #FF6900;
+    @apply btn bg-green-500 text-white hover:bg-green-600 active:bg-green-700;
+    background-color: #00CC66;
   }
 
   .btn-secondary {
@@ -165,7 +165,7 @@
   }
 
   .btn-outline {
-    @apply btn border-2 border-orange-500 bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white;
+    @apply btn border-2 border-green-500 bg-transparent text-green-500 hover:bg-green-500 hover:text-white;
   }
 
   .btn-ghost {
@@ -237,14 +237,14 @@
     @apply shadow-lg transform translate-y-[-2px];
   }
 
-  /* Orange accent elements */
-  .orange-accent {
-    background-color: #FF6900;
+  /* Green accent elements */
+  .green-accent {
+    background-color: #00CC66;
     color: white;
   }
 
-  .orange-accent-text {
-    color: #FF6900;
+  .green-accent-text {
+    color: #00CC66;
   }
 
   /* Contiki specific spacing */

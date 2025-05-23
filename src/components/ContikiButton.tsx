@@ -25,7 +25,7 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
 }) => {
   const baseClasses = cn(
     'inline-flex items-center justify-center font-semibold tracking-wider uppercase transition-all duration-200 ease-in-out',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500',
     'disabled:opacity-60 disabled:pointer-events-none disabled:cursor-not-allowed',
     'transform hover:scale-[1.02] active:scale-[0.98]',
     {
@@ -35,9 +35,9 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
 
   const variantClasses = {
     primary: cn(
-      'bg-orange-500 text-white hover:bg-orange-600 active:bg-orange-700',
+      'bg-green-500 text-white hover:bg-green-600 active:bg-green-700',
       'shadow-lg hover:shadow-xl',
-      'border-2 border-orange-500 hover:border-orange-600'
+      'border-2 border-green-500 hover:border-green-600'
     ),
     secondary: cn(
       'bg-black text-white hover:bg-gray-800 active:bg-gray-900',
@@ -45,16 +45,16 @@ const ContikiButton: React.FC<ContikiButtonProps> = ({
       'border-2 border-black hover:border-gray-800'
     ),
     outline: cn(
-      'border-2 border-orange-500 bg-transparent text-orange-500',
-      'hover:bg-orange-500 hover:text-white hover:border-orange-500',
-      'active:bg-orange-600 active:border-orange-600'
+      'border-2 border-green-500 bg-transparent text-green-500',
+      'hover:bg-green-500 hover:text-white hover:border-green-500',
+      'active:bg-green-600 active:border-green-600'
     ),
     ghost: cn(
       'bg-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200',
       'border-2 border-transparent'
     ),
     link: cn(
-      'bg-transparent text-orange-500 underline-offset-4 hover:underline',
+      'bg-transparent text-green-500 underline-offset-4 hover:underline',
       'border-2 border-transparent p-0'
     ),
   };

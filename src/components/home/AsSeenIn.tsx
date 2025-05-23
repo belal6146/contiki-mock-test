@@ -91,7 +91,7 @@ const AsSeenIn = () => {
                     )}
                   </div>
                   {index < 4 && (
-                    <div className="w-px h-8 bg-[#FF6900] flex-shrink-0" />
+                    <div className="w-px h-8 bg-[#00CC66] flex-shrink-0" />
                   )}
                 </React.Fragment>
               ))}
@@ -112,7 +112,7 @@ const AsSeenIn = () => {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-[#FF6900]' : 'bg-gray-300'
+                  index === currentIndex ? 'bg-[#00CC66]' : 'bg-gray-300'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

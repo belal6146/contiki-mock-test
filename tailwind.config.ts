@@ -51,49 +51,49 @@ export default {
           900: '#000000',
         },
         
-        // Contiki Orange
-        orange: {
-          DEFAULT: '#FF6900',
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#FF6900', // Main Contiki Orange
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+        // Contiki Green (changed from orange)
+        green: {
+          DEFAULT: '#00CC66',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#00CC66', // Main Contiki Green
+          600: '#00b359',
+          700: '#009944',
+          800: '#007a37',
+          900: '#00602b',
         },
         
         secondary: {
-          DEFAULT: '#FF6900', // Contiki Orange
+          DEFAULT: '#00CC66', // Contiki Green
           foreground: '#FFFFFF',
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#FF6900',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#00CC66',
+          600: '#00b359',
+          700: '#009944',
+          800: '#007a37',
+          900: '#00602b',
         },
         
         accent: {
-          DEFAULT: '#FF6900', // Contiki Orange
+          DEFAULT: '#00CC66', // Contiki Green
           foreground: '#FFFFFF',
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#FF6900',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#00CC66',
+          600: '#00b359',
+          700: '#009944',
+          800: '#007a37',
+          900: '#00602b',
         },
         
         // Neutral grays for Contiki
@@ -160,9 +160,9 @@ export default {
         sm: 'calc(var(--radius) - 4px)'
       },
       boxShadow: {
-        'contiki': '0 4px 6px -1px rgba(255, 105, 0, 0.1), 0 2px 4px -1px rgba(255, 105, 0, 0.06)',
-        'contiki-lg': '0 10px 15px -3px rgba(255, 105, 0, 0.1), 0 4px 6px -2px rgba(255, 105, 0, 0.05)',
-        'contiki-xl': '0 20px 25px -5px rgba(255, 105, 0, 0.1), 0 10px 10px -5px rgba(255, 105, 0, 0.04)',
+        'contiki': '0 4px 6px -1px rgba(0, 204, 102, 0.1), 0 2px 4px -1px rgba(0, 204, 102, 0.06)',
+        'contiki-lg': '0 10px 15px -3px rgba(0, 204, 102, 0.1), 0 4px 6px -2px rgba(0, 204, 102, 0.05)',
+        'contiki-xl': '0 20px 25px -5px rgba(0, 204, 102, 0.1), 0 10px 10px -5px rgba(0, 204, 102, 0.04)',
       },
       keyframes: {
         "accordion-down": {

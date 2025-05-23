@@ -90,18 +90,18 @@ const Header = () => {
       {/* Main Navigation */}
       <nav className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Logo on the left */}
+          {/* Left side with mobile burger and logo */}
           <div className="flex items-center">
             {/* Mobile Burger */}
             <button
               aria-label="Toggle menu"
-              className="lg:hidden p-2 -ml-2"
+              className="lg:hidden p-2 mr-4"
               onClick={toggleMobile}
             >
               {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
             </button>
             
-            {/* Logo */}
+            {/* Logo positioned at far left */}
             <Logo onClick={() => handleClick('Logo')} width="120px" />
           </div>
           
