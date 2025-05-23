@@ -90,19 +90,22 @@ const Header = () => {
       {/* Main Navigation */}
       <nav className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Mobile Burger */}
-          <button
-            aria-label="Toggle menu"
-            className="md:hidden p-2 -ml-2"
-            onClick={toggleMobile}
-          >
-            {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
-          </button>
+          {/* Logo on the left */}
+          <div className="flex items-center">
+            {/* Mobile Burger */}
+            <button
+              aria-label="Toggle menu"
+              className="lg:hidden p-2 -ml-2"
+              onClick={toggleMobile}
+            >
+              {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
+            </button>
+            
+            {/* Logo */}
+            <Logo onClick={handleClick('Logo')} />
+          </div>
           
-          {/* Logo */}
-          <Logo onClick={handleClick('Logo')} />
-          
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation on the right */}
           <DesktopNav onLinkClick={handleClick} />
         </div>
         

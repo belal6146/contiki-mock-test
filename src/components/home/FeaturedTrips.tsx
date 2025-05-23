@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
@@ -135,11 +136,21 @@ const FeaturedTrips = () => {
     <>
       <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
         <div className="container max-w-7xl mx-auto px-4">
-          {/* Header with navigation arrows - centered */}
-          <div className="flex items-center justify-center mb-8">
-            <h2 id="featured-trips-heading" className="text-3xl font-bold text-black text-center">
-              Popular trips
-            </h2>
+          {/* Header with navigation arrows - centered with buttons on the sides */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex-1 text-center">
+              <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
+                Popular trips
+              </h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <button className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+              <button className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors">
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
           </div>
           
           {loading && (
@@ -167,9 +178,9 @@ const FeaturedTrips = () => {
           
           {!loading && !error && (
             <div className="relative">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {displayTrips.slice(0, 4).map((trip) => (
-                  <div key={trip.id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+                  <div key={trip.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
                     {/* Trip Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img 
@@ -221,7 +232,7 @@ const FeaturedTrips = () => {
                           <span>{trip.places || 5} Places</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <span>{trip.countries || 1} Country</span>
+                          <span>{trip.countries || 1} {trip.countries === 1 ? 'Country' : 'Countries'}</span>
                         </div>
                       </div>
                       
@@ -231,7 +242,7 @@ const FeaturedTrips = () => {
                       </p>
                       
                       {/* Add to Compare Button */}
-                      <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4">
+                      <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4 w-full justify-center">
                         <Plus className="w-4 h-4" />
                         Add to compare
                       </button>
@@ -244,17 +255,26 @@ const FeaturedTrips = () => {
                               £{trip.oldPrice.toLocaleString()}
                             </span>
                           )}
-                          <span className="text-lg font-bold text-black">
-                            From £{trip.price.toLocaleString()}
-                          </span>
+                          <div className="flex items-center">
+                            <span className="text-sm text-gray-700 mr-1">From</span>
+                            <span className="text-lg font-bold text-black">
+                              £{trip.price.toLocaleString()}
+                            </span>
+                          </div>
                         </div>
-                        <Button className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-2 rounded-lg">
-                          VIEW TRIP
+                        <Button asChild className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-2 rounded-lg">
+                          <Link to={`/tours/${trip.id}`}>VIEW TRIP</Link>
                         </Button>
                       </div>
                     </div>
                   </div>
                 ))}
+              </div>
+              
+              {/* Navigation dots */}
+              <div className="flex justify-center mt-8 gap-2">
+                <div className="w-3 h-3 rounded-full bg-gray-900"></div>
+                <div className="w-3 h-3 rounded-full bg-gray-300"></div>
               </div>
               
               {/* View All Trips Button */}
