@@ -2,7 +2,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  moduleNameMapper: {
+  moduleNameMapping: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
   },
@@ -16,12 +16,18 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/components/**/*.{ts,tsx}',
-    '!src/components/**/*.d.ts'
+    '!src/components/**/*.d.ts',
+    '!src/components/**/*.test.{ts,tsx}'
   ],
   coverageReporters: ['text', 'lcov', 'html'],
   testMatch: [
     '**/__tests__/**/*.{ts,tsx}',
-    '**/?(*.)+(test).{ts,tsx}'
+    '**/?(*.)+(test|spec).{ts,tsx}'
   ],
   verbose: true,
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json'
+    }
+  }
 };

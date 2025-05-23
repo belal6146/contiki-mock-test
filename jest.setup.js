@@ -29,6 +29,21 @@ Object.defineProperty(window, 'IntersectionObserver', {
   value: IntersectionObserver,
 });
 
+// Mock Image constructor for tests
+Object.defineProperty(global, 'Image', {
+  writable: true,
+  value: class {
+    constructor() {
+      setTimeout(() => {
+        if (this.onload) this.onload();
+      }, 100);
+    }
+    onload = null;
+    onerror = null;
+    src = '';
+  }
+});
+
 // Console debugging suppression for tests
 const originalConsoleDebug = console.debug;
 console.debug = (...args) => {
