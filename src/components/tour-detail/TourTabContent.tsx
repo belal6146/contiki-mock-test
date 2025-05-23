@@ -9,6 +9,12 @@ import TourDatesTab from '@/components/tour-detail/TourDatesTab';
 import TourReviewsTab from '@/components/tour-detail/TourReviewsTab';
 import FAQAccordion from '@/components/tour/FAQAccordion';
 import FlexDepositBanner from '@/components/tour/FlexDepositBanner';
+import WhatsIncluded from '@/components/tour/WhatsIncluded';
+import TripTeam from '@/components/tour/TripTeam';
+import TripInformation from '@/components/tour/TripInformation';
+import TravelEssentials from '@/components/tour/TravelEssentials';
+import PackingGuide from '@/components/tour/PackingGuide';
+import BookingSidebar from '@/components/tour/BookingSidebar';
 
 interface TourTabContentProps {
   activeTab: string;
@@ -108,14 +114,49 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
             />
           }>
             <div className="animate-fade-in">
-              <TourOverviewTab
-                trip={tour}
-                highlights={mockHighlights}
-                trips={trips}
-                accommodation={mockAccommodation}
-                tripFAQs={mockTripFAQs}
-                generalFAQs={mockGeneralFAQs}
+              <div className="container mt-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  {/* Left column: Main content */}
+                  <div className="lg:col-span-2">
+                    <TourOverviewTab
+                      trip={tour}
+                      highlights={mockHighlights}
+                      trips={trips}
+                      accommodation={mockAccommodation}
+                      tripFAQs={mockTripFAQs}
+                      generalFAQs={mockGeneralFAQs}
+                    />
+                  </div>
+                  
+                  {/* Right column: Booking sidebar */}
+                  <div className="lg:col-span-1">
+                    <BookingSidebar
+                      price={tour.price}
+                      oldPrice={tour.oldPrice}
+                      tourName={tour.name}
+                      duration={tour.duration}
+                      savings={tour.oldPrice ? tour.oldPrice - tour.price : 0}
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <WhatsIncluded included={tour.included || []} />
+              <TripTeam teamMembers={[]} />
+              <TripInformation 
+                ageRange="18-35"
+                groupSize="Average 30, Maximum 45"
+                physicalRating={2}
+                countries={1}
+                tripType="Island Hopping"
+                meals={{
+                  breakfasts: 10,
+                  lunches: 0,
+                  dinners: 3
+                }}
               />
+              <TravelEssentials />
+              <PackingGuide destination={tour.destination} />
             </div>
           </ErrorBoundary>
         );
