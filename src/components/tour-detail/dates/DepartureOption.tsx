@@ -94,120 +94,133 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   const hasDiscount = option.discount && option.discount > 0;
   
   return (
-    <div className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 mb-6 ${isOpen ? 'shadow-lg border-[#CCFF00]' : 'hover:border-gray-300'}`}>
-      {/* Header row */}
+    <div className={`border border-gray-200 rounded-lg overflow-hidden transition-all duration-200 mb-4 ${isOpen ? 'shadow-md' : 'hover:shadow-sm'}`}>
+      {/* Header row - matches the screenshot layout */}
       <div 
-        className={`grid grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'bg-gray-50' : ''}`}
+        className="bg-white border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
         onClick={handleToggle}
       >
-        {/* Date info */}
-        <div className="col-span-3 p-5 border-r border-gray-200">
-          <div className="flex flex-col">
-            <span className="text-sm text-gray-600 font-medium">{option.dayOfWeek}</span>
-            <div className="flex gap-1 items-baseline mt-1">
-              <span className="font-bold text-xl text-black">{option.month} {option.day},</span>
-              <span className="text-gray-700">{option.year}</span>
+        <div className="grid grid-cols-12 items-center">
+          {/* Date Column */}
+          <div className="col-span-3 p-4 border-r border-gray-100">
+            <div className="text-sm text-gray-600 mb-1">{option.dayOfWeek}</div>
+            <div className="font-bold text-lg text-black">
+              {option.month} {option.day}, {option.year}
             </div>
-            <div className="mt-3">
-              <button className="flex items-center text-sm text-black hover:text-gray-700 transition-colors font-medium">
-                <Info size={15} className="mr-1.5" />
-                <span>Further information</span>
-              </button>
-            </div>
+            <button className="flex items-center text-xs text-blue-600 hover:text-blue-800 mt-2 transition-colors">
+              <Info size={12} className="mr-1" />
+              Further information
+            </button>
           </div>
-        </div>
-        
-        {/* Type & Trip Info */}
-        <div className="col-span-5 p-5 border-r border-gray-200 flex items-center">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-3">
-              <div className="bg-gray-100 px-4 py-1.5 text-sm font-semibold rounded-full text-gray-800">
+          
+          {/* Trip Type Column */}
+          <div className="col-span-5 p-4 border-r border-gray-100">
+            <div className="inline-flex items-center">
+              <span className="bg-[#CCFF00] text-black px-3 py-1 rounded-full text-sm font-semibold">
                 {tripTypeLabels[option.type] || option.type}
-              </div>
-              
-              {option.variants.length > 0 && (
-                <div className="text-sm text-gray-600">
-                  + {option.variants.length} other option{option.variants.length > 1 ? 's' : ''}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        {/* Price & Action */}
-        <div className="col-span-4 p-5 flex justify-between items-center">
-          <div className="flex flex-col">
-            {hasDiscount && (
-              <div className="inline-block text-red-600 text-xs font-bold mb-2 self-start">
-                LAST MINUTE DEAL
-              </div>
-            )}
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">Price</span>
-              {option.oldPrice && hasDiscount && (
-                <span className="text-sm line-through text-gray-400">{formatCurrency(option.oldPrice)}</span>
-              )}
-              <span className={`font-bold text-xl ${hasDiscount ? 'text-black' : 'text-black'}`}>
-                {formatCurrency(displayPrice)}
               </span>
-              {hasDiscount && (
-                <span className="text-xs font-bold bg-[#CCFF00] text-black px-2 py-0.5 rounded">
-                  {option.discount}% off
+              {option.variants.length > 0 && (
+                <span className="ml-3 text-sm text-gray-600">
+                  + {option.variants.length} other option{option.variants.length > 1 ? 's' : ''}
                 </span>
               )}
             </div>
           </div>
           
-          <div className="flex items-center gap-3">
-            <div className="bg-[#CCFF00] text-black px-3 py-1 rounded font-bold text-sm">
-              CALL US
+          {/* Price and Action Column */}
+          <div className="col-span-4 p-4 flex justify-between items-center">
+            <div className="text-right">
+              {hasDiscount && (
+                <div className="text-red-600 text-xs font-bold mb-1">
+                  LAST MINUTE DEAL
+                </div>
+              )}
+              <div className="flex items-center justify-end gap-2 mb-1">
+                <span className="text-sm text-gray-500">Price</span>
+                {option.oldPrice && hasDiscount && (
+                  <span className="text-sm line-through text-gray-400">
+                    {formatCurrency(option.oldPrice)}
+                  </span>
+                )}
+                <span className="font-bold text-xl text-black">
+                  {formatCurrency(displayPrice)}
+                </span>
+                {hasDiscount && (
+                  <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded">
+                    {option.discount}% off
+                  </span>
+                )}
+              </div>
             </div>
-            <button className="text-gray-600 hover:text-black transition-colors" onClick={handleToggle}>
-              {isOpen ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
-            </button>
+            
+            <div className="flex items-center gap-3 ml-4">
+              <button 
+                className="bg-[#CCFF00] text-black px-4 py-2 rounded font-bold text-sm hover:bg-[#bfff00] transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleBookNow();
+                }}
+              >
+                CALL US
+              </button>
+              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
       
       {/* Expanded content */}
       {isOpen && (
-        <div className="bg-white border-t border-gray-200">
-          <div className="grid grid-cols-12 gap-6 p-8">
+        <div className="bg-white">
+          <div className="grid grid-cols-12 gap-8 p-8">
             {/* Left side - Variant selection and trip details */}
             <div className="col-span-8">
-              {option.variants.length > 0 ? (
-                <div className="space-y-4 mb-8">
-                  <h4 className="font-semibold text-xl text-black mb-4">Choose Variation</h4>
+              {/* Choose Variation Section */}
+              {option.variants.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
                   <div className="space-y-3">
                     {option.variants.map((variant) => (
                       <div 
                         key={variant.id}
-                        className={`border rounded-lg p-5 cursor-pointer transition-all ${
+                        className={`border rounded-lg p-4 cursor-pointer transition-all ${
                           selectedVariant === variant.id 
-                            ? 'border-[#CCFF00] ring-2 ring-[#CCFF00]/20 bg-[#CCFF00]/10' 
+                            ? 'border-[#CCFF00] bg-[#CCFF00]/10' 
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                         onClick={() => handleVariantSelect(variant.id)}
                       >
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
-                            <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${
-                              selectedVariant === variant.id ? 'border-black bg-black' : 'border-gray-300 bg-white'
+                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                              selectedVariant === variant.id 
+                                ? 'border-black bg-black' 
+                                : 'border-gray-300 bg-white'
                             }`}>
-                              {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                              {selectedVariant === variant.id && (
+                                <div className="w-2 h-2 rounded-full bg-white"></div>
+                              )}
                             </div>
-                            <span className="font-semibold text-black uppercase">{variant.name}</span>
+                            <span className="font-semibold text-black uppercase text-sm">
+                              {variant.name}
+                            </span>
                           </div>
                           <div className="text-right">
-                            <div className="text-sm text-black font-medium hover:underline">More info</div>
-                            <div className="font-bold text-lg">£{variant.price}</div>
+                            <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1">
+                              More info
+                            </button>
+                            <div className="font-bold text-lg text-black">
+                              {formatCurrency(variant.price)}
+                            </div>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              ) : null }
+              )}
               
               {/* Trip Timeline */}
               <div className="mb-8">
@@ -217,18 +230,20 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 />
               </div>
 
-              {/* Additional information */}
-              <div className="mb-5">
-                <div className="font-bold mb-2">Further Information</div>
-                <div className="flex mb-4">
-                  <div className="bg-yellow-400 text-black rounded-full p-1 mr-2 flex-shrink-0 mt-1">
-                    <span className="text-sm">!</span>
+              {/* Further Information */}
+              <div className="mb-6">
+                <h4 className="font-bold text-black mb-3">Further Information</h4>
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="bg-yellow-400 text-black rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mt-0.5">
+                    !
                   </div>
                   <p className="text-sm text-gray-700">
                     This trip ends at 10am in Athens. For those participating in the Athens Sightseeing Free Time Add On, the trip will end in Athens at 12pm.
                   </p>
                 </div>
-                <p className="text-xs italic text-gray-600">Flights there and back again aren't included.</p>
+                <p className="text-xs italic text-gray-600">
+                  Flights there and back again aren't included.
+                </p>
               </div>
 
               {/* See Who's Travelling Section */}
