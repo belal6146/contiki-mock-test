@@ -9,7 +9,12 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: 'tsconfig.test.json'
+      tsconfig: {
+        jsx: 'react-jsx',
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+        types: ['jest', '@testing-library/jest-dom', 'node']
+      }
     }]
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
@@ -24,10 +29,5 @@ module.exports = {
     '**/__tests__/**/*.{ts,tsx}',
     '**/?(*.)+(test|spec).{ts,tsx}'
   ],
-  verbose: true,
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json'
-    }
-  }
+  verbose: true
 };

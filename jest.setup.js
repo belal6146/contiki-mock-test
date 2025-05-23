@@ -1,6 +1,9 @@
 
 import '@testing-library/jest-dom';
 
+// Extend Jest matchers
+expect.extend(require('@testing-library/jest-dom/matchers'));
+
 // Add required browser mocks
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
