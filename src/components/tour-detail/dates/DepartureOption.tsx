@@ -173,129 +173,70 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
       
       {/* Expanded content */}
       {isOpen && (
-        <div className="bg-white">
-          <div className="grid grid-cols-12 gap-8 p-8">
-            {/* Left side - Variant selection and trip details */}
-            <div className="col-span-8">
-              {/* Choose Variation Section */}
-              {option.variants.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
+        <div className="bg-white p-6">
+          {/* Choose Variation Section - moved to top */}
+          {option.variants.length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
+              <div className="flex gap-4">
+                {/* Variants Grid */}
+                <div className="flex-1">
                   <div className="space-y-3">
                     {option.variants.map((variant) => (
                       <div 
                         key={variant.id}
-                        className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                        className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between ${
                           selectedVariant === variant.id 
                             ? 'border-[#CCFF00] bg-[#CCFF00]/10' 
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                         onClick={() => handleVariantSelect(variant.id)}
                       >
-                        <div className="flex justify-between items-center">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                              selectedVariant === variant.id 
-                                ? 'border-black bg-black' 
-                                : 'border-gray-300 bg-white'
-                            }`}>
-                              {selectedVariant === variant.id && (
-                                <div className="w-2 h-2 rounded-full bg-white"></div>
-                              )}
-                            </div>
-                            <span className="font-semibold text-black uppercase text-sm">
-                              {variant.name}
-                            </span>
+                        <div className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                            selectedVariant === variant.id 
+                              ? 'border-black bg-black' 
+                              : 'border-gray-300 bg-white'
+                          }`}>
+                            {selectedVariant === variant.id && (
+                              <div className="w-2 h-2 rounded-full bg-white"></div>
+                            )}
                           </div>
-                          <div className="text-right">
-                            <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1">
-                              More info
-                            </button>
-                            <div className="font-bold text-lg text-black">
-                              {formatCurrency(variant.price)}
-                            </div>
+                          <span className="font-semibold text-black uppercase text-sm">
+                            {variant.name}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1">
+                            More info
+                          </button>
+                          <div className="font-bold text-lg text-black">
+                            {formatCurrency(variant.price)}
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              )}
-              
-              {/* Trip Timeline */}
-              <div className="mb-8">
-                <TripTimeline 
-                  startDate={new Date(option.startDate)}
-                  endDate={new Date(option.endDate)}
-                />
-              </div>
-
-              {/* Further Information */}
-              <div className="mb-6">
-                <h4 className="font-bold text-black mb-3">Further Information</h4>
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="bg-yellow-400 text-black rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mt-0.5">
-                    !
-                  </div>
-                  <p className="text-sm text-gray-700">
-                    This trip ends at 10am in Athens. For those participating in the Athens Sightseeing Free Time Add On, the trip will end in Athens at 12pm.
-                  </p>
+                
+                {/* Price Breakdown Card - positioned to the right */}
+                <div className="w-80">
+                  <PriceBreakdown
+                    basePrice={displayPrice}
+                    discount={option.discount || 0}
+                    dealLabel={hasDiscount ? "Last minute deal" : undefined}
+                    onBookByPhone={() => onBookByPhone(option.id)}
+                    onRequestInfo={() => onRequestInfo(option.id)}
+                  />
                 </div>
-                <p className="text-xs italic text-gray-600">
-                  Flights there and back again aren't included.
-                </p>
-              </div>
-
-              {/* See Who's Travelling Section */}
-              <div className="mb-4">
-                <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
-                  <div className="border border-gray-200 rounded-lg overflow-hidden">
-                    <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Users className="mr-3 h-5 w-5 text-black" />
-                          <span className="font-medium text-gray-900">See Who's Travelling</span>
-                        </div>
-                        {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                      </div>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <TravelersInfo passengers={passengers} />
-                    </CollapsibleContent>
-                  </div>
-                </Collapsible>
-              </div>
-
-              {/* Bus Seating Plan Section */}
-              <div className="mb-4">
-                <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
-                  <div className="border border-gray-200 rounded-lg overflow-hidden">
-                    <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Bus className="mr-3 h-5 w-5 text-black" />
-                          <span className="font-medium text-gray-900">Bus Seating Plan</span>
-                        </div>
-                        {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
-                      </div>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h4 className="font-semibold text-lg">Choose Your Seat</h4>
-                          <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
-                        </div>
-                        <BusSeatMap passengers={passengers} />
-                      </div>
-                    </CollapsibleContent>
-                  </div>
-                </Collapsible>
               </div>
             </div>
-            
-            {/* Right side - Price breakdown */}
-            <div className="col-span-4">
-              <div className="sticky top-4">
+          )}
+          
+          {/* If no variants, show price breakdown in single column */}
+          {option.variants.length === 0 && (
+            <div className="mb-8">
+              <div className="max-w-sm ml-auto">
                 <PriceBreakdown
                   basePrice={displayPrice}
                   discount={option.discount || 0}
@@ -305,6 +246,79 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 />
               </div>
             </div>
+          )}
+          
+          {/* Two column layout for timeline and further info */}
+          <div className="grid grid-cols-12 gap-8 mb-8">
+            {/* Left side - Trip Timeline */}
+            <div className="col-span-6">
+              <TripTimeline 
+                startDate={new Date(option.startDate)}
+                endDate={new Date(option.endDate)}
+              />
+            </div>
+            
+            {/* Right side - Further Information */}
+            <div className="col-span-6">
+              <h4 className="font-bold text-black mb-4">Further Information</h4>
+              <div className="flex items-start gap-3 mb-4">
+                <div className="bg-yellow-400 text-black rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mt-0.5">
+                  !
+                </div>
+                <p className="text-sm text-gray-700">
+                  This trip ends at 10am in Athens. For those participating in the Athens Sightseeing Free Time Add On, the trip will end in Athens at 12pm.
+                </p>
+              </div>
+              <p className="text-xs italic text-gray-600">
+                Flights there and back again aren't included.
+              </p>
+            </div>
+          </div>
+
+          {/* See Who's Travelling Section */}
+          <div className="mb-4">
+            <Collapsible open={travelersOpen} onOpenChange={setTravelersOpen}>
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Users className="mr-3 h-5 w-5 text-black" />
+                      <span className="font-medium text-gray-900">See Who's Travelling</span>
+                    </div>
+                    {travelersOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <TravelersInfo passengers={passengers} />
+                </CollapsibleContent>
+              </div>
+            </Collapsible>
+          </div>
+
+          {/* Bus Seating Plan Section */}
+          <div className="mb-4">
+            <Collapsible open={seatingOpen} onOpenChange={setSeatingOpen}>
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <CollapsibleTrigger className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <Bus className="mr-3 h-5 w-5 text-black" />
+                      <span className="font-medium text-gray-900">Bus Seating Plan</span>
+                    </div>
+                    {seatingOpen ? <ChevronUp className="h-5 w-5 text-gray-600" /> : <ChevronDown className="h-5 w-5 text-gray-600" />}
+                  </div>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="font-semibold text-lg">Choose Your Seat</h4>
+                      <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
+                    </div>
+                    <BusSeatMap passengers={passengers} />
+                  </div>
+                </CollapsibleContent>
+              </div>
+            </Collapsible>
           </div>
         </div>
       )}
