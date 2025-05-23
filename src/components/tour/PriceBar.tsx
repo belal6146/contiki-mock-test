@@ -25,7 +25,10 @@ const PriceBar: React.FC<PriceBarProps> = ({
     console.debug('[PriceBar] viewDates clicked');
     trackEvent('view_dates_clicked', { price: newPrice });
     // Navigate to the dates section
-    document.getElementById('dates')?.scrollIntoView({ behavior: 'smooth' });
+    const datesTab = document.querySelector('[data-tab="dates"]') as HTMLElement;
+    if (datesTab) {
+      datesTab.click();
+    }
   };
   
   const handleRequestInfo = () => {
@@ -34,7 +37,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
   };
   
   return (
-    <section className="sticky top-16 z-40 bg-white shadow-md" aria-label="Tour pricing information">
+    <section className="sticky top-16 z-40 bg-white shadow-sm border-b border-gray-200" aria-label="Tour pricing information">
       <div className="container">
         <div className="py-4 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-4 md:mb-0">
@@ -46,7 +49,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
                     {formatCurrency(oldPrice)}
                   </p>
                 )}
-                <p className="text-2xl font-bold text-primary" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
+                <p className="text-2xl font-bold text-black" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
                   {formatCurrency(newPrice)}
                 </p>
               </div>
@@ -82,9 +85,10 @@ const PriceBar: React.FC<PriceBarProps> = ({
             </button>
             
             <button 
-              className="bg-[#CCFF00] text-black px-5 py-2 font-semibold text-sm rounded hover:bg-[#b8e600]"
+              className="bg-lime-400 text-black px-5 py-2 font-semibold text-sm rounded hover:bg-lime-500"
               onClick={handleViewDates}
               aria-label="View available dates"
+              data-tab="dates"
             >
               VIEW DATES
             </button>

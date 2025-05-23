@@ -74,7 +74,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
   };
 
   return (
-    <section className="py-0 border-t border-gray-200" aria-labelledby="tabNav-title">
+    <section className="py-0 bg-white" aria-labelledby="tabNav-title">
       <div className="container">
         {/* Hidden accessible title for screen readers */}
         <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>
@@ -88,12 +88,12 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 onClick={() => handleTabClick(tab.id)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "px-4 md:px-6 py-3 font-semibold font-montserrat whitespace-nowrap text-sm md:text-base uppercase tracking-wider",
+                  "px-6 py-4 font-bold text-sm uppercase tracking-wider whitespace-nowrap",
                   "focus:outline-none focus:ring-0",
-                  "relative transition-colors",
+                  "relative transition-colors border-b-3",
                   activeTab === tab.id
-                    ? "text-primary"
-                    : "text-gray-500 hover:text-primary"
+                    ? "text-black border-b-lime-400"
+                    : "text-gray-500 hover:text-black border-b-transparent"
                 )}
                 aria-selected={activeTab === tab.id}
                 aria-controls={`tab-panel-${tab.id}`}
@@ -101,16 +101,9 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 role="tab"
                 tabIndex={activeTab === tab.id ? 0 : -1}
                 type="button"
+                data-tab={tab.id}
               >
                 {tab.label}
-                <span 
-                  className={cn(
-                    "absolute bottom-0 left-0 w-full h-1 bg-[#CCFF00]",
-                    "transition-transform duration-150 ease-in-out",
-                    activeTab === tab.id ? "scale-x-100" : "scale-x-0"
-                  )}
-                  aria-hidden="true"
-                />
               </button>
             ))}
           </div>
