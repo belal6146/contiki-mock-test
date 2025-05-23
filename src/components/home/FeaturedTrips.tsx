@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { useTrips } from '@/hooks/useTrips';
@@ -136,19 +135,11 @@ const FeaturedTrips = () => {
     <>
       <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
         <div className="container max-w-7xl mx-auto px-4">
-          {/* Header with navigation arrows */}
-          <div className="flex items-center justify-between mb-8">
-            <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
+          {/* Header with navigation arrows - centered */}
+          <div className="flex items-center justify-center mb-8">
+            <h2 id="featured-trips-heading" className="text-3xl font-bold text-black text-center">
               Popular trips
             </h2>
-            <div className="flex items-center gap-2">
-              <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-                <ChevronLeft className="w-5 h-5 text-gray-600" />
-              </button>
-              <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-                <ChevronRight className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
           </div>
           
           {loading && (

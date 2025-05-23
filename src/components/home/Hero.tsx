@@ -18,8 +18,8 @@ const Hero = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Use the uploaded Colosseum image
-  const heroImageUrl = "/lovable-uploads/9b1c8cb6-c1a3-49d5-aa1f-7c7c676e34ae.png";
+  // Use the uploaded hero image
+  const heroImageUrl = "/lovable-uploads/cfabc9ea-e3e5-4e31-b5f1-bc5dc8c9e5ea.png";
 
   useEffect(() => {
     console.debug('[Hero] mounted');
