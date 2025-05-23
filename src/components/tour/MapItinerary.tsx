@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import MapDisplay from './map/MapDisplay';
 import ItineraryTimeline from './map/ItineraryTimeline';
+import DayDetailView from './map/DayDetailView';
 
 // Define both types for compatibility
 export interface ItineraryDay {
@@ -31,6 +31,7 @@ export type MapItineraryProps = {
 const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
   const [activeDay, setActiveDay] = useState<number>(0);
   const [viewType, setViewType] = useState<'list' | 'grid'>('list');
+  const [isDayExpanded, setIsDayExpanded] = useState<boolean>(false);
   
   useEffect(() => {
     if (itinerary.length > 0) {
@@ -46,6 +47,22 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
 
   const handleDayClick = (index: number) => {
     setActiveDay(index);
+  };
+
+  const handleToggleExpand = () => {
+    setIsDayExpanded(!isDayExpanded);
+  };
+
+  const handlePreviousDay = () => {
+    if (activeDay > 0) {
+      setActiveDay(activeDay - 1);
+    }
+  };
+
+  const handleNextDay = () => {
+    if (activeDay < itinerary.length - 1) {
+      setActiveDay(activeDay + 1);
+    }
   };
 
   return (
@@ -114,9 +131,9 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
           onDayClick={handleDayClick} 
         />
 
-        {/* Map and Details */}
+        {/* Map and Day Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-          {/* Map Component with updated styling to match Contiki */}
+          {/* Map Component */}
           <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-md">
             {hasCoordinates ? (
               <MapDisplay 
@@ -133,59 +150,17 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             )}
           </div>
 
-          {/* Day Details with Contiki-style coloring */}
+          {/* Day Details using new component */}
           {currentDay && (
-            <div className="space-y-6">
-              <div>
-                <div className="bg-[#FF6900] text-white inline-block px-3 py-1 rounded-md mb-2">
-                  <h3 className="text-xl font-bold">Day {currentDay.day}</h3>
-                </div>
-                <h4 className="text-lg font-semibold mb-3 text-gray-800">{currentDay.title}</h4>
-                <p className="text-gray-700 mb-4">{currentDay.description}</p>
-                
-                {/* Additional details if available */}
-                {'meals' in currentDay && currentDay.meals && currentDay.meals.length > 0 && (
-                  <div className="mb-4">
-                    <h5 className="font-semibold mb-2">Meals included:</h5>
-                    <ul className="list-disc list-inside text-gray-700">
-                      {currentDay.meals.map((meal, index) => (
-                        <li key={index}>{meal}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                {'accommodation' in currentDay && currentDay.accommodation && (
-                  <div className="mb-4">
-                    <h5 className="font-semibold mb-2">Accommodation:</h5>
-                    <p className="text-gray-700">{currentDay.accommodation}</p>
-                  </div>
-                )}
-              </div>
-              
-              {/* Navigation with Contiki orange */}
-              <div className="flex justify-between">
-                <Button
-                  variant="outline"
-                  onClick={() => setActiveDay(Math.max(0, activeDay - 1))}
-                  disabled={activeDay === 0}
-                  className="flex items-center gap-2 hover:bg-[#FF6900]/10"
-                >
-                  <span>←</span>
-                  Previous Day
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  onClick={() => setActiveDay(Math.min(itinerary.length - 1, activeDay + 1))}
-                  disabled={activeDay === itinerary.length - 1}
-                  className="flex items-center gap-2 hover:bg-[#FF6900]/10"
-                >
-                  Next Day
-                  <span>→</span>
-                </Button>
-              </div>
-            </div>
+            <DayDetailView
+              day={currentDay}
+              isExpanded={isDayExpanded}
+              onToggle={handleToggleExpand}
+              onPrevious={handlePreviousDay}
+              onNext={handleNextDay}
+              hasPrevious={activeDay > 0}
+              hasNext={activeDay < itinerary.length - 1}
+            />
           )}
         </div>
       </div>
