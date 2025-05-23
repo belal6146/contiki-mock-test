@@ -133,164 +133,169 @@ const FeaturedTrips = () => {
   const displayTrips = trips.length > 0 ? trips : mockTrips;
 
   return (
-    <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
-      <div className="container max-w-7xl mx-auto px-4">
-        {/* Header with navigation arrows */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
-            Popular trips
-          </h2>
-          <div className="flex items-center gap-2">
-            <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            </button>
-            <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-              <ChevronRight className="w-5 h-5 text-gray-600" />
-            </button>
+    <>
+      <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
+        <div className="container max-w-7xl mx-auto px-4">
+          {/* Header with navigation arrows */}
+          <div className="flex items-center justify-between mb-8">
+            <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
+              Popular trips
+            </h2>
+            <div className="flex items-center gap-2">
+              <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+              <button className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
           </div>
-        </div>
-        
-        {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <Skeleton className="h-48 w-full" />
-                <div className="p-4">
-                  <Skeleton className="h-6 w-3/4 mb-2" />
-                  <Skeleton className="h-4 w-1/2 mb-2" />
-                  <Skeleton className="h-4 w-1/4" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {error && (
-          <ErrorMessage
-            title="Unable to load popular trips"
-            message={error}
-            onRetry={handleRetry}
-          />
-        )}
-        
-        {!loading && !error && (
-          <div className="relative">
+          
+          {loading && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {displayTrips.slice(0, 4).map((trip) => (
-                <div key={trip.id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
-                  {/* Trip Image */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={trip.image || `https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
-                      alt={trip.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    
-                    {/* Trip Spotlight Badge */}
-                    {trip.isSpotlight && (
-                      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                        Trip Spotlight
-                      </div>
-                    )}
-                    
-                    {/* Add to Compare Button */}
-                    <button className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                      <Plus className="w-4 h-4 text-gray-600" />
-                    </button>
-                  </div>
-                  
-                  {/* Trip Content */}
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                  <Skeleton className="h-48 w-full" />
                   <div className="p-4">
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`w-4 h-4 ${i < Math.floor(trip.rating || 4.6) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                      <span className="text-sm font-medium ml-1">{trip.rating || '4.6'}</span>
-                    </div>
-                    
-                    {/* Trip Name */}
-                    <h3 className="font-bold text-lg mb-2 text-black line-clamp-2">
-                      {trip.name}
-                    </h3>
-                    
-                    {/* Trip Details */}
-                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{trip.duration || 11} Days</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        <span>{trip.places || 5} Places</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span>{trip.countries || 1} Country</span>
-                      </div>
-                    </div>
-                    
-                    {/* Description */}
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops...
-                    </p>
-                    
-                    {/* Add to Compare Button */}
-                    <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4">
-                      <Plus className="w-4 h-4" />
-                      Add to compare
-                    </button>
-                    
-                    {/* Price and View Trip */}
-                    <div className="flex items-center justify-between">
-                      <div>
-                        {trip.oldPrice && (
-                          <span className="text-sm text-gray-400 line-through block">
-                            £{trip.oldPrice.toLocaleString()}
-                          </span>
-                        )}
-                        <span className="text-lg font-bold text-black">
-                          From £{trip.price.toLocaleString()}
-                        </span>
-                      </div>
-                      <Button className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-2 rounded-lg">
-                        VIEW TRIP
-                      </Button>
-                    </div>
+                    <Skeleton className="h-6 w-3/4 mb-2" />
+                    <Skeleton className="h-4 w-1/2 mb-2" />
+                    <Skeleton className="h-4 w-1/4" />
                   </div>
                 </div>
               ))}
             </div>
-            
-            {/* View All Trips Button */}
-            <div className="text-center mt-12">
-              <Button 
-                asChild
-                className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-8 py-3 rounded-lg text-lg"
-              >
-                <Link to="/tours">VIEW ALL TRIPS</Link>
-              </Button>
+          )}
+          
+          {error && (
+            <ErrorMessage
+              title="Unable to load popular trips"
+              message={error}
+              onRetry={handleRetry}
+            />
+          )}
+          
+          {!loading && !error && (
+            <div className="relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {displayTrips.slice(0, 4).map((trip) => (
+                  <div key={trip.id} className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow group">
+                    {/* Trip Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={trip.image || `https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
+                        alt={trip.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      
+                      {/* Trip Spotlight Badge */}
+                      {trip.isSpotlight && (
+                        <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                          Trip Spotlight
+                        </div>
+                      )}
+                      
+                      {/* Add to Compare Button */}
+                      <button className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                        <Plus className="w-4 h-4 text-gray-600" />
+                      </button>
+                    </div>
+                    
+                    {/* Trip Content */}
+                    <div className="p-4">
+                      {/* Rating */}
+                      <div className="flex items-center gap-1 mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`w-4 h-4 ${i < Math.floor(trip.rating || 4.6) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                          />
+                        ))}
+                        <span className="text-sm font-medium ml-1">{trip.rating || '4.6'}</span>
+                      </div>
+                      
+                      {/* Trip Name */}
+                      <h3 className="font-bold text-lg mb-2 text-black line-clamp-2">
+                        {trip.name}
+                      </h3>
+                      
+                      {/* Trip Details */}
+                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{trip.duration || 11} Days</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <MapPin className="w-4 h-4" />
+                          <span>{trip.places || 5} Places</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>{trip.countries || 1} Country</span>
+                        </div>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                        The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops...
+                      </p>
+                      
+                      {/* Add to Compare Button */}
+                      <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4">
+                        <Plus className="w-4 h-4" />
+                        Add to compare
+                      </button>
+                      
+                      {/* Price and View Trip */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          {trip.oldPrice && (
+                            <span className="text-sm text-gray-400 line-through block">
+                              £{trip.oldPrice.toLocaleString()}
+                            </span>
+                          )}
+                          <span className="text-lg font-bold text-black">
+                            From £{trip.price.toLocaleString()}
+                          </span>
+                        </div>
+                        <Button className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-2 rounded-lg">
+                          VIEW TRIP
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* View All Trips Button */}
+              <div className="text-center mt-12">
+                <Button 
+                  asChild
+                  className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-8 py-3 rounded-lg text-lg"
+                >
+                  <Link to="/tours">VIEW ALL TRIPS</Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </section>
 
-      <style jsx>{`
-        .custom-dots {
-          bottom: -40px;
-        }
-        .custom-dots li button:before {
-          font-size: 12px;
-          color: #666;
-        }
-        .custom-dots li.slick-active button:before {
-          color: #CCFF00;
-        }
-      `}</style>
-    </section>
+      {/* CSS styles as a separate style tag */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .custom-dots {
+            bottom: -40px;
+          }
+          .custom-dots li button:before {
+            font-size: 12px;
+            color: #666;
+          }
+          .custom-dots li.slick-active button:before {
+            color: #CCFF00;
+          }
+        `
+      }} />
+    </>
   );
 };
 
