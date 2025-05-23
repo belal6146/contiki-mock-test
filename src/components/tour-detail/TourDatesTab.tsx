@@ -97,15 +97,24 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
     <TooltipProvider>
       <div className="bg-white">
         <div className="container py-8">
+          {/* Year Selection */}
           <div className="flex justify-center mb-8">
-            <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)}>
-              <ToggleGroupItem value="2025" className="bg-black text-white rounded-l-full px-6 py-2 border border-black">
-                2025
-              </ToggleGroupItem>
-              <ToggleGroupItem value="2026" className="bg-white text-black border border-gray-300 rounded-r-full px-6 py-2">
-                2026
-              </ToggleGroupItem>
-            </ToggleGroup>
+            <div className="bg-gray-100 rounded-full p-1">
+              <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)} className="gap-0">
+                <ToggleGroupItem 
+                  value="2025" 
+                  className="bg-black text-white rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white"
+                >
+                  2025
+                </ToggleGroupItem>
+                <ToggleGroupItem 
+                  value="2026" 
+                  className="bg-transparent text-gray-600 rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white hover:bg-gray-200"
+                >
+                  2026
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
           </div>
 
           {/* Month Filter Pills */}
@@ -115,8 +124,8 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
             onMonthChange={handleMonthChange}
           />
 
-          {/* Trip Type Filters */}
-          <div className="flex items-start justify-between gap-6">
+          {/* Trip Type Filters and View Toggle */}
+          <div className="flex items-center justify-between gap-6 mb-6">
             <div className="flex-1">
               <TripTypeFilter 
                 types={TRIP_TYPES}
@@ -124,17 +133,25 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 onTypeToggle={handleTypeToggle}
               />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">View:</span>
-              <div className="flex border border-gray-200 rounded-md overflow-hidden">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-gray-700">View:</span>
+              <div className="flex bg-gray-100 rounded-md overflow-hidden">
                 <button 
-                  className={`p-2 flex items-center justify-center ${viewMode === 'grid' ? 'bg-black text-white' : 'bg-white text-gray-700'}`}
+                  className={`p-2 flex items-center justify-center transition-colors ${
+                    viewMode === 'grid' 
+                      ? 'bg-black text-white' 
+                      : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                  }`}
                   onClick={() => setViewMode('grid')}
                 >
                   <Grid size={18} />
                 </button>
                 <button 
-                  className={`p-2 flex items-center justify-center ${viewMode === 'list' ? 'bg-black text-white' : 'bg-white text-gray-700'}`}
+                  className={`p-2 flex items-center justify-center transition-colors ${
+                    viewMode === 'list' 
+                      ? 'bg-black text-white' 
+                      : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                  }`}
                   onClick={() => setViewMode('list')}
                 >
                   <List size={18} />
@@ -144,7 +161,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
           </div>
 
           {/* Departure Options */}
-          <div className="space-y-4 mt-6">
+          <div className="space-y-4">
             {options.map((option) => (
               <DepartureOption
                 key={option.id}
@@ -160,54 +177,55 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
             ))}
           </div>
 
+          {/* Load More Button */}
           <div className="flex justify-center mt-8">
-            <button className="px-6 py-3 border border-gray-300 rounded-full font-semibold hover:bg-gray-50">
+            <button className="px-8 py-3 border-2 border-gray-300 rounded-full font-bold text-gray-700 hover:bg-gray-50 transition-colors">
               LOAD MORE
             </button>
           </div>
         </div>
 
         {/* FlexDeposit Banner */}
-        <div className="py-12 bg-gray-50">
+        <div className="py-16 bg-gray-50">
           <div className="container">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               <div className="flex items-center gap-4">
-                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
-                  <span className="text-secondary-foreground text-xl font-bold">£</span>
+                <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                  <span className="text-white text-2xl font-bold">£</span>
                 </div>
                 <div>
-                  <p className="font-medium text-base">Only £60 deposit</p>
-                  <p className="text-gray-600 text-sm">to book</p>
+                  <p className="font-bold text-lg text-black">Only £60 deposit</p>
+                  <p className="text-gray-600">to book</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
-                  <span className="text-secondary-foreground text-xl font-bold">⏱</span>
+                <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                  <span className="text-white text-2xl font-bold">⏱</span>
                 </div>
                 <div>
-                  <p className="font-medium text-base">Pay over time</p>
-                  <p className="text-gray-600 text-sm">interest free</p>
+                  <p className="font-bold text-lg text-black">Pay over time</p>
+                  <p className="text-gray-600">interest free</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
-                  <span className="text-secondary-foreground text-xl font-bold">✓</span>
+                <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                  <span className="text-white text-2xl font-bold">✓</span>
                 </div>
                 <div>
-                  <p className="font-medium text-base">No booking fee</p>
-                  <p className="text-gray-600 text-sm">no change fee</p>
+                  <p className="font-bold text-lg text-black">No booking fee</p>
+                  <p className="text-gray-600">no change fee</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="bg-secondary rounded-full w-12 h-12 flex items-center justify-center shrink-0">
-                  <span className="text-secondary-foreground text-xl font-bold">⚡</span>
+                <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                  <span className="text-white text-2xl font-bold">⚡</span>
                 </div>
                 <div>
-                  <p className="font-medium text-base">FlexDeposit</p>
-                  <p className="text-gray-600 text-sm">options</p>
+                  <p className="font-bold text-lg text-black">FlexDeposit</p>
+                  <p className="text-gray-600">options</p>
                 </div>
               </div>
             </div>
@@ -216,13 +234,13 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
             <div className="bg-black text-white p-8 rounded-lg">
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Flexibility Promise</h3>
-                  <p>
+                  <h3 className="text-3xl font-bold mb-3">Flexibility Promise</h3>
+                  <p className="text-lg">
                     Your money is safe with us and the TTC Promise. Book today and enjoy the benefits of flexible travel dates and money guarantee.
                   </p>
                 </div>
                 <button 
-                  className="mt-6 md:mt-0 border-2 border-white text-white hover:bg-white hover:text-black px-6 py-2 font-semibold transition-all duration-200 ease-in-out"
+                  className="mt-6 md:mt-0 border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded"
                 >
                   FIND OUT MORE
                 </button>

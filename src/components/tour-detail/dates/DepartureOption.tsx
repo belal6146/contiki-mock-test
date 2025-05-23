@@ -1,7 +1,10 @@
+
 import React from 'react';
 import { ChevronDown, ChevronUp, Info } from 'lucide-react';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import PriceBreakdown from './PriceBreakdown';
+import TripTimeline from './TripTimeline';
 
 // Export the interface that utils.ts is trying to import
 export interface DepartureOptionData {
@@ -83,22 +86,22 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   const hasDiscount = option.discount && option.discount > 0;
   
   return (
-    <div className={`border rounded-md overflow-hidden ${isOpen ? 'border-black' : 'border-gray-200 hover:border-gray-300'} transition-colors`}>
+    <div className={`border border-gray-200 rounded-md overflow-hidden transition-all duration-200 ${isOpen ? 'border-gray-400 shadow-md' : 'hover:border-gray-300'}`}>
       {/* Header row */}
       <div 
-        className={`grid grid-cols-3 md:grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'shadow-md' : ''}`}
+        className={`grid grid-cols-12 bg-white cursor-pointer transition-all ${isOpen ? 'bg-gray-50' : ''}`}
         onClick={handleToggle}
       >
         {/* Date info */}
-        <div className="col-span-1 md:col-span-3 p-4 border-r border-gray-200">
+        <div className="col-span-3 p-4 border-r border-gray-200">
           <div className="flex flex-col">
-            <span className="text-sm text-gray-500">{option.dayOfWeek}</span>
-            <div className="flex gap-1 items-baseline">
-              <span className="font-bold text-lg">{option.month} {option.day},</span>
-              <span>{option.year}</span>
+            <span className="text-sm text-gray-600 font-medium">{option.dayOfWeek}</span>
+            <div className="flex gap-1 items-baseline mt-1">
+              <span className="font-bold text-lg text-black">{option.month} {option.day},</span>
+              <span className="text-gray-700">{option.year}</span>
             </div>
-            <div className="hidden md:block mt-1">
-              <button className="flex items-center text-sm text-gray-600 hover:text-black">
+            <div className="mt-2">
+              <button className="flex items-center text-sm text-gray-600 hover:text-black transition-colors">
                 <Info size={14} className="mr-1" />
                 <span>Further Information</span>
               </button>
@@ -107,14 +110,14 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
         </div>
         
         {/* Type & Trip Info */}
-        <div className="col-span-1 md:col-span-5 p-4 border-r border-gray-200 flex items-center">
-          <div className="flex items-center gap-2">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-medium rounded">
+        <div className="col-span-5 p-4 border-r border-gray-200 flex items-center">
+          <div className="flex items-center gap-3">
+            <div className="bg-gray-100 px-3 py-1 text-sm font-semibold rounded-full text-gray-800">
               {tripTypeLabels[option.type] || option.type}
             </div>
             
             {option.variants.length > 0 && (
-              <div className="text-sm text-gray-700">
+              <div className="text-sm text-gray-600">
                 + {option.variants.length} other{option.variants.length > 1 ? 's' : ''}
               </div>
             )}
@@ -122,38 +125,38 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
         </div>
         
         {/* Price & Action */}
-        <div className="col-span-1 md:col-span-4 p-4 flex flex-col md:flex-row justify-between items-center">
-          <div>
+        <div className="col-span-4 p-4 flex justify-between items-center">
+          <div className="flex flex-col">
             {hasDiscount && (
-              <div className="inline-block bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded mb-1">
+              <div className="inline-block bg-yellow-200 text-yellow-800 text-xs font-bold px-2 py-1 rounded mb-2 self-start">
                 LAST MINUTE DEAL
               </div>
             )}
-            <div className="flex items-baseline gap-2">
-              <span className="text-sm text-gray-500">Price</span>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-500">From</span>
               {option.oldPrice && hasDiscount && (
                 <span className="text-sm line-through text-gray-400">{formatCurrency(option.oldPrice)}</span>
               )}
-              <span className={`font-bold ${hasDiscount ? 'text-red-600' : ''}`}>
+              <span className={`font-bold text-lg ${hasDiscount ? 'text-orange-600' : 'text-black'}`}>
                 {formatCurrency(displayPrice)}
               </span>
               {hasDiscount && (
-                <span className="text-xs font-bold bg-yellow-400 text-black px-1 py-0.5 rounded">
+                <span className="text-xs font-bold bg-yellow-300 text-yellow-800 px-2 py-1 rounded">
                   {option.discount}% off
                 </span>
               )}
             </div>
           </div>
           
-          <div className="flex items-center mt-2 md:mt-0">
+          <div className="flex items-center gap-3">
             <button 
-              className={`text-black bg-[#CCFF00] px-4 py-1 rounded text-sm font-bold hover:bg-[#b8e600] ${isSoldOut ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-lime-400 text-black px-6 py-2 rounded font-bold text-sm hover:bg-lime-500 transition-colors ${isSoldOut ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={isSoldOut}
               onClick={isSoldOut ? undefined : handleBookNow}
             >
-              CALL US
+              {isSoldOut ? 'SOLD OUT' : 'BOOK BY PHONE'}
             </button>
-            <button className="ml-2" onClick={handleToggle}>
+            <button className="text-gray-600 hover:text-black transition-colors" onClick={handleToggle}>
               {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </button>
           </div>
@@ -162,71 +165,67 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
       
       {/* Expanded content */}
       {isOpen && (
-        <div className="bg-gray-50 p-4 border-t border-gray-200">
-          {option.variants.length > 0 ? (
-            <div className="space-y-4">
-              <h4 className="font-medium text-sm">Select your option:</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {option.variants.map((variant) => (
-                  <div 
-                    key={variant.id}
-                    className={`border rounded p-3 cursor-pointer transition-all ${
-                      selectedVariant === variant.id 
-                        ? 'border-black ring-2 ring-black ring-opacity-10' 
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                    onClick={() => handleVariantSelect(variant.id)}
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-medium">{variant.name}</span>
-                      <div className={`w-4 h-4 border border-gray-300 rounded-full flex items-center justify-center ${
-                        selectedVariant === variant.id ? 'bg-black border-black' : 'bg-white'
-                      }`}>
-                        {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
+        <div className="bg-white border-t border-gray-200">
+          <div className="grid grid-cols-12 gap-6 p-6">
+            {/* Left side - Variant selection and trip details */}
+            <div className="col-span-8">
+              {option.variants.length > 0 ? (
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-lg text-black mb-4">Choose Variation</h4>
+                  <div className="space-y-3">
+                    {option.variants.map((variant) => (
+                      <div 
+                        key={variant.id}
+                        className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                          selectedVariant === variant.id 
+                            ? 'border-black ring-2 ring-black ring-opacity-20 bg-gray-50' 
+                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                        }`}
+                        onClick={() => handleVariantSelect(variant.id)}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-5 h-5 border-2 rounded-full flex items-center justify-center ${
+                              selectedVariant === variant.id ? 'border-black bg-black' : 'border-gray-300 bg-white'
+                            }`}>
+                              {selectedVariant === variant.id && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                            </div>
+                            <span className="font-semibold text-black">{variant.name}</span>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-sm text-gray-500">More Info</div>
+                            <div className="font-bold text-lg">{formatCurrency(variant.price)}</div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="text-sm text-gray-500">From</span>
-                        <div className="font-bold">{formatCurrency(variant.price)}</div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                          variant.availability === 'available' ? 'bg-green-500' :
-                          variant.availability === 'limited' ? 'bg-yellow-500' : 'bg-red-500'
-                        }`}></span>
-                        <span className="text-xs font-medium">
-                          {variant.availability === 'available' ? 'Available' :
-                           variant.availability === 'limited' ? 'Limited' : 'Sold Out'}
-                        </span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-600">
+                  No additional options available for this departure date.
+                </div>
+              )}
+              
+              {/* Trip Timeline */}
+              <div className="mt-8">
+                <TripTimeline 
+                  startDate={new Date(option.startDate)}
+                  endDate={new Date(option.endDate)}
+                />
               </div>
             </div>
-          ) : (
-            <div className="text-center py-4 text-gray-600">
-              No additional options available for this departure date.
+            
+            {/* Right side - Price breakdown */}
+            <div className="col-span-4">
+              <PriceBreakdown
+                basePrice={displayPrice}
+                discount={option.discount || 0}
+                dealLabel={hasDiscount ? "Last minute deal" : undefined}
+                onBookByPhone={() => onBookByPhone(option.id)}
+                onRequestInfo={() => onRequestInfo(option.id)}
+              />
             </div>
-          )}
-          
-          <div className="mt-6 flex justify-end gap-4">
-            <button 
-              className="px-4 py-2 border border-gray-300 text-gray-800 rounded hover:bg-gray-50"
-              onClick={() => onRequestInfo(option.id)}
-            >
-              Request Info
-            </button>
-            <button 
-              className={`px-4 py-2 bg-[#CCFF00] text-black rounded font-medium hover:bg-[#b8e600] ${
-                isSoldOut ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              disabled={isSoldOut}
-              onClick={!isSoldOut ? () => onBookByPhone(option.id) : undefined}
-            >
-              {isSoldOut ? 'Sold Out' : 'Call Us'}
-            </button>
           </div>
         </div>
       )}
