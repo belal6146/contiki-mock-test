@@ -1,9 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import PrevArrow from '../carousel/PrevArrow';
 import NextArrow from '../carousel/NextArrow';
-// Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -18,39 +17,47 @@ interface Highlight {
 
 interface TripHighlightsProps {
   highlights: Highlight[];
-  arrowVariant?: "default" | "outline" | "circle" | "minimal"; // Fixed arrow variant type
+  arrowVariant?: "default" | "outline" | "circle" | "minimal";
 }
 
 const TripHighlights: React.FC<TripHighlightsProps> = ({ 
   highlights,
-  arrowVariant = "default" // Default value with proper type
+  arrowVariant = "default"
 }) => {
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
+
   useEffect(() => {
     console.debug('[TripHighlights] mounted', { highlightsCount: highlights.length });
   }, [highlights.length]);
   
-  // Get a dynamic image from Unsplash based on highlight type
   const getHighlightImage = (highlight: Highlight, index: number) => {
     if (highlight.image && !highlight.image.includes('placeholder')) {
       return highlight.image;
     }
     
-    // Different image categories based on highlight type
     const type = highlight.type.toLowerCase();
-    let searchTerm = 'travel';
+    const title = highlight.title.toLowerCase().replace(/\s+/g, ',');
+    let searchTerms = [];
     
     if (type.includes('cultural')) {
-      searchTerm = 'cultural,travel,landmarks';
+      searchTerms = ['cultural', 'landmarks', 'architecture', 'heritage', title];
     } else if (type.includes('adventure')) {
-      searchTerm = 'adventure,travel,outdoor';
+      searchTerms = ['adventure', 'outdoor', 'extreme', 'activity', title];
     } else if (type.includes('food')) {
-      searchTerm = 'food,cuisine,restaurant';
+      searchTerms = ['food', 'cuisine', 'restaurant', 'local', title];
     } else if (type.includes('nature')) {
-      searchTerm = 'nature,landscape,scenery';
+      searchTerms = ['nature', 'landscape', 'scenery', 'wilderness', title];
+    } else {
+      searchTerms = ['travel', 'destination', 'experience', title];
     }
     
-    // Add index to make each image unique
-    return `https://source.unsplash.com/random/800x600/?${searchTerm}&sig=${index}`;
+    const searchQuery = searchTerms.filter(Boolean).join(',');
+    return `https://source.unsplash.com/featured/800x600/?${searchQuery}&sig=${index}`;
+  };
+
+  const handleImageLoad = (highlightId: string) => {
+    setImagesLoaded(prev => ({ ...prev, [highlightId]: true }));
+    console.debug('[TripHighlights] imageLoaded', { highlightId });
   };
   
   if (!highlights || highlights.length === 0) {
@@ -92,39 +99,65 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
   };
   
   return (
-    <section className="py-12 bg-white">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="container">
-        <h2 className="text-3xl font-bold mb-2">Trip Highlights</h2>
-        <p className="text-gray-600 mb-8">The must-do experiences that you can cross off your bucket list</p>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 text-gray-900">Trip Highlights</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            The must-do experiences that you can cross off your bucket list
+          </p>
+        </div>
         
         <div className="relative highlights-slider">
           <Slider {...sliderSettings}>
-            {highlights.map((highlight, index) => (
-              <div
-                key={highlight.id}
-                className="px-3"
-              >
-                <div className="group bg-white rounded-lg overflow-hidden shadow transition-all duration-300 hover:shadow-lg">
-                  <div className="relative aspect-w-16 aspect-h-10">
-                    <img
-                      src={getHighlightImage(highlight, index)}
-                      alt={highlight.title}
-                      className="w-full h-64 object-cover"
-                    />
-                    {highlight.isIncluded && (
-                      <div className="absolute top-3 left-3 bg-[#FF3B5C] text-white text-xs font-bold px-3 py-1 rounded">
-                        Included Experience
+            {highlights.map((highlight, index) => {
+              const imageUrl = getHighlightImage(highlight, index);
+              const isLoaded = imagesLoaded[highlight.id];
+              
+              return (
+                <div key={highlight.id} className="px-3">
+                  <div className="group bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+                    <div className="relative h-64 overflow-hidden">
+                      <div 
+                        className={`w-full h-full bg-cover bg-center transition-all duration-700 transform group-hover:scale-110 ${
+                          isLoaded ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                        onLoad={() => handleImageLoad(highlight.id)}
+                      />
+                      
+                      {!isLoaded && (
+                        <div className="absolute inset-0 bg-gray-300 animate-pulse" />
+                      )}
+                      
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                      
+                      {highlight.isIncluded && (
+                        <div className="absolute top-4 left-4 bg-[#CCFF00] text-black text-xs font-bold px-3 py-2 rounded-full shadow-lg">
+                          Included Experience
+                        </div>
+                      )}
+                      
+                      <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
+                        {highlight.type}
                       </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-xl mb-2">{highlight.title}</h3>
-                    <p className="text-gray-700 mb-4 line-clamp-3">{highlight.description}</p>
-                    <a href="#" className="text-[#00BFFF] font-medium">Read more</a>
+                    </div>
+                    
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-[#FF6900] transition-colors duration-200">
+                        {highlight.title}
+                      </h3>
+                      <p className="text-gray-700 mb-4 line-clamp-3 leading-relaxed">
+                        {highlight.description}
+                      </p>
+                      <button className="text-[#FF6900] font-semibold text-sm hover:text-[#FF6900]/80 transition-colors duration-200 flex items-center gap-1">
+                        Read more →
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </Slider>
         </div>
       </div>
@@ -132,10 +165,14 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
       <style>
         {`
         .highlights-slider .slick-dots {
-          bottom: -30px;
+          bottom: -40px;
         }
         .highlights-slider .slick-dots li button:before {
-          font-size: 10px;
+          font-size: 12px;
+          color: #FF6900;
+        }
+        .highlights-slider .slick-dots li.slick-active button:before {
+          color: #FF6900;
         }
         .highlights-slider .slick-slide {
           padding: 0 8px;

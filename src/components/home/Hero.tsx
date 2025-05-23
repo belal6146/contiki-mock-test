@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Search, Users, ChevronRight } from 'lucide-react';
@@ -10,8 +9,8 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
 
-// Use a more high-quality static image
-const heroImageUrl = "https://source.unsplash.com/random/1920x1080/?croatia,beach,travel,adventure";
+// High-quality travel image for young adventurers
+const heroImageUrl = "https://source.unsplash.com/featured/1920x1080/?youth,travel,adventure,landscape,backpacking,europe";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -29,10 +28,11 @@ const Hero = () => {
     img.src = heroImageUrl;
     img.onload = () => {
       setIsLoaded(true);
+      console.debug('[Hero] imageLoaded');
       trackEvent('hero_image_loaded', { status: 'success' });
     };
     img.onerror = () => {
-      setIsLoaded(true); // Still set loaded to true to show content
+      setIsLoaded(true);
       trackEvent('hero_image_loaded', { status: 'error' });
     };
     
@@ -57,13 +57,12 @@ const Hero = () => {
     if (date) params.append('date', format(date, 'yyyy-MM-dd'));
     params.append('travelers', travelers.toString());
     
-    // Navigate to the search results page
     navigate(`/tours?${params.toString()}`);
   };
 
   return (
-    <section className="relative bg-primary h-screen md:h-[85vh] h-[70vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image with parallax */}
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Background Image with parallax */}
       <div 
         className={cn(
           "absolute inset-0 w-full h-full bg-cover bg-center z-0 transition-all duration-1000",
@@ -78,7 +77,7 @@ const Hero = () => {
       
       {/* Enhanced Gradient Overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-transparent z-10"
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/40 z-10"
         aria-hidden="true"
       />
 
@@ -88,14 +87,13 @@ const Hero = () => {
           "text-center mb-8 transform transition-all duration-700 ease-out",
           isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         )}>
-          <h1 className="font-bold text-5xl md:text-7xl text-white leading-tight tracking-tight drop-shadow-lg mb-4">
+          <h1 className="font-bold text-5xl md:text-7xl text-white leading-tight tracking-tight drop-shadow-2xl mb-4">
             ADVENTURE <span className="text-[#CCFF00]">AWAITS</span>
           </h1>
-          <p className="font-normal text-lg md:text-2xl text-white/90 mt-4 max-w-2xl mx-auto">
+          <p className="font-normal text-lg md:text-2xl text-white/90 mt-4 max-w-2xl mx-auto drop-shadow-lg">
             Discover the world with like-minded 18-35 year olds
           </p>
           
-          {/* New: Animated down indicator */}
           <div className="mt-8 animate-bounce">
             <ChevronRight className="h-8 w-8 text-white/50 rotate-90 mx-auto" />
           </div>
@@ -105,7 +103,7 @@ const Hero = () => {
         <form 
           onSubmit={handleSubmit}
           className={cn(
-            "bg-white rounded-lg p-6 shadow-xl max-w-4xl w-full mx-auto transition-all duration-1000 ease-out transform",
+            "bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-2xl max-w-4xl w-full mx-auto transition-all duration-1000 ease-out transform",
             isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95"
           )}
           aria-label="Trip search form"
@@ -186,11 +184,10 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Search Button with enhanced hover effect */}
           <div className="mt-6">
             <Button 
               type="submit" 
-              className="w-full bg-accent text-primary hover:bg-accent/90 font-medium px-6 py-6 rounded-lg transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg"
+              className="w-full bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-medium px-6 py-6 rounded-lg transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg"
               aria-label="Search trips"
             >
               <Search className="mr-2 h-5 w-5" />
