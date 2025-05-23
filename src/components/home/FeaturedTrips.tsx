@@ -21,7 +21,7 @@ const FeaturedTrips = () => {
     trackEvent('retry_clicked', { component: 'FeaturedTrips' });
   };
 
-  // Mock data if no trips are loaded
+  // Mock data that matches the screenshot
   const mockTrips = [
     {
       id: '1',
@@ -34,7 +34,8 @@ const FeaturedTrips = () => {
       places: 5,
       rating: 4.6,
       image: 'https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      isSpotlight: true
+      isSpotlight: true,
+      description: 'The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, wit...'
     },
     {
       id: '2',
@@ -46,7 +47,8 @@ const FeaturedTrips = () => {
       countries: 1,
       places: 7,
       rating: 4.7,
-      image: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+      image: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      description: 'The one that surrounds you with the majestic landscape of the Canadian Rockies, from Vancouver to the Rocky...'
     },
     {
       id: '3',
@@ -95,22 +97,20 @@ const FeaturedTrips = () => {
     <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
       <div className="container max-w-7xl mx-auto px-4">
         {/* Header with navigation arrows - centered with buttons on the sides */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex-1 text-center">
-            <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
-              Popular trips
-            </h2>
-          </div>
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center mb-8 relative">
+          <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
+            Popular trips
+          </h2>
+          <div className="absolute right-0 flex items-center gap-2">
             <button 
-              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handlePrevious}
               disabled={currentPage === 0}
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             <button 
-              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handleNext}
               disabled={currentPage >= Math.ceil(displayTrips.length / 4) - 1}
             >
@@ -157,7 +157,7 @@ const FeaturedTrips = () => {
                     />
                     
                     {/* Trip Spotlight Badge */}
-                    {(index === 0 || trip.isSpotlight) && (
+                    {trip.isSpotlight && (
                       <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                         Trip Spotlight
                       </div>
@@ -204,7 +204,7 @@ const FeaturedTrips = () => {
                     
                     {/* Description */}
                     <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      The one that takes you through {trip.destination} with comfy sleeps between island hops...
+                      {trip.description || `The one that takes you through ${trip.destination} with comfy sleeps between island hops...`}
                     </p>
                     
                     {/* Add to Compare Button */}

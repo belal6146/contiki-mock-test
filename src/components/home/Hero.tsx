@@ -79,8 +79,8 @@ const Hero = () => {
         )}>
           <div className="mb-6">
             <h1 className="font-black text-6xl md:text-8xl text-white leading-none tracking-tight drop-shadow-2xl mb-2">
-              <span className="block">LAST MINUTE</span>
-              <span className="block text-[#CCFF00] stroke-black" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
+              <span className="block text-white" style={{ WebkitTextStroke: '2px black' }}>LAST MINUTE</span>
+              <span className="block text-[#CCFF00]" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
             </h1>
             <p className="font-semibold text-xl md:text-2xl text-white mt-4 drop-shadow-lg">
               Save BIG on trips departing soon
@@ -113,7 +113,7 @@ const Hero = () => {
                   placeholder="Where do you want to go?"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full pl-10 h-12 border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent focus:border-red-500 focus:ring-0"
+                  className="w-full pl-10 h-12 border-0 border-b-2 border-gray-300 rounded-none bg-transparent focus:border-gray-400 focus:ring-0"
                   type="text"
                   aria-label="Enter destination"
                 />
@@ -124,7 +124,7 @@ const Hero = () => {
             {/* What do you want to see? */}
             <div className="space-y-2">
               <Select value={activity} onValueChange={setActivity}>
-                <SelectTrigger className="w-full h-12 border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent focus:border-red-500 focus:ring-0">
+                <SelectTrigger className="w-full h-12 border-0 border-b-2 border-gray-300 rounded-none bg-transparent focus:border-gray-400 focus:ring-0">
                   <SelectValue placeholder="What do you want to see?" />
                 </SelectTrigger>
                 <SelectContent>
@@ -145,7 +145,7 @@ const Hero = () => {
                     variant="outline"
                     aria-label="Select travel date"
                     className={cn(
-                      "w-full h-12 text-left font-normal relative border-b-2 border-red-500 border-t-0 border-l-0 border-r-0 rounded-none bg-transparent hover:bg-transparent focus:border-red-500 focus:ring-0",
+                      "w-full h-12 text-left font-normal relative border-0 border-b-2 border-gray-300 rounded-none bg-transparent hover:bg-transparent focus:border-gray-400 focus:ring-0",
                       !date && "text-gray-400"
                     )}
                   >

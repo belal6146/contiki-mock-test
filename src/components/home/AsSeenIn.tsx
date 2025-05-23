@@ -41,42 +41,44 @@ const AsSeenIn = () => {
   return (
     <section className="py-12 bg-white">
       <div className="container max-w-6xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <h2 className="text-lg font-medium text-gray-800 mb-6">As seen in</h2>
+        <div className="text-center">
+          <h2 className="text-lg font-medium text-gray-800 mb-8">As seen in</h2>
           
-          <div className="flex items-center justify-center space-x-8">
+          <div className="flex items-center justify-center">
             <button 
               onClick={goToPrevious}
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors mr-8"
               aria-label="Previous logos"
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             
-            <div className="flex items-center justify-center space-x-12 min-w-0 flex-1">
+            <div className="flex items-center justify-center space-x-8 min-w-0 flex-1">
               {getVisibleLogos().map((logo, index) => (
-                <div key={`${logo.name}-${index}`} className="flex-shrink-0">
-                  {logo.src ? (
-                    <img 
-                      src={logo.src} 
-                      alt={logo.name} 
-                      className="h-8 object-contain"
-                    />
-                  ) : (
-                    <span className={logo.className}>
-                      {logo.name}
-                    </span>
-                  )}
+                <React.Fragment key={`${logo.name}-${index}`}>
+                  <div className="flex-shrink-0 flex items-center justify-center min-w-0">
+                    {logo.src ? (
+                      <img 
+                        src={logo.src} 
+                        alt={logo.name} 
+                        className="h-8 object-contain max-w-[120px]"
+                      />
+                    ) : (
+                      <span className={logo.className}>
+                        {logo.name}
+                      </span>
+                    )}
+                  </div>
                   {index < 4 && (
-                    <div className="w-px h-8 bg-red-500 ml-6 inline-block" />
+                    <div className="w-px h-8 bg-red-500 flex-shrink-0" />
                   )}
-                </div>
+                </React.Fragment>
               ))}
             </div>
             
             <button 
               onClick={goToNext}
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors ml-8"
               aria-label="Next logos"
             >
               <ChevronRight className="w-5 h-5 text-gray-600" />
