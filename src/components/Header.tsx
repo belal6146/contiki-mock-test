@@ -5,6 +5,13 @@ import { Search, Phone, Menu, X, MessageCircle, ChevronDown } from 'lucide-react
 import { trackEvent } from '@/lib/analytics';
 import Logo from './header/Logo';
 import DesktopNav from './header/DesktopNav';
+import MobileMenu from './header/MobileMenu';
+import {
+  destinationItems,
+  travelStyleItems,
+  aboutItems,
+  inspiredItems
+} from './header/NavigationData';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,41 +45,41 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full z-50">
+    <header className="fixed w-full z-50 bg-white shadow-sm">
       {/* Utility Navigation */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 py-1 flex justify-end space-x-6 text-sm">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end space-x-6 text-xs">
           <Link
             to="/contact-us"
-            className="hover:underline text-gray-600 font-medium"
+            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
             onClick={handleClick('ContactUs')}
           >
             Contact us
           </Link>
           <Link
             to="/future-travel-credit"
-            className="hover:underline text-gray-600 font-medium"
+            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
             onClick={handleClick('FutureTravelCredit')}
           >
             Future Travel Credit
           </Link>
           <Link
             to="/subscribe"
-            className="hover:underline text-gray-600 font-medium"
+            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
             onClick={handleClick('SubscribeToEmails')}
           >
             Subscribe to emails
           </Link>
           <Link
             to="/login"
-            className="hover:underline text-gray-600 font-medium"
+            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
             onClick={handleClick('TravellerLogIn')}
           >
             Traveller log in
           </Link>
           <Link
             to="/agent-login"
-            className="hover:underline text-gray-600 font-medium"
+            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
             onClick={handleClick('AgentLogIn')}
           >
             Agent log in
@@ -81,43 +88,36 @@ const Header = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav id="navbar" className="navbar bg-white shadow-md">
-        <div className="navbar-wrapper max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <nav className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Mobile Burger */}
           <button
             aria-label="Toggle menu"
-            className="md:hidden icon-wrapper"
+            className="md:hidden p-2 -ml-2"
             onClick={toggleMobile}
-            data-item-type="General Interaction"
-            data-item-name="open-main-menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
           </button>
           
           {/* Logo */}
           <Logo onClick={handleClick('Logo')} />
           
-          {/* Use the DesktopNav component for larger screens */}
+          {/* Desktop Navigation */}
           <DesktopNav onLinkClick={handleClick} />
         </div>
         
-        {/* Mobile Slide-Down Menu */}
-        {mobileOpen && (
-          <div className="md:hidden bg-white shadow-lg">
-            {['DESTINATIONS', 'DEALS', 'TRAVEL STYLES', 'ABOUT CONTIKI', 'GET INSPIRED'].map(label => (
-              <button
-                key={label}
-                className="block w-full text-left px-4 py-3 text-base font-medium text-black hover:bg-gray-100"
-                onClick={() => {
-                  handleClick(`Mobile-${label}`)();
-                  toggleMobile();
-                }}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Mobile Menu */}
+        <MobileMenu
+          isOpen={mobileOpen}
+          destinationItems={destinationItems}
+          travelStyleItems={travelStyleItems}
+          aboutItems={aboutItems}
+          inspiredItems={inspiredItems}
+          onLinkClick={(label) => {
+            handleClick(label)();
+            setMobileOpen(false);
+          }}
+        />
       </nav>
     </header>
   );
