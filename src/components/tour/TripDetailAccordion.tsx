@@ -7,147 +7,122 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Users, Bus } from 'lucide-react';
-import TravelersInfo, { Traveler } from './TravelersInfo';
+import TravelersInfo, { BookingPassenger } from './TravelersInfo';
 import BusSeatMap from './BusSeatMap';
-import { Seat } from './SeatGrid';
 import { ConsentManagerProvider } from '@/context/ConsentManager';
 
-// Mock data for travelers
-const mockTravelers: Traveler[] = [
+// Mock data for travelers using the correct BookingPassenger interface
+const mockTravelers: BookingPassenger[] = [
   {
-    id: '1',
-    name: 'Emma Wilson',
+    id: 1,
+    firstName: 'Emma',
+    lastName: 'Wilson',
     age: 24,
-    country: 'Australia',
-    occupation: 'Marketing Manager',
-    seatId: '1A',
-    hasAvatar: true
+    gender: 'Female',
+    address: { country: 'Australia' },
+    travelPassion: 'Photography',
+    numberOfTimesTravelledPreviously: 3,
+    passengerId: 1
   },
   {
-    id: '2',
-    name: 'James Smith',
+    id: 2,
+    firstName: 'James',
+    lastName: 'Smith',
     age: 26,
-    country: 'USA',
-    occupation: 'Software Developer',
-    seatId: '2A',
-    hasAvatar: false
+    gender: 'Male',
+    address: { country: 'USA' },
+    travelPassion: 'Adventure sports',
+    numberOfTimesTravelledPreviously: 5,
+    passengerId: 2
   },
   {
-    id: '3',
-    name: 'Sophie Brown',
+    id: 3,
+    firstName: 'Sophie',
+    lastName: 'Brown',
     age: 23,
-    country: 'UK',
-    occupation: 'Student',
-    seatId: '3A',
-    hasAvatar: true
+    gender: 'Female',
+    address: { country: 'UK' },
+    travelPassion: 'Cultural experiences',
+    numberOfTimesTravelledPreviously: 2,
+    passengerId: 3
   },
   {
-    id: '4',
-    name: 'Michael Johnson',
+    id: 4,
+    firstName: 'Michael',
+    lastName: 'Johnson',
     age: 29,
-    country: 'Canada',
-    occupation: 'Photographer',
-    seatId: '4B',
-    hasAvatar: true
+    gender: 'Male',
+    address: { country: 'Canada' },
+    travelPassion: 'History',
+    numberOfTimesTravelledPreviously: 7,
+    passengerId: 4
   },
   {
-    id: '5',
-    name: 'Jessica Lee',
+    id: 5,
+    firstName: 'Jessica',
+    lastName: 'Lee',
     age: 25,
-    country: 'New Zealand',
-    occupation: 'Teacher',
-    seatId: '5A',
-    hasAvatar: false
+    gender: 'Female',
+    address: { country: 'New Zealand' },
+    travelPassion: 'Nature and wildlife',
+    numberOfTimesTravelledPreviously: 4,
+    passengerId: 5
   },
   {
-    id: '6',
-    name: 'Daniel Thompson',
+    id: 6,
+    firstName: 'Daniel',
+    lastName: 'Thompson',
     age: 31,
-    country: 'Ireland',
-    occupation: 'Doctor',
-    seatId: '7B',
-    hasAvatar: true
+    gender: 'Male',
+    address: { country: 'Ireland' },
+    travelPassion: 'Food and wine',
+    numberOfTimesTravelledPreviously: 6,
+    passengerId: 6
   },
   {
-    id: '7',
-    name: 'Olivia Garcia',
+    id: 7,
+    firstName: 'Olivia',
+    lastName: 'Garcia',
     age: 27,
-    country: 'Spain',
-    occupation: 'Architect',
-    seatId: '8A',
-    hasAvatar: true
+    gender: 'Female',
+    address: { country: 'Spain' },
+    travelPassion: 'Architecture',
+    numberOfTimesTravelledPreviously: 8,
+    passengerId: 7
   },
   {
-    id: '8',
-    name: 'Thomas Wright',
+    id: 8,
+    firstName: 'Thomas',
+    lastName: 'Wright',
     age: 28,
-    country: 'Germany',
-    occupation: 'Engineer',
-    seatId: '21B',
-    hasAvatar: false
+    gender: 'Male',
+    address: { country: 'Germany' },
+    travelPassion: 'Technology',
+    numberOfTimesTravelledPreviously: 3,
+    passengerId: 8
   },
   {
-    id: '9',
-    name: 'Emily Chen',
+    id: 9,
+    firstName: 'Emily',
+    lastName: 'Chen',
     age: 26,
-    country: 'Singapore',
-    occupation: 'Financial Analyst',
-    seatId: '23A',
-    hasAvatar: true
+    gender: 'Female',
+    address: { country: 'Singapore' },
+    travelPassion: 'Business networking',
+    numberOfTimesTravelledPreviously: 9,
+    passengerId: 9
   },
   {
-    id: '10',
-    name: 'Jack Murphy',
+    id: 10,
+    firstName: 'Jack',
+    lastName: 'Murphy',
     age: 24,
-    country: 'Ireland',
-    occupation: 'Chef',
-    seatId: '26A',
-    hasAvatar: false
+    gender: 'Male',
+    address: { country: 'Ireland' },
+    travelPassion: 'Culinary experiences',
+    numberOfTimesTravelledPreviously: 2,
+    passengerId: 10
   }
-];
-
-// Mock data for upper deck seats
-const mockUpperDeckSeats: Seat[] = [
-  { id: '21A', status: 'available' },
-  { id: '21B', status: 'occupied_male', traveler: { id: '8', name: 'Thomas Wright' } },
-  { id: '22A', status: 'available' },
-  { id: '22B', status: 'available' },
-  { id: '23A', status: 'occupied_female', traveler: { id: '9', name: 'Emily Chen' } },
-  { id: '23B', status: 'available' },
-  { id: '24A', status: 'available' },
-  { id: '24B', status: 'available' },
-  { id: '25A', status: 'occupied_male' },
-  { id: '25B', status: 'available' },
-  { id: '26A', status: 'occupied_male', traveler: { id: '10', name: 'Jack Murphy' } },
-  { id: '26B', status: 'available' },
-  { id: '27A', status: 'available' },
-  { id: '27B', status: 'available' },
-  { id: '28A', status: 'available' },
-  { id: '28B', status: 'available' }
-];
-
-// Mock data for lower deck seats
-const mockLowerDeckSeats: Seat[] = [
-  { id: '1A', status: 'occupied_female', traveler: { id: '1', name: 'Emma Wilson' } },
-  { id: '1B', status: 'available' },
-  { id: '2A', status: 'occupied_male', traveler: { id: '2', name: 'James Smith' } },
-  { id: '2B', status: 'available' },
-  { id: '3A', status: 'occupied_female', traveler: { id: '3', name: 'Sophie Brown' } },
-  { id: '3B', status: 'available' },
-  { id: '4A', status: 'available' },
-  { id: '4B', status: 'occupied_male', traveler: { id: '4', name: 'Michael Johnson' } },
-  { id: '5A', status: 'occupied_female', traveler: { id: '5', name: 'Jessica Lee' } },
-  { id: '5B', status: 'available' },
-  { id: '6A', status: 'available' },
-  { id: '6B', status: 'available' },
-  { id: '7A', status: 'available' },
-  { id: '7B', status: 'occupied_male', traveler: { id: '6', name: 'Daniel Thompson' } },
-  { id: '8A', status: 'occupied_female', traveler: { id: '7', name: 'Olivia Garcia' } },
-  { id: '8B', status: 'available' },
-  { id: '9A', status: 'available' },
-  { id: '9B', status: 'available' },
-  { id: '10A', status: 'available' },
-  { id: '10B', status: 'available' }
 ];
 
 const TripDetailAccordion: React.FC = () => {
@@ -164,7 +139,7 @@ const TripDetailAccordion: React.FC = () => {
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4">
-              <TravelersInfo travelers={mockTravelers} />
+              <TravelersInfo passengers={mockTravelers} />
             </AccordionContent>
           </AccordionItem>
           
@@ -177,10 +152,7 @@ const TripDetailAccordion: React.FC = () => {
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4">
-              <BusSeatMap 
-                upperDeckSeats={mockUpperDeckSeats}
-                lowerDeckSeats={mockLowerDeckSeats}
-              />
+              <BusSeatMap passengers={mockTravelers} />
             </AccordionContent>
           </AccordionItem>
         </Accordion>
