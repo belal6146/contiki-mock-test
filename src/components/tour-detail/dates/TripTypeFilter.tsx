@@ -1,10 +1,11 @@
 
 import React from 'react';
+import { Check } from 'lucide-react';
 
 interface TripType {
   id: string;
   label: string;
-  color: string;
+  iconPath?: string;
 }
 
 interface TripTypeFilterProps {
@@ -15,22 +16,21 @@ interface TripTypeFilterProps {
 
 const TripTypeFilter: React.FC<TripTypeFilterProps> = ({ types, selectedTypes, onTypeToggle }) => {
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-4">
-      <span className="text-sm font-medium text-gray-700 mr-2">Trip Type:</span>
-      {types.map(type => (
+    <div className="flex flex-wrap gap-2">
+      {types.map((type) => (
         <button
           key={type.id}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+          className={`flex items-center px-3 py-1 rounded-full text-sm transition-colors ${
             selectedTypes.includes(type.id)
-              ? `bg-${type.color} text-black border border-${type.color}`
+              ? 'bg-[rgb(204,255,0)] text-black font-semibold'
               : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
           }`}
-          style={{
-            backgroundColor: selectedTypes.includes(type.id) ? type.color : 'white'
-          }}
           onClick={() => onTypeToggle(type.id)}
         >
-          {type.label}
+          {selectedTypes.includes(type.id) && (
+            <Check className="mr-1 h-3.5 w-3.5" />
+          )}
+          <span>{type.label}</span>
         </button>
       ))}
     </div>

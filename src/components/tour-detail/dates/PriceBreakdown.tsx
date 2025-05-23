@@ -68,7 +68,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
         <div className="space-y-3">
           <button 
             onClick={onBookByPhone} 
-            className="w-full bg-[#CCFF00] text-black py-3 px-4 rounded font-bold hover:bg-[#bfff00] transition-colors text-sm"
+            className="w-full bg-[rgb(204,255,0)] text-black py-3 px-4 rounded font-bold hover:bg-[rgb(204,255,0)/90] transition-colors text-sm"
           >
             BOOK BY PHONE
           </button>

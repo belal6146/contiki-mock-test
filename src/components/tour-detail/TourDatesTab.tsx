@@ -161,7 +161,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>Date</span>
                     </button>
-                    <button className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                    <button className="inline-flex items-center px-4 py-2 bg-[rgb(204,255,0)] text-black rounded-md hover:bg-[rgb(204,255,0)/90]">
                       <Filter className="h-4 w-4 mr-2" />
                       <span>Apply Filters</span>
                     </button>
@@ -175,13 +175,13 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                   <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)} className="gap-0">
                     <ToggleGroupItem 
                       value="2025" 
-                      className="bg-orange-500 text-white rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-orange-500 data-[state=on]:text-white"
+                      className="bg-[rgb(204,255,0)] text-black rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-[rgb(204,255,0)] data-[state=on]:text-black"
                     >
                       2025
                     </ToggleGroupItem>
                     <ToggleGroupItem 
                       value="2026" 
-                      className="bg-transparent text-gray-600 rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-orange-500 data-[state=on]:text-white hover:bg-gray-200"
+                      className="bg-transparent text-gray-600 rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-[rgb(204,255,0)] data-[state=on]:text-black hover:bg-gray-200"
                     >
                       2026
                     </ToggleGroupItem>
@@ -211,7 +211,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     <button 
                       className={`p-2 flex items-center justify-center transition-colors ${
                         viewMode === 'grid' 
-                          ? 'bg-orange-500 text-white' 
+                          ? 'bg-[rgb(204,255,0)] text-black' 
                           : 'bg-transparent text-gray-600 hover:bg-gray-200'
                       }`}
                       onClick={() => setViewMode('grid')}
@@ -221,7 +221,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     <button 
                       className={`p-2 flex items-center justify-center transition-colors ${
                         viewMode === 'list' 
-                          ? 'bg-orange-500 text-white' 
+                          ? 'bg-[rgb(204,255,0)] text-black' 
                           : 'bg-transparent text-gray-600 hover:bg-gray-200'
                       }`}
                       onClick={() => setViewMode('list')}
@@ -235,7 +235,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
               {/* Selected Filters Display */}
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span className="text-sm font-medium text-gray-700">Active filters:</span>
-                <div className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                <div className="bg-[rgb(204,255,0)] text-black px-3 py-1 rounded-full text-sm font-medium flex items-center">
                   {selectedMonth}
                   <button className="ml-2">
                     <span className="sr-only">Remove filter</span>
@@ -255,7 +255,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     </button>
                   </div>
                 ))}
-                <button className="text-sm text-orange-500 font-medium hover:text-orange-600">Clear all</button>
+                <button className="text-sm text-[rgb(204,255,0)] font-medium hover:text-[rgb(204,255,0)/90]">Clear all</button>
               </div>
 
               {/* Results Summary */}
@@ -290,7 +290,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
 
               {/* Load More Button */}
               <div className="flex justify-center mt-10">
-                <button className="px-8 py-3 border-2 border-orange-500 rounded-full font-bold text-orange-500 hover:bg-orange-50 transition-colors">
+                <button className="px-8 py-3 border-2 border-[rgb(204,255,0)] rounded-full font-bold text-black bg-[rgb(204,255,0)] hover:bg-[rgb(204,255,0)/90] transition-colors">
                   LOAD MORE DATES
                 </button>
               </div>
@@ -302,8 +302,8 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
             <div className="container">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div className="flex items-center gap-5">
-                  <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-white text-2xl font-bold">£</span>
+                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                    <span className="text-black text-2xl font-bold">£</span>
                   </div>
                   <div>
                     <p className="font-bold text-lg text-black">Only £60 deposit</p>
@@ -312,8 +312,8 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
                 
                 <div className="flex items-center gap-5">
-                  <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-white text-2xl font-bold">⏱</span>
+                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                    <span className="text-black text-2xl font-bold">⏱</span>
                   </div>
                   <div>
                     <p className="font-bold text-lg text-black">Pay over time</p>
@@ -322,8 +322,8 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
                 
                 <div className="flex items-center gap-5">
-                  <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-white text-2xl font-bold">✓</span>
+                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                    <span className="text-black text-2xl font-bold">✓</span>
                   </div>
                   <div>
                     <p className="font-bold text-lg text-black">No booking fees</p>
@@ -332,8 +332,8 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
                 
                 <div className="flex items-center gap-5">
-                  <div className="bg-orange-500 rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-white text-2xl font-bold">⚡</span>
+                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
+                    <span className="text-black text-2xl font-bold">⚡</span>
                   </div>
                   <div>
                     <p className="font-bold text-lg text-black">FlexDeposit</p>
@@ -353,7 +353,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                       </p>
                     </div>
                     <button 
-                      className="mt-6 md:mt-0 border-2 border-white text-white hover:bg-white hover:text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded"
+                      className="mt-6 md:mt-0 bg-[rgb(204,255,0)] text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded hover:bg-[rgb(204,255,0)/90]"
                     >
                       FIND OUT MORE
                     </button>
