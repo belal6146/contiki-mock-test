@@ -31,7 +31,7 @@ const Header = () => {
     };
   }, [mobileOpen]);
 
-  const handleClick = (label: string) => () => {
+  const handleClick = (label: string) => {
     console.debug('[Header] clicked', { label });
     trackEvent('navigation_click', { item: label });
   };
@@ -52,35 +52,35 @@ const Header = () => {
           <Link
             to="/contact-us"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={handleClick('ContactUs')}
+            onClick={() => handleClick('ContactUs')}
           >
             Contact us
           </Link>
           <Link
             to="/future-travel-credit"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={handleClick('FutureTravelCredit')}
+            onClick={() => handleClick('FutureTravelCredit')}
           >
             Future Travel Credit
           </Link>
           <Link
             to="/subscribe"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={handleClick('SubscribeToEmails')}
+            onClick={() => handleClick('SubscribeToEmails')}
           >
             Subscribe to emails
           </Link>
           <Link
             to="/login"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={handleClick('TravellerLogIn')}
+            onClick={() => handleClick('TravellerLogIn')}
           >
             Traveller log in
           </Link>
           <Link
             to="/agent-login"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={handleClick('AgentLogIn')}
+            onClick={() => handleClick('AgentLogIn')}
           >
             Agent log in
           </Link>
@@ -102,11 +102,11 @@ const Header = () => {
             </button>
             
             {/* Logo */}
-            <Logo onClick={handleClick('Logo')} />
+            <Logo onClick={() => handleClick('Logo')} width="120px" />
           </div>
           
           {/* Desktop Navigation on the right */}
-          <DesktopNav onLinkClick={handleClick} />
+          <DesktopNav onLinkClick={(label) => handleClick(label)()} />
         </div>
         
         {/* Mobile Menu */}

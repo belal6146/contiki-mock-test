@@ -12,7 +12,7 @@ const SixTwoCTA = () => {
   };
 
   return (
-    <section className="bg-black py-12">
+    <section className="bg-black py-12 relative bg-cover bg-center" style={{ backgroundImage: 'url("/assets/images/six-two-map.png")' }}>
       <div className="container max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
@@ -20,7 +20,7 @@ const SixTwoCTA = () => {
           </div>
           
           <div className="text-center md:text-right">
-            <h3 className="text-[#CCFF00] text-2xl font-bold mb-2">
+            <h3 className="text-[#CCFF00] text-4xl font-bold mb-2">
               Think you've seen the world?
             </h3>
             <Link 

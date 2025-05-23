@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Phone } from 'lucide-react';
+import { Search, Phone, MessageCircle } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import MenuLink from './MenuLink';
 import DropdownItems from './DropdownItems';
@@ -21,8 +21,8 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
     <>
       {/* Desktop navigation */}
       <nav className="hidden lg:flex items-center justify-center flex-1 mx-8">
-        <ul className="flex items-center space-x-1">
-          <li>
+        <ul className="flex items-center">
+          <li className="mr-6">
             <MenuLink 
               to="/destinations" 
               label="DESTINATIONS" 
@@ -32,7 +32,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={destinationItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li>
+          <li className="mr-6">
             <MenuLink 
               to="/deals" 
               label="DEALS" 
@@ -45,7 +45,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               />
             </MenuLink>
           </li>
-          <li>
+          <li className="mr-6">
             <MenuLink 
               to="/travel-styles" 
               label="TRAVEL STYLES" 
@@ -55,7 +55,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={travelStyleItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li>
+          <li className="mr-6">
             <MenuLink 
               to="/about-contiki" 
               label="ABOUT CONTIKI" 
@@ -65,7 +65,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={aboutItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li>
+          <li className="mr-6">
             <MenuLink 
               to="/get-inspired" 
               label="GET INSPIRED" 
@@ -78,7 +78,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         </ul>
       </nav>
       
-      {/* Right side elements - search box, phone, etc. */}
+      {/* Right side elements - search box, phone, chat, etc. */}
       <div className="hidden lg:flex items-center space-x-4">
         <div className="relative">
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none z-10">
@@ -101,6 +101,14 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
           <Phone className="h-4 w-4 mr-2" />
           0808 281 1120
         </a>
+        
+        <button 
+          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
+          onClick={() => onLinkClick('Chat')}
+        >
+          <MessageCircle className="h-4 w-4 mr-2" />
+          Chat
+        </button>
         
         <Link 
           to="/subscribe" 

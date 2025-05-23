@@ -11,6 +11,7 @@ import TopTripsPromo from '@/components/home/TopTripsPromo';
 import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
 import LogosCarousel from '@/components/home/LogosCarousel';
 import AsSeenIn from '@/components/home/AsSeenIn';
+import SixTwoCTA from '@/components/home/SixTwoCTA';
 import SixTwoMap from '@/components/home/SixTwoMap';
 import BackToTopButton from '@/components/BackToTopButton';
 import HelpButton from '@/components/home/HelpButton';
@@ -65,7 +66,7 @@ const Index = () => {
 
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-20">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
@@ -76,6 +77,10 @@ const Index = () => {
         
         <ErrorBoundary>
           <AsSeenIn />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <SixTwoCTA />
         </ErrorBoundary>
         
         <ErrorBoundary>

@@ -6,11 +6,11 @@ const AsSeenIn = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const logos = [
-    { name: 'BuzzFeed', className: 'text-black font-bold text-xl' },
-    { name: 'PinkNews', className: 'text-pink-600 font-bold text-xl' },
-    { name: 'Traveler', className: 'text-black font-serif text-xl italic' },
-    { name: 'UNILAD', className: 'text-black font-bold text-xl' },
-    { name: 'COSMOPOLITAN', className: 'text-black font-bold text-xl tracking-wide' }
+    { name: 'BuzzFeed', src: 'assets/logos/buzzfeed.png', className: 'text-black font-bold text-xl' },
+    { name: 'PinkNews', src: 'assets/logos/pinknews.png', className: 'text-pink-600 font-bold text-xl' },
+    { name: 'Traveler', src: 'assets/logos/traveler.png', className: 'text-black font-serif text-xl italic' },
+    { name: 'UNILAD', src: 'assets/logos/unilad.png', className: 'text-black font-bold text-xl' },
+    { name: 'COSMOPOLITAN', src: 'assets/logos/cosmopolitan.png', className: 'text-black font-bold text-xl tracking-wide' }
   ];
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const AsSeenIn = () => {
           <div className="flex items-center justify-center space-x-8">
             <button 
               onClick={goToPrevious}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Previous logos"
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
@@ -56,9 +56,17 @@ const AsSeenIn = () => {
             <div className="flex items-center justify-center space-x-12 min-w-0 flex-1">
               {getVisibleLogos().map((logo, index) => (
                 <div key={`${logo.name}-${index}`} className="flex-shrink-0">
-                  <span className={logo.className}>
-                    {logo.name}
-                  </span>
+                  {logo.src ? (
+                    <img 
+                      src={logo.src} 
+                      alt={logo.name} 
+                      className="h-8 object-contain"
+                    />
+                  ) : (
+                    <span className={logo.className}>
+                      {logo.name}
+                    </span>
+                  )}
                   {index < 4 && (
                     <div className="w-px h-8 bg-red-500 ml-6 inline-block" />
                   )}
@@ -68,7 +76,7 @@ const AsSeenIn = () => {
             
             <button 
               onClick={goToNext}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors"
               aria-label="Next logos"
             >
               <ChevronRight className="w-5 h-5 text-gray-600" />
