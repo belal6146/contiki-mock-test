@@ -38,7 +38,7 @@ const DayDetailView: React.FC<DayDetailViewProps> = ({
   const dayHighlights = [
     {
       title: 'Chill out on Mykonos Beach',
-      description: "Mykonos is the LGBTQIA+ capital of Greece. So obviously, we'll spend a full day chilling on one of its stunning beaches.",
+      description: 'Mykonos is the LGBTQIA+ capital of Greece. So obviously, we'll spend a full day chilling on one of its stunning beaches.',
       image: 'https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=200&mode=crop&quality=80&width=300',
       type: 'Included Experience'
     },
