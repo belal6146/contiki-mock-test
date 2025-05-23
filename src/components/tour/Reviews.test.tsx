@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Reviews from './Reviews';
 
@@ -65,7 +65,8 @@ describe('Reviews', () => {
     render(<Reviews tripId="123" />);
     
     // Click load more button
-    await userEvent.click(screen.getByText("Load More Reviews"));
+    const user = userEvent.setup();
+    await user.click(screen.getByText("Load More Reviews"));
     
     // Third review should now be visible
     expect(screen.getByText("David Kim")).toBeInTheDocument();

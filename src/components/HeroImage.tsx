@@ -52,7 +52,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
 
   // Guard against undefined props
   if (!title) {
-    return <Skeleton className="h-[50vh] min-h-[300px] max-h-[500px] w-full" />;
+    return <Skeleton className="h-[50vh] min-h-[300px] max-h-[500px] w-full" data-testid="hero-skeleton" />;
   }
 
   const displayImageUrl = imageError || !imageUrl ? getFallbackImage() : imageUrl;
@@ -91,7 +91,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
 
       {/* Loading indicator */}
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50" role="status">
           <div className="w-12 h-12 border-4 border-t-[#CCFF00] border-gray-200 rounded-full animate-spin"></div>
         </div>
       )}

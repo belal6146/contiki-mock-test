@@ -8,17 +8,29 @@ jest.mock('@/lib/analytics', () => ({
   trackEvent: jest.fn(),
 }));
 
-// Mock the Image component
-global.Image = class {
-  onload: () => void = () => {};
-  onerror: () => void = () => {};
-  src: string = '';
-  constructor() {
-    setTimeout(() => {
-      this.onload();
-    }, 100);
-  }
-};
+// Define a custom type to handle the Image mock properly
+interface MockImage {
+  onload: () => void;
+  onerror: () => void;
+  src: string;
+}
+
+// Mock the Image constructor with a proper TypeScript implementation
+const originalImage = global.Image;
+global.Image = function() {
+  const mockImage = {
+    onload: () => {},
+    onerror: () => {},
+    src: '',
+  } as MockImage;
+  
+  // Use setTimeout to simulate async image loading
+  setTimeout(() => {
+    mockImage.onload();
+  }, 100);
+  
+  return mockImage;
+} as unknown as typeof global.Image;
 
 describe('HeroImage', () => {
   const defaultProps = {
@@ -57,15 +69,15 @@ describe('HeroImage', () => {
     render(<HeroImage {...defaultProps} />);
     
     // Check aria-label
-    const heroSection = screen.getByRole('banner');
-    expect(heroSection).toHaveAttribute('aria-label', 'Test Title - Test Subtitle');
+    const heroSection = screen.getByRole('img');
+    expect(heroSection).toHaveAttribute('aria-label', 'Hero image: Test Title');
   });
 
   test('handles missing props gracefully', () => {
     render(<HeroImage imageUrl="" title="" subtitle="" />);
     
     // Should render a skeleton loader
-    expect(screen.getByText('Discover Amazing Places')).toBeInTheDocument();
+    expect(screen.getByTestId('hero-skeleton')).toBeInTheDocument();
   });
 
   test('renders fallback image when imageUrl is empty', async () => {
@@ -89,5 +101,10 @@ describe('HeroImage', () => {
     // Check for the parallax container
     const container = document.querySelector('.transition-transform');
     expect(container).toBeInTheDocument();
+  });
+  
+  // Restore the original Image constructor after tests
+  afterAll(() => {
+    global.Image = originalImage;
   });
 });

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TabNav from './TabNav';
 
@@ -32,7 +32,8 @@ describe('TabNav', () => {
     render(<TabNav tabs={mockTabs}>{mockChildren}</TabNav>);
     
     const secondTab = screen.getByText('Tab 2');
-    await userEvent.click(secondTab);
+    const user = userEvent.setup();
+    await user.click(secondTab);
     
     expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('tab', { name: 'Tab 1' })).toHaveAttribute('aria-selected', 'false');
@@ -53,19 +54,20 @@ describe('TabNav', () => {
     firstTab.focus();
     
     // Press right arrow key to move to next tab
-    fireEvent.keyDown(document.activeElement || document.body, { key: 'ArrowRight' });
+    const user = userEvent.setup();
+    await user.keyboard('{ArrowRight}');
     expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute('aria-selected', 'true');
     
     // Press right arrow key again to move to last tab
-    fireEvent.keyDown(document.activeElement || document.body, { key: 'ArrowRight' });
+    await user.keyboard('{ArrowRight}');
     expect(screen.getByRole('tab', { name: 'Tab 3' })).toHaveAttribute('aria-selected', 'true');
     
     // Press right arrow key on last tab to loop back to first tab
-    fireEvent.keyDown(document.activeElement || document.body, { key: 'ArrowRight' });
+    await user.keyboard('{ArrowRight}');
     expect(screen.getByRole('tab', { name: 'Tab 1' })).toHaveAttribute('aria-selected', 'true');
     
     // Press left arrow key to move to last tab
-    fireEvent.keyDown(document.activeElement || document.body, { key: 'ArrowLeft' });
+    await user.keyboard('{ArrowLeft}');
     expect(screen.getByRole('tab', { name: 'Tab 3' })).toHaveAttribute('aria-selected', 'true');
   });
 
@@ -73,7 +75,10 @@ describe('TabNav', () => {
     const handleChange = jest.fn();
     render(<TabNav tabs={mockTabs} onChange={handleChange}>{mockChildren}</TabNav>);
     
-    await userEvent.click(screen.getByText('Tab 2'));
+    const secondTab = screen.getByText('Tab 2');
+    const user = userEvent.setup();
+    await user.click(secondTab);
+    
     expect(handleChange).toHaveBeenCalledWith('tab2');
   });
 
