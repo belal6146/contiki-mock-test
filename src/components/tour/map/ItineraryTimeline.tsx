@@ -39,19 +39,19 @@ const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
     <div className="relative mb-8">
       {/* Main timeline container */}
       <div className="relative">
-        {/* Background line - using Contiki green */}
+        {/* Background line - using Chartreuse */}
         <div className="absolute top-6 left-0 w-full h-0.5 bg-gray-300 z-0" />
         
         {/* Day markers and labels */}
         <div className="relative z-10">
-          {/* Day circles - using Contiki green for active state */}
+          {/* Day circles - using Chartreuse for active state */}
           <div className="flex justify-between items-center mb-6">
             {processedItinerary.map((day, index) => (
               <button
                 key={index}
                 className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-200 border-2 ${
                   index === activeDay 
-                    ? 'bg-[#00CC66] border-[#00CC66] text-white shadow-lg scale-110' 
+                    ? 'bg-[#CCFF00] border-[#CCFF00] text-black shadow-lg scale-110' 
                     : index < activeDay
                     ? 'bg-gray-800 border-gray-800 text-white'
                     : 'bg-white border-gray-300 text-gray-600 hover:border-gray-400'
@@ -74,7 +74,7 @@ const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
               >
                 <div className={`text-xs font-medium transition-colors duration-200 ${
                   index === activeDay 
-                    ? 'text-[#00CC66] font-bold' 
+                    ? 'text-[#CCFF00] font-bold' 
                     : 'text-gray-600'
                 }`}>
                   {day.title.includes(' to ') ? (

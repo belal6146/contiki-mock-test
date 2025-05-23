@@ -51,49 +51,49 @@ export default {
           900: '#000000',
         },
         
-        // Contiki Green (changed from orange)
+        // Chartreuse color (#CF0)
         green: {
-          DEFAULT: '#00CC66',
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#00CC66', // Main Contiki Green
-          600: '#00b359',
-          700: '#009944',
-          800: '#007a37',
-          900: '#00602b',
+          DEFAULT: '#CCFF00',
+          50: '#f7ffe0',
+          100: '#eeffb3',
+          200: '#e5ff80',
+          300: '#ddff4d',
+          400: '#d4ff1a',
+          500: '#CCFF00', // Main Chartreuse color
+          600: '#a3cc00',
+          700: '#7a9900',
+          800: '#526600',
+          900: '#293300',
         },
         
         secondary: {
-          DEFAULT: '#00CC66', // Contiki Green
-          foreground: '#FFFFFF',
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#00CC66',
-          600: '#00b359',
-          700: '#009944',
-          800: '#007a37',
-          900: '#00602b',
+          DEFAULT: '#CCFF00', // Chartreuse
+          foreground: '#000000', // Changed to black for better contrast
+          50: '#f7ffe0',
+          100: '#eeffb3',
+          200: '#e5ff80',
+          300: '#ddff4d',
+          400: '#d4ff1a',
+          500: '#CCFF00',
+          600: '#a3cc00',
+          700: '#7a9900',
+          800: '#526600',
+          900: '#293300',
         },
         
         accent: {
-          DEFAULT: '#00CC66', // Contiki Green
-          foreground: '#FFFFFF',
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#00CC66',
-          600: '#00b359',
-          700: '#009944',
-          800: '#007a37',
-          900: '#00602b',
+          DEFAULT: '#CCFF00', // Chartreuse
+          foreground: '#000000', // Changed to black for better contrast
+          50: '#f7ffe0',
+          100: '#eeffb3',
+          200: '#e5ff80',
+          300: '#ddff4d',
+          400: '#d4ff1a',
+          500: '#CCFF00',
+          600: '#a3cc00',
+          700: '#7a9900',
+          800: '#526600',
+          900: '#293300',
         },
         
         // Neutral grays for Contiki
@@ -160,9 +160,9 @@ export default {
         sm: 'calc(var(--radius) - 4px)'
       },
       boxShadow: {
-        'contiki': '0 4px 6px -1px rgba(0, 204, 102, 0.1), 0 2px 4px -1px rgba(0, 204, 102, 0.06)',
-        'contiki-lg': '0 10px 15px -3px rgba(0, 204, 102, 0.1), 0 4px 6px -2px rgba(0, 204, 102, 0.05)',
-        'contiki-xl': '0 20px 25px -5px rgba(0, 204, 102, 0.1), 0 10px 10px -5px rgba(0, 204, 102, 0.04)',
+        'contiki': '0 4px 6px -1px rgba(204, 255, 0, 0.1), 0 2px 4px -1px rgba(204, 255, 0, 0.06)',
+        'contiki-lg': '0 10px 15px -3px rgba(204, 255, 0, 0.1), 0 4px 6px -2px rgba(204, 255, 0, 0.05)',
+        'contiki-xl': '0 20px 25px -5px rgba(204, 255, 0, 0.1), 0 10px 10px -5px rgba(204, 255, 0, 0.04)',
       },
       keyframes: {
         "accordion-down": {

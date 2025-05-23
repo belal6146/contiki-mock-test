@@ -29,12 +29,12 @@ const SixTwoCTA = () => {
           </div>
           
           <div className="text-center md:text-right">
-            <h3 className="text-[#00CC66] text-4xl font-bold mb-2">
+            <h3 className="text-[#CCFF00] text-4xl font-bold mb-2">
               Think you've seen the world?
             </h3>
             <Link 
               to="/sixtwo" 
-              className="text-[#00CC66] underline text-lg hover:text-white transition-colors"
+              className="text-[#CCFF00] underline text-lg hover:text-white transition-colors"
               onClick={handleClick}
             >
               Prove it – scratch it off here!
