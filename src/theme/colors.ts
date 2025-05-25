@@ -23,49 +23,35 @@ export const colors = {
     900: '#000000',
   },
   
-  // Contiki Orange color (#CCFF00)
-  orange: {
-    DEFAULT: 'rgb(204 255 0 / var(--tw-bg-opacity, 1))',
-    50: '#fff4e6',
-    100: '#ffe0b3',
-    200: '#ffcc80',
-    300: '#ffb84d',
-    400: '#ffa31a',
-    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));', // Main Contiki orange color
-    600: '#e65c00',
-    700: '#cc5200',
-    800: '#b34700',
-    900: '#993d00',
-  },
-  
+  // Contiki Green color (rgb(204, 255, 0))
   secondary: {
-    DEFAULT: 'rgb(204 255 0 / var(--tw-bg-opacity, 1))', // Contiki Orange
-    foreground: '#FFFFFF',
-    50: '#fff4e6',
-    100: '#ffe0b3',
-    200: '#ffcc80',
-    300: '#ffb84d',
-    400: '#ffa31a',
-    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));',
-    600: '#e65c00',
-    700: '#cc5200',
-    800: '#b34700',
-    900: '#993d00',
+    DEFAULT: 'rgb(204, 255, 0)', // Main Contiki green color
+    foreground: '#000000',
+    50: '#f9ffe6',
+    100: '#efffb3',
+    200: '#e2ff80',
+    300: '#ccff4d',
+    400: 'rgb(204, 255, 0)', // Main green
+    500: 'rgb(204, 255, 0)', // Main green
+    600: '#b8e600',
+    700: '#a3cc00',
+    800: '#8bb300',
+    900: '#739900',
   },
   
   accent: {
-    DEFAULT: 'rgb(204 255 0 / var(--tw-bg-opacity, 1))', // Contiki Orange
-    foreground: '#FFFFFF',
-    50: '#fff4e6',
-    100: '#ffe0b3',
-    200: '#ffcc80',
-    300: '#ffb84d',
-    400: '#ffa31a',
-    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));',
-    600: '#e65c00',
-    700: '#cc5200',
-    800: '#b34700',
-    900: '#993d00',
+    DEFAULT: 'rgb(204, 255, 0)', // Contiki Green
+    foreground: '#000000',
+    50: '#f9ffe6',
+    100: '#efffb3',
+    200: '#e2ff80',
+    300: '#ccff4d',
+    400: 'rgb(204, 255, 0)',
+    500: 'rgb(204, 255, 0)',
+    600: '#b8e600',
+    700: '#a3cc00',
+    800: '#8bb300',
+    900: '#739900',
   },
   
   // Neutral grays for Contiki

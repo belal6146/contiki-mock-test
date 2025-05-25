@@ -161,7 +161,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>Date</span>
                     </button>
-                    <button className="inline-flex items-center px-4 py-2 bg-[rgb(204,255,0)] text-black rounded-md hover:bg-[rgb(204,255,0)/90]">
+                    <button className="inline-flex items-center px-4 py-2 bg-[rgb(204,255,0)] text-black rounded-md hover:bg-[rgb(184,230,0)] transition-colors">
                       <Filter className="h-4 w-4 mr-2" />
                       <span>Apply Filters</span>
                     </button>
@@ -255,7 +255,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     </button>
                   </div>
                 ))}
-                <button className="text-sm text-[rgb(204,255,0)] font-medium hover:text-[rgb(204,255,0)/90]">Clear all</button>
+                <button className="text-sm text-[rgb(204,255,0)] font-medium hover:text-[rgb(184,230,0)]">Clear all</button>
               </div>
 
               {/* Results Summary */}
@@ -290,7 +290,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
 
               {/* Load More Button */}
               <div className="flex justify-center mt-10">
-                <button className="px-8 py-3 border-2 border-[rgb(204,255,0)] rounded-full font-bold text-black bg-[rgb(204,255,0)] hover:bg-[rgb(204,255,0)/90] transition-colors">
+                <button className="px-8 py-3 border-2 border-[rgb(204,255,0)] rounded-full font-bold text-black bg-[rgb(204,255,0)] hover:bg-[rgb(184,230,0)] transition-colors">
                   LOAD MORE DATES
                 </button>
               </div>
@@ -353,7 +353,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                       </p>
                     </div>
                     <button 
-                      className="mt-6 md:mt-0 bg-[rgb(204,255,0)] text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded hover:bg-[rgb(204,255,0)/90]"
+                      className="mt-6 md:mt-0 bg-[rgb(204,255,0)] text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded hover:bg-[rgb(184,230,0)]"
                     >
                       FIND OUT MORE
                     </button>

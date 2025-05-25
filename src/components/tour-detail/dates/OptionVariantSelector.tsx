@@ -32,7 +32,7 @@ const OptionVariantSelector: React.FC<OptionVariantSelectorProps> = ({
             key={variant.id}
             className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between ${
               selectedVariantId === variant.id 
-                ? 'border-[#FF6600] bg-[#FF6600]/10 shadow-sm' 
+                ? 'border-orange-500 bg-orange-50 shadow-sm' 
                 : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-sm'
             }`}
             onClick={() => onVariantSelect(variant.id)}
@@ -40,7 +40,7 @@ const OptionVariantSelector: React.FC<OptionVariantSelectorProps> = ({
             <div className="flex items-center gap-3">
               <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                 selectedVariantId === variant.id 
-                  ? 'border-[#FF6600] bg-[#FF6600]' 
+                  ? 'border-orange-500 bg-orange-500' 
                   : 'border-gray-300 bg-white'
               }`}>
                 {selectedVariantId === variant.id && (

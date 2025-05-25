@@ -19,7 +19,6 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
 }) => {
   const discountAmount = basePrice * (discount / 100);
   const finalPrice = basePrice - discountAmount;
-  const depositAmount = 60; // Hardcoded deposit amount
   
   return (
     <div className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm font-montserrat">
@@ -30,20 +29,19 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
       <div className="p-4">
         {dealLabel && (
           <div className="flex items-center mb-4">
-            <span className="font-bold text-red-600 text-sm uppercase tracking-wide">LAST MINUTE DEAL</span>
+            <span className="font-bold text-orange-600 text-sm uppercase tracking-wide bg-orange-100 px-2 py-1 rounded">LAST MINUTE DEAL</span>
           </div>
         )}
         
         <div className="space-y-3 mb-6">
           <div className="flex justify-between items-center">
             <span className="text-gray-600 font-medium">Plus</span>
-            <span className="font-bold">—</span>
             <span className="font-bold">{formatCurrency(basePrice)}</span>
           </div>
           
           <div className="border-t border-gray-200 pt-3 flex justify-between items-center">
             <span className="font-bold text-gray-800">Total Savings</span>
-            <span className="font-bold text-lg">£467</span>
+            <span className="font-bold text-lg">£{discountAmount.toFixed(0)}</span>
           </div>
           
           <div className="flex items-center mt-3">
@@ -59,7 +57,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
             <div className="text-center">
               <p className="text-sm text-gray-700 mb-1 font-medium">Total Price</p>
               <p className="text-xs text-gray-600 mb-2 font-medium">Based on twinshare room</p>
-              <p className="text-lg line-through text-gray-500 mb-1 font-medium">£2,335</p>
+              <p className="text-lg line-through text-gray-500 mb-1 font-medium">{formatCurrency(basePrice)}</p>
               <p className="text-2xl font-bold text-black">{formatCurrency(finalPrice)}</p>
             </div>
           </div>
@@ -68,7 +66,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
         <div className="space-y-3">
           <button 
             onClick={onBookByPhone} 
-            className="w-full bg-[#FF6600] text-white py-3 px-4 rounded font-bold hover:bg-[#e65c00] transition-colors text-sm uppercase tracking-wide"
+            className="w-full bg-[rgb(204,255,0)] text-black py-3 px-4 rounded font-bold hover:bg-[rgb(184,230,0)] transition-colors text-sm uppercase tracking-wide border border-[rgb(204,255,0)]"
           >
             BOOK BY PHONE
           </button>
