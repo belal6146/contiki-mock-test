@@ -127,7 +127,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
                   I'm planning to travel in
                 </span>
                 <div className="flex bg-gray-100 rounded overflow-hidden">
-                  <button className="bg-[#FF6900] text-white px-4 py-1 text-sm font-bold">
+                  <button className="bg-[#CCFF00] text-white px-4 py-1 text-sm font-bold">
                     2025
                   </button>
                   <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200">
@@ -202,9 +202,9 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
               </p>
               
               {/* On the road to Net Zero Banner - using Contiki orange instead of lime */}
-              <div className="bg-[#FF6900] text-white p-4 rounded-lg flex items-center justify-between mb-6">
+              <div className="bg-[#CCFF00] text-white p-4 rounded-lg flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-white text-[#FF6900] w-8 h-8 rounded-full flex items-center justify-center">
+                  <div className="bg-white text-[#CCFF00] w-8 h-8 rounded-full flex items-center justify-center">
                     <span className="text-sm font-bold">🌱</span>
                   </div>
                   <span className="font-bold">On the road to Net Zero</span>
@@ -233,8 +233,8 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
               <h3 className="text-lg font-bold mb-2">Greek Island Hopping Plus</h3>
               <p className="text-gray-600 mb-4">Our most popular variation with premium accommodations and additional experiences.</p>
               <div className="flex justify-between items-center">
-                <span className="text-lg font-bold text-[#FF6900]">From $1,899</span>
-                <button className="bg-[#FF6900] text-white px-4 py-2 rounded hover:bg-[#FF6900]/90 transition-colors">
+                <span className="text-lg font-bold text-[#CCFF00]">From $1,899</span>
+                <button className="bg-[#CCFF00] text-white px-4 py-2 rounded hover:bg-[#CCFF00]/90 transition-colors">
                   Select
                 </button>
               </div>
