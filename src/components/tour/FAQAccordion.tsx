@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import { 
   Accordion,
   AccordionContent,
@@ -40,25 +40,44 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
   }, [tripFAQs, generalFAQs]);
   
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="py-8 md:py-16 bg-white font-montserrat">
       <div className="container max-w-4xl mx-auto px-4">
         {/* General FAQs */}
         {generalFAQs && generalFAQs.length > 0 && (
           <div className="mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center relative">
-              General FAQs
-              <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 h-1 w-16 bg-red-500"></span>
-            </h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-black">
+                General FAQs
+              </h2>
+              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 14L12 9L17 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
             
-            <div className="bg-green-50 rounded-lg">
+            <div className="bg-[#f0f8f0] rounded-lg overflow-hidden">
               <Accordion type="single" collapsible className="w-full">
                 {generalFAQs.map((faq, index) => (
-                  <AccordionItem key={`general-faq-${index}`} value={`item-${index}`} className="border-b border-green-100">
-                    <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-4 py-3 text-left">
-                      <h3 className="text-base md:text-lg font-medium text-left pr-8">{faq.question}</h3>
+                  <AccordionItem 
+                    key={`general-faq-${index}`} 
+                    value={`item-${index}`} 
+                    className="border-b border-[#e0f0e0] last:border-b-0"
+                  >
+                    <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-6 py-4 text-left group [&[data-state=open]>div>svg]:rotate-45">
+                      <div className="flex items-center justify-between w-full">
+                        <h3 className="text-base md:text-lg font-semibold text-black text-left pr-4 leading-tight">
+                          {faq.question}
+                        </h3>
+                        <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center ml-4">
+                          <Plus className="w-4 h-4 text-white transition-transform duration-200" />
+                        </div>
+                      </div>
                     </AccordionTrigger>
-                    <AccordionContent className="px-4 pb-4">
-                      <p className="text-gray-600">{faq.answer}</p>
+                    <AccordionContent className="px-6 pb-6 pt-0">
+                      <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                        {faq.answer}
+                      </p>
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -70,20 +89,44 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
         {/* Trip FAQs */}
         {tripFAQs && tripFAQs.length > 0 && (
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">Trip FAQs</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-black">
+                Trip FAQs
+              </h2>
+              <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 14L12 9L17 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
             
-            <Accordion type="single" collapsible className="w-full">
-              {tripFAQs.map((faq, index) => (
-                <AccordionItem key={`trip-faq-${index}`} value={`trip-item-${index}`} className="border-b border-gray-200">
-                  <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-4 py-3 text-left">
-                    <h3 className="text-base md:text-lg font-medium text-left pr-8">{faq.question}</h3>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-4 pb-4">
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <div className="bg-[#f0f8f0] rounded-lg overflow-hidden">
+              <Accordion type="single" collapsible className="w-full">
+                {tripFAQs.map((faq, index) => (
+                  <AccordionItem 
+                    key={`trip-faq-${index}`} 
+                    value={`trip-item-${index}`} 
+                    className="border-b border-[#e0f0e0] last:border-b-0"
+                  >
+                    <AccordionTrigger className="hover:no-underline focus:outline-none focus:ring-0 px-6 py-4 text-left group [&[data-state=open]>div>svg]:rotate-45">
+                      <div className="flex items-center justify-between w-full">
+                        <h3 className="text-base md:text-lg font-semibold text-black text-left pr-4 leading-tight">
+                          {faq.question}
+                        </h3>
+                        <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center ml-4">
+                          <Plus className="w-4 h-4 text-white transition-transform duration-200" />
+                        </div>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-6 pt-0">
+                      <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                        {faq.answer}
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
           </div>
         )}
       </div>
