@@ -23,49 +23,49 @@ export const colors = {
     900: '#000000',
   },
   
-  // Chartreuse color (#CF0)
-  green: {
-    DEFAULT: '#CCFF00',
-    50: '#f7ffe0',
-    100: '#eeffb3',
-    200: '#e5ff80',
-    300: '#ddff4d',
-    400: '#d4ff1a',
-    500: '#CCFF00', // Main Chartreuse color
-    600: '#a3cc00',
-    700: '#7a9900',
-    800: '#526600',
-    900: '#293300',
+  // Contiki Orange color (#FF6600)
+  orange: {
+    DEFAULT: '#FF6600',
+    50: '#fff4e6',
+    100: '#ffe0b3',
+    200: '#ffcc80',
+    300: '#ffb84d',
+    400: '#ffa31a',
+    500: '#FF6600', // Main Contiki orange color
+    600: '#e65c00',
+    700: '#cc5200',
+    800: '#b34700',
+    900: '#993d00',
   },
   
   secondary: {
-    DEFAULT: '#CCFF00', // Chartreuse
-    foreground: '#000000', // Changed to black for better contrast
-    50: '#f7ffe0',
-    100: '#eeffb3',
-    200: '#e5ff80',
-    300: '#ddff4d',
-    400: '#d4ff1a',
-    500: '#CCFF00',
-    600: '#a3cc00',
-    700: '#7a9900',
-    800: '#526600',
-    900: '#293300',
+    DEFAULT: '#FF6600', // Contiki Orange
+    foreground: '#FFFFFF',
+    50: '#fff4e6',
+    100: '#ffe0b3',
+    200: '#ffcc80',
+    300: '#ffb84d',
+    400: '#ffa31a',
+    500: '#FF6600',
+    600: '#e65c00',
+    700: '#cc5200',
+    800: '#b34700',
+    900: '#993d00',
   },
   
   accent: {
-    DEFAULT: '#CCFF00', // Chartreuse
-    foreground: '#000000', // Changed to black for better contrast
-    50: '#f7ffe0',
-    100: '#eeffb3',
-    200: '#e5ff80',
-    300: '#ddff4d',
-    400: '#d4ff1a',
-    500: '#CCFF00',
-    600: '#a3cc00',
-    700: '#7a9900',
-    800: '#526600',
-    900: '#293300',
+    DEFAULT: '#FF6600', // Contiki Orange
+    foreground: '#FFFFFF',
+    50: '#fff4e6',
+    100: '#ffe0b3',
+    200: '#ffcc80',
+    300: '#ffb84d',
+    400: '#ffa31a',
+    500: '#FF6600',
+    600: '#e65c00',
+    700: '#cc5200',
+    800: '#b34700',
+    900: '#993d00',
   },
   
   // Neutral grays for Contiki

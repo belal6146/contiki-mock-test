@@ -85,7 +85,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
             </button>
             
             <button 
-              className="bg-lime-400 text-black px-5 py-2 font-semibold text-sm rounded hover:bg-lime-500"
+              className="bg-[#FF6600] text-white px-5 py-2 font-semibold text-sm rounded hover:bg-[#e65c00]"
               onClick={handleViewDates}
               aria-label="View available dates"
               data-tab="dates"

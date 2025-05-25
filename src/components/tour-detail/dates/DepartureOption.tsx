@@ -117,7 +117,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
           {/* Trip Type Column */}
           <div className="col-span-5 p-4 border-r border-gray-100">
             <div className="inline-flex items-center">
-              <span className="bg-[#CCFF00] text-black px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wide">
+              <span className="bg-[#FF6600] text-white px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wide">
                 {tripTypeLabels[option.type] || option.type}
               </span>
               {option.variants.length > 0 && (
@@ -156,7 +156,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
             
             <div className="flex items-center gap-3 ml-4">
               <button 
-                className="bg-[#CCFF00] text-black px-4 py-2 rounded font-bold text-sm hover:bg-[#CCFF00]/90 transition-colors uppercase tracking-wide"
+                className="bg-[#FF6600] text-white px-4 py-2 rounded font-bold text-sm hover:bg-[#e65c00] transition-colors uppercase tracking-wide"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleBookNow();
