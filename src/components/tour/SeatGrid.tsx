@@ -45,22 +45,22 @@ const SeatGrid: React.FC<SeatGridProps> = ({ seats, deckTitle, onSeatSelect, sel
   const rows = getUniqueRows();
 
   return (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-2 px-1">
-        <h3 className="text-sm font-medium">{deckTitle}</h3>
+    <div className="mb-8 font-montserrat">
+      <div className="flex justify-between items-center mb-4 px-1">
+        <h3 className="text-sm font-bold uppercase tracking-wide text-black">{deckTitle}</h3>
         {deckTitle === "Upper Deck" ? (
-          <div className="text-xs text-gray-500 text-right">REAR OF BUS</div>
+          <div className="text-xs text-gray-500 font-medium uppercase tracking-wide">Rear of Bus</div>
         ) : null}
       </div>
       
-      <div className="border rounded-md p-4 bg-white">
+      <div className="border-2 border-gray-200 rounded-lg p-6 bg-gray-50">
         {deckTitle === "Lower Deck" ? (
-          <div className="text-xs text-gray-500 text-center mb-4">FRONT OF BUS</div>
+          <div className="text-xs text-gray-500 text-center mb-6 font-medium uppercase tracking-wide">Front of Bus</div>
         ) : null}
         
-        <div className="grid grid-cols-1 gap-y-2">
+        <div className="grid grid-cols-1 gap-y-3">
           {rows.map((rowSeats, rowIndex) => (
-            <div key={`row-${rowIndex}`} className="grid grid-cols-2 gap-2">
+            <div key={`row-${rowIndex}`} className="grid grid-cols-2 gap-4">
               {rowSeats
                 .sort((a, b) => a.id.localeCompare(b.id))
                 .map(seat => (
@@ -76,7 +76,7 @@ const SeatGrid: React.FC<SeatGridProps> = ({ seats, deckTitle, onSeatSelect, sel
         </div>
         
         {deckTitle === "Lower Deck" ? (
-          <div className="text-xs text-gray-500 text-center mt-4">REAR OF BUS</div>
+          <div className="text-xs text-gray-500 text-center mt-6 font-medium uppercase tracking-wide">Rear of Bus</div>
         ) : null}
       </div>
     </div>

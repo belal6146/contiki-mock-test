@@ -31,8 +31,8 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
   
   if (!passengers || passengers.length === 0) {
     return (
-      <div className="p-6 bg-gray-50 rounded-md">
-        <p className="text-gray-500 text-center">No travelers have booked this trip yet.</p>
+      <div className="p-8 bg-gray-50 rounded-lg border border-gray-200 font-montserrat">
+        <p className="text-gray-500 text-center font-medium">No travelers have booked this trip yet.</p>
       </div>
     );
   }
@@ -47,12 +47,12 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white font-montserrat">
       <div className="mb-6 space-y-6">
         {displayedPassengers.map(passenger => (
-          <div key={passenger.id} className="flex items-start">
-            <Avatar className="h-12 w-12 mr-4 bg-gray-100">
-              <AvatarFallback className="bg-gray-200 text-gray-600 font-medium">
+          <div key={passenger.id} className="flex items-start p-4 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-sm transition-all duration-200">
+            <Avatar className="h-14 w-14 mr-4 bg-[rgb(204,255,0)] border-2 border-[rgb(184,230,0)]">
+              <AvatarFallback className="bg-[rgb(204,255,0)] text-black font-bold text-lg">
                 {hasConsented ? getFullName(passenger).charAt(0) : passenger.firstName.charAt(0)}
               </AvatarFallback>
             </Avatar>
@@ -60,26 +60,26 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
             <div className="flex-1">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-900">
+                  <h3 className="font-bold text-lg text-black mb-1">
                     {hasConsented ? getFullName(passenger) : maskName(getFullName(passenger))}
                   </h3>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-600 mb-2 font-medium">
                     {hasConsented ? `${passenger.age} years` : maskAge(passenger.age)} • {passenger.address.country}
                   </p>
                   {passenger.travelPassion && (
-                    <p className="text-sm text-gray-600 mt-1">
-                      Interested in: {passenger.travelPassion}
+                    <p className="text-sm text-gray-600 mb-1 font-medium">
+                      <span className="font-bold text-black">Interested in:</span> {passenger.travelPassion}
                     </p>
                   )}
                   {passenger.numberOfTimesTravelledPreviously !== undefined && (
-                    <p className="text-sm text-gray-500 mt-1">
-                      {passenger.numberOfTimesTravelledPreviously} previous trips
+                    <p className="text-sm text-gray-500 font-medium">
+                      <span className="font-bold text-black">{passenger.numberOfTimesTravelledPreviously}</span> previous trips
                     </p>
                   )}
                 </div>
                 
                 <div className="ml-4">
-                  <div className="bg-black text-white text-xs py-1 px-3 rounded font-medium">
+                  <div className="bg-black text-white text-xs py-2 px-4 rounded-full font-bold uppercase tracking-wide">
                     Seat {getSeatId(passenger)}
                   </div>
                 </div>
@@ -90,13 +90,13 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
       </div>
       
       {/* Privacy consent toggle */}
-      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+      <div className="mb-6 p-4 bg-[rgb(204,255,0)] border-2 border-[rgb(184,230,0)] rounded-lg">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-blue-900">
+            <p className="text-sm font-bold text-black uppercase tracking-wide mb-1">
               {hasConsented ? "Showing full traveler details" : "Privacy mode enabled"}
             </p>
-            <p className="text-xs text-blue-700 mt-1">
+            <p className="text-xs text-black font-medium">
               {hasConsented 
                 ? "Personal information is visible" 
                 : "Names and ages are anonymized for privacy"}
@@ -106,7 +106,7 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
             variant="outline" 
             size="sm" 
             onClick={toggleConsent}
-            className="text-xs h-8 border-blue-300 text-blue-700 hover:bg-blue-100"
+            className="text-xs h-8 bg-white border-2 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
           >
             {hasConsented ? "Enable privacy mode" : "Show full details"}
           </Button>
@@ -119,7 +119,7 @@ const TravelersInfo: React.FC<TravelersInfoProps> = ({ passengers }) => {
           <Button
             variant="link"
             onClick={() => setShowAll(true)}
-            className="text-orange-500 hover:text-orange-600 font-medium"
+            className="text-black hover:text-gray-700 font-bold uppercase tracking-wide underline"
           >
             View all {passengers.length} travelers
           </Button>
