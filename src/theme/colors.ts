@@ -23,9 +23,9 @@ export const colors = {
     900: '#000000',
   },
   
-  // Contiki Orange color (#FF6600)
+  // Contiki Orange color (#CCFF00)
   orange: {
-    DEFAULT: '#FF6600',
+    DEFAULT: '#CCFF00',
     50: '#fff4e6',
     100: '#ffe0b3',
     200: '#ffcc80',
@@ -39,7 +39,7 @@ export const colors = {
   },
   
   secondary: {
-    DEFAULT: '#FF6600', // Contiki Orange
+    DEFAULT: '#CCFF00', // Contiki Orange
     foreground: '#FFFFFF',
     50: '#fff4e6',
     100: '#ffe0b3',
@@ -54,7 +54,7 @@ export const colors = {
   },
   
   accent: {
-    DEFAULT: '#FF6600', // Contiki Orange
+    DEFAULT: '#CCFF00', // Contiki Orange
     foreground: '#FFFFFF',
     50: '#fff4e6',
     100: '#ffe0b3',
