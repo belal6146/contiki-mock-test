@@ -5,15 +5,15 @@ import SearchBar from './SearchBar';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"
-          alt="Travel destination"
+          src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80"
+          alt="Coastal destination with turquoise water and stone buildings"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
       {/* Content */}
@@ -62,7 +62,7 @@ const Hero = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
-            <span>20,000+ verified reviews</span>
+            <span>26000+ verified reviews</span>
           </div>
         </div>
       </div>
