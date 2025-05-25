@@ -5,7 +5,7 @@ import { useTrips } from '@/hooks/useTrips';
 import { Skeleton } from '@/components/ui/skeleton';
 import ErrorMessage from '@/components/ui/error-message';
 import { trackEvent } from '@/lib/analytics';
-import { Star, ChevronLeft, ChevronRight, Plus, Calendar, MapPin } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const FeaturedTrips = () => {
@@ -21,7 +21,7 @@ const FeaturedTrips = () => {
     trackEvent('retry_clicked', { component: 'FeaturedTrips' });
   };
 
-  // Mock data that matches the screenshot
+  // Mock data that matches the Contiki website exactly
   const mockTrips = [
     {
       id: '1',
@@ -33,9 +33,9 @@ const FeaturedTrips = () => {
       countries: 1,
       places: 5,
       rating: 4.6,
-      image: 'https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       isSpotlight: true,
-      description: 'The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, wit...'
+      description: 'The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops...'
     },
     {
       id: '2',
@@ -47,7 +47,7 @@ const FeaturedTrips = () => {
       countries: 1,
       places: 7,
       rating: 4.7,
-      image: 'https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
       description: 'The one that surrounds you with the majestic landscape of the Canadian Rockies, from Vancouver to the Rocky...'
     },
     {
@@ -96,21 +96,21 @@ const FeaturedTrips = () => {
   return (
     <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
       <div className="container max-w-7xl mx-auto px-4">
-        {/* Header with navigation arrows - centered with buttons on the sides */}
-        <div className="flex items-center justify-center mb-8 relative">
+        {/* Header with navigation arrows */}
+        <div className="flex items-center justify-between mb-12">
           <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
             Popular trips
           </h2>
-          <div className="absolute right-0 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <button 
-              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handlePrevious}
               disabled={currentPage === 0}
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             <button 
-              className="w-12 h-12 border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handleNext}
               disabled={currentPage >= Math.ceil(displayTrips.length / 4) - 1}
             >
@@ -146,7 +146,7 @@ const FeaturedTrips = () => {
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {visibleTrips.map((trip, index) => (
-                <div key={trip.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
+                <div key={trip.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group">
                   {/* Trip Image */}
                   <div className="relative h-48 overflow-hidden">
                     <img 
@@ -163,8 +163,8 @@ const FeaturedTrips = () => {
                       </div>
                     )}
                     
-                    {/* Add to Compare Button */}
-                    <button className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
+                    {/* Add to Compare Button - Top Right */}
+                    <button className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-sm">
                       <Plus className="w-4 h-4 text-gray-600" />
                     </button>
                   </div>
@@ -172,63 +172,61 @@ const FeaturedTrips = () => {
                   {/* Trip Content */}
                   <div className="p-4">
                     {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
+                    <div className="flex items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
                         <Star 
                           key={i} 
-                          className={`w-4 h-4 ${i < Math.floor(trip.rating || 4.6) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                          className={`w-4 h-4 ${i < Math.floor(trip.rating || 4.6) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
                         />
                       ))}
-                      <span className="text-sm font-medium ml-1">{trip.rating || '4.6'}</span>
+                      <span className="text-sm font-medium ml-1 text-gray-700">{trip.rating || '4.6'}</span>
                     </div>
                     
                     {/* Trip Name */}
-                    <h3 className="font-bold text-lg mb-2 text-black line-clamp-2">
+                    <h3 className="font-bold text-lg mb-3 text-black line-clamp-2 leading-tight">
                       {trip.name}
                     </h3>
                     
                     {/* Trip Details */}
                     <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                       <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
                         <span>{trip.duration || 11} Days</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
                         <span>{trip.places || 5} Places</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span>{trip.countries || 1} {trip.countries === 1 ? 'Country' : 'Countries'}</span>
+                        <span>{trip.countries || 1} Countr{trip.countries === 1 ? 'y' : 'ies'}</span>
                       </div>
                     </div>
                     
                     {/* Description */}
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                      {trip.description || `The one that takes you through ${trip.destination} with comfy sleeps between island hops...`}
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                      {trip.description || `Discover the best of ${trip.destination} in this adventure through multiple destinations...`}
                     </p>
                     
                     {/* Add to Compare Button */}
-                    <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4 w-full justify-center">
+                    <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4 w-full justify-center font-medium">
                       <Plus className="w-4 h-4" />
                       Add to compare
                     </button>
                     
                     {/* Price and View Trip */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-end justify-between">
                       <div>
                         {trip.oldPrice && (
                           <span className="text-sm text-gray-400 line-through block">
                             £{trip.oldPrice.toLocaleString()}
                           </span>
                         )}
-                        <div className="flex items-center">
-                          <span className="text-sm text-gray-700 mr-1">From</span>
-                          <span className="text-lg font-bold text-black">
+                        <div className="flex items-baseline">
+                          <span className="text-sm text-gray-500 mr-1">From</span>
+                          <span className="text-xl font-bold text-black">
                             £{trip.price.toLocaleString()}
                           </span>
                         </div>
                       </div>
-                      <Button asChild className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-6 py-2 rounded-lg">
+                      <Button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-6 py-2 rounded text-sm uppercase tracking-wide">
                         <Link to={`/tours/${trip.id}`}>VIEW TRIP</Link>
                       </Button>
                     </div>
@@ -243,7 +241,7 @@ const FeaturedTrips = () => {
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`w-3 h-3 rounded-full transition-colors ${i === currentPage ? 'bg-gray-900' : 'bg-gray-300'}`}
+                  className={`w-3 h-3 rounded-full transition-colors ${i === currentPage ? 'bg-black' : 'bg-gray-300'}`}
                   aria-label={`Go to page ${i + 1}`}
                 />
               ))}
@@ -251,10 +249,7 @@ const FeaturedTrips = () => {
             
             {/* View All Trips Button */}
             <div className="text-center mt-12">
-              <Button 
-                asChild
-                className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90 font-bold px-8 py-3 rounded-lg text-lg"
-              >
+              <Button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-8 py-3 rounded text-lg uppercase tracking-wide">
                 <Link to="/tours">VIEW ALL TRIPS</Link>
               </Button>
             </div>

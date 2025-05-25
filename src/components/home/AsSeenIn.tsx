@@ -5,32 +5,32 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const AsSeenIn = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Updated list with Contiki Feefo lockup and other partner logos
+  // Partner logos matching the Contiki website
   const logos = [
     { 
-      name: 'Feefo Reviews', 
-      src: 'https://www.contiki.com/media/voxkq3ue/feefo-lockup.png?height=126&mode=max&width=126', 
-      className: 'text-black font-bold text-xl' 
+      name: 'BuzzFeed', 
+      logoText: 'BuzzFeed',
+      className: 'text-black font-bold text-2xl'
     },
     { 
-      name: 'Six-Two Magazine', 
-      src: 'https://www.contiki.com/media/2degaq2e/six-two-logo.svg?height=101&mode=max&width=123', 
-      className: 'text-pink-600 font-bold text-xl' 
+      name: 'PinkNews', 
+      logoText: 'PinkNews',
+      className: 'text-black font-bold text-2xl'
     },
     { 
-      name: 'TreadRight Foundation', 
-      src: 'https://www.contiki.com/media/opwmano4/treadright-1.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
-      className: 'text-black font-serif text-xl italic' 
+      name: 'Condé Nast Traveler', 
+      logoText: 'Traveler',
+      className: 'text-black font-bold text-2xl'
     },
     { 
-      name: 'The Travel Corporation', 
-      src: 'https://www.contiki.com/media/z0kkjtoj/ttc-core-logo-white-rgb.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
-      className: 'text-black font-bold text-xl' 
+      name: 'UNILAD', 
+      logoText: 'UNILAD',
+      className: 'text-black font-bold text-2xl'
     },
     { 
-      name: 'UN World Tourism', 
-      src: 'https://www.contiki.com/media/h2qob34a/unwto-2.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
-      className: 'text-black font-bold text-xl tracking-wide' 
+      name: 'Cosmopolitan', 
+      logoText: 'COSMOPOLITAN',
+      className: 'text-black font-bold text-xl tracking-wider'
     }
   ];
 
@@ -50,69 +50,53 @@ const AsSeenIn = () => {
     setCurrentIndex((prev) => (prev + 1) % logos.length);
   };
 
-  const getVisibleLogos = () => {
-    const visible = [];
-    for (let i = 0; i < 5; i++) {
-      const index = (currentIndex + i) % logos.length;
-      visible.push(logos[index]);
-    }
-    return visible;
-  };
-
   return (
-    <section className="py-12 bg-white">
+    <section className="py-16 bg-white">
       <div className="container max-w-6xl mx-auto px-6">
         <div className="text-center">
-          <h2 className="text-lg font-medium text-gray-800 mb-8">Tried and trusted by millions</h2>
-          
-          <div className="flex items-center justify-center">
-            <button 
-              onClick={goToPrevious}
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors mr-8"
-              aria-label="Previous logos"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            </button>
-            
-            <div className="flex items-center justify-center space-x-8 min-w-0 flex-1">
-              {getVisibleLogos().map((logo, index) => (
-                <React.Fragment key={`${logo.name}-${index}`}>
-                  <div className="flex-shrink-0 flex items-center justify-center min-w-0 h-12">
-                    {logo.src ? (
-                      <img 
-                        src={logo.src} 
-                        alt={logo.name} 
-                        className="h-8 object-contain max-w-[120px]"
-                      />
-                    ) : (
-                      <span className={logo.className}>
-                        {logo.name}
-                      </span>
-                    )}
-                  </div>
-                  {index < 4 && (
-                    <div className="w-px h-8 bg-[#00CC66] flex-shrink-0" />
-                  )}
-                </React.Fragment>
-              ))}
+          {/* Header with navigation arrows */}
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-2xl font-bold text-black flex items-center gap-2">
+              As seen in 
+              <span className="text-2xl">👀</span>
+            </h2>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={goToPrevious}
+                className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                aria-label="Previous logos"
+              >
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
+              </button>
+              <button 
+                onClick={goToNext}
+                className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors"
+                aria-label="Next logos"
+              >
+                <ChevronRight className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
-            
-            <button 
-              onClick={goToNext}
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 transition-colors ml-8"
-              aria-label="Next logos"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
-            </button>
           </div>
           
-          <div className="flex justify-center mt-6 space-x-2">
+          {/* Logos Display */}
+          <div className="flex items-center justify-center space-x-16 min-w-0 flex-1 mb-8">
+            {logos.map((logo, index) => (
+              <div key={logo.name} className="flex-shrink-0 flex items-center justify-center min-w-0">
+                <span className={`${logo.className} transition-opacity duration-300`}>
+                  {logo.logoText}
+                </span>
+              </div>
+            ))}
+          </div>
+          
+          {/* Navigation dots */}
+          <div className="flex justify-center space-x-2">
             {logos.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-[#00CC66]' : 'bg-gray-300'
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  index === currentIndex ? 'bg-black' : 'bg-gray-300'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
