@@ -1,127 +1,72 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Phone, Menu, X, MessageCircle, ChevronDown } from 'lucide-react';
-import { trackEvent } from '@/lib/analytics';
+import { Menu, X, User, Phone } from 'lucide-react';
 import Logo from './header/Logo';
 import DesktopNav from './header/DesktopNav';
 import MobileMenu from './header/MobileMenu';
-import {
-  destinationItems,
-  travelStyleItems,
-  aboutItems,
-  inspiredItems
-} from './header/NavigationData';
 
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  
-  useEffect(() => {
-    console.debug('[Header] mounted');
-    
-    // Handle body scroll lock when mobile menu is open
-    if (mobileOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [mobileOpen]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleClick = (label: string) => {
-    console.debug('[Header] clicked', { label });
-    trackEvent('navigation_click', { item: label });
-  };
-  
-  const toggleMobile = () => {
-    setMobileOpen(o => {
-      const newValue = !o;
-      console.debug('[Header] mobileOpen', newValue);
-      return newValue;
-    });
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <header className="fixed w-full z-50 bg-white shadow-sm font-montserrat">
-      {/* Utility Navigation */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end space-x-6 text-xs">
-          <Link
-            to="/contact-us"
-            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('Contact us')}
-          >
-            Contact us
-          </Link>
-          <Link
-            to="/future-travel-credit"
-            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('Future Travel Credit')}
-          >
-            Future Travel Credit
-          </Link>
-          <Link
-            to="/subscribe"
-            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('Subscribe to emails')}
-          >
-            Subscribe to emails
-          </Link>
-          <Link
-            to="/login"
-            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('Traveller log in')}
-          >
-            Traveller log in
-          </Link>
-          <Link
-            to="/agent-login"
-            className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('Agent log in')}
-          >
-            Agent log in
-          </Link>
+    <header className="bg-white border-b border-gray-100 fixed top-0 left-0 right-0 z-50 shadow-sm">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="block">
+              <Logo />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:block flex-1 mx-8">
+            <DesktopNav />
+          </div>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-4">
+            {/* Call us button - Desktop */}
+            <div className="hidden md:flex items-center gap-2 text-sm">
+              <Phone className="w-4 h-4" />
+              <span className="font-medium">Call us: 020 7468 4335</span>
+            </div>
+
+            {/* Account button */}
+            <Link 
+              to="/account" 
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black hover:bg-gray-50 rounded-lg transition-colors"
+            >
+              <User className="w-4 h-4" />
+              <span className="hidden sm:inline">My Account</span>
+            </Link>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden p-2 text-black hover:bg-gray-50 rounded-lg transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <nav className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Left side with mobile burger and logo */}
-          <div className="flex items-center">
-            {/* Mobile Burger */}
-            <button
-              aria-label="Toggle menu"
-              className="lg:hidden p-2 mr-4"
-              onClick={toggleMobile}
-            >
-              {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
-            </button>
-            
-            {/* Logo */}
-            <Logo onClick={() => handleClick('Logo')} />
-          </div>
-          
-          {/* Desktop Navigation */}
-          <DesktopNav onLinkClick={handleClick} />
-        </div>
-        
-        {/* Mobile Menu */}
-        <MobileMenu
-          isOpen={mobileOpen}
-          destinationItems={destinationItems}
-          travelStyleItems={travelStyleItems}
-          aboutItems={aboutItems}
-          inspiredItems={inspiredItems}
-          onLinkClick={(label) => {
-            handleClick(label);
-            setMobileOpen(false);
-          }}
-        />
-      </nav>
+      {/* Mobile Menu */}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen} 
+        onClose={() => setIsMobileMenuOpen(false)} 
+      />
     </header>
   );
 };

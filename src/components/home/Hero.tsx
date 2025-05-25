@@ -1,192 +1,78 @@
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { MapPin, Search, Calendar, ChevronDown } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { trackEvent } from '@/lib/analytics';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Hero = () => {
-  const navigate = useNavigate();
-  const [destination, setDestination] = useState<string>("");
-  const [activity, setActivity] = useState<string>("");
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // Using Contiki's Dubrovnik, Croatia hero image
-  const heroImageUrl = "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920";
-
-  useEffect(() => {
-    console.debug('[Hero] mounted');
-    
-    // Preload hero image
-    const img = new Image();
-    img.src = heroImageUrl;
-    img.onload = () => {
-      setIsLoaded(true);
-      console.debug('[Hero] imageLoaded');
-      trackEvent('hero_image_loaded', { status: 'success' });
-    };
-    img.onerror = () => {
-      setIsLoaded(true);
-      console.debug('[Hero] image failed to load');
-      trackEvent('hero_image_loaded', { status: 'error' });
-    };
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.debug('[Hero] search', { destination, activity, date });
-    trackEvent('search_submitted', { destination, activity, date: date ? format(date, 'yyyy-MM-dd') : undefined });
-    
-    // Build query params
-    const params = new URLSearchParams();
-    if (destination) params.append('destination', destination);
-    if (activity) params.append('activity', activity);
-    if (date) params.append('date', format(date, 'yyyy-MM-dd'));
-    
-    navigate(`/tours?${params.toString()}`);
-  };
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero Background Image */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-        style={{ 
-          backgroundImage: `url(${heroImageUrl})`,
-        }}
-        aria-hidden="true"
-      />
-      
-      {/* Gradient Overlay */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40 z-10"
-        aria-hidden="true"
-      />
-
-      {/* Content Container */}
-      <div className="container relative z-20 px-6 md:px-8 flex flex-col items-center justify-center">
-        {/* Last Minute Deals Banner */}
-        <div className={cn(
-          "text-center mb-8 transform transition-all duration-700 ease-out",
-          isLoaded ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        )}>
-          <div className="mb-6">
-            <h1 className="font-black text-6xl md:text-8xl text-white leading-none tracking-tight drop-shadow-2xl mb-2">
-              <span className="block text-white" style={{ WebkitTextStroke: '2px black' }}>LAST MINUTE</span>
-              <span className="block text-[#FF6900]" style={{ WebkitTextStroke: '2px black' }}>DEALS</span>
-            </h1>
-            <p className="font-semibold text-xl md:text-2xl text-white mt-4 drop-shadow-lg">
-              Save BIG on trips departing soon
-            </p>
-          </div>
-          
-          {/* View Deals Button */}
-          <Button 
-            className="bg-[#FF6900] text-white hover:bg-[#FF6900]/90 font-bold px-8 py-4 rounded-lg text-lg mb-12 shadow-lg"
-            onClick={() => navigate('/deals')}
-          >
-            VIEW DEALS
-          </Button>
-        </div>
-
-        {/* Search Form */}
-        <form 
-          onSubmit={handleSubmit}
-          className={cn(
-            "bg-white/95 backdrop-blur-sm rounded-lg p-6 shadow-2xl max-w-6xl w-full mx-auto transition-all duration-1000 ease-out transform",
-            isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-10 opacity-0 scale-95"
-          )}
-          aria-label="Trip search form"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Where do you want to go? */}
-            <div className="space-y-2">
-              <div className="relative">
-                <Input
-                  placeholder="Where do you want to go?"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="w-full pl-10 h-12 border-0 border-b-2 border-gray-300 rounded-none bg-transparent focus:border-gray-400 focus:ring-0"
-                  type="text"
-                  aria-label="Enter destination"
-                />
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              </div>
-            </div>
-
-            {/* What do you want to see? */}
-            <div className="space-y-2">
-              <Select value={activity} onValueChange={setActivity}>
-                <SelectTrigger className="w-full h-12 border-0 border-b-2 border-gray-300 rounded-none bg-transparent focus:border-gray-400 focus:ring-0">
-                  <SelectValue placeholder="What do you want to see?" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="culture">Culture & History</SelectItem>
-                  <SelectItem value="adventure">Adventure</SelectItem>
-                  <SelectItem value="nightlife">Nightlife</SelectItem>
-                  <SelectItem value="nature">Nature</SelectItem>
-                  <SelectItem value="food">Food & Drink</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* When do you want to go? */}
-            <div className="space-y-2">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    aria-label="Select travel date"
-                    className={cn(
-                      "w-full h-12 text-left font-normal relative border-0 border-b-2 border-gray-300 rounded-none bg-transparent hover:bg-transparent focus:border-gray-400 focus:ring-0",
-                      !date && "text-gray-400"
-                    )}
-                  >
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                    <span className="block truncate pl-8">
-                      {date ? format(date, "PPP") : "When do you want to go?"}
-                    </span>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="center">
-                  <CalendarComponent
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                    className="p-3"
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-
-            {/* Search Button - changed to Contiki orange */}
-            <div className="flex items-end">
-              <Button 
-                type="submit" 
-                className="w-full bg-[#FF6900] text-white hover:bg-[#FF6900]/90 font-bold px-6 py-3 rounded-lg h-12 transition-all duration-300"
-                aria-label="Search trips"
-              >
-                SEARCH
-              </Button>
-            </div>
-          </div>
-        </form>
+    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"
+          alt="Travel destination"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      
-      {/* Loading indicator */}
-      {!isLoaded && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black">
-          <div className="w-16 h-16 border-4 border-t-[#FF6900] border-gray-700 rounded-full animate-spin"></div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-6">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 tracking-tight">
+          TRAVEL FOR 
+          <br />
+          <span className="text-[#CCFF00]">18-35S</span>
+        </h1>
+        
+        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-medium leading-relaxed">
+          Experience epic adventures with like-minded travellers on trips designed for 18-35 year olds
+        </p>
+
+        {/* Search Bar */}
+        <div className="mb-8">
+          <SearchBar />
         </div>
-      )}
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            to="/tours"
+            className="bg-[#CCFF00] text-black font-bold px-8 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-[#b8e600] transition-all duration-200 transform hover:scale-105"
+          >
+            FIND YOUR TRIP
+          </Link>
+          
+          <Link
+            to="/destinations"
+            className="border-2 border-white text-white font-bold px-8 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all duration-200"
+          >
+            EXPLORE DESTINATIONS
+          </Link>
+        </div>
+
+        {/* Trust indicators */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm opacity-90">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span>50+ years of travel experience</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span>ATOL & ABTA protected</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span>20,000+ verified reviews</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+        </div>
+      </div>
     </section>
   );
 };

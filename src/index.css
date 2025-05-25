@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -59,234 +59,209 @@
     @apply bg-background text-foreground;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     letter-spacing: -0.01em;
     font-weight: 400;
     color: #000000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Contiki Typography System */
+  /* Contiki Typography System - More aggressive and bold */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
+    @apply font-extrabold;
     margin: 0;
     color: #000000;
     font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
   }
 
   h1 {
-    font-size: 48px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 800;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.9;
+    font-weight: 900;
+    text-transform: uppercase;
   }
 
   h2 {
-    font-size: 36px;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
   }
 
   h3 {
-    font-size: 28px;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    line-height: 1.2;
     font-weight: 700;
+    text-transform: uppercase;
   }
 
   h4 {
-    font-size: 24px;
+    font-size: clamp(1.25rem, 3vw, 2rem);
     line-height: 1.3;
-    letter-spacing: -0.01em;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   h5 {
-    font-size: 20px;
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     line-height: 1.4;
-    letter-spacing: 0;
     font-weight: 600;
   }
 
   h6 {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.4;
-    letter-spacing: 0.01em;
     font-weight: 600;
   }
 
   p {
-    margin-bottom: 16px;
-    font-size: 16px;
-    line-height: 1.6;
-    letter-spacing: 0;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.7;
     color: #333333;
+    font-weight: 400;
   }
 
   .container {
     @apply px-4 md:px-6 lg:px-8;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
-  /* Smooth transitions for interactive elements */
-  a, button, input, select, textarea {
-    @apply transition-all duration-200 ease-in-out;
-  }
-  
-  /* Focus styles matching Contiki */
+  /* Enhanced focus styles */
   a:focus, button:focus, input:focus, select:focus, textarea:focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:ring-offset-2;
   }
 }
 
 @layer components {
-  /* Contiki Button System */
+  /* Contiki Button System - More aggressive styling */
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-semibold transition-all duration-200 ease-in-out
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-bold transition-all duration-200 ease-in-out
     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00] focus:outline-none focus:ring-2 focus:ring-[#CCFF00]
-    disabled:pointer-events-none disabled:opacity-50;
+    disabled:pointer-events-none disabled:opacity-50 transform hover:scale-105 active:scale-95;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     line-height: 1.2;
-    letter-spacing: 0.5px;
-    padding: 12px 24px;
+    letter-spacing: 1px;
+    padding: 16px 32px;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 800;
+    border-radius: 12px;
   }
 
   .btn-primary {
-    @apply btn bg-[#CCFF00] text-black hover:bg-[#bfff00] active:bg-[#adeb00];
+    @apply btn bg-[#CCFF00] text-black hover:bg-[#b8e600] active:bg-[#adeb00] shadow-lg hover:shadow-xl;
     background-color: #CCFF00;
   }
 
   .btn-secondary {
-    @apply btn bg-black text-white hover:bg-gray-800 active:bg-gray-900;
+    @apply btn bg-black text-white hover:bg-gray-800 active:bg-gray-900 shadow-lg hover:shadow-xl;
   }
 
   .btn-outline {
-    @apply btn border-2 border-[#CCFF00] bg-transparent text-[#CCFF00] hover:bg-[#CCFF00] hover:text-black;
+    @apply btn border-2 border-[#CCFF00] bg-transparent text-[#CCFF00] hover:bg-[#CCFF00] hover:text-black shadow-lg hover:shadow-xl;
   }
 
   .btn-ghost {
     @apply btn bg-transparent text-gray-800 hover:bg-gray-100 active:bg-gray-200;
   }
 
-  /* Contiki Typography Classes */
+  /* Contiki Card System */
+  .contiki-card {
+    @apply bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 ease-out;
+    transform: translateY(0);
+  }
+
+  .contiki-card:hover {
+    @apply shadow-2xl;
+    transform: translateY(-8px);
+  }
+
+  /* Enhanced Typography Classes */
+  .heading-hero {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.85;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+  }
+
   .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    @apply text-4xl md:text-6xl lg:text-7xl font-extrabold uppercase;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: 0.9;
     color: #000000;
   }
 
   .heading-lg {
-    @apply text-3xl md:text-4xl font-bold;
+    @apply text-3xl md:text-5xl font-extrabold uppercase;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1;
     color: #000000;
   }
 
   .heading-md {
-    @apply text-2xl md:text-3xl font-bold;
+    @apply text-2xl md:text-4xl font-bold uppercase;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: -0.01em;
-    line-height: 1.3;
+    line-height: 1.1;
     color: #000000;
   }
 
   .heading-sm {
-    @apply text-xl md:text-2xl font-semibold;
+    @apply text-xl md:text-2xl font-bold uppercase;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0;
-    line-height: 1.3;
+    line-height: 1.2;
     color: #000000;
   }
 
   .text-body {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #333333;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
   }
 
   .text-small {
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #666666;
     font-family: 'Montserrat', sans-serif;
   }
 
   .text-caption {
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.5;
     color: #999999;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
   }
 
-  /* Contiki Cards */
-  .contiki-card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 ease-in-out;
-  }
-
-  .contiki-card:hover {
-    @apply shadow-lg transform translate-y-[-2px];
-  }
-
-  /* Green accent elements */
-  .green-accent {
-    background-color: #CCFF00;
-    color: black;
-  }
-
-  .green-accent-text {
-    color: #CCFF00;
-  }
-
-  /* Contiki specific spacing */
+  /* Section spacing - Contiki style */
   .section-padding {
-    @apply py-16 md:py-20 lg:py-24;
+    @apply py-20 md:py-28 lg:py-32;
   }
 
   .content-padding {
-    @apply py-8 md:py-12;
+    @apply py-12 md:py-16;
   }
 
-  /* Hide scrollbars */
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Contiki specific animations */
+  /* Enhanced animations */
   .fade-in {
-    animation: fadeIn 0.6s ease-in-out;
+    animation: fadeIn 0.8s ease-out;
   }
 
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .slide-up {
-    animation: slideUp 0.5s ease-in-out;
-  }
-
-  @keyframes slideUp {
     from {
       opacity: 0;
       transform: translateY(30px);
@@ -296,4 +271,64 @@
       transform: translateY(0);
     }
   }
+
+  .slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Contiki-specific utility classes */
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+  }
+
+  .contiki-green {
+    background-color: #CCFF00;
+    color: #000000;
+  }
+
+  .border-contiki {
+    border-color: #CCFF00;
+  }
+
+  /* Enhanced spacing system */
+  .space-y-contiki > * + * {
+    margin-top: 2rem;
+  }
+
+  .gap-contiki {
+    gap: 2rem;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CCFF00;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8e600;
 }
