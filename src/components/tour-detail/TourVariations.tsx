@@ -9,6 +9,7 @@ const TourVariations: React.FC = () => {
       name: 'PLUS',
       description: 'Upgrade to hotel rooms & share with just 1 other traveller.',
       price: '£1,761',
+      oldPrice: '£2,335',
       isSelected: true,
       features: ['Hotel rooms', 'Share with 1 other']
     },
@@ -17,6 +18,7 @@ const TourVariations: React.FC = () => {
       name: 'STANDARD',
       description: 'Stay in multi-share hotel rooms with up to 3 other travellers.',
       price: '£1,468',
+      oldPrice: '£1,835',
       isSelected: false,
       features: ['Multi-share rooms', 'Up to 3 others']
     },
@@ -25,14 +27,16 @@ const TourVariations: React.FC = () => {
       name: 'PRIDE',
       description: 'The Plus itinerary with extra activities handpicked for the LGBTQIA+ community operating in peak season.',
       price: '£1,758',
+      oldPrice: '£2,315',
       isSelected: false,
       features: ['LGBTQIA+ focused', 'Extra activities']
     },
     {
       id: 'gap',
       name: 'GAP 18-22',
-      description: 'Includes the Standard itinerary, exclusively for 18-22s (in Peak Season).',
+      description: 'Includes the Standard itinerary, exclusively for 18-22s (In Peak Season).',
       price: '£1,639',
+      oldPrice: '£2,049',
       isSelected: false,
       features: ['Ages 18-22 only', 'Peak season']
     }
@@ -40,9 +44,9 @@ const TourVariations: React.FC = () => {
 
   return (
     <div className="container py-12">
-      <h2 className="text-2xl font-bold text-black mb-2">Selected Variation</h2>
+      <h2 className="text-2xl font-bold text-black mb-8">Selected Variation</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {variations.map((variation) => (
           <div 
             key={variation.id}
@@ -58,16 +62,23 @@ const TourVariations: React.FC = () => {
               </div>
             )}
             
-            <div className="text-center">
-              <h3 className="font-bold text-lg text-black mb-2">{variation.name}</h3>
-              <p className="text-sm text-gray-600 mb-4 min-h-[3rem]">{variation.description}</p>
+            <div>
+              <h3 className="font-bold text-lg text-black mb-3 uppercase tracking-wide">{variation.name}</h3>
+              <p className="text-sm text-gray-600 mb-4 leading-relaxed min-h-[4rem]">{variation.description}</p>
               
               <div className="mb-4">
-                <div className="text-sm text-gray-500">From</div>
-                <div className="text-xl font-bold text-black">{variation.price}</div>
+                {variation.oldPrice && (
+                  <div className="text-sm text-gray-400 line-through mb-1">
+                    {variation.oldPrice}
+                  </div>
+                )}
+                <div className="flex items-baseline">
+                  <span className="text-sm text-gray-500 mr-1">From</span>
+                  <span className="text-xl font-bold text-black">{variation.price}</span>
+                </div>
               </div>
               
-              <button className="w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded text-sm font-semibold hover:bg-gray-50">
+              <button className="w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded text-sm font-semibold hover:bg-gray-50 transition-colors">
                 Add to compare
               </button>
             </div>
@@ -75,8 +86,8 @@ const TourVariations: React.FC = () => {
         ))}
       </div>
       
-      <div className="text-center mt-6">
-        <button className="text-black font-semibold underline">
+      <div className="text-center mt-8">
+        <button className="text-black font-semibold underline hover:no-underline transition-all">
           SHOW ALL VERSIONS
         </button>
       </div>

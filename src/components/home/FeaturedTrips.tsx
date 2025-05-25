@@ -60,7 +60,8 @@ const FeaturedTrips = () => {
       countries: 7,
       places: 13,
       rating: 4.6,
-      image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+      image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+      hasPromoBanner: true
     },
     {
       id: '4',
@@ -160,6 +161,20 @@ const FeaturedTrips = () => {
                     {trip.isSpotlight && (
                       <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                         Trip Spotlight
+                      </div>
+                    )}
+                    
+                    {/* Promotional Banner Overlay */}
+                    {trip.hasPromoBanner && (
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 flex flex-col justify-end p-4">
+                        <div className="text-white text-center">
+                          <div className="text-2xl font-bold mb-2">Get set for</div>
+                          <div className="text-3xl font-bold mb-2">GREECE 🌴</div>
+                          <div className="text-sm mb-3">Save extra when you book this month!</div>
+                          <button className="bg-[#CCFF00] text-black font-bold px-6 py-2 rounded-full hover:bg-[#b8e600] transition-colors">
+                            LET'S GO
+                          </button>
+                        </div>
                       </div>
                     )}
                     
