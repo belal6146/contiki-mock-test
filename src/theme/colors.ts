@@ -23,16 +23,16 @@ export const colors = {
     900: '#000000',
   },
   
-  // Contiki Green color (rgb(204, 255, 0))
+  // Contiki Green color (#cf0)
   secondary: {
-    DEFAULT: 'rgb(204, 255, 0)', // Main Contiki green color
+    DEFAULT: '#cf0', // Main Contiki green color
     foreground: '#000000',
     50: '#f9ffe6',
     100: '#efffb3',
     200: '#e2ff80',
     300: '#ccff4d',
-    400: 'rgb(204, 255, 0)', // Main green
-    500: 'rgb(204, 255, 0)', // Main green
+    400: '#cf0', // Main green
+    500: '#cf0', // Main green
     600: '#b8e600',
     700: '#a3cc00',
     800: '#8bb300',
@@ -40,14 +40,14 @@ export const colors = {
   },
   
   accent: {
-    DEFAULT: 'rgb(204, 255, 0)', // Contiki Green
+    DEFAULT: '#cf0', // Contiki Green
     foreground: '#000000',
     50: '#f9ffe6',
     100: '#efffb3',
     200: '#e2ff80',
     300: '#ccff4d',
-    400: 'rgb(204, 255, 0)',
-    500: 'rgb(204, 255, 0)',
+    400: '#cf0',
+    500: '#cf0',
     600: '#b8e600',
     700: '#a3cc00',
     800: '#8bb300',
