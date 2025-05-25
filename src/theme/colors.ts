@@ -25,7 +25,7 @@ export const colors = {
   
   // Contiki Green color (#cf0)
   secondary: {
-    DEFAULT: '#cf0', // Main Contiki green color
+    DEFAULT: '#cf0;', // Main Contiki green color
     foreground: '#000000',
     50: '#f9ffe6',
     100: '#efffb3',
@@ -40,7 +40,7 @@ export const colors = {
   },
   
   accent: {
-    DEFAULT: '#cf0', // Contiki Green
+    DEFAULT: '#cf0;', // Contiki Green
     foreground: '#000000',
     50: '#f9ffe6',
     100: '#efffb3',
