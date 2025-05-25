@@ -123,11 +123,11 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
           <div className="lg:col-span-1">
             <div className="mb-6">
               <div className="flex items-center gap-3 mb-4">
-                <span className="bg-black text-white px-3 py-1 text-sm font-bold rounded">
+                <span className="bg-black text-black px-3 py-1 text-sm font-bold rounded">
                   I'm planning to travel in
                 </span>
                 <div className="flex bg-gray-100 rounded overflow-hidden">
-                  <button className="bg-[#CCFF00] text-white px-4 py-1 text-sm font-bold">
+                  <button className="bg-[#CCFF00] text-black px-4 py-1 text-sm font-bold">
                     2025
                   </button>
                   <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200">
@@ -202,14 +202,14 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
               </p>
               
               {/* On the road to Net Zero Banner - using Contiki orange instead of lime */}
-              <div className="bg-[#CCFF00] text-white p-4 rounded-lg flex items-center justify-between mb-6">
+              <div className="bg-[#CCFF00] text-black p-4 rounded-lg flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-white text-[#CCFF00] w-8 h-8 rounded-full flex items-center justify-center">
                     <span className="text-sm font-bold">🌱</span>
                   </div>
                   <span className="font-bold">On the road to Net Zero</span>
                 </div>
-                <button className="text-white underline font-semibold text-sm">
+                <button className="text-black underline font-semibold text-sm">
                   Find out more
                 </button>
               </div>
@@ -234,7 +234,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
               <p className="text-gray-600 mb-4">Our most popular variation with premium accommodations and additional experiences.</p>
               <div className="flex justify-between items-center">
                 <span className="text-lg font-bold text-[#CCFF00]">From $1,899</span>
-                <button className="bg-[#CCFF00] text-white px-4 py-2 rounded hover:bg-[#CCFF00]/90 transition-colors">
+                <button className="bg-[#CCFF00] text-black px-4 py-2 rounded hover:bg-[#CCFF00]/90 transition-colors">
                   Select
                 </button>
               </div>
