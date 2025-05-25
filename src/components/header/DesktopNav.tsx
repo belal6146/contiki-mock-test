@@ -82,20 +82,20 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
       <div className="hidden lg:flex items-center space-x-3">
         <div className="relative">
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none z-10">
-            <div className="bg-[#CCFF00] rounded-full p-2">
+            <div className="bg-[#CCFF00] rounded-full p-1.5">
               <Search className="h-4 w-4 text-black" />
             </div>
           </div>
           <Input 
             type="search" 
             placeholder="Aged 18-35? Find your adventure" 
-            className="pr-14 text-sm w-80 h-10 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#CCFF00] focus:border-[#CCFF00] transition-all duration-150 ease-in-out bg-white text-gray-600 placeholder-gray-500"
+            className="pr-12 text-sm w-64 h-9 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#CCFF00] focus:border-[#CCFF00] transition-all duration-150 ease-in-out bg-white text-gray-600 placeholder-gray-500"
           />
         </div>
         
         <a 
           href="tel:08082811120" 
-          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out whitespace-nowrap"
+          className="flex items-center px-3 py-1.5 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out whitespace-nowrap"
           onClick={() => onLinkClick('Phone')}
         >
           <Phone className="h-4 w-4 mr-2" />
@@ -103,20 +103,12 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         </a>
         
         <button 
-          className="flex items-center px-4 py-2 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
+          className="flex items-center px-3 py-1.5 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
           onClick={() => onLinkClick('Chat')}
         >
           <MessageCircle className="h-4 w-4 mr-2" />
           Chat
         </button>
-        
-        <Link 
-          to="/subscribe" 
-          className="px-4 py-2 bg-[#CCFF00] rounded-full text-black font-bold text-sm hover:bg-[#b8e600] transition-all duration-150 ease-in-out whitespace-nowrap"
-          onClick={() => onLinkClick('Subscribe')}
-        >
-          Subscribe
-        </Link>
       </div>
     </>
   );
