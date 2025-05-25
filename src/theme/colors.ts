@@ -31,7 +31,7 @@ export const colors = {
     200: '#ffcc80',
     300: '#ffb84d',
     400: '#ffa31a',
-    500: '#FF6600', // Main Contiki orange color
+    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));', // Main Contiki orange color
     600: '#e65c00',
     700: '#cc5200',
     800: '#b34700',
@@ -46,7 +46,7 @@ export const colors = {
     200: '#ffcc80',
     300: '#ffb84d',
     400: '#ffa31a',
-    500: '#FF6600',
+    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));',
     600: '#e65c00',
     700: '#cc5200',
     800: '#b34700',
@@ -61,7 +61,7 @@ export const colors = {
     200: '#ffcc80',
     300: '#ffb84d',
     400: '#ffa31a',
-    500: '#FF6600',
+    500: 'rgb(204 255 0 / var(--tw-bg-opacity, 1));',
     600: '#e65c00',
     700: '#cc5200',
     800: '#b34700',
