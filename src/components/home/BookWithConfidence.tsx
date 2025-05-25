@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Lock, Calendar, Edit, Shield } from 'lucide-react';
 
 const BookWithConfidence = () => {
   useEffect(() => {
@@ -11,20 +10,44 @@ const BookWithConfidence = () => {
 
   const confidenceItems = [
     {
-      icon: <Lock className="h-8 w-8" />,
-      text: "Lock in your spot with a £50 deposit"
+      icon: (
+        <img 
+          src="https://www.contiki.com/media/bcoftwgx/details-sorted-icon.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200" 
+          alt="Details Sorted" 
+          className="w-12 h-12 object-contain"
+        />
+      ),
+      text: "Includes accommodation, local transport & epic experiences"
     },
     {
-      icon: <Calendar className="h-8 w-8" />,
-      text: "Pay monthly or bi-weekly"
+      icon: (
+        <img 
+          src="https://www.contiki.com/media/0ficmavf/experience-social-icon.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200" 
+          alt="Experience Social Travel" 
+          className="w-12 h-12 object-contain"
+        />
+      ),
+      text: "Explore with a Trip Manager, Driver and other awesome travellers"
     },
     {
-      icon: <Edit className="h-8 w-8" />,
-      text: "Amend your booking up to 60 days pre-trip"
+      icon: (
+        <img 
+          src="https://www.contiki.com/media/4vvbzugm/abta-logo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" 
+          alt="ABTA Protected" 
+          className="w-12 h-12 object-contain"
+        />
+      ),
+      text: "ABTA protected"
     },
     {
-      icon: <Shield className="h-8 w-8" />,
-      text: "ABTA & ATOL protected"
+      icon: (
+        <img 
+          src="https://www.contiki.com/media/scmo443v/atol-logo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" 
+          alt="ATOL Protected" 
+          className="w-12 h-12 object-contain"
+        />
+      ),
+      text: "ATOL protected"
     }
   ];
 
@@ -36,7 +59,7 @@ const BookWithConfidence = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {confidenceItems.map((item, index) => (
             <div key={index} className="flex flex-col items-center text-center">
-              <div className="mb-4 bg-black rounded-full p-4 text-white">
+              <div className="mb-4 bg-white rounded-full p-4 flex items-center justify-center w-20 h-20">
                 {item.icon}
               </div>
               <p className="text-lg font-medium">

@@ -11,8 +11,8 @@ const TopTripsPromo = () => {
     const img1 = new Image();
     const img2 = new Image();
     
-    img1.src = "https://source.unsplash.com/featured/800x600/?mountains,lake,travel,adventure";
-    img2.src = "https://source.unsplash.com/featured/800x600/?asia,temple,travel,culture";
+    img1.src = "https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720";
+    img2.src = "https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720";
     
     Promise.all([
       new Promise(resolve => { img1.onload = resolve; }),
@@ -33,7 +33,7 @@ const TopTripsPromo = () => {
               className={`absolute inset-0 bg-cover bg-center transition-all duration-700 transform group-hover:scale-105 ${
                 isLoaded ? 'opacity-100' : 'opacity-0'
               }`}
-              style={{ backgroundImage: "url('https://source.unsplash.com/featured/800x600/?mountains,lake,travel,adventure')" }}
+              style={{ backgroundImage: "url('https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
@@ -58,7 +58,7 @@ const TopTripsPromo = () => {
               className={`absolute inset-0 bg-cover bg-center transition-all duration-700 transform group-hover:scale-105 ${
                 isLoaded ? 'opacity-100' : 'opacity-0'
               }`}
-              style={{ backgroundImage: "url('https://source.unsplash.com/featured/800x600/?asia,temple,travel,culture')" }}
+              style={{ backgroundImage: "url('https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720')" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">

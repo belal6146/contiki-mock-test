@@ -18,7 +18,7 @@ const Hero = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Using Contiki's actual hero image
+  // Using Contiki's Dubrovnik, Croatia hero image
   const heroImageUrl = "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920";
 
   useEffect(() => {

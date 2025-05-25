@@ -5,30 +5,30 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const AsSeenIn = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Updated list with actual Contiki partner logos
+  // Updated list with Contiki Feefo lockup and other partner logos
   const logos = [
     { 
-      name: 'BuzzFeed', 
+      name: 'Feefo Reviews', 
       src: 'https://www.contiki.com/media/voxkq3ue/feefo-lockup.png?height=126&mode=max&width=126', 
       className: 'text-black font-bold text-xl' 
     },
     { 
-      name: 'PinkNews', 
+      name: 'Six-Two Magazine', 
       src: 'https://www.contiki.com/media/2degaq2e/six-two-logo.svg?height=101&mode=max&width=123', 
       className: 'text-pink-600 font-bold text-xl' 
     },
     { 
-      name: 'Traveler', 
+      name: 'TreadRight Foundation', 
       src: 'https://www.contiki.com/media/opwmano4/treadright-1.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
       className: 'text-black font-serif text-xl italic' 
     },
     { 
-      name: 'UNILAD', 
+      name: 'The Travel Corporation', 
       src: 'https://www.contiki.com/media/z0kkjtoj/ttc-core-logo-white-rgb.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
       className: 'text-black font-bold text-xl' 
     },
     { 
-      name: 'COSMOPOLITAN', 
+      name: 'UN World Tourism', 
       src: 'https://www.contiki.com/media/h2qob34a/unwto-2.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300', 
       className: 'text-black font-bold text-xl tracking-wide' 
     }
@@ -63,7 +63,7 @@ const AsSeenIn = () => {
     <section className="py-12 bg-white">
       <div className="container max-w-6xl mx-auto px-6">
         <div className="text-center">
-          <h2 className="text-lg font-medium text-gray-800 mb-8">As seen in</h2>
+          <h2 className="text-lg font-medium text-gray-800 mb-8">Tried and trusted by millions</h2>
           
           <div className="flex items-center justify-center">
             <button 

@@ -5,42 +5,42 @@ import { Link } from 'react-router-dom';
 const destinations = [
   {
     name: "Europe",
-    image: "https://source.unsplash.com/random/400x300/?europe,eiffel",
+    image: "https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920",
     link: "/tours?region=europe"
   },
   {
     name: "Asia",
-    image: "https://source.unsplash.com/random/400x300/?asia,taj-mahal",
+    image: "https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720",
     link: "/tours?region=asia"
   },
   {
     name: "USA & Canada",
-    image: "https://source.unsplash.com/random/400x300/?canada,mountains",
+    image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     link: "/tours?region=north-america"
   },
   {
     name: "Australia",
-    image: "https://source.unsplash.com/random/400x300/?australia,uluru",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     link: "/tours?region=australia"
   },
   {
     name: "Africa",
-    image: "https://source.unsplash.com/random/400x300/?africa,safari",
+    image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     link: "/tours?region=africa"
   },
   {
     name: "New Zealand",
-    image: "https://source.unsplash.com/random/400x300/?new-zealand,river",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     link: "/tours?region=new-zealand"
   },
   {
     name: "Latin America",
-    image: "https://source.unsplash.com/random/400x300/?latin-america,mountains",
+    image: "https://images.unsplash.com/photo-1531065208531-4036c0dba3c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     link: "/tours?region=latin-america"
   },
   {
     name: "See all trips",
-    image: "https://source.unsplash.com/random/400x300/?travel,beach",
+    image: "https://www.contiki.com/media/be2hvn55/find-your-adventure.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200",
     link: "/tours"
   }
 ];
