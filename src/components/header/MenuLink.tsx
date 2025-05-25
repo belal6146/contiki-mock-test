@@ -30,15 +30,15 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   if (hasDropdown && !isMobile) {
     return (
       <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-        <DropdownMenuTrigger className="group focus:outline-none" aria-haspopup="true">
-          <div className="flex items-center text-sm font-semibold tracking-tight hover:text-[#FF6900] text-black py-4 px-4 group-data-[state=open]:text-[#FF6900] relative transition-all duration-150 ease-in-out">
+        <DropdownMenuTrigger className="group focus:outline-none font-montserrat" aria-haspopup="true">
+          <div className="flex items-center text-sm font-semibold tracking-tight hover:text-[rgb(204,255,0)] text-black py-4 px-4 group-data-[state=open]:text-[rgb(204,255,0)] relative transition-all duration-150 ease-in-out">
             {label}
             <ChevronDown className="h-3 w-3 ml-1 transition-transform duration-150 group-data-[state=open]:rotate-180" />
-            <span className="absolute -bottom-0 left-4 w-0 h-[2px] bg-[#FF6900] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-32px)] group-data-[state=open]:w-[calc(100%-32px)]"></span>
+            <span className="absolute -bottom-0 left-4 w-0 h-[2px] bg-[rgb(204,255,0)] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-32px)] group-data-[state=open]:w-[calc(100%-32px)]"></span>
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent 
-          className="bg-white shadow-lg rounded-md p-4 min-w-[220px] transition-all duration-150 ease-in-out z-50"
+          className="bg-white shadow-lg rounded-md p-4 min-w-[220px] transition-all duration-150 ease-in-out z-50 font-montserrat"
           sideOffset={8}
         >
           {children}
@@ -50,7 +50,7 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   if (hasDropdown && isMobile) {
     return (
       <div className="space-y-2">
-        <div className="flex items-center justify-between py-3 text-sm font-semibold text-black tracking-tight transition-colors duration-150 ease-in-out">
+        <div className="flex items-center justify-between py-3 text-sm font-semibold text-black tracking-tight transition-colors duration-150 ease-in-out font-montserrat">
           {label}
           <ChevronDown className="h-4 w-4" />
         </div>
@@ -64,12 +64,12 @@ const MenuLink: React.FC<MenuLinkProps> = ({
   return (
     <Link 
       to={to} 
-      className={`text-sm font-semibold tracking-tight text-black ${isMobile ? 'py-3' : 'py-4 px-4'} hover:text-[#FF6900] relative group transition-colors duration-150 ease-in-out`}
+      className={`text-sm font-semibold tracking-tight text-black ${isMobile ? 'py-3' : 'py-4 px-4'} hover:text-[rgb(204,255,0)] relative group transition-colors duration-150 ease-in-out font-montserrat`}
       onClick={() => onClick(label)}
     >
       {label}
       {!isMobile && (
-        <span className="absolute -bottom-0 left-4 w-0 h-[2px] bg-[#FF6900] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-32px)]"></span>
+        <span className="absolute -bottom-0 left-4 w-0 h-[2px] bg-[rgb(204,255,0)] transition-all duration-150 ease-in-out group-hover:w-[calc(100%-32px)]"></span>
       )}
     </Link>
   );

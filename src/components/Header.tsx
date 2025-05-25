@@ -45,42 +45,42 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full z-50 bg-white shadow-sm">
+    <header className="fixed w-full z-50 bg-white shadow-sm font-montserrat">
       {/* Utility Navigation */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-2 flex justify-end space-x-6 text-xs">
           <Link
             to="/contact-us"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('ContactUs')}
+            onClick={() => handleClick('Contact us')}
           >
             Contact us
           </Link>
           <Link
             to="/future-travel-credit"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('FutureTravelCredit')}
+            onClick={() => handleClick('Future Travel Credit')}
           >
             Future Travel Credit
           </Link>
           <Link
             to="/subscribe"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('SubscribeToEmails')}
+            onClick={() => handleClick('Subscribe to emails')}
           >
             Subscribe to emails
           </Link>
           <Link
             to="/login"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('TravellerLogIn')}
+            onClick={() => handleClick('Traveller log in')}
           >
             Traveller log in
           </Link>
           <Link
             to="/agent-login"
             className="hover:underline text-gray-600 font-normal transition-colors duration-150"
-            onClick={() => handleClick('AgentLogIn')}
+            onClick={() => handleClick('Agent log in')}
           >
             Agent log in
           </Link>

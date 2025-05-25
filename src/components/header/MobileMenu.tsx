@@ -27,7 +27,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   return (
     <div 
       className={cn(
-        "lg:hidden bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden", 
+        "lg:hidden bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden font-montserrat", 
         isOpen ? "max-h-screen border-t border-gray-100" : "max-h-0"
       )}
     >
@@ -36,14 +36,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           {/* Mobile search bar */}
           <div className="relative">
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none z-10">
-              <div className="bg-[#00CC66] rounded-full p-1.5">
-                <Search className="h-4 w-4 text-white" />
+              <div className="bg-[rgb(204,255,0)] rounded-full p-1.5">
+                <Search className="h-4 w-4 text-black" />
               </div>
             </div>
             <Input 
               type="search" 
               placeholder="Aged 18-35? Find your adventure" 
-              className="pr-12 text-sm h-10 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#00CC66] focus:border-[#00CC66] transition-all duration-150 ease-in-out bg-white"
+              className="pr-12 text-sm h-10 border border-gray-300 rounded-full focus:ring-2 focus:ring-[rgb(204,255,0)] focus:border-[rgb(204,255,0)] transition-all duration-150 ease-in-out bg-white font-montserrat"
             />
           </div>
           
@@ -54,7 +54,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 <Link 
                   key={index}
                   to={item.to} 
-                  className="block py-2 text-sm text-gray-700 hover:text-[#00CC66] transition-all duration-150 ease-in-out"
+                  className="block py-2 text-sm text-gray-700 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat"
                   onClick={() => onLinkClick(item.label)}
                 >
                   {item.label}
@@ -65,7 +65,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             <MenuLink to="/deals" label="DEALS" hasDropdown isMobile onClick={onLinkClick}>
               <Link 
                 to="/deals/current-deals" 
-                className="block py-2 text-sm text-gray-700 hover:text-[#00CC66] transition-all duration-150 ease-in-out"
+                className="block py-2 text-sm text-gray-700 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat"
                 onClick={() => onLinkClick('Current Deals')}
               >
                 Current Deals
@@ -77,7 +77,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 <Link 
                   key={index}
                   to={item.to} 
-                  className="block py-2 text-sm text-gray-700 hover:text-[#00CC66] transition-all duration-150 ease-in-out"
+                  className="block py-2 text-sm text-gray-700 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat"
                   onClick={() => onLinkClick(item.label)}
                 >
                   {item.label}
@@ -90,7 +90,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 <Link 
                   key={index}
                   to={item.to} 
-                  className="block py-2 text-sm text-gray-700 hover:text-[#00CC66] transition-all duration-150 ease-in-out"
+                  className="block py-2 text-sm text-gray-700 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat"
                   onClick={() => onLinkClick(item.label)}
                 >
                   {item.label}
@@ -103,7 +103,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 <Link 
                   key={index}
                   to={item.to} 
-                  className="block py-2 text-sm text-gray-700 hover:text-[#00CC66] transition-all duration-150 ease-in-out"
+                  className="block py-2 text-sm text-gray-700 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat"
                   onClick={() => onLinkClick(item.label)}
                 >
                   {item.label}
@@ -114,18 +114,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           
           {/* Mobile utility links */}
           <div className="space-y-2 pt-4 border-t border-gray-200">
-            <Link to="/contact-us" className="block py-2 text-sm text-gray-600 hover:text-[#00CC66] transition-all duration-150 ease-in-out" onClick={() => onLinkClick('Contact us')}>Contact us</Link>
-            <Link to="/future-travel-credit" className="block py-2 text-sm text-gray-600 hover:text-[#00CC66] transition-all duration-150 ease-in-out" onClick={() => onLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
-            <Link to="/subscribe" className="block py-2 text-sm text-gray-600 hover:text-[#00CC66] transition-all duration-150 ease-in-out" onClick={() => onLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
-            <Link to="/login" className="block py-2 text-sm text-gray-600 hover:text-[#00CC66] transition-all duration-150 ease-in-out" onClick={() => onLinkClick('Traveller log in')}>Traveller log in</Link>
-            <Link to="/agent-login" className="block py-2 text-sm text-gray-600 hover:text-[#00CC66] transition-all duration-150 ease-in-out" onClick={() => onLinkClick('Agent log in')}>Agent log in</Link>
+            <Link to="/contact-us" className="block py-2 text-sm text-gray-600 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat" onClick={() => onLinkClick('Contact us')}>Contact us</Link>
+            <Link to="/future-travel-credit" className="block py-2 text-sm text-gray-600 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat" onClick={() => onLinkClick('Future Travel Credit')}>Future Travel Credit</Link>
+            <Link to="/subscribe" className="block py-2 text-sm text-gray-600 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat" onClick={() => onLinkClick('Subscribe to emails')}>Subscribe to emails</Link>
+            <Link to="/login" className="block py-2 text-sm text-gray-600 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat" onClick={() => onLinkClick('Traveller log in')}>Traveller log in</Link>
+            <Link to="/agent-login" className="block py-2 text-sm text-gray-600 hover:text-[rgb(204,255,0)] transition-all duration-150 ease-in-out font-montserrat" onClick={() => onLinkClick('Agent log in')}>Agent log in</Link>
           </div>
           
           {/* Mobile action buttons */}
           <div className="space-y-3 pt-4 border-t border-gray-200">
             <a 
               href="tel:08082811120" 
-              className="flex items-center justify-center px-4 py-3 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out"
+              className="flex items-center justify-center px-4 py-3 bg-white rounded-full border border-gray-300 text-black font-medium text-sm hover:bg-gray-50 transition-all duration-150 ease-in-out font-montserrat"
               onClick={() => onLinkClick('Phone')}
             >
               <Phone className="h-4 w-4 mr-2" />
@@ -134,7 +134,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             
             <Link 
               to="/subscribe" 
-              className="flex items-center justify-center px-4 py-3 bg-[#00CC66] rounded-full text-white font-medium text-sm hover:bg-[#00CC66]/90 transition-all duration-150 ease-in-out"
+              className="flex items-center justify-center px-4 py-3 bg-[rgb(204,255,0)] rounded-full text-black font-medium text-sm hover:bg-[rgb(184,230,0)] transition-all duration-150 ease-in-out font-montserrat"
               onClick={() => onLinkClick('Subscribe')}
             >
               Subscribe

@@ -71,35 +71,83 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
     nightsCount: 10
   };
 
-  // Mock FAQ data that will be consistent across all tabs
+  // Extended FAQ data that matches the Contiki website
   const mockGeneralFAQs = [
     {
-      question: "What does a modular trip mean?",
-      answer: "A modular trip means fellow travellers will join and leave at various locations. There'll be some goodbyes, sure, but there'll also be plenty of hellos with new like-minded travellers."
-    },
-    {
       question: "What is Contiki?",
-      answer: "Contiki is a travel company that specializes in group tours for 18-35 year olds. We offer unforgettable experiences across the globe."
+      answer: "Contiki is a travel company that specializes in group tours for 18-35 year olds. We offer unforgettable experiences across the globe with like-minded travelers."
     },
     {
-      question: "Why travel 18-35?",
-      answer: "Our trips are designed specifically for young travelers looking for authentic experiences with like-minded people."
+      question: "Why only 18-35?",
+      answer: "Our trips are designed specifically for young travelers looking for authentic experiences with like-minded people in the same life stage."
     },
     {
-      question: "Will I be pressured to participate in any trip?",
-      answer: "Never. All activities are optional, allowing you to customize your travel experience to your preferences."
+      question: "Will I be pressured to party/drink on my trip?",
+      answer: "Never. All activities are optional, allowing you to customize your travel experience to your preferences. We cater to all types of travelers."
+    },
+    {
+      question: "What destinations can I go to with Contiki?",
+      answer: "Contiki offers trips to over 40+ countries across 6 continents including Europe, Asia, Australia, New Zealand, North America, and more."
+    },
+    {
+      question: "How does it work?",
+      answer: "Simply choose your trip, book online or call us, and we'll take care of the rest. Your Trip Manager will guide you through your adventure."
+    },
+    {
+      question: "Do I need a visa?",
+      answer: "Visa requirements depend on your nationality and destination. We provide guidance on visa requirements for all our trips."
+    },
+    {
+      question: "Do you always travel by coach on a Contiki trip?",
+      answer: "While coaches are common for European trips, we use various transportation methods including trains, boats, and flights depending on the destination."
+    },
+    {
+      question: "How many other travellers will be on each trip?",
+      answer: "Group sizes vary by trip type, typically ranging from 20-50 travelers to ensure a great group dynamic while maintaining intimacy."
+    },
+    {
+      question: "Can I book online?",
+      answer: "Yes, you can book your Contiki trip online through our website, or contact our travel experts by phone for personalized assistance."
+    },
+    {
+      question: "What's included?",
+      answer: "Your trip includes accommodation, transportation, many meals, a professional Trip Manager, Local Guides, and all listed activities. Check individual trip pages for specific inclusions."
+    },
+    {
+      question: "What's not included?",
+      answer: "Personal expenses, some meals, optional activities, travel insurance, visas, and flights to/from your trip starting point are typically not included."
+    },
+    {
+      question: "What are Contiki's sustainability credentials?",
+      answer: "We're committed to responsible travel through partnerships with local communities, sustainable accommodation choices, and carbon offset programs."
+    },
+    {
+      question: "Do I need to have travel insurance for this trip?",
+      answer: "Yes, comprehensive travel insurance is mandatory for all Contiki trips to protect you and your investment."
+    },
+    {
+      question: "Can I stay in my destination a few days before/after the trip starts/ends? And can Contiki help me arrange that?",
+      answer: "Absolutely! We offer pre and post-trip accommodation and can help arrange additional nights in your start or end destination."
+    },
+    {
+      question: "Can I book more than one trip at a time?",
+      answer: "Yes, you can book multiple trips and even combine them for an extended adventure. Our travel experts can help plan your multi-trip journey."
+    },
+    {
+      question: "Want to learn more about us from Past Travellers?",
+      answer: "Check out our reviews and testimonials from thousands of past travelers who have experienced the magic of Contiki firsthand."
     }
   ];
 
   // Trip-specific FAQs
   const mockTripFAQs = [
     {
-      question: "Can I book online?",
-      answer: "Yes, you can book your Contiki trip online through our website, or contact our travel experts by phone."
+      question: "What does a modular trip mean?",
+      answer: "A modular trip means fellow travellers will join and leave at various locations. There'll be some goodbyes, sure, but there'll also be plenty of hellos with new like-minded travellers."
     },
     {
-      question: "What's included?",
-      answer: "Your trip includes accommodation, transportation, many meals, a professional Trip Manager, Local Guides, and all listed activities."
+      question: "What should I pack for this trip?",
+      answer: "We recommend packing light clothes for daytime and something warmer for evenings. A detailed packing list will be provided after booking."
     }
   ];
 
@@ -170,8 +218,8 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="bg-[#FF6900] rounded-full p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+              <div className="bg-[rgb(204,255,0)] rounded-full p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                 </svg>
               </div>
@@ -180,7 +228,7 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
                 <p className="text-sm text-gray-600">Flexible booking policies & health measures</p>
               </div>
             </div>
-            <button className="text-[#FF6900] font-semibold hover:underline">
+            <button className="text-[rgb(204,255,0)] font-semibold hover:underline">
               Learn More
             </button>
           </div>
@@ -190,28 +238,24 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
       {/* Tab-specific content */}
       {renderTabContent()}
       
-      {/* FAQ section - only show for trip tab */}
-      {activeTab === 'trip' && (
-        <>
-          <div className="bg-white py-12 border-t border-gray-100">
-            <div className="container max-w-7xl">
-              <div className="mx-auto max-w-4xl">
-                <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
-              </div>
-            </div>
+      {/* FAQ section - show on all tabs */}
+      <div className="bg-white py-12 border-t border-gray-100">
+        <div className="container max-w-7xl">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
           </div>
-          <div className="bg-white pb-16">
-            <div className="container max-w-7xl">
-              <div className="mx-auto max-w-4xl">
-                <FAQAccordion 
-                  tripFAQs={mockTripFAQs} 
-                  generalFAQs={mockGeneralFAQs} 
-                />
-              </div>
-            </div>
+        </div>
+      </div>
+      <div className="bg-white pb-16">
+        <div className="container max-w-7xl">
+          <div className="mx-auto max-w-4xl">
+            <FAQAccordion 
+              tripFAQs={mockTripFAQs} 
+              generalFAQs={mockGeneralFAQs} 
+            />
           </div>
-        </>
-      )}
+        </div>
+      </div>
       
       {/* Chat with us section - show on all tabs */}
       <div className="bg-[#F7F7F7] py-12 border-t border-gray-200">
@@ -222,7 +266,7 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
               <p className="text-gray-600">Our travel experts are here to help you plan your perfect trip.</p>
             </div>
             <div className="flex gap-4">
-              <button className="bg-[#FF6900] text-white px-6 py-3 rounded-full hover:bg-[#E55F00] transition-colors font-semibold">
+              <button className="bg-[rgb(204,255,0)] text-black px-6 py-3 rounded-full hover:bg-[rgb(184,230,0)] transition-colors font-semibold">
                 Chat with Us
               </button>
               <button className="border border-gray-300 bg-white text-gray-800 px-6 py-3 rounded-full hover:bg-gray-50 transition-colors font-semibold">
