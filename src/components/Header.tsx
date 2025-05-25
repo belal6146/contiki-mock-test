@@ -89,7 +89,7 @@ const Header = () => {
 
       {/* Main Navigation */}
       <nav className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Left side with mobile burger and logo */}
           <div className="flex items-center">
             {/* Mobile Burger */}
@@ -101,11 +101,11 @@ const Header = () => {
               {mobileOpen ? <X size={24} className="text-black" /> : <Menu size={24} className="text-black" />}
             </button>
             
-            {/* Logo positioned at far left */}
-            <Logo onClick={() => handleClick('Logo')} width="120px" />
+            {/* Logo */}
+            <Logo onClick={() => handleClick('Logo')} />
           </div>
           
-          {/* Desktop Navigation on the right */}
+          {/* Desktop Navigation */}
           <DesktopNav onLinkClick={handleClick} />
         </div>
         

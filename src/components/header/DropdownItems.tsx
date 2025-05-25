@@ -15,19 +15,19 @@ interface DropdownItemsProps {
 
 const DropdownItems: React.FC<DropdownItemsProps> = ({ items, onClick }) => {
   return (
-    <>
+    <div className="grid grid-cols-1 gap-1">
       {items.map((item, index) => (
         <DropdownMenuItem key={index} asChild className="p-0 focus:bg-gray-50 rounded-md">
           <Link 
             to={item.to} 
-            className="block w-full px-3 py-2.5 text-sm text-black hover:text-[#FF6900] hover:bg-gray-50 transition-all duration-150 ease-in-out rounded-md"
+            className="block w-full px-4 py-3 text-sm text-gray-700 hover:text-black hover:bg-gray-50 transition-all duration-150 ease-in-out rounded-md font-montserrat"
             onClick={() => onClick(item.label)}
           >
             {item.label}
           </Link>
         </DropdownMenuItem>
       ))}
-    </>
+    </div>
   );
 };
 

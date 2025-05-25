@@ -19,10 +19,10 @@ interface DesktopNavProps {
 const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
   return (
     <>
-      {/* Desktop navigation */}
-      <nav className="hidden lg:flex items-center justify-center flex-1 mx-8">
-        <ul className="flex items-center">
-          <li className="mr-6">
+      {/* Desktop navigation - centered */}
+      <nav className="hidden lg:flex items-center justify-center flex-1">
+        <ul className="flex items-center space-x-8">
+          <li>
             <MenuLink 
               to="/destinations" 
               label="DESTINATIONS" 
@@ -32,7 +32,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={destinationItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li className="mr-6">
+          <li>
             <MenuLink 
               to="/deals" 
               label="DEALS" 
@@ -45,7 +45,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               />
             </MenuLink>
           </li>
-          <li className="mr-6">
+          <li>
             <MenuLink 
               to="/travel-styles" 
               label="TRAVEL STYLES" 
@@ -55,7 +55,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={travelStyleItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li className="mr-6">
+          <li>
             <MenuLink 
               to="/about-contiki" 
               label="ABOUT CONTIKI" 
@@ -65,7 +65,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
               <DropdownItems items={aboutItems} onClick={onLinkClick} />
             </MenuLink>
           </li>
-          <li className="mr-6">
+          <li>
             <MenuLink 
               to="/get-inspired" 
               label="GET INSPIRED" 
@@ -78,18 +78,18 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         </ul>
       </nav>
       
-      {/* Right side elements - search box, phone, chat, etc. */}
+      {/* Right side elements */}
       <div className="hidden lg:flex items-center space-x-4">
         <div className="relative">
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none z-10">
-            <div className="bg-[rgb(204,255,0)] rounded-full p-1.5">
+            <div className="bg-[rgb(204,255,0)] rounded-full p-2">
               <Search className="h-4 w-4 text-black" />
             </div>
           </div>
           <Input 
             type="search" 
             placeholder="Aged 18-35? Find your adventure" 
-            className="pr-12 text-sm w-80 h-10 border border-gray-300 rounded-full focus:ring-2 focus:ring-[rgb(204,255,0)] focus:border-[rgb(204,255,0)] transition-all duration-150 ease-in-out bg-white font-montserrat"
+            className="pr-14 text-sm w-80 h-12 border border-gray-300 rounded-full focus:ring-2 focus:ring-[rgb(204,255,0)] focus:border-[rgb(204,255,0)] transition-all duration-150 ease-in-out bg-white font-montserrat"
           />
         </div>
         
