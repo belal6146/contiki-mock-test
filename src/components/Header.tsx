@@ -25,9 +25,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-black border-b border-gray-800 fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
       <div className="container max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="block">
@@ -41,17 +41,17 @@ const Header = () => {
           </div>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {/* Call us button - Desktop */}
-            <div className="hidden md:flex items-center gap-2 text-sm text-white">
+            <div className="hidden md:flex items-center gap-2 text-sm text-gray-700">
               <Phone className="w-4 h-4" />
-              <span className="font-medium">Call us: 020 7468 4335</span>
+              <span className="font-medium">0808 281 1120</span>
             </div>
 
             {/* Account button */}
             <Link 
               to="/account" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <User className="w-4 h-4" />
               <span className="hidden sm:inline">My Account</span>
@@ -60,7 +60,7 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               onClick={toggleMobileMenu}
-              className="lg:hidden p-2 text-white hover:bg-gray-800 rounded-lg transition-colors"
+              className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (

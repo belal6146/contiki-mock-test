@@ -66,7 +66,7 @@ const Index = () => {
 
       <Header />
       
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
