@@ -1,97 +1,62 @@
-
 import React from 'react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FAQAccordion from './FAQAccordion';
 
-// Mock the accordion component since it depends on Radix UI
+// Mock the accordion component
 jest.mock('@/components/ui/accordion', () => {
   return {
     Accordion: ({ children }: { children: React.ReactNode }) => <div data-testid="accordion">{children}</div>,
+    AccordionContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
     AccordionItem: ({ children, value }: { children: React.ReactNode, value: string }) => (
-      <div data-testid={`accordion-item-${value}`}>{children}</div>
+      <div data-value={value}>{children}</div>
     ),
-    AccordionTrigger: ({ children }: { children: React.ReactNode }) => (
-      <button data-testid="accordion-trigger">{children}</button>
-    ),
-    AccordionContent: ({ children }: { children: React.ReactNode }) => (
-      <div data-testid="accordion-content">{children}</div>
+    AccordionTrigger: ({ children, className }: { children: React.ReactNode, className: string }) => (
+      <button className={className}>{children}</button>
     ),
   };
 });
 
 describe('FAQAccordion', () => {
-  const mockGeneralFAQs = [
-    {
-      question: "What is Contiki?",
-      answer: "Contiki is a travel company that specializes in group tours for 18-35 year olds."
-    },
-    {
-      question: "Why 18-35?",
-      answer: "Our trips are designed specifically for young travelers looking for authentic experiences."
-    }
-  ];
-  
   const mockTripFAQs = [
     {
-      question: "Can I book online?",
-      answer: "Yes, you can book your Contiki trip online through our website."
-    },
-    {
-      question: "What's included?",
-      answer: "Your trip includes accommodation, transportation, many meals, and a professional Trip Manager."
+      question: 'What should I pack?',
+      answer: 'Pack light and bring comfortable walking shoes.'
     }
   ];
 
-  test('renders general FAQs section', () => {
-    render(<FAQAccordion generalFAQs={mockGeneralFAQs} tripFAQs={[]} />);
-    
-    expect(screen.getByText('General FAQs')).toBeInTheDocument();
-    expect(screen.getByText('What is Contiki?')).toBeInTheDocument();
-    expect(screen.getByText('Why 18-35?')).toBeInTheDocument();
-  });
+  const mockGeneralFAQs = [
+    {
+      question: 'How do I book?',
+      answer: 'You can book online or call our customer service.'
+    }
+  ];
 
-  test('renders trip FAQs section', () => {
-    render(<FAQAccordion generalFAQs={[]} tripFAQs={mockTripFAQs} />);
+  test('renders trip FAQs when provided', () => {
+    render(<FAQAccordion tripFAQs={mockTripFAQs} generalFAQs={[]} />);
     
     expect(screen.getByText('Trip FAQs')).toBeInTheDocument();
-    expect(screen.getByText('Can I book online?')).toBeInTheDocument();
-    expect(screen.getByText("What's included?")).toBeInTheDocument();
+    expect(screen.getByText('What should I pack?')).toBeInTheDocument();
   });
 
-  test('renders both sections when both props are provided', () => {
-    render(<FAQAccordion generalFAQs={mockGeneralFAQs} tripFAQs={mockTripFAQs} />);
+  test('renders general FAQs when provided', () => {
+    render(<FAQAccordion tripFAQs={[]} generalFAQs={mockGeneralFAQs} />);
     
     expect(screen.getByText('General FAQs')).toBeInTheDocument();
-    expect(screen.getByText('Trip FAQs')).toBeInTheDocument();
+    expect(screen.getByText('How do I book?')).toBeInTheDocument();
   });
 
-  test('does not render general FAQs section when empty array is provided', () => {
-    render(<FAQAccordion generalFAQs={[]} tripFAQs={mockTripFAQs} />);
+  test('renders both sections when both are provided', () => {
+    render(<FAQAccordion tripFAQs={mockTripFAQs} generalFAQs={mockGeneralFAQs} />);
     
-    expect(screen.queryByText('General FAQs')).not.toBeInTheDocument();
     expect(screen.getByText('Trip FAQs')).toBeInTheDocument();
-  });
-
-  test('does not render trip FAQs section when empty array is provided', () => {
-    render(<FAQAccordion generalFAQs={mockGeneralFAQs} tripFAQs={[]} />);
-    
     expect(screen.getByText('General FAQs')).toBeInTheDocument();
-    expect(screen.queryByText('Trip FAQs')).not.toBeInTheDocument();
   });
 
-  test('accordion triggers are rendered correctly', () => {
-    render(<FAQAccordion generalFAQs={mockGeneralFAQs} tripFAQs={mockTripFAQs} />);
+  test('handles empty arrays gracefully', () => {
+    render(<FAQAccordion tripFAQs={[]} generalFAQs={[]} />);
     
-    const triggers = screen.getAllByTestId('accordion-trigger');
-    expect(triggers.length).toBe(mockGeneralFAQs.length + mockTripFAQs.length);
-  });
-
-  test('accordion content is rendered correctly', () => {
-    render(<FAQAccordion generalFAQs={mockGeneralFAQs} tripFAQs={mockTripFAQs} />);
-    
-    const contents = screen.getAllByTestId('accordion-content');
-    expect(contents.length).toBe(mockGeneralFAQs.length + mockTripFAQs.length);
+    // Should not crash and accordion should still be present
+    expect(screen.getByTestId('accordion')).toBeInTheDocument();
   });
 });

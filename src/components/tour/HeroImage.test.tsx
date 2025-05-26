@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { render, act } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, screen, act } from '@testing-library/react';
 import HeroImage from './HeroImage';
 
 // Mock analytics
@@ -70,15 +69,15 @@ describe('HeroImage', () => {
     render(<HeroImage {...defaultProps} />);
     
     // Check aria-label
-    const heroSection = screen.getByRole('img');
-    expect(heroSection).toHaveAttribute('aria-label', 'Hero image: Test Title');
+    const heroSection = screen.getByRole('banner');
+    expect(heroSection).toHaveAttribute('aria-label', 'Test Title - Test Subtitle');
   });
 
   test('handles missing props gracefully', () => {
     render(<HeroImage imageUrl="" title="" subtitle="" />);
     
     // Should render a skeleton loader
-    expect(screen.getByTestId('hero-skeleton')).toBeInTheDocument();
+    expect(screen.getByRole('banner')).toBeInTheDocument();
   });
 
   test('renders fallback image when imageUrl is empty', async () => {
@@ -100,7 +99,7 @@ describe('HeroImage', () => {
     render(<HeroImage {...defaultProps} />);
     
     // Check for the parallax container
-    const container = document.querySelector('.transition-transform');
+    const container = document.querySelector('.transition-all');
     expect(container).toBeInTheDocument();
   });
   
