@@ -1,15 +1,15 @@
-
 import React from 'react';
 import { Info, Users, Bus, ChevronUp, ChevronDown } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import PriceBreakdown from './PriceBreakdown';
 import TripTimeline from './TripTimeline';
-import TravelersInfo, { BookingPassenger } from '../../tour/TravelersInfo';
+import FellowTravellerList from '../../tour/FellowTravellerList';
 import BusSeatMap from '../../tour/BusSeatMap';
 import OptionVariantSelector from './OptionVariantSelector';
 import FurtherInformation from './FurtherInformation';
 import CollapsibleSection from './CollapsibleSection';
+import { mockPassengers } from '@/data/mockPassengers';
 
 export interface DepartureOptionData {
   id: string;
@@ -31,6 +31,20 @@ interface OptionVariant {
   name: string;
   price: number;
   availability: 'available' | 'limited' | 'soldOut';
+}
+
+export interface BookingPassenger {
+  id: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+  address: {
+    country: string;
+  };
+  travelPassion?: string;
+  numberOfTimesTravelledPreviously?: number;
+  passengerId: number;
 }
 
 interface DepartureOptionProps {
@@ -220,7 +234,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 isOpen={travelersOpen}
                 onToggle={setTravelersOpen}
               >
-                <TravelersInfo passengers={passengers} />
+                <FellowTravellerList passengers={mockPassengers} />
               </CollapsibleSection>
             </div>
 

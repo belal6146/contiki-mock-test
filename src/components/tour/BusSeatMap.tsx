@@ -3,7 +3,21 @@ import React, { useState } from 'react';
 import { Settings } from 'lucide-react';
 import SeatGrid, { Seat } from './SeatGrid';
 import { Button } from '@/components/ui/button';
-import { BookingPassenger } from './TravelersInfo';
+import { mockPassengers } from '@/data/mockPassengers';
+
+export interface BookingPassenger {
+  id: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+  address: {
+    country: string;
+  };
+  travelPassion?: string;
+  numberOfTimesTravelledPreviously?: number;
+  passengerId: number;
+}
 
 interface BusSeatMapProps {
   passengers: BookingPassenger[];
@@ -13,7 +27,10 @@ const BusSeatMap: React.FC<BusSeatMapProps> = ({ passengers }) => {
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Generate seat data based on passengers
+  // Use the enhanced mock passenger data for seat assignments
+  const enhancedPassengers = mockPassengers.slice(0, 20); // Use first 20 for seat assignments
+
+  // Generate seat data based on enhanced passengers
   const generateSeats = () => {
     const upperDeckSeats: Seat[] = [];
     const lowerDeckSeats: Seat[] = [];
@@ -24,13 +41,13 @@ const BusSeatMap: React.FC<BusSeatMapProps> = ({ passengers }) => {
       const seatB = `${i}B`;
       
       // Check if passenger is assigned to this seat
-      const passengerA = passengers.find((p, idx) => {
+      const passengerA = enhancedPassengers.find((p, idx) => {
         const seatRow = Math.floor(idx / 2) + 1;
         const seatLetter = idx % 2 === 0 ? 'A' : 'B';
         return `${seatRow}${seatLetter}` === seatA;
       });
       
-      const passengerB = passengers.find((p, idx) => {
+      const passengerB = enhancedPassengers.find((p, idx) => {
         const seatRow = Math.floor(idx / 2) + 1;
         const seatLetter = idx % 2 === 0 ? 'A' : 'B';
         return `${seatRow}${seatLetter}` === seatB;
