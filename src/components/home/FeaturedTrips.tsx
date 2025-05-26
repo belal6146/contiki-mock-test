@@ -95,23 +95,23 @@ const FeaturedTrips = () => {
   const visibleTrips = displayTrips.slice(currentPage * 4, (currentPage * 4) + 4);
 
   return (
-    <section className="py-16 bg-white" aria-labelledby="featured-trips-heading">
+    <section className="py-20 bg-white" aria-labelledby="featured-trips-heading">
       <div className="container max-w-7xl mx-auto px-4">
         {/* Header with navigation arrows */}
         <div className="flex items-center justify-between mb-12">
           <h2 id="featured-trips-heading" className="text-3xl font-bold text-black">
             Popular trips
           </h2>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button 
-              className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-12 h-12 border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handlePrevious}
               disabled={currentPage === 0}
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             <button 
-              className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-12 h-12 border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handleNext}
               disabled={currentPage >= Math.ceil(displayTrips.length / 4) - 1}
             >
@@ -123,11 +123,11 @@ const FeaturedTrips = () => {
         {loading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <Skeleton className="h-48 w-full" />
-                <div className="p-4">
-                  <Skeleton className="h-6 w-3/4 mb-2" />
-                  <Skeleton className="h-4 w-1/2 mb-2" />
+              <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <Skeleton className="h-52 w-full" />
+                <div className="p-5">
+                  <Skeleton className="h-6 w-3/4 mb-3" />
+                  <Skeleton className="h-4 w-1/2 mb-3" />
                   <Skeleton className="h-4 w-1/4" />
                 </div>
               </div>
@@ -147,9 +147,9 @@ const FeaturedTrips = () => {
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {visibleTrips.map((trip, index) => (
-                <div key={trip.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group">
+                <div key={trip.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow group">
                   {/* Trip Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-52 overflow-hidden">
                     <img 
                       src={trip.image || `https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
                       alt={trip.name}
@@ -159,7 +159,7 @@ const FeaturedTrips = () => {
                     
                     {/* Trip Spotlight Badge */}
                     {trip.isSpotlight && (
-                      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         Trip Spotlight
                       </div>
                     )}
@@ -185,7 +185,7 @@ const FeaturedTrips = () => {
                   </div>
                   
                   {/* Trip Content */}
-                  <div className="p-4">
+                  <div className="p-5">
                     {/* Rating */}
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
@@ -216,12 +216,12 @@ const FeaturedTrips = () => {
                     </div>
                     
                     {/* Description */}
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                    <p className="text-sm text-gray-600 mb-5 line-clamp-3 leading-relaxed">
                       {trip.description || `Discover the best of ${trip.destination} in this adventure through multiple destinations...`}
                     </p>
                     
                     {/* Add to Compare Button */}
-                    <button className="flex items-center gap-2 text-sm text-black border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-4 w-full justify-center font-medium">
+                    <button className="flex items-center gap-2 text-sm text-black border-2 border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-5 w-full justify-center font-medium">
                       <Plus className="w-4 h-4" />
                       Add to compare
                     </button>
@@ -241,9 +241,11 @@ const FeaturedTrips = () => {
                           </span>
                         </div>
                       </div>
-                      <Button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-6 py-2 rounded text-sm uppercase tracking-wide">
-                        <Link to={`/tours/${trip.id}`}>VIEW TRIP</Link>
-                      </Button>
+                      <Link to={`/tours/${trip.id}`}>
+                        <button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-6 py-3 rounded-full text-sm uppercase tracking-wide transition-colors">
+                          VIEW TRIP
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -251,12 +253,12 @@ const FeaturedTrips = () => {
             </div>
             
             {/* Navigation dots */}
-            <div className="flex justify-center mt-8 gap-2">
+            <div className="flex justify-center mt-10 gap-2">
               {Array.from({ length: Math.ceil(displayTrips.length / 4) }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`w-3 h-3 rounded-full transition-colors ${i === currentPage ? 'bg-black' : 'bg-gray-300'}`}
+                  className={`w-3 h-3 rounded-full transition-colors ${i === currentPage ? 'bg-gray-800' : 'bg-gray-300'}`}
                   aria-label={`Go to page ${i + 1}`}
                 />
               ))}
@@ -264,9 +266,11 @@ const FeaturedTrips = () => {
             
             {/* View All Trips Button */}
             <div className="text-center mt-12">
-              <Button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-8 py-3 rounded text-lg uppercase tracking-wide">
-                <Link to="/tours">VIEW ALL TRIPS</Link>
-              </Button>
+              <Link to="/tours">
+                <button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-8 py-3 rounded-full text-lg uppercase tracking-wide transition-colors">
+                  VIEW ALL TRIPS
+                </button>
+              </Link>
             </div>
           </div>
         )}
