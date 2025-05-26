@@ -54,11 +54,11 @@ const EnhancedBusSeatMap: React.FC<EnhancedBusSeatMapProps> = ({ passengers }) =
         </div>
       )}
       
-      {/* Action Button */}
+      {/* Action Button - Updated with Contiki brand colors */}
       <div className="flex justify-end mt-8">
         <Button 
           onClick={handleSaveSelection}
-          className="bg-[rgb(204,255,0)] hover:bg-[rgb(184,230,0)] text-black font-bold px-10 py-4 text-base uppercase tracking-wide transition-all duration-200 border-2 border-[rgb(204,255,0)] hover:border-[rgb(184,230,0)] shadow-lg hover:shadow-xl transform hover:scale-105"
+          className="bg-[#FF6900] hover:bg-[#e65100] text-white font-bold px-10 py-4 text-base uppercase tracking-wide transition-all duration-200 border-2 border-[#FF6900] hover:border-[#e65100] shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           Save Seat Selection
         </Button>

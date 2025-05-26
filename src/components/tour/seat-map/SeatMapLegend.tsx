@@ -19,7 +19,7 @@ const SeatMapLegend: React.FC = () => {
           <span className="text-sm text-gray-700 font-medium">Occupied (Female)</span>
         </div>
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-[rgb(204,255,0)] border-2 border-[rgb(184,230,0)] rounded-lg shadow-lg"></div>
+          <div className="w-8 h-8 bg-[#FF6900] border-2 border-[#e65100] rounded-lg shadow-lg"></div>
           <span className="text-sm text-gray-700 font-medium">Selected</span>
         </div>
       </div>

@@ -81,8 +81,8 @@ const Header = () => {
       {/* Primary Nav Bar */}
       <div className="py-4">
         <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex items-center justify-between">
-          {/* Logo */}
-          <div className="mr-16">
+          {/* Logo - Positioned on the left with proper spacing */}
+          <div className="flex-shrink-0 mr-8">
             <Link to="/" className="block" onClick={() => handleLinkClick('Logo')}>
               <Logo />
             </Link>
@@ -94,7 +94,7 @@ const Header = () => {
               <li key={index}>
                 <Link 
                   to={item.to}
-                  className="text-sm uppercase font-semibold tracking-wide text-black hover:text-[#CCFF00] focus:outline-none focus:ring-2 focus:ring-[#CCFF00] transition-colors duration-150 flex items-center"
+                  className="text-sm uppercase font-semibold tracking-wide text-black hover:text-[#FF6900] focus:outline-none focus:ring-2 focus:ring-[#FF6900] transition-colors duration-150 flex items-center"
                   onClick={() => handleLinkClick(item.label)}
                 >
                   {item.label}
@@ -114,11 +114,11 @@ const Header = () => {
                 className="flex-grow text-sm text-gray-600 placeholder-gray-400 bg-transparent focus:outline-none"
               />
               <button 
-                className="ml-2 p-2 bg-[#CCFF00] rounded-full hover:bg-[#b8e600] transition-colors duration-150"
+                className="ml-2 p-2 bg-[#FF6900] rounded-full hover:bg-[#e65100] transition-colors duration-150"
                 onClick={() => handleLinkClick('Search')}
                 aria-label="Search"
               >
-                <Search className="h-4 w-4 text-black" />
+                <Search className="h-4 w-4 text-white" />
               </button>
             </div>
 

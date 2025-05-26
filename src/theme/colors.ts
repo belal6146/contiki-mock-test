@@ -7,7 +7,7 @@ export const colors = {
   background: 'hsl(var(--background))',
   foreground: 'hsl(var(--foreground))',
   
-  // Contiki Brand Colors
+  // Contiki Brand Colors - Corrected to match official brand
   primary: {
     DEFAULT: '#000000', // Contiki Black
     foreground: '#FFFFFF',
@@ -23,35 +23,35 @@ export const colors = {
     900: '#000000',
   },
   
-  // Contiki Green color (#cf0)
+  // Contiki Orange (official secondary color)
   secondary: {
-    DEFAULT: '#cf0;', // Main Contiki green color
-    foreground: '#000000',
-    50: '#f9ffe6',
-    100: '#efffb3',
-    200: '#e2ff80',
-    300: '#ccff4d',
-    400: '#cf0', // Main green
-    500: '#cf0', // Main green
-    600: '#b8e600',
-    700: '#a3cc00',
-    800: '#8bb300',
-    900: '#739900',
+    DEFAULT: '#FF6900', // Official Contiki Orange
+    foreground: '#FFFFFF',
+    50: '#fff3e6',
+    100: '#ffe0b3',
+    200: '#ffcc80',
+    300: '#ffb74d',
+    400: '#ffa726',
+    500: '#FF6900', // Main orange
+    600: '#e65100',
+    700: '#cc4700',
+    800: '#b33c00',
+    900: '#992f00',
   },
   
   accent: {
-    DEFAULT: '#cf0;', // Contiki Green
-    foreground: '#000000',
-    50: '#f9ffe6',
-    100: '#efffb3',
-    200: '#e2ff80',
-    300: '#ccff4d',
-    400: '#cf0',
-    500: '#cf0',
-    600: '#b8e600',
-    700: '#a3cc00',
-    800: '#8bb300',
-    900: '#739900',
+    DEFAULT: '#FF6900', // Contiki Orange
+    foreground: '#FFFFFF',
+    50: '#fff3e6',
+    100: '#ffe0b3',
+    200: '#ffcc80',
+    300: '#ffb74d',
+    400: '#ffa726',
+    500: '#FF6900',
+    600: '#e65100',
+    700: '#cc4700',
+    800: '#b33c00',
+    900: '#992f00',
   },
   
   // Neutral grays for Contiki

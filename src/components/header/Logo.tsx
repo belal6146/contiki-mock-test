@@ -5,9 +5,9 @@ const Logo = React.memo(() => {
   return (
     <div className="flex items-center" role="img" aria-label="Contiki Logo">
       <img 
-        src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&format=webp&mode=crop&width=800&height=200&quality=80"
+        src="/lovable-uploads/304774ea-2a34-4c18-981b-c7747ef66baf.png"
         alt="Contiki Logo"
-        className="h-6 w-auto"
+        className="h-8 w-auto"
       />
     </div>
   );
