@@ -11,8 +11,6 @@ import TopTripsPromo from '@/components/home/TopTripsPromo';
 import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
 import LogosCarousel from '@/components/home/LogosCarousel';
 import AsSeenIn from '@/components/home/AsSeenIn';
-import SixTwoCTA from '@/components/home/SixTwoCTA';
-import SixTwoMap from '@/components/home/SixTwoMap';
 import BackToTopButton from '@/components/BackToTopButton';
 import HelpButton from '@/components/home/HelpButton';
 import Footer from '@/components/Footer';
@@ -82,12 +80,6 @@ const Index = () => {
             <AsSeenIn />
           </section>
         </ErrorBoundary>
-
-        <ErrorBoundary>
-          <section aria-labelledby="cta-heading">
-            <SixTwoCTA />
-          </section>
-        </ErrorBoundary>
         
         <ErrorBoundary>
           <section aria-labelledby="testimonials-heading">
@@ -122,12 +114,6 @@ const Index = () => {
         <ErrorBoundary>
           <section aria-labelledby="partners-heading">
             <LogosCarousel />
-          </section>
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="map-heading">
-            <SixTwoMap />
           </section>
         </ErrorBoundary>
       </main>
