@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -64,7 +63,7 @@ const Index = () => {
 
       <Header />
       
-      <main className="flex-grow" role="main" aria-label="Main content">
+      <main className="flex-grow pt-24" role="main" aria-label="Main content">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
