@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Hero from '@/components/home/Hero';
-import FeaturedTrips from '@/components/home/FeaturedTrips';
+import PopularTrips from '@/components/home/PopularTrips';
 import PayOverTime from '@/components/home/PayOverTime';
 import BookWithConfidence from '@/components/home/BookWithConfidence';
 import TopTripsPromo from '@/components/home/TopTripsPromo';
@@ -69,8 +69,8 @@ const Index = () => {
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <section aria-labelledby="featured-trips-heading">
-            <FeaturedTrips />
+          <section aria-labelledby="popular-trips-heading">
+            <PopularTrips />
           </section>
         </ErrorBoundary>
         
