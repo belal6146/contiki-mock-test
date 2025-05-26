@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Trip } from '@/types/trip';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -12,11 +11,26 @@ import {
   generateDepartureOptions
 } from './dates';
 import { Grid, List } from 'lucide-react';
-import { BookingPassenger } from '../tour/TravelersInfo';
 import { ConsentManagerProvider } from '@/context/ConsentManager';
 
 interface TourDatesTabProps {
   trip: Trip;
+}
+
+// Updated BookingPassenger interface to include countryCode
+export interface BookingPassenger {
+  id: number;
+  firstName: string;
+  lastName: string;
+  age: number;
+  gender: string;
+  address: { 
+    country: string;
+    countryCode: string;
+  };
+  travelPassion: string;
+  numberOfTimesTravelledPreviously: number;
+  passengerId: number;
 }
 
 // Mock booking data - in a real app this would come from an API
