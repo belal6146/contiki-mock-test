@@ -12,7 +12,6 @@ import {
   generateDepartureOptions
 } from './dates';
 import { Grid, List } from 'lucide-react';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { BookingPassenger } from '../tour/TravelersInfo';
 import { ConsentManagerProvider } from '@/context/ConsentManager';
 
@@ -127,34 +126,40 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
         <div className="bg-white">
           <div className="container py-8">
             <div className="max-w-5xl mx-auto">
-              {/* Year Selection - matching original design */}
+              {/* Year Selection - updated to match Contiki style */}
               <div className="flex justify-center mb-8">
-                <div className="bg-gray-100 rounded-full p-1">
-                  <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)} className="gap-0">
-                    <ToggleGroupItem 
-                      value="2025" 
-                      className="bg-black text-white rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white"
-                    >
-                      2025
-                    </ToggleGroupItem>
-                    <ToggleGroupItem 
-                      value="2026" 
-                      className="bg-transparent text-gray-600 rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white hover:bg-gray-200"
-                    >
-                      2026
-                    </ToggleGroupItem>
-                  </ToggleGroup>
+                <div className="flex bg-gray-100 rounded-full p-1">
+                  <button 
+                    className={`px-8 py-2 rounded-full font-semibold transition-colors ${
+                      selectedYear === '2025' 
+                        ? 'bg-black text-white' 
+                        : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                    }`}
+                    onClick={() => setSelectedYear('2025')}
+                  >
+                    2025
+                  </button>
+                  <button 
+                    className={`px-8 py-2 rounded-full font-semibold transition-colors ${
+                      selectedYear === '2026' 
+                        ? 'bg-black text-white' 
+                        : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                    }`}
+                    onClick={() => setSelectedYear('2026')}
+                  >
+                    2026
+                  </button>
                 </div>
               </div>
 
-              {/* Month Filter Pills - matching original */}
+              {/* Month Filter Pills - updated spacing */}
               <MonthFilter 
                 months={MONTHS} 
                 selectedMonth={selectedMonth}
                 onMonthChange={handleMonthChange}
               />
 
-              {/* Trip Type Filters and View Toggle - matching original */}
+              {/* Trip Type Filters and View Toggle */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-700">Trip Type</span>
@@ -192,7 +197,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
               </div>
 
-              {/* Active Filters Display - matching original */}
+              {/* Active Filters Display */}
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span className="text-sm font-medium text-gray-700">Active filters:</span>
                 <div className="bg-[rgb(204,255,0)] text-black px-3 py-1 rounded-full text-sm font-medium flex items-center">
@@ -217,7 +222,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 ))}
               </div>
 
-              {/* Results Summary - matching original */}
+              {/* Results Summary */}
               <div className="flex justify-between items-center mb-6">
                 <p className="text-gray-600"><span className="font-medium">{options.length}</span> departure dates available</p>
                 <div>
@@ -229,7 +234,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
               </div>
 
-              {/* Departure Options - matching original */}
+              {/* Departure Options */}
               <div className="space-y-0 mb-10">
                 {options.map((option) => (
                   <DepartureOption

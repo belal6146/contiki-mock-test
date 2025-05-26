@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { formatCurrency } from '@/lib/utils';
-import { Info } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export interface OptionVariant {
   id: string;
@@ -24,36 +24,38 @@ const OptionVariantSelector: React.FC<OptionVariantSelectorProps> = ({
   if (variants.length === 0) return null;
   
   return (
-    <div className="mb-8 font-montserrat">
-      <h3 className="text-lg font-bold text-black mb-4 uppercase tracking-wide">Choose Variation</h3>
-      <div className="space-y-3">
+    <div className="mb-8">
+      <h3 className="text-lg font-bold text-black mb-4">Choose Variation</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {variants.map((variant) => (
           <div 
             key={variant.id}
-            className={`border rounded-lg p-4 cursor-pointer transition-all flex items-center justify-between ${
+            className={`relative border rounded-lg p-4 cursor-pointer transition-all ${
               selectedVariantId === variant.id 
-                ? 'border-orange-500 bg-orange-50 shadow-sm' 
+                ? 'border-black bg-white shadow-md' 
                 : 'border-gray-200 hover:border-gray-300 bg-white hover:shadow-sm'
             }`}
             onClick={() => onVariantSelect(variant.id)}
           >
-            <div className="flex items-center gap-3">
+            {/* Radio button */}
+            <div className="absolute top-4 right-4">
               <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                 selectedVariantId === variant.id 
-                  ? 'border-orange-500 bg-orange-500' 
+                  ? 'border-black bg-black' 
                   : 'border-gray-300 bg-white'
               }`}>
                 {selectedVariantId === variant.id && (
-                  <div className="w-2 h-2 rounded-full bg-white"></div>
+                  <Check className="w-3 h-3 text-white" />
                 )}
               </div>
-              <span className="font-bold text-black uppercase text-sm tracking-wide">
-                {variant.name}
-              </span>
             </div>
-            <div className="text-right">
-              <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-1 flex items-center font-medium">
-                <Info size={12} className="mr-1" />
+            
+            {/* Content */}
+            <div className="pr-8">
+              <h4 className="font-bold text-black uppercase text-sm tracking-wide mb-1">
+                {variant.name}
+              </h4>
+              <button className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-3">
                 More info
               </button>
               <div className="font-bold text-lg text-black">
