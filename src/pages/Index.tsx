@@ -9,8 +9,8 @@ import PayOverTime from '@/components/home/PayOverTime';
 import BookWithConfidence from '@/components/home/BookWithConfidence';
 import TopTripsPromo from '@/components/home/TopTripsPromo';
 import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
-import LogosCarousel from '@/components/home/LogosCarousel';
 import AsSeenIn from '@/components/home/AsSeenIn';
+import SixTwoBanner from '@/components/home/SixTwoBanner';
 import BackToTopButton from '@/components/BackToTopButton';
 import HelpButton from '@/components/home/HelpButton';
 import Footer from '@/components/Footer';
@@ -110,13 +110,14 @@ const Index = () => {
             <TravelDestinationsGrid />
           </section>
         </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="partners-heading">
-            <LogosCarousel />
-          </section>
-        </ErrorBoundary>
       </main>
+      
+      {/* New sections before footer */}
+      <ErrorBoundary>
+        <section aria-labelledby="six-two-banner-heading">
+          <SixTwoBanner />
+        </section>
+      </ErrorBoundary>
       
       <Footer />
       <BackToTopButton />
