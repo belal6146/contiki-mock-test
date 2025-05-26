@@ -1,8 +1,6 @@
 
 import React from 'react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
-import userEvent from '@testing-library/user-event';
+import { render, screen, userEvent } from '@/test-utils';
 import FAQAccordion from './FAQAccordion';
 
 // Mock the accordion component

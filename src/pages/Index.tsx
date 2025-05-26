@@ -66,49 +66,69 @@ const Index = () => {
 
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex-grow" role="main" aria-label="Main content">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <FeaturedTrips />
+          <section aria-labelledby="featured-trips-heading">
+            <FeaturedTrips />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <AsSeenIn />
+          <section aria-labelledby="media-mentions-heading">
+            <AsSeenIn />
+          </section>
         </ErrorBoundary>
 
         <ErrorBoundary>
-          <SixTwoCTA />
+          <section aria-labelledby="cta-heading">
+            <SixTwoCTA />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <Testimonials />
+          <section aria-labelledby="testimonials-heading">
+            <Testimonials />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <PayOverTime />
+          <section aria-labelledby="payment-options-heading">
+            <PayOverTime />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <BookWithConfidence />
+          <section aria-labelledby="booking-confidence-heading">
+            <BookWithConfidence />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <TopTripsPromo />
+          <section aria-labelledby="top-trips-heading">
+            <TopTripsPromo />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <TravelDestinationsGrid />
+          <section aria-labelledby="destinations-heading">
+            <TravelDestinationsGrid />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <LogosCarousel />
+          <section aria-labelledby="partners-heading">
+            <LogosCarousel />
+          </section>
         </ErrorBoundary>
         
         <ErrorBoundary>
-          <SixTwoMap />
+          <section aria-labelledby="map-heading">
+            <SixTwoMap />
+          </section>
         </ErrorBoundary>
       </main>
       

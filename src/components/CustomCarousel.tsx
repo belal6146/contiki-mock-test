@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,7 +10,7 @@ interface CustomCarouselProps {
   category?: string;
 }
 
-const CustomCarousel: React.FC<CustomCarouselProps> = ({ 
+const CustomCarousel = memo<CustomCarouselProps>(({ 
   images, 
   autoRotate = true, 
   interval = 5000,
@@ -79,13 +79,14 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
   };
 
   return (
-    <div 
+    <section 
       className="relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Image carousel"
+      aria-label={`${category} image carousel`}
+      aria-live="polite"
     >
       {/* Image container */}
       <div className="relative h-96">
@@ -115,7 +116,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
         onClick={handlePrev}
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-6 w-6" aria-hidden="true" />
       </Button>
       
       <Button
@@ -125,11 +126,11 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
         onClick={handleNext}
         aria-label="Next slide"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-6 w-6" aria-hidden="true" />
       </Button>
       
       {/* Indicator dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" role="tablist">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" role="tablist" aria-label="Slide indicators">
         {carouselImages.map((_, index) => (
           <button
             key={index}
@@ -140,15 +141,22 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
               setCurrentIndex(index);
               console.debug('[Carousel] slideChanged', index);
             }}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Go to slide ${index + 1} of ${carouselImages.length}`}
             aria-selected={index === currentIndex}
             role="tab"
             tabIndex={0}
           />
         ))}
       </div>
-    </div>
+      
+      {/* Screen reader announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        Slide {currentIndex + 1} of {carouselImages.length}: {carouselImages[currentIndex]?.alt}
+      </div>
+    </section>
   );
-};
+});
+
+CustomCarousel.displayName = 'CustomCarousel';
 
 export default CustomCarousel;

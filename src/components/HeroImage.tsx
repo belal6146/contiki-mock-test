@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { trackEvent } from '@/lib/analytics';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ interface HeroImageProps {
   subtitle?: string;
 }
 
-const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
+const HeroImage = memo<HeroImageProps>(({ imageUrl, title, subtitle }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -53,15 +53,16 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
   const displayImageUrl = imageError || !imageUrl ? getFallbackImage() : imageUrl;
 
   return (
-    <div 
+    <section 
       className="relative bg-cover bg-center h-[60vh] min-h-[400px] max-h-[600px] w-full overflow-hidden"
-      role="img"
-      aria-label={`Hero image: ${title}`}
+      role="banner"
+      aria-labelledby="hero-title"
+      aria-describedby="hero-description"
     >
       {/* Background image */}
       <img 
         src={displayImageUrl}
-        alt={title}
+        alt={`Hero image for ${title}`}
         className={cn(
           "absolute inset-0 w-full h-full object-cover transition-all duration-1000 transform",
           isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
@@ -83,17 +84,25 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
               <span 
                 className="inline-block px-6 py-3 text-sm font-bold tracking-wider uppercase rounded-full shadow-lg backdrop-blur-sm"
                 style={{ backgroundColor: 'rgba(255, 105, 0, 0.9)', color: 'white' }}
+                role="badge"
+                aria-label={`Trip category: ${subtitle}`}
               >
                 {subtitle}
               </span>
             </div>
           )}
           
-          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white leading-tight drop-shadow-2xl">
+          <h1 
+            id="hero-title"
+            className="font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white leading-tight drop-shadow-2xl"
+          >
             {title}
           </h1>
           
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-lg">
+          <p 
+            id="hero-description"
+            className="text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-lg"
+          >
             Join thousands of 18-35s on the adventure of a lifetime
           </p>
         </div>
@@ -101,18 +110,21 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
 
       {/* Loading indicator */}
       {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80" role="status">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-900/80" role="status" aria-label="Loading adventure content">
           <div className="text-center">
             <div 
               className="w-16 h-16 border-4 border-gray-200 rounded-full animate-spin mb-4"
               style={{ borderTopColor: '#FF6900' }}
+              aria-hidden="true"
             ></div>
             <p className="text-white text-sm">Loading adventure...</p>
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
-};
+});
+
+HeroImage.displayName = 'HeroImage';
 
 export default HeroImage;
