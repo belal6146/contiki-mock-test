@@ -31,9 +31,9 @@ const Header = () => {
   return (
     <header className="bg-white border-b border-gray-300 fixed top-0 left-0 right-0 z-40 shadow-sm">
       <div className="container max-w-screen-xl mx-auto px-4 lg:px-8">
-        {/* Top row with utility links - increased height */}
-        <div className="hidden lg:flex items-center justify-end py-3 text-sm text-gray-600 border-b border-gray-300">
-          <div className="flex items-center gap-8">
+        {/* Top row with utility links */}
+        <div className="hidden lg:flex items-center justify-end py-4 text-sm text-gray-600 border-b border-gray-300">
+          <div className="flex items-center gap-10">
             <Link to="/contact" className="text-gray-600 hover:text-primary transition">Contact us</Link>
             <Link to="/future-travel-credit" className="text-gray-600 hover:text-primary transition">Future Travel Credit</Link>
             <Link to="/subscribe" className="text-gray-600 hover:text-primary transition">Subscribe to emails</Link>
@@ -42,8 +42,8 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Main header row - increased height and spacing */}
-        <div className="flex items-center justify-between py-5">
+        {/* Main header row */}
+        <div className="flex items-center justify-between py-6">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="block">

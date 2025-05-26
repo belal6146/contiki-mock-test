@@ -19,9 +19,9 @@ interface DesktopNavProps {
 const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
   return (
     <>
-      {/* Desktop navigation - matched spacing to reference */}
+      {/* Desktop navigation */}
       <nav className="hidden lg:flex items-center justify-center flex-1">
-        <ul className="flex items-center space-x-8">
+        <ul className="flex items-center space-x-10">
           <li>
             <MenuLink 
               to="/destinations" 
@@ -78,24 +78,24 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         </ul>
       </nav>
       
-      {/* Right side elements - matched to reference design */}
-      <div className="hidden lg:flex items-center space-x-3">
+      {/* Right side elements */}
+      <div className="hidden lg:flex items-center space-x-4">
         <div className="relative">
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none z-10">
-            <div className="bg-[#CCFF00] rounded-full p-2">
+            <div className="bg-[#CCFF00] rounded-full p-2.5">
               <Search className="h-4 w-4 text-black" />
             </div>
           </div>
           <Input 
             type="search" 
             placeholder="Aged 18-35? Find your adventure" 
-            className="pr-14 text-sm w-80 h-12 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#CCFF00] focus:border-[#CCFF00] transition bg-white text-gray-600 placeholder-gray-600"
+            className="pr-16 text-sm w-96 h-14 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#CCFF00] focus:border-[#CCFF00] transition bg-white text-gray-600 placeholder-gray-600"
           />
         </div>
         
         <a 
           href="tel:08082811120" 
-          className="flex items-center px-6 py-3 bg-white rounded-full border border-gray-300 text-black font-semibold text-sm hover:bg-gray-50 transition whitespace-nowrap"
+          className="flex items-center px-8 py-4 bg-white rounded-full border border-gray-300 text-black font-semibold text-sm hover:bg-gray-50 transition whitespace-nowrap"
           onClick={() => onLinkClick('Phone')}
         >
           <Phone className="h-4 w-4 mr-2" />
@@ -103,7 +103,7 @@ const DesktopNav: React.FC<DesktopNavProps> = ({ onLinkClick }) => {
         </a>
         
         <button 
-          className="flex items-center px-6 py-3 bg-white rounded-full border border-gray-300 text-black font-semibold text-sm hover:bg-gray-50 transition"
+          className="flex items-center px-8 py-4 bg-white rounded-full border border-gray-300 text-black font-semibold text-sm hover:bg-gray-50 transition"
           onClick={() => onLinkClick('Chat')}
         >
           <MessageCircle className="h-4 w-4 mr-2" />

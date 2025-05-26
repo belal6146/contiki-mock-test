@@ -14,10 +14,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-full p-2 shadow-2xl max-w-5xl mx-auto">
+    <div className="bg-white/95 backdrop-blur-sm rounded-full p-1.5 shadow-2xl max-w-6xl mx-auto">
       <form onSubmit={handleSearch} className="flex items-center gap-0 h-16">
         {/* WHERE */}
-        <div className="flex-1 px-6 border-r border-gray-300">
+        <div className="flex-1 px-8 border-r border-gray-300">
           <div className="relative">
             <MapPin className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
             <input
@@ -25,13 +25,13 @@ const SearchBar = () => {
               placeholder="Where do you want to go?"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              className="w-full pl-7 pr-2 py-3 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
+              className="w-full pl-8 pr-2 py-4 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
             />
           </div>
         </div>
 
         {/* WHAT */}
-        <div className="flex-1 px-6 border-r border-gray-300">
+        <div className="flex-1 px-8 border-r border-gray-300">
           <div className="relative">
             <Search className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
             <input
@@ -39,13 +39,13 @@ const SearchBar = () => {
               placeholder="What do you want to see?"
               value={activity}
               onChange={(e) => setActivity(e.target.value)}
-              className="w-full pl-7 pr-2 py-3 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
+              className="w-full pl-8 pr-2 py-4 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
             />
           </div>
         </div>
 
         {/* WHEN */}
-        <div className="flex-1 px-6">
+        <div className="flex-1 px-8">
           <div className="relative">
             <Calendar className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
             <input
@@ -53,16 +53,16 @@ const SearchBar = () => {
               placeholder="When do you want to go?"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full pl-7 pr-2 py-3 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
+              className="w-full pl-8 pr-2 py-4 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
             />
           </div>
         </div>
 
         {/* Search Button */}
-        <div className="flex-shrink-0 pl-2">
+        <div className="flex-shrink-0 pl-2 pr-1">
           <Button
             type="submit"
-            className="bg-[#CCFF00] hover:bg-[#b8e600] text-black font-black px-10 py-4 rounded-full text-base uppercase tracking-wider transition-all duration-200 transform hover:scale-105 shadow-lg h-14 flex items-center gap-2"
+            className="bg-[#CCFF00] hover:bg-[#b8e600] text-black font-black px-12 py-4 rounded-full text-base uppercase tracking-wider transition-all duration-200 transform hover:scale-105 shadow-lg h-14 flex items-center gap-2"
           >
             SEARCH
           </Button>
