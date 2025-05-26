@@ -69,48 +69,7 @@ const TourDetail = () => {
         <TourDetailHead trip={tour} slug={slug} />
         <Header />
         
-        {/* Hero Banner - Contiki Style */}
-        <div className="relative h-[60vh] min-h-[400px] mt-20">
-          <div className="absolute inset-0 w-full h-full">
-            <img 
-              src={tour.image || "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"} 
-              alt={tour.name} 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/60"></div>
-          </div>
-          
-          <div className="container relative z-10 h-full flex flex-col justify-end pb-12">
-            <div className="text-white max-w-4xl">
-              <div className="mb-4">
-                <span className="bg-[#CCFF00] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
-                  TRENDING TRIP
-                </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 uppercase tracking-tight leading-tight">
-                {tour.name}
-              </h1>
-              
-              {/* Quick stats */}
-              <div className="flex flex-wrap gap-6 text-sm font-medium">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
-                  <span>{tour.duration} days</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
-                  <span>Ages 18-35</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
-                  <span>From £{tour.price}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Tour Header with Breadcrumb and Rating */}
+        {/* Tour Header with Breadcrumb and Rating - moved to top after header */}
         <TourHeader tour={tour} slug={slug} />
         
         {/* Price Bar */}
