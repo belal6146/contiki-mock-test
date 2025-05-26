@@ -40,11 +40,41 @@ const Header = () => {
       {/* Top Utility Bar */}
       <div className="py-2 border-b border-gray-200">
         <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex justify-end space-x-6">
-          <Link to="/contact" className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150">Contact us</Link>
-          <Link to="/future-travel-credit" className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150">Future Travel Credit</Link>
-          <Link to="/subscribe" className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150">Subscribe to emails</Link>
-          <Link to="/login" className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150">Traveller log in</Link>
-          <Link to="/agent-login" className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150">Agent log in</Link>
+          <Link 
+            to="/contact" 
+            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
+            onClick={() => handleLinkClick('Contact us')}
+          >
+            Contact us
+          </Link>
+          <Link 
+            to="/future-travel-credit" 
+            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
+            onClick={() => handleLinkClick('Future Travel Credit')}
+          >
+            Future Travel Credit
+          </Link>
+          <Link 
+            to="/subscribe" 
+            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
+            onClick={() => handleLinkClick('Subscribe to emails')}
+          >
+            Subscribe to emails
+          </Link>
+          <Link 
+            to="/login" 
+            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
+            onClick={() => handleLinkClick('Traveller log in')}
+          >
+            Traveller log in
+          </Link>
+          <Link 
+            to="/agent-login" 
+            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
+            onClick={() => handleLinkClick('Agent log in')}
+          >
+            Agent log in
+          </Link>
         </div>
       </div>
 
@@ -53,7 +83,7 @@ const Header = () => {
         <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <div className="mr-8">
-            <Link to="/" className="block">
+            <Link to="/" className="block" onClick={() => handleLinkClick('Logo')}>
               <Logo />
             </Link>
           </div>
@@ -83,7 +113,11 @@ const Header = () => {
                 placeholder="Aged 18–35? Find your adventure"
                 className="flex-grow text-sm text-gray-600 placeholder-gray-400 bg-transparent focus:outline-none"
               />
-              <button className="ml-2 p-2 bg-[#CCFF00] rounded-full hover:bg-[#b8e600] transition-colors duration-150">
+              <button 
+                className="ml-2 p-2 bg-[#CCFF00] rounded-full hover:bg-[#b8e600] transition-colors duration-150"
+                onClick={() => handleLinkClick('Search')}
+                aria-label="Search"
+              >
                 <Search className="h-4 w-4 text-black" />
               </button>
             </div>

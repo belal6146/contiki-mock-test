@@ -1,9 +1,9 @@
+
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
 import Hero from '@/components/home/Hero';
 import FeaturedTrips from '@/components/home/FeaturedTrips';
-import Testimonials from '@/components/home/Testimonials';
 import PayOverTime from '@/components/home/PayOverTime';
 import BookWithConfidence from '@/components/home/BookWithConfidence';
 import TopTripsPromo from '@/components/home/TopTripsPromo';
@@ -11,7 +11,7 @@ import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
 import AsSeenIn from '@/components/home/AsSeenIn';
 import SixTwoBanner from '@/components/home/SixTwoBanner';
 import BackToTopButton from '@/components/BackToTopButton';
-import HelpButton from '@/components/home/HelpButton';
+import ChatNowButton from '@/components/ChatNowButton';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackPageView } from '@/lib/analytics';
@@ -63,7 +63,7 @@ const Index = () => {
 
       <Header />
       
-      <main className="flex-grow pt-24" role="main" aria-label="Main content">
+      <main className="flex-grow pt-20" role="main" aria-label="Main content">
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
@@ -71,18 +71,6 @@ const Index = () => {
         <ErrorBoundary>
           <section aria-labelledby="featured-trips-heading">
             <FeaturedTrips />
-          </section>
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="media-mentions-heading">
-            <AsSeenIn />
-          </section>
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="testimonials-heading">
-            <Testimonials />
           </section>
         </ErrorBoundary>
         
@@ -109,18 +97,23 @@ const Index = () => {
             <TravelDestinationsGrid />
           </section>
         </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <section aria-labelledby="media-mentions-heading">
+            <AsSeenIn />
+          </section>
+        </ErrorBoundary>
+        
+        <ErrorBoundary>
+          <section aria-labelledby="six-two-banner-heading">
+            <SixTwoBanner />
+          </section>
+        </ErrorBoundary>
       </main>
-      
-      {/* New sections before footer */}
-      <ErrorBoundary>
-        <section aria-labelledby="six-two-banner-heading">
-          <SixTwoBanner />
-        </section>
-      </ErrorBoundary>
       
       <Footer />
       <BackToTopButton />
-      <HelpButton />
+      <ChatNowButton />
     </div>
   );
 };
