@@ -11,11 +11,10 @@ import {
   getTripTypeLabel,
   generateDepartureOptions
 } from './dates';
-import { Grid, List, Search, Calendar, Filter, Check } from 'lucide-react';
+import { Grid, List } from 'lucide-react';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { BookingPassenger } from '../tour/TravelersInfo';
 import { ConsentManagerProvider } from '@/context/ConsentManager';
-import { Input } from '@/components/ui/input';
 
 interface TourDatesTabProps {
   trip: Trip;
@@ -54,7 +53,6 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [selectedYear, setSelectedYear] = useState<string>('2025');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [searchQuery, setSearchQuery] = useState<string>('');
   
   // Generate departure options
   const options = generateDepartureOptions(trip);
@@ -127,61 +125,21 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
     <ConsentManagerProvider>
       <TooltipProvider>
         <div className="bg-white">
-          <div className="container py-10">
+          <div className="container py-8">
             <div className="max-w-5xl mx-auto">
-              {/* Hero Banner for Dates & Pricing */}
-              <div className="relative rounded-xl overflow-hidden mb-10">
-                <img 
-                  src="https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=2070&auto=format&fit=crop" 
-                  alt="European Adventure" 
-                  className="w-full h-56 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
-                  <div className="px-10">
-                    <h2 className="text-white text-3xl font-bold mb-2">Dates & Pricing</h2>
-                    <p className="text-white/90 max-w-md">Find your perfect departure date and the best prices for your next adventure.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Search and Filter Bar */}
-              <div className="bg-gray-50 p-5 rounded-lg mb-8 border border-gray-200">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <div className="flex-1 relative">
-                    <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                    <Input 
-                      placeholder="Search by destination or trip name" 
-                      className="pl-10 bg-white border-gray-300"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      <span>Date</span>
-                    </button>
-                    <button className="inline-flex items-center px-4 py-2 bg-[rgb(204,255,0)] text-black rounded-md hover:bg-[rgb(184,230,0)] transition-colors">
-                      <Filter className="h-4 w-4 mr-2" />
-                      <span>Apply Filters</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Year Selection */}
-              <div className="flex justify-center mb-10">
+              {/* Year Selection - matching original design */}
+              <div className="flex justify-center mb-8">
                 <div className="bg-gray-100 rounded-full p-1">
                   <ToggleGroup type="single" value={selectedYear} onValueChange={(value) => value && setSelectedYear(value)} className="gap-0">
                     <ToggleGroupItem 
                       value="2025" 
-                      className="bg-[rgb(204,255,0)] text-black rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-[rgb(204,255,0)] data-[state=on]:text-black"
+                      className="bg-black text-white rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white"
                     >
                       2025
                     </ToggleGroupItem>
                     <ToggleGroupItem 
                       value="2026" 
-                      className="bg-transparent text-gray-600 rounded-full px-10 py-2.5 font-semibold data-[state=on]:bg-[rgb(204,255,0)] data-[state=on]:text-black hover:bg-gray-200"
+                      className="bg-transparent text-gray-600 rounded-full px-8 py-2 font-semibold data-[state=on]:bg-black data-[state=on]:text-white hover:bg-gray-200"
                     >
                       2026
                     </ToggleGroupItem>
@@ -189,16 +147,18 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
               </div>
 
-              {/* Month Filter Pills */}
+              {/* Month Filter Pills - matching original */}
               <MonthFilter 
                 months={MONTHS} 
                 selectedMonth={selectedMonth}
                 onMonthChange={handleMonthChange}
               />
 
-              {/* Trip Type Filters and View Toggle */}
+              {/* Trip Type Filters and View Toggle - matching original */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-                <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Trip Type</span>
+                  <span className="text-gray-400">ⓘ</span>
                   <TripTypeFilter 
                     types={TRIP_TYPES}
                     selectedTypes={selectedTypes}
@@ -232,7 +192,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
               </div>
 
-              {/* Selected Filters Display */}
+              {/* Active Filters Display - matching original */}
               <div className="flex flex-wrap items-center gap-2 mb-6">
                 <span className="text-sm font-medium text-gray-700">Active filters:</span>
                 <div className="bg-[rgb(204,255,0)] text-black px-3 py-1 rounded-full text-sm font-medium flex items-center">
@@ -245,7 +205,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                   </button>
                 </div>
                 {selectedTypes.map(type => (
-                  <div key={type} className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                  <div key={type} className="bg-[rgb(204,255,0)] text-black px-3 py-1 rounded-full text-sm font-medium flex items-center">
                     {tripTypeLabels[type]}
                     <button className="ml-2" onClick={() => handleTypeToggle(type)}>
                       <span className="sr-only">Remove filter</span>
@@ -255,14 +215,13 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     </button>
                   </div>
                 ))}
-                <button className="text-sm text-[rgb(204,255,0)] font-medium hover:text-[rgb(184,230,0)]">Clear all</button>
               </div>
 
-              {/* Results Summary */}
+              {/* Results Summary - matching original */}
               <div className="flex justify-between items-center mb-6">
                 <p className="text-gray-600"><span className="font-medium">{options.length}</span> departure dates available</p>
                 <div>
-                  <select className="border-gray-300 rounded-md text-sm px-2 py-1">
+                  <select className="border-gray-300 rounded-md text-sm px-3 py-2 bg-white">
                     <option>Sort by date</option>
                     <option>Sort by price: low to high</option>
                     <option>Sort by price: high to low</option>
@@ -270,7 +229,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                 </div>
               </div>
 
-              {/* Departure Options */}
+              {/* Departure Options - matching original */}
               <div className="space-y-0 mb-10">
                 {options.map((option) => (
                   <DepartureOption
@@ -286,79 +245,6 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     passengers={mockBookingData}
                   />
                 ))}
-              </div>
-
-              {/* Load More Button */}
-              <div className="flex justify-center mt-10">
-                <button className="px-8 py-3 border-2 border-[rgb(204,255,0)] rounded-full font-bold text-black bg-[rgb(204,255,0)] hover:bg-[rgb(184,230,0)] transition-colors">
-                  LOAD MORE DATES
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* FlexDeposit Banner */}
-          <div className="py-20 bg-gray-50 mt-10">
-            <div className="container">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <div className="flex items-center gap-5">
-                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-black text-2xl font-bold">£</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-black">Only £60 deposit</p>
-                    <p className="text-gray-600">to secure your booking</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-5">
-                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-black text-2xl font-bold">⏱</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-black">Pay over time</p>
-                    <p className="text-gray-600">interest-free payments</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-5">
-                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-black text-2xl font-bold">✓</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-black">No booking fees</p>
-                    <p className="text-gray-600">no change fees</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-5">
-                  <div className="bg-[rgb(204,255,0)] rounded-full w-16 h-16 flex items-center justify-center shrink-0">
-                    <span className="text-black text-2xl font-bold">⚡</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-black">FlexDeposit</p>
-                    <p className="text-gray-600">change dates or trips</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Flexibility Promise banner */}
-              <div className="bg-black text-white p-8 rounded-lg bg-[url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
-                <div className="bg-black/60 rounded-lg p-8">
-                  <div className="flex flex-col md:flex-row justify-between items-center">
-                    <div>
-                      <h3 className="text-3xl font-bold mb-3">Flexibility Promise</h3>
-                      <p className="text-lg max-w-xl">
-                        Your money is safe with us and the TTC Promise. Book today and enjoy the benefits of flexible travel dates and money-back guarantee.
-                      </p>
-                    </div>
-                    <button 
-                      className="mt-6 md:mt-0 bg-[rgb(204,255,0)] text-black px-8 py-3 font-bold transition-all duration-200 ease-in-out rounded hover:bg-[rgb(184,230,0)]"
-                    >
-                      FIND OUT MORE
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
