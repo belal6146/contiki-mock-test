@@ -2,7 +2,7 @@ import React from 'react';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import DepartureOptionHeader from './DepartureOptionHeader';
 import DepartureOptionContent from './DepartureOptionContent';
-import { BookingPassenger } from '../../../tour/seat-map/SeatMapTypes';
+import { BookingPassenger } from '../../tour/seat-map/SeatMapTypes';
 
 export interface DepartureOptionData {
   id: string;
