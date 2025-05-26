@@ -85,7 +85,7 @@ const TripCard = ({
     <Link to={linkUrl} onClick={handleClick} className="block group">
       <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
         {/* Card Image with enhanced loading */}
-        <div className="relative h-48 overflow-hidden bg-gray-200">
+        <div className="relative h-48 overflow-hidden bg-gray-100">
           {isImageLoaded && !imageError ? (
             <img 
               src={imageUrl}
@@ -94,7 +94,7 @@ const TripCard = ({
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
+            <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-600 flex items-center justify-center">
               <span className="text-gray-600 text-sm">Loading...</span>
             </div>
           )}
@@ -104,14 +104,14 @@ const TripCard = ({
           
           {/* Discount Badge */}
           {discountPercentage > 0 && (
-            <div className="absolute top-3 left-3 bg-[#CCFF00] text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+            <div className="absolute top-3 left-3 bg-secondary text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
               {discountPercentage}% OFF
             </div>
           )}
           
           {/* Spotlight Badge */}
           {isSpotlight && (
-            <div className="absolute top-3 right-3 bg-[#FF3B5C] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+            <div className="absolute top-3 right-3 bg-error text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
               Trip Spotlight
             </div>
           )}
@@ -119,7 +119,7 @@ const TripCard = ({
         
         {/* Card Content */}
         <div className="p-5">
-          <h3 className="font-bold text-lg mb-3 line-clamp-2 text-gray-900 group-hover:text-[#FF6900] transition-colors duration-200">
+          <h3 className="font-bold text-lg mb-3 line-clamp-2 text-gray-800 group-hover:text-primary transition-colors duration-200">
             {title}
           </h3>
           
@@ -144,19 +144,19 @@ const TripCard = ({
           
           {/* Price */}
           <div className="flex items-baseline mb-4">
-            <span className="text-xs text-gray-500 mr-1">From </span>
+            <span className="text-xs text-gray-600 mr-1">From </span>
             {oldPrice && (
-              <span className="text-gray-400 line-through text-sm mr-2">
+              <span className="text-gray-600 line-through text-sm mr-2">
                 {formatCurrency(oldPrice)}
               </span>
             )}
-            <span className="font-bold text-xl text-[#FF6900]">
+            <span className="font-bold text-xl text-primary">
               {formatCurrency(price)}
             </span>
           </div>
           
           {/* View Details Button */}
-          <button className="w-full bg-[#FF6900] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#FF6900]/90 transition-all duration-200 transform group-hover:scale-105">
+          <button className="w-full bg-primary text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-dark transition-all duration-200 transform group-hover:scale-105">
             View Details
           </button>
         </div>

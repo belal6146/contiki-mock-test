@@ -17,11 +17,11 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tight leading-none">
+      <div className="relative z-10 text-center text-white max-w-screen-xl mx-auto px-4 lg:px-8">
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 tracking-tight leading-none">
           TRAVEL FOR
           <br />
-          <span className="text-[#CCFF00]">18-35S</span>
+          <span className="text-secondary">18-35S</span>
         </h1>
         
         <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-medium leading-relaxed opacity-95">
@@ -37,14 +37,14 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
           <Link
             to="/tours"
-            className="bg-[#CCFF00] text-black font-bold px-10 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-[#b8e600] transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="bg-secondary text-gray-800 font-bold px-10 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-secondary-dark transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
             FIND YOUR TRIP
           </Link>
           
           <Link
             to="/destinations"
-            className="border-2 border-white text-white font-bold px-10 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all duration-200 shadow-lg"
+            className="border-2 border-white text-white font-bold px-10 py-4 rounded-lg text-lg uppercase tracking-wide hover:bg-white hover:text-gray-800 transition-all duration-200 shadow-lg"
           >
             EXPLORE DESTINATIONS
           </Link>
@@ -53,15 +53,15 @@ const Hero = () => {
         {/* Trust indicators */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm opacity-90">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span className="w-2 h-2 bg-secondary rounded-full"></span>
             <span>50+ years of travel experience</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span className="w-2 h-2 bg-secondary rounded-full"></span>
             <span>ATOL & ABTA protected</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
+            <span className="w-2 h-2 bg-secondary rounded-full"></span>
             <span>26000+ verified reviews</span>
           </div>
         </div>

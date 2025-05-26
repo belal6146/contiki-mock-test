@@ -25,21 +25,21 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white border-b border-gray-100 fixed top-0 left-0 right-0 z-50 shadow-sm">
-      <div className="container max-w-[1400px] mx-auto px-6">
+    <header className="bg-white border-b border-gray-300 fixed top-0 left-0 right-0 z-50 shadow-sm">
+      <div className="container max-w-screen-xl mx-auto px-4 lg:px-8">
         {/* Top row with utility links */}
-        <div className="hidden lg:flex items-center justify-end py-2 text-xs text-gray-600 border-b border-gray-100">
+        <div className="hidden lg:flex items-center justify-end py-2 text-sm text-gray-600 border-b border-gray-300">
           <div className="flex items-center gap-6">
-            <Link to="/contact" className="hover:text-black transition-colors">Contact us</Link>
-            <Link to="/future-travel-credit" className="hover:text-black transition-colors">Future Travel Credit</Link>
-            <Link to="/subscribe" className="hover:text-black transition-colors">Subscribe to emails</Link>
-            <Link to="/login" className="hover:text-black transition-colors">Traveller log in</Link>
-            <Link to="/agent-login" className="hover:text-black transition-colors">Agent log in</Link>
+            <Link to="/contact" className="text-gray-600 hover:text-primary transition">Contact us</Link>
+            <Link to="/future-travel-credit" className="text-gray-600 hover:text-primary transition">Future Travel Credit</Link>
+            <Link to="/subscribe" className="text-gray-600 hover:text-primary transition">Subscribe to emails</Link>
+            <Link to="/login" className="text-gray-600 hover:text-primary transition">Traveller log in</Link>
+            <Link to="/agent-login" className="text-gray-600 hover:text-primary transition">Agent log in</Link>
           </div>
         </div>
 
         {/* Main header row */}
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="block">
@@ -53,7 +53,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 text-gray-800 hover:bg-gray-100 rounded-lg transition"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
