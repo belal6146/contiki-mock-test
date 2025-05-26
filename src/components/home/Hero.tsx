@@ -19,18 +19,18 @@ const Hero = () => {
       {/* Last Minute Deals Banner */}
       <div className="absolute top-28 left-1/2 transform -translate-x-1/2 z-20 text-center">
         <div className="mb-6">
-          <h2 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-2">
+          <h2 className="text-white text-sm uppercase font-bold tracking-wider leading-none mb-2">
             LAST MINUTE
           </h2>
-          <h2 className="text-[#CCFF00] text-6xl md:text-9xl font-black uppercase tracking-tight leading-none mb-6">
+          <h2 className="text-[#CCFF00] text-6xl font-extrabold uppercase tracking-tight leading-none mb-6">
             DEALS
           </h2>
-          <p className="text-white text-xl md:text-2xl font-semibold mb-8">
+          <p className="text-white text-base font-medium mb-8">
             Save BIG on trips departing soon
           </p>
           <Link
             to="/deals"
-            className="inline-block bg-[#CCFF00] text-black font-black px-10 py-4 rounded-lg text-lg uppercase tracking-wider hover:bg-[#b8e600] transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="inline-block bg-[#CCFF00] text-black font-semibold px-8 py-3 rounded-full text-base uppercase tracking-wider hover:bg-[#b8e600] transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
             VIEW DEALS
           </Link>

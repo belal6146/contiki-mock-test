@@ -104,14 +104,14 @@ const FeaturedTrips = () => {
           </h2>
           <div className="flex items-center gap-3">
             <button 
-              className="w-12 h-12 border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handlePrevious}
               disabled={currentPage === 0}
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             <button 
-              className="w-12 h-12 border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
+              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50"
               onClick={handleNext}
               disabled={currentPage >= Math.ceil(displayTrips.length / 4) - 1}
             >
@@ -124,8 +124,8 @@ const FeaturedTrips = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <Skeleton className="h-64 w-full" />
-                <div className="p-6">
+                <Skeleton className="h-44 w-full" />
+                <div className="p-4">
                   <Skeleton className="h-6 w-3/4 mb-3" />
                   <Skeleton className="h-4 w-1/2 mb-3" />
                   <Skeleton className="h-4 w-1/4" />
@@ -147,19 +147,19 @@ const FeaturedTrips = () => {
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {visibleTrips.map((trip, index) => (
-                <div key={trip.id} className="w-72 h-auto bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow group">
+                <div key={trip.id} className="w-72 h-auto bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow group">
                   {/* Trip Image */}
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-44 overflow-hidden">
                     <img 
                       src={trip.image || `https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
                       alt={trip.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />
                     
                     {/* Trip Spotlight Badge */}
                     {trip.isSpotlight && (
-                      <div className="absolute top-3 left-3 bg-[#FEDA6A] text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      <div className="absolute top-3 left-3 bg-[#CCFF00] text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
                         Trip Spotlight
                       </div>
                     )}
@@ -185,7 +185,7 @@ const FeaturedTrips = () => {
                   </div>
                   
                   {/* Trip Content */}
-                  <div className="p-6">
+                  <div className="p-4">
                     {/* Rating */}
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
@@ -221,7 +221,7 @@ const FeaturedTrips = () => {
                     </p>
                     
                     {/* Add to Compare Button */}
-                    <button className="flex items-center gap-2 text-sm text-black border-2 border-gray-300 rounded-full px-4 py-2 hover:bg-gray-50 transition-colors mb-5 w-full justify-center font-medium">
+                    <button className="flex items-center gap-2 text-sm text-black rounded-full border border-gray-300 px-4 py-2 hover:bg-gray-100 transition-colors mb-5 w-full justify-center font-medium">
                       <Plus className="w-4 h-4" />
                       Add to compare
                     </button>
@@ -242,7 +242,7 @@ const FeaturedTrips = () => {
                         </div>
                       </div>
                       <Link to={`/tours/${trip.id}`}>
-                        <button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-bold px-6 py-3 rounded-full text-sm uppercase tracking-wide transition-colors">
+                        <button className="bg-[#CCFF00] text-black hover:bg-[#b8e600] font-semibold px-6 py-3 rounded-full text-base uppercase tracking-wide transition-colors">
                           VIEW TRIP
                         </button>
                       </Link>
@@ -258,7 +258,7 @@ const FeaturedTrips = () => {
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`w-3 h-3 rounded-full transition-colors ${i === currentPage ? 'bg-gray-800' : 'bg-gray-300'}`}
+                  className={`w-2 h-2 rounded-full transition-colors ${i === currentPage ? 'bg-gray-800' : 'bg-gray-300'}`}
                   aria-label={`Go to page ${i + 1}`}
                 />
               ))}

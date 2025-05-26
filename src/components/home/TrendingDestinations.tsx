@@ -3,10 +3,6 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Slider from 'react-slick';
-// Import slick carousel CSS
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 // Sample trending destinations data
 const destinations = [
@@ -43,25 +39,9 @@ const destinations = [
 ];
 
 const TrendingDestinations = () => {
-  const sliderRef = useRef<Slider | null>(null);
-
   useEffect(() => {
     console.debug('[TrendingDestinations] mounted');
   }, []);
-
-  const handlePrev = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickPrev();
-      console.debug('[TrendingDestinations] scroll', 'left');
-    }
-  };
-
-  const handleNext = () => {
-    if (sliderRef.current) {
-      sliderRef.current.slickNext();
-      console.debug('[TrendingDestinations] scroll', 'right');
-    }
-  };
 
   return (
     <section className="py-12">
@@ -72,8 +52,7 @@ const TrendingDestinations = () => {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full bg-white shadow-md"
-              onClick={handlePrev}
+              className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white shadow-md"
               aria-label="Scroll left"
             >
               <ChevronLeft className="h-6 w-6" />
@@ -81,8 +60,7 @@ const TrendingDestinations = () => {
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full bg-white shadow-md"
-              onClick={handleNext}
+              className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white shadow-md"
               aria-label="Scroll right"
             >
               <ChevronRight className="h-6 w-6" />
@@ -90,22 +68,22 @@ const TrendingDestinations = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-5 gap-6">
           {destinations.map((destination) => (
             <Link 
               key={destination.id}
               to={`/tours/${destination.id}`}
               className="block hover:scale-105 transition-all duration-150 shadow-sm hover:shadow-md"
             >
-              <div className="relative h-[300px] w-[200px] rounded-lg overflow-hidden">
+              <div className="relative h-48 w-full rounded-lg overflow-hidden">
                 <img 
                   src={destination.image} 
                   alt={destination.name} 
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute bottom-0 left-0 p-3 bg-black/40 w-full">
-                  <p className="font-medium text-white">
+                <div className="absolute bottom-3 left-3">
+                  <p className="font-semibold text-white text-sm">
                     {destination.name}
                   </p>
                 </div>

@@ -25,7 +25,7 @@ const SearchBar = () => {
               placeholder="Where do you want to go?"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
-              className="w-full pl-8 pr-2 py-4 border-0 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium"
+              className="w-72 h-10 pl-8 pr-2 py-4 border-2 border-gray-300 bg-transparent focus:outline-none text-gray-800 placeholder-gray-600 text-base font-medium rounded-full"
             />
           </div>
         </div>
@@ -60,12 +60,12 @@ const SearchBar = () => {
 
         {/* Search Button */}
         <div className="flex-shrink-0 pl-2 pr-1">
-          <Button
+          <button
             type="submit"
-            className="bg-[#CCFF00] hover:bg-[#b8e600] text-black font-black px-12 py-4 rounded-full text-base uppercase tracking-wider transition-all duration-200 transform hover:scale-105 shadow-lg h-14 flex items-center gap-2"
+            className="p-3 bg-[#CCFF00] hover:bg-[#b8e600] text-black rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg h-14 w-14 flex items-center justify-center"
           >
-            SEARCH
-          </Button>
+            <Search className="h-6 w-6" />
+          </button>
         </div>
       </form>
     </div>
