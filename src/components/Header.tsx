@@ -82,7 +82,7 @@ const Header = () => {
       <div className="py-4">
         <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <div className="mr-8">
+          <div className="mr-16">
             <Link to="/" className="block" onClick={() => handleLinkClick('Logo')}>
               <Logo />
             </Link>
