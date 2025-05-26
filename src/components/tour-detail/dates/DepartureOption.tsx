@@ -10,6 +10,7 @@ import OptionVariantSelector from './OptionVariantSelector';
 import FurtherInformation from './FurtherInformation';
 import CollapsibleSection from './CollapsibleSection';
 import { mockPassengers } from '@/data/mockPassengers';
+import { BookingPassenger } from './types';
 
 export interface DepartureOptionData {
   id: string;
@@ -31,21 +32,6 @@ interface OptionVariant {
   name: string;
   price: number;
   availability: 'available' | 'limited' | 'soldOut';
-}
-
-export interface BookingPassenger {
-  id: number;
-  firstName: string;
-  lastName: string;
-  age: number;
-  gender: string;
-  address: {
-    country: string;
-    countryCode: string;
-  };
-  travelPassion?: string;
-  numberOfTimesTravelledPreviously?: number;
-  passengerId: number;
 }
 
 interface DepartureOptionProps {

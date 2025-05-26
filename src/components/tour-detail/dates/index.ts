@@ -1,7 +1,11 @@
-
 export { default as MonthFilter } from './MonthFilter';
 export { default as TripTypeFilter } from './TripTypeFilter';
 export { default as DepartureOption } from './DepartureOption';
+export { default as YearSelector } from './YearSelector';
+export { default as FiltersSection } from './FiltersSection';
+export { default as ActiveFilters } from './ActiveFilters';
+export { default as ResultsSummary } from './ResultsSummary';
+export * from './types';
 
 // Constants
 export const MONTHS = [
