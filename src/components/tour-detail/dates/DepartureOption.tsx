@@ -41,6 +41,7 @@ export interface BookingPassenger {
   gender: string;
   address: {
     country: string;
+    countryCode: string;
   };
   travelPassion?: string;
   numberOfTimesTravelledPreviously?: number;
@@ -245,7 +246,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 isOpen={seatingOpen}
                 onToggle={setSeatingOpen}
               >
-                <EnhancedBusSeatMap passengers={passengers} />
+                <EnhancedBusSeatMap passengers={mockPassengers} />
               </CollapsibleSection>
             </div>
             
