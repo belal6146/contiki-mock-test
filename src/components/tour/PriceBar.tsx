@@ -37,47 +37,44 @@ const PriceBar: React.FC<PriceBarProps> = ({
   };
   
   return (
-    <section className="sticky top-16 z-40 bg-white shadow-sm border-b border-gray-200" aria-label="Tour pricing information">
+    <section className="bg-white border-b border-gray-200" aria-label="Tour pricing information">
       <div className="container">
-        <div className="py-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center mb-4 md:mb-0">
-            <div className="mr-6">
-              <p className="text-sm text-gray-500 mb-1">From</p>
-              <div className="flex items-end gap-2">
-                {oldPrice && (
-                  <p className="text-lg text-gray-400 line-through font-medium" aria-label={`Original price: ${formatCurrency(oldPrice)}`}>
-                    {formatCurrency(oldPrice)}
-                  </p>
-                )}
-                <p className="text-2xl font-bold text-black" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
-                  {formatCurrency(newPrice)}
-                </p>
-              </div>
-              <p className="text-sm text-gray-600">Save your space with a deposit payment</p>
+        <div className="py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div className="flex flex-col">
+            <div className="mb-1">
+              <span className="text-sm text-gray-600 font-medium">From</span>
             </div>
+            <div className="flex items-baseline gap-2 mb-2">
+              <span className="text-3xl font-black text-black" aria-label={`Current price: ${formatCurrency(newPrice)}`}>
+                {formatCurrency(newPrice)}
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 hover:underline cursor-pointer">
+              Save your space with a deposit payment
+            </p>
           </div>
           
-          <div className="flex space-x-4 items-center">
+          <div className="flex items-center gap-3">
             <button
-              className="flex items-center gap-1 text-gray-700 hover:text-black"
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium"
               aria-label="Share this tour"
             >
-              <Share size={18} />
-              <span className="text-sm font-semibold">Share</span>
+              <Share size={16} />
+              <span>Share</span>
             </button>
             
             <button
-              className="flex items-center gap-1 text-gray-700 hover:text-black"
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium"
               aria-label="Add to compare"
             >
-              <Plus size={18} />
-              <span className="text-sm font-semibold">Add To Compare</span>
+              <Plus size={16} />
+              <span>Add To Compare</span>
             </button>
 
-            <div className="border-l border-gray-300 h-6 mx-2"></div>
+            <div className="border-l border-gray-300 h-8 mx-2"></div>
             
             <button 
-              className="bg-white border border-gray-300 text-gray-800 px-5 py-2 font-semibold text-sm rounded hover:bg-gray-50"
+              className="border border-gray-300 text-gray-800 px-6 py-3 font-semibold text-sm rounded-full hover:bg-gray-50 transition-colors"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
@@ -85,7 +82,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
             </button>
             
             <button 
-              className="bg-[rgb(204,255,0)] text-black px-5 py-2 font-semibold text-sm rounded hover:bg-[rgb(184,230,0)] transition-colors"
+              className="bg-[#CCFF00] text-black px-6 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors uppercase tracking-wide"
               onClick={handleViewDates}
               aria-label="View available dates"
               data-tab="dates"

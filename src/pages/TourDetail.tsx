@@ -70,32 +70,29 @@ const TourDetail = () => {
         <Header />
         
         {/* Hero Banner - Contiki Style */}
-        <div className="relative h-[70vh] min-h-[500px] mt-20">
+        <div className="relative h-[60vh] min-h-[400px] mt-20">
           <div className="absolute inset-0 w-full h-full">
             <img 
               src={tour.image || "https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920"} 
               alt={tour.name} 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/60"></div>
           </div>
           
-          <div className="container relative z-10 h-full flex flex-col justify-end pb-16">
+          <div className="container relative z-10 h-full flex flex-col justify-end pb-12">
             <div className="text-white max-w-4xl">
               <div className="mb-4">
-                <span className="bg-[#CCFF00] text-black px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
+                <span className="bg-[#CCFF00] text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                   TRENDING TRIP
                 </span>
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 uppercase tracking-tight leading-none">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 uppercase tracking-tight leading-tight">
                 {tour.name}
               </h1>
-              <p className="text-lg md:text-xl opacity-95 leading-relaxed max-w-2xl">
-                {tour.description && tour.description.slice(0, 150)}...
-              </p>
               
               {/* Quick stats */}
-              <div className="flex flex-wrap gap-6 mt-8 text-sm">
+              <div className="flex flex-wrap gap-6 text-sm font-medium">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
                   <span>{tour.duration} days</span>
@@ -155,7 +152,7 @@ const TourDetail = () => {
                 <span className="text-2xl font-bold text-black">£{tour.price}</span>
               </div>
             </div>
-            <button className="bg-[#CCFF00] text-black font-bold py-3 px-8 rounded-lg hover:bg-[#b8e600] transition-colors uppercase tracking-wide">
+            <button className="bg-[#CCFF00] text-black font-bold py-3 px-8 rounded-full hover:bg-[#b8e600] transition-colors uppercase tracking-wide text-sm">
               BOOK NOW
             </button>
           </div>
