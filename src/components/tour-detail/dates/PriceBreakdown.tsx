@@ -21,22 +21,19 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
   const finalPrice = basePrice - discountAmount;
   
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm font-montserrat">
-      <div className="bg-gray-50 p-4 border-b border-gray-200">
+    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+      <div className="bg-green-50 p-4 border-b border-gray-200">
         <h3 className="font-bold text-lg text-gray-900 uppercase tracking-wide">PRICE BREAKDOWN</h3>
       </div>
       
       <div className="p-4">
-        {dealLabel && (
-          <div className="flex items-center mb-4">
-            <span className="font-bold text-orange-600 text-sm uppercase tracking-wide bg-orange-100 px-2 py-1 rounded">LAST MINUTE DEAL</span>
-          </div>
-        )}
-        
         <div className="space-y-3 mb-6">
           <div className="flex justify-between items-center">
-            <span className="text-gray-600 font-medium">Plus</span>
-            <span className="font-bold">{formatCurrency(basePrice)}</span>
+            <span className="text-gray-600 font-medium">Standard</span>
+            <div className="text-right">
+              <div className="text-xs text-gray-500 line-through">£{Math.round(basePrice + discountAmount)}</div>
+              <span className="font-bold">{formatCurrency(basePrice)}</span>
+            </div>
           </div>
           
           <div className="border-t border-gray-200 pt-3 flex justify-between items-center">
@@ -44,20 +41,13 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
             <span className="font-bold text-lg">£{discountAmount.toFixed(0)}</span>
           </div>
           
-          <div className="flex items-center mt-3">
-            <div className="bg-black rounded-full p-1.5 mr-2">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <span className="font-bold text-sm">Last minute deal</span>
-          </div>
-          
           <div className="bg-green-50 p-4 rounded-md mt-4">
             <div className="text-center">
-              <p className="text-sm text-gray-700 mb-1 font-medium">Total Price</p>
-              <p className="text-xs text-gray-600 mb-2 font-medium">Based on twinshare room</p>
-              <p className="text-lg line-through text-gray-500 mb-1 font-medium">{formatCurrency(basePrice)}</p>
+              <p className="text-lg font-bold text-black mb-1">Total Price</p>
+              <p className="text-xs text-gray-600 mb-2">Based on multishare room</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <span className="text-sm line-through text-gray-500">£{Math.round(basePrice + discountAmount)}</span>
+              </div>
               <p className="text-2xl font-bold text-black">{formatCurrency(finalPrice)}</p>
             </div>
           </div>
@@ -66,7 +56,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
         <div className="space-y-3">
           <button 
             onClick={onBookByPhone} 
-            className="w-full bg-[rgb(204,255,0)] text-black py-3 px-4 rounded font-bold hover:bg-[rgb(184,230,0)] transition-colors text-sm uppercase tracking-wide border border-[rgb(204,255,0)]"
+            className="w-full bg-yellow-300 text-black py-3 px-4 rounded font-bold hover:bg-yellow-400 transition-colors text-sm uppercase tracking-wide"
           >
             BOOK BY PHONE
           </button>
