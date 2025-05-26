@@ -212,43 +212,56 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
   };
 
   return (
-    <>
-      {/* Banner that appears on all tabs */}
+    <div className="bg-white">
+      {/* Travel with Confidence Banner */}
       <div className="bg-[#F5F8FF] py-4 mb-8 border-b border-gray-200">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="bg-[rgb(204,255,0)] rounded-full p-2">
+              <div className="bg-[#CCFF00] rounded-full p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                 </svg>
               </div>
               <div>
-                <p className="font-semibold">Travel with Confidence</p>
+                <p className="font-semibold text-gray-900">Travel with Confidence</p>
                 <p className="text-sm text-gray-600">Flexible booking policies & health measures</p>
               </div>
             </div>
-            <button className="text-[rgb(204,255,0)] font-semibold hover:underline">
+            <button className="text-[#CCFF00] font-semibold hover:underline text-sm">
               Learn More
             </button>
           </div>
         </div>
       </div>
       
-      {/* Tab-specific content */}
-      {renderTabContent()}
-      
-      {/* FAQ section - show on all tabs */}
-      <div className="bg-white py-12 border-t border-gray-100">
-        <div className="container max-w-7xl">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+      {/* Year Selection Banner */}
+      <div className="bg-white py-4 mb-8 border-b border-gray-200">
+        <div className="container max-w-7xl mx-auto">
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">I'm planning to travel in</span>
+            <div className="flex gap-2">
+              <button className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium">
+                2025
+              </button>
+              <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200">
+                2026
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="bg-white pb-16">
-        <div className="container max-w-7xl">
+      
+      {/* Tab-specific content */}
+      <div className="container max-w-7xl mx-auto px-4 pb-16">
+        {renderTabContent()}
+      </div>
+      
+      {/* FAQ section - show on all tabs */}
+      <div className="bg-white py-12 border-t border-gray-100">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="mx-auto max-w-4xl">
+            <h2 className="text-3xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
             <FAQAccordion 
               tripFAQs={mockTripFAQs} 
               generalFAQs={mockGeneralFAQs} 
@@ -259,14 +272,14 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
       
       {/* Chat with us section - show on all tabs */}
       <div className="bg-[#F7F7F7] py-12 border-t border-gray-200">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-2">Still have questions?</h2>
               <p className="text-gray-600">Our travel experts are here to help you plan your perfect trip.</p>
             </div>
             <div className="flex gap-4">
-              <button className="bg-[rgb(204,255,0)] text-black px-6 py-3 rounded-full hover:bg-[rgb(184,230,0)] transition-colors font-semibold">
+              <button className="bg-[#CCFF00] text-black px-6 py-3 rounded-full hover:bg-[#b8e600] transition-colors font-semibold">
                 Chat with Us
               </button>
               <button className="border border-gray-300 bg-white text-gray-800 px-6 py-3 rounded-full hover:bg-gray-50 transition-colors font-semibold">
@@ -276,7 +289,7 @@ const TourTabContent: React.FC<TourTabContentProps> = ({ activeTab, tour, onRetr
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

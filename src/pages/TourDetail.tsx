@@ -69,7 +69,7 @@ const TourDetail = () => {
         <TourDetailHead trip={tour} slug={slug} />
         <Header />
         
-        {/* Tour Header with Breadcrumb and Rating - moved to top after header */}
+        {/* Tour Header with Breadcrumb and Rating */}
         <TourHeader tour={tour} slug={slug} />
         
         {/* Price Bar */}

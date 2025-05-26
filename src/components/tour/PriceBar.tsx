@@ -49,7 +49,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
   return (
     <section className="bg-white border-b border-gray-200" aria-label="Tour pricing information">
       <div className="container max-w-7xl mx-auto">
-        <div className="py-6 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div className="py-6 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
           {/* Left side - Price info */}
           <div className="flex flex-col">
             <div className="mb-2">
@@ -66,33 +66,31 @@ const PriceBar: React.FC<PriceBarProps> = ({
           </div>
           
           {/* Right side - Action buttons */}
-          <div className="flex items-center gap-4">
-            {/* Share button */}
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150 px-4 py-2 rounded-full border border-transparent hover:border-gray-200"
-              aria-label="Share this tour"
-            >
-              <Share size={18} />
-              <span>Share</span>
-            </button>
-            
-            {/* Add to Compare button */}
-            <button
-              onClick={handleAddToCompare}
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150 px-4 py-2 rounded-full border border-transparent hover:border-gray-200"
-              aria-label="Add to compare"
-            >
-              <Plus size={18} />
-              <span>Add To Compare</span>
-            </button>
-
-            {/* Vertical divider */}
-            <div className="border-l border-gray-300 h-8 mx-2"></div>
+          <div className="flex items-center gap-3">
+            {/* Share and Add to Compare buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150 px-3 py-2 rounded-full border border-gray-300 hover:bg-gray-50"
+                aria-label="Share this tour"
+              >
+                <Share size={16} />
+                <span>Share</span>
+              </button>
+              
+              <button
+                onClick={handleAddToCompare}
+                className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150 px-3 py-2 rounded-full border border-gray-300 hover:bg-gray-50"
+                aria-label="Add to compare"
+              >
+                <Plus size={16} />
+                <span>Add To Compare</span>
+              </button>
+            </div>
             
             {/* Request More Info button */}
             <button 
-              className="border-2 border-gray-300 text-gray-800 px-6 py-3 font-bold text-sm rounded-full hover:bg-gray-50 hover:border-gray-400 transition-all duration-150 uppercase tracking-wide"
+              className="border border-gray-300 text-gray-800 px-6 py-3 font-semibold text-sm rounded-full hover:bg-gray-50 hover:border-gray-400 transition-all duration-150 uppercase tracking-wide"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
