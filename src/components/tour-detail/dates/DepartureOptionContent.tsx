@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Users, Bus } from 'lucide-react';
 import PriceBreakdown from './PriceBreakdown';
@@ -9,7 +8,7 @@ import OptionVariantSelector from './OptionVariantSelector';
 import FurtherInformation from './FurtherInformation';
 import CollapsibleSection from './CollapsibleSection';
 import { mockPassengers } from '@/data/mockPassengers';
-import { BookingPassenger } from './types';
+import { BookingPassenger } from '../../tour/seat-map/SeatMapTypes';
 
 interface OptionVariant {
   id: string;
