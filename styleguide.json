@@ -1,0 +1,70 @@
+{
+  "designTokens": {
+    "fontFamily": {
+      "sans": ["'Inter'", "ui-sans-serif", "system-ui", "sans-serif"],
+      "serif": ["ui-serif", "Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+      "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
+    },
+    "colors": {
+      "primary": "#00C2CB",
+      "primary-dark": "#00A3AF",
+      "secondary": "#FEDA6A",
+      "secondary-dark": "#E5C357",
+      "white": "#FFFFFF",
+      "gray-100": "#F9FAFB",
+      "gray-300": "#D1D5DB",
+      "gray-600": "#4B5563",
+      "gray-800": "#1F2937",
+      "error": "#EF4444"
+    },
+    "typography": {
+      "h1":  { "fontSize": "2.25rem",  "lineHeight": "2.5rem",  "fontWeight": 700, "class": "text-4xl leading-tight font-bold" },
+      "h2":  { "fontSize": "1.875rem", "lineHeight": "2.25rem", "fontWeight": 600, "class": "text-3xl leading-snug font-semibold" },
+      "h3":  { "fontSize": "1.5rem",   "lineHeight": "2rem",    "fontWeight": 600, "class": "text-2xl leading-snug font-semibold" },
+      "body":{ "fontSize": "1rem",     "lineHeight": "1.5rem",  "fontWeight": 400, "class": "text-base leading-relaxed" },
+      "sm":  { "fontSize": "0.875rem", "lineHeight": "1.25rem", "fontWeight": 400, "class": "text-sm leading-tight" }
+    },
+    "spacing": {
+      "container": { "maxWidth": "72rem", "px": ["1rem","2rem"] },
+      "sectionY": ["4rem","6rem"],
+      "gap": { "sm": "1rem", "md": "1.5rem", "lg": "2rem" }
+    },
+    "breakpoints": { "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px" }
+  },
+  "pages": {
+    "HomePage": ["Header","HeroSection","DestinationsSection","WhatIncludedSection","TestimonialsCarousel","ReviewsLockup","PopularTripsSection","PaymentOptionsSection","SaveOnTripsSection","MagazinePromoSection","ScratchMapSection","Footer"],
+    "TripsOverviewPage": ["Header","TripsHeroBanner","FiltersSidebar","TripsList","Pagination","TriedTrustedSection","BookConfidenceSection","Footer"],
+    "TravelStylePage": ["Header","StyleHeroBanner","StyleIntroText","StyleTripsGrid","StyleImageGallery","Footer"],
+    "DestinationsPage": ["Header","DestinationHeroBanner","DestinationIntro","DestinationHighlights","DestinationTripsGrid","DestinationMap","Footer"],
+    "DealsPage": ["Header","DealsHeroBanner","DealsGrid","Footer"],
+    "TourDetailPage": ["Header","TourHero","Breadcrumbs","TourOverview","TourGalleryCarousel","TourMap","ReviewsSection","SimilarTripsCarousel","Footer"],
+    "AboutPage": ["Header","ContentPageLayout","RichTextBlock","TeamMemberCardGrid","Footer"],
+    "BlogListPage": ["Header","BlogListGrid","BlogCard","Footer"],
+    "BlogDetailPage": ["Header","BlogHero","RichTextBlock","Footer"],
+    "PolicyPage": ["Header","ContentPageLayout","TermsList","Footer"],
+    "Error404Page": ["Header","ErrorMessageBlock","Footer"]
+  },
+  "components": {
+    "Header": {"font":"body","fontFamily":"sans","textColor":"gray-800","bgColor":"white","css":["border-b","border-gray-300"],"layout":["max-w-screen-xl","mx-auto","flex","items-center","justify-between","py-4","px-4","lg:px-8"],"navLink":["font-medium","hover:text-primary","transition"]},
+    "Logo": {"tailwind":["h-10","w-auto"],"style":{"height":"2.5rem","width":"auto"}},
+    "Button": {"font":"body","fontFamily":"sans","base":["inline-block","font-semibold","rounded-full","px-6","py-3","transition"],"variants":{"primary":["bg-primary","text-white","hover:bg-primary-dark"],"secondary":["bg-secondary","text-gray-800","hover:bg-secondary-dark"],"outline":["border","border-gray-300","text-gray-800","hover:bg-gray-100"]}},
+    "Footer": {"font":"sm","fontFamily":"sans","textColor":"gray-600","bgColor":"gray-100","layout":["max-w-screen-xl","mx-auto","py-12","px-4","lg:px-8"],"columns":["grid","grid-cols-2","md:grid-cols-4","gap-6"],"heading":["font-semibold","text-gray-800","mb-4"],"link":["text-gray-600","hover:underline"],"logoList":["flex","flex-wrap","gap-4","mt-6"],"logoItem":["h-8","w-auto","object-contain"]},
+    "CookieConsentBanner": {"font":"sm","fontFamily":"sans","textColor":"white","bgColor":"gray-800","css":["fixed","bottom-0","inset-x-0","py-3","px-4","flex","items-center","justify-between"],"button":["bg-primary","text-white","py-2","px-4","rounded-md","hover:bg-primary-dark"]},
+    "HeroSection": {"font":"h1","fontFamily":"sans","titleColor":"white","css":["relative","bg-cover","bg-center","flex","items-center","h-[calc(100vh-64px)]"],"content":["max-w-screen-xl","mx-auto","px-4","lg:px-8"]},
+    "DestinationsSection": {"font":"h2","fontFamily":"sans","titleColor":"gray-800","css":["py-16","bg-gray-100"],"layout":["grid","grid-cols-2","md:grid-cols-4","gap-6","max-w-screen-xl","mx-auto","px-4","lg:px-8"]},
+    "DestinationCard": {"font":"body","fontFamily":"sans","css":["relative","overflow-hidden","rounded-lg","shadow-md","h-48"],"image":["object-cover","w-full","h-full"],"overlay":["absolute","bottom-0","left-0","right-0","bg-gradient-to-t","from-black/60","p-4"],"title":["text-lg","font-semibold","text-white"]},
+    "WhatIncludedSection": {"font":"body","fontFamily":"sans","css":["flex","flex-col","md:flex-row","items-center","justify-between","gap-6","max-w-screen-xl","mx-auto","px-4","lg:px-8"],"card":["flex","flex-col","items-center","text-center","p-6","bg-white","rounded-lg","shadow-sm","hover:shadow-md","transition"],"icon":["h-12","w-12","mb-4"]},
+    "TestimonialsCarousel": {"font":"body","fontFamily":"sans","css":["relative","max-w-screen-xl","mx-auto","px-4","lg:px-8"],"slide":["p-8","bg-white","rounded-lg","shadow-sm","text-gray-600"],"quote":["italic","mb-4"],"author":["font-semibold","text-gray-800"]},
+    "ReviewsLockup": {"font":"sm","fontFamily":"sans","css":["flex","items-center","gap-3","mt-12","justify-center"],"iconSize":"h-9 w-9"},
+    "PopularTripsSection": {"font":"h2","fontFamily":"sans","css":["py-16","max-w-screen-xl","mx-auto","px-4","lg:px-8"],"title":["text-3xl","font-semibold","text-gray-800","text-center","mb-8"],"grid":["grid","grid-cols-1","md:grid-cols-2","xl:grid-cols-4","gap-6"],"carouselNav":["absolute","top-1/2","transform","-translate-y-1/2","space-x-4"]},
+    "PaymentOptionsSection": {"font":"body","fontFamily":"sans","css":["py-16","bg-white"],"container":["max-w-screen-xl","mx-auto","px-4","lg:px-8"],"grid":["grid","grid-cols-1","md:grid-cols-2","gap-6"],"card":["bg-white","rounded-lg","shadow-sm","p-6","flex","items-center","gap-4"]},
+    "SaveOnTripsSection": {"font":"h2","fontFamily":"sans","css":["py-16","bg-white"],"container":["max-w-screen-xl","mx-auto","px-4","lg:px-8"],"grid":["grid","grid-cols-1","md:grid-cols-2","xl:grid-cols-3","gap-6"]},
+    "MagazinePromoSection": {"font":"body","fontFamily":"sans","css":["py-16","bg-gray-100"],"container":["max-w-screen-xl","mx-auto","px-4","lg:px-8"],"card":["bg-white","rounded-lg","shadow-sm","p-6","flex","items-center","gap-4"]},
+    "ScratchMapSection": {"font":"body","fontFamily":"sans","css":["py-16","bg-white","text-center"],"button":["mt-6","bg-primary","text-white","rounded-full","px-6","py-3","transition"]},
+    "TripsHeroBanner": {"font":"h2","fontFamily":"sans","titleColor":"white","css":["relative","bg-cover","bg-center","h-64","md:h-96","flex","items-center"],"overlay":["max-w-screen-xl","mx-auto","px-4","lg:px-8"]},
+    "FiltersSidebar": {"font":"body","fontFamily":"sans","css":["hidden","lg:block","sticky","top-24","space-y-6","w-64","pr-6"],"group":["space-y-2"],"heading":["text-lg","font-semibold","text-gray-800"],"checkbox":["flex","items-center","space-x-2"]},
+    "TripsList": {"css":["grid","grid-cols-1","md:grid-cols-2","xl:grid-cols-3","gap-6"]},
+    "Pagination": {"font":"sm","fontFamily":"sans","css":["flex","items-center","justify-center","space-x-2","mt-8"],"pageItem":["px-3","py-1","rounded","text-gray-800","hover:bg-gray-100","cursor-pointer"],"active":["bg-primary","text-white"]},
+    "StyleHeroBanner": {"font":"h2","fontFamily":"sans","css":["h-64","md:h-96","bg-cover","bg-center","relative","flex","items-center"],"overlay":["max-w-screen-xl","mx-auto","px-4","lg:px-8"]},
+    "StyleIntroText": {"font":"body","fontFamily":"serif","css":["prose","prose-lg","max-w-screen-md","mx-auto","px-4","lg:px-8"]},
+    "StyleTripsGrid": {"css":["grid","grid-cols-1","md:grid-cols-2","xl:grid-cols-3","gap-6","max-w-screen-xl","mx-auto","px-4","
