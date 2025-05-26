@@ -39,7 +39,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
   return (
     <section className="bg-white border-b border-gray-200" aria-label="Tour pricing information">
       <div className="container">
-        <div className="py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex flex-col">
             <div className="mb-1">
               <span className="text-sm text-gray-600 font-medium">From</span>
@@ -56,7 +56,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
           
           <div className="flex items-center gap-3">
             <button
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium"
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150"
               aria-label="Share this tour"
             >
               <Share size={16} />
@@ -64,7 +64,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
             </button>
             
             <button
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium"
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-medium transition-colors duration-150"
               aria-label="Add to compare"
             >
               <Plus size={16} />
@@ -74,7 +74,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
             <div className="border-l border-gray-300 h-8 mx-2"></div>
             
             <button 
-              className="border border-gray-300 text-gray-800 px-6 py-3 font-semibold text-sm rounded-full hover:bg-gray-50 transition-colors"
+              className="border border-gray-300 text-gray-800 px-6 py-3 font-semibold text-sm rounded-full hover:bg-gray-50 transition-colors duration-150 uppercase tracking-wide"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
@@ -82,7 +82,7 @@ const PriceBar: React.FC<PriceBarProps> = ({
             </button>
             
             <button 
-              className="bg-[#CCFF00] text-black px-6 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors uppercase tracking-wide"
+              className="bg-[#CCFF00] text-black px-6 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors duration-150 uppercase tracking-wide"
               onClick={handleViewDates}
               aria-label="View available dates"
               data-tab="dates"

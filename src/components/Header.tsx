@@ -32,18 +32,18 @@ const Header = () => {
     <header className="bg-white border-b border-gray-300 fixed top-0 left-0 right-0 z-40 shadow-sm">
       <div className="container max-w-screen-xl mx-auto px-4 lg:px-8">
         {/* Top row with utility links */}
-        <div className="hidden lg:flex items-center justify-end py-4 text-sm text-gray-600 border-b border-gray-300">
-          <div className="flex items-center gap-10">
-            <Link to="/contact" className="text-gray-600 hover:text-primary transition">Contact us</Link>
-            <Link to="/future-travel-credit" className="text-gray-600 hover:text-primary transition">Future Travel Credit</Link>
-            <Link to="/subscribe" className="text-gray-600 hover:text-primary transition">Subscribe to emails</Link>
-            <Link to="/login" className="text-gray-600 hover:text-primary transition">Traveller log in</Link>
-            <Link to="/agent-login" className="text-gray-600 hover:text-primary transition">Agent log in</Link>
+        <div className="hidden lg:flex items-center justify-end py-3 text-sm text-gray-600 border-b border-gray-300">
+          <div className="flex items-center gap-8">
+            <Link to="/contact" className="text-gray-600 hover:text-primary transition-colors duration-150">Contact us</Link>
+            <Link to="/future-travel-credit" className="text-gray-600 hover:text-primary transition-colors duration-150">Future Travel Credit</Link>
+            <Link to="/subscribe" className="text-gray-600 hover:text-primary transition-colors duration-150">Subscribe to emails</Link>
+            <Link to="/login" className="text-gray-600 hover:text-primary transition-colors duration-150">Traveller log in</Link>
+            <Link to="/agent-login" className="text-gray-600 hover:text-primary transition-colors duration-150">Agent log in</Link>
           </div>
         </div>
 
         {/* Main header row */}
-        <div className="flex items-center justify-between py-6">
+        <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="block">
@@ -57,7 +57,7 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden p-3 text-gray-800 hover:bg-gray-100 rounded-lg transition"
+            className="lg:hidden p-2 text-gray-800 hover:bg-gray-100 rounded-lg transition-colors duration-150"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (

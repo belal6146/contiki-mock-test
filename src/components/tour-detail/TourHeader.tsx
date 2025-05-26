@@ -12,14 +12,14 @@ interface TourHeaderProps {
 
 const TourHeader: React.FC<TourHeaderProps> = ({ tour, slug }) => {
   return (
-    <div className="container py-6">
+    <div className="container py-4">
       <Breadcrumb 
         title={tour.name} 
         destination={tour.destination} 
       />
       
-      <div className="mt-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div className="flex items-center gap-4">
+      <div className="mt-3 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div className="flex items-center gap-3">
           {/* Star Rating */}
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -28,7 +28,7 @@ const TourHeader: React.FC<TourHeaderProps> = ({ tour, slug }) => {
                 className={`w-4 h-4 ${i < Math.floor(tour.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
               />
             ))}
-            <span className="text-sm font-medium ml-2 text-gray-700">{tour.rating}</span>
+            <span className="text-sm font-medium ml-1 text-gray-700">{tour.rating}</span>
           </div>
           
           {/* Reviews Link */}
@@ -38,7 +38,7 @@ const TourHeader: React.FC<TourHeaderProps> = ({ tour, slug }) => {
             </span>
             
             {/* Trip Spotlight Badge */}
-            <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
+            <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
               Trip Spotlight
             </span>
           </div>
