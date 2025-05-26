@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '@/lib/utils';
@@ -52,10 +51,10 @@ const TripCard = memo<TripCardProps>(({
     
     // Use reliable Unsplash image URLs with specific IDs
     const imageMap: { [key: string]: string } = {
-      'europe': 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      'asia': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      'america': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      'default': 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+      'europe': 'https://lovable-uploads.s3.amazonaws.com/european-horizon.jpg',
+      'asia': 'https://lovable-uploads.s3.amazonaws.com/asian-adventure.jpg',
+      'america': 'https://lovable-uploads.s3.amazonaws.com/american-dream.jpg',
+      'default': 'https://lovable-uploads.s3.amazonaws.com/contiki-default.jpg'
     };
     
     const regionKey = region.toLowerCase().includes('europe') ? 'europe' :
@@ -92,7 +91,7 @@ const TripCard = memo<TripCardProps>(({
       >
         <CardBase variant="elevated" className="h-full">
           {/* Card Image with enhanced loading */}
-          <header className="relative h-48 overflow-hidden bg-gray-100">
+          <header className="relative h-56 overflow-hidden bg-gray-100">
             {isImageLoaded && !imageError ? (
               <img 
                 src={imageUrl}
@@ -107,63 +106,63 @@ const TripCard = memo<TripCardProps>(({
             )}
             
             {/* Image overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" aria-hidden="true" />
             
             {/* Discount Badge */}
             {discountPercentage > 0 && (
-              <div className="absolute top-3 left-3 bg-secondary text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+              <div className="absolute top-4 left-4 bg-[#CCFF00] text-black text-sm font-extrabold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
                 {discountPercentage}% OFF
               </div>
             )}
             
             {/* Spotlight Badge */}
             {isSpotlight && (
-              <div className="absolute top-3 right-3 bg-error text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+              <div className="absolute top-4 right-4 bg-[#FF0080] text-white text-sm font-extrabold px-4 py-2 rounded-full shadow-lg uppercase tracking-wider">
                 Trip Spotlight
               </div>
             )}
           </header>
           
           {/* Card Content */}
-          <div className="p-5">
-            <h3 className="font-bold text-lg mb-3 line-clamp-2 text-gray-800 group-hover:text-primary transition-colors duration-200">
+          <div className="p-6">
+            <h3 className="font-extrabold text-xl mb-4 line-clamp-2 text-gray-900 group-hover:text-[#CCFF00] transition-colors duration-200 tracking-tight">
               {title}
             </h3>
             
             {/* Trip Details */}
             {(duration || countries) && (
-              <div className="text-sm text-gray-600 mb-3 flex items-center gap-2" role="list">
+              <div className="text-sm text-gray-600 mb-4 flex items-center gap-3" role="list">
                 {duration && (
-                  <span className="bg-gray-100 px-2 py-1 rounded text-xs font-medium" role="listitem">
-                    {duration} days
+                  <span className="bg-gray-100 px-3 py-1.5 rounded-full text-sm font-bold" role="listitem">
+                    {duration} Days
                   </span>
                 )}
                 {countries && (
-                  <span className="bg-gray-100 px-2 py-1 rounded text-xs font-medium" role="listitem">
-                    {countries} {countries === 1 ? 'country' : 'countries'}
+                  <span className="bg-gray-100 px-3 py-1.5 rounded-full text-sm font-bold" role="listitem">
+                    {countries} {countries === 1 ? 'Country' : 'Countries'}
                   </span>
                 )}
               </div>
             )}
             
             {/* Region */}
-            <p className="text-gray-600 mb-4 text-sm font-medium">{region}</p>
+            <p className="text-gray-700 mb-5 text-base font-bold">{region}</p>
             
             {/* Price */}
-            <div className="flex items-baseline mb-4">
-              <span className="text-xs text-gray-600 mr-1">From </span>
+            <div className="flex items-baseline mb-6">
+              <span className="text-sm text-gray-600 mr-2">From </span>
               {oldPrice && (
-                <span className="text-gray-600 line-through text-sm mr-2" aria-label={`Original price ${formatCurrency(oldPrice)}`}>
+                <span className="text-gray-500 line-through text-base mr-3" aria-label={`Original price ${formatCurrency(oldPrice)}`}>
                   {formatCurrency(oldPrice)}
                 </span>
               )}
-              <span className="font-bold text-xl text-primary" aria-label={`Current price ${formatCurrency(price)}`}>
+              <span className="font-extrabold text-2xl text-gray-900" aria-label={`Current price ${formatCurrency(price)}`}>
                 {formatCurrency(price)}
               </span>
             </div>
             
             {/* View Details Button */}
-            <button className="w-full bg-primary text-white py-2 px-4 rounded-lg font-medium hover:bg-primary-dark transition-all duration-200 transform group-hover:scale-105">
+            <button className="w-full bg-[#CCFF00] text-black py-3 px-6 rounded-full font-extrabold text-base uppercase tracking-wider hover:bg-[#b8e600] transition-all duration-200 transform group-hover:scale-105 shadow-lg">
               View Details
             </button>
           </div>

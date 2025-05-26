@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, memo } from 'react';
 import { trackEvent } from '@/lib/analytics';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -15,14 +14,7 @@ const HeroImage = memo<HeroImageProps>(({ imageUrl, title, subtitle }) => {
   const [imageError, setImageError] = useState(false);
 
   const getFallbackImage = () => {
-    // Use reliable Unsplash image with proper parameters
-    const searchTerm = title ? title.toLowerCase().replace(/\s+/g, ',') : 'travel';
-    const subtitleTerm = subtitle ? subtitle.toLowerCase().replace(/\s+/g, ',') : '';
-    const combinedTerms = [searchTerm, subtitleTerm, 'adventure', 'landscape', 'destination']
-      .filter(Boolean)
-      .join(',');
-    
-    return `https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=900&q=80`;
+    return 'https://lovable-uploads.s3.amazonaws.com/contiki-hero-default.jpg';
   };
 
   useEffect(() => {
@@ -75,15 +67,15 @@ const HeroImage = memo<HeroImageProps>(({ imageUrl, title, subtitle }) => {
       
       {/* Content */}
       <div className={cn(
-        "absolute inset-0 flex flex-col items-start justify-end text-white pb-16 px-6 md:px-8 transition-all duration-1000",
+        "absolute inset-0 flex flex-col items-start justify-end text-white pb-20 px-6 md:px-12 transition-all duration-1000",
         isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       )}>
-        <div className="container max-w-4xl">
+        <div className="container max-w-5xl">
           {subtitle && (
-            <div className="mb-6">
+            <div className="mb-8">
               <span 
-                className="inline-block px-6 py-3 text-sm font-bold tracking-wider uppercase rounded-full shadow-lg backdrop-blur-sm"
-                style={{ backgroundColor: 'rgba(255, 105, 0, 0.9)', color: 'white' }}
+                className="inline-block px-8 py-4 text-base font-extrabold tracking-widest uppercase rounded-full shadow-xl backdrop-blur-sm"
+                style={{ backgroundColor: 'rgba(204, 255, 0, 0.95)', color: 'black' }}
                 role="badge"
                 aria-label={`Trip category: ${subtitle}`}
               >
@@ -94,17 +86,24 @@ const HeroImage = memo<HeroImageProps>(({ imageUrl, title, subtitle }) => {
           
           <h1 
             id="hero-title"
-            className="font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white leading-tight drop-shadow-2xl"
+            className="font-extrabold text-5xl md:text-6xl lg:text-7xl mb-8 text-white leading-tight drop-shadow-2xl tracking-tight"
+            style={{ letterSpacing: '-0.02em' }}
           >
             {title}
           </h1>
           
           <p 
             id="hero-description"
-            className="text-white/90 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-lg"
+            className="text-white/95 text-xl md:text-2xl max-w-3xl leading-relaxed drop-shadow-lg font-medium"
           >
             Join thousands of 18-35s on the adventure of a lifetime
           </p>
+
+          <div className="mt-10">
+            <button className="bg-[#CCFF00] text-black font-extrabold py-5 px-12 rounded-full text-lg uppercase tracking-wider shadow-xl hover:bg-[#b8e600] transition-all duration-200 transform hover:scale-105">
+              Find Your Trip
+            </button>
+          </div>
         </div>
       </div>
 
@@ -114,7 +113,7 @@ const HeroImage = memo<HeroImageProps>(({ imageUrl, title, subtitle }) => {
           <div className="text-center">
             <div 
               className="w-16 h-16 border-4 border-gray-200 rounded-full animate-spin mb-4"
-              style={{ borderTopColor: '#FF6900' }}
+              style={{ borderTopColor: '#CCFF00' }}
               aria-hidden="true"
             ></div>
             <p className="text-white text-sm">Loading adventure...</p>

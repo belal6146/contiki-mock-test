@@ -1,4 +1,3 @@
-
 // Define Contiki brand colors and variants
 export const colors = {
   border: 'hsl(var(--border))',
@@ -23,16 +22,16 @@ export const colors = {
     900: '#000000',
   },
   
-  // Contiki Orange (official secondary color)
+  // Contiki Lime Green (official secondary color)
   secondary: {
-    DEFAULT: '#FF6900', // Official Contiki Orange
+    DEFAULT: '#CCFF00', // Official Contiki Lime Green
     foreground: '#FFFFFF',
     50: '#fff3e6',
     100: '#ffe0b3',
     200: '#ffcc80',
     300: '#ffb74d',
     400: '#ffa726',
-    500: '#FF6900', // Main orange
+    500: '#CCFF00', // Main lime green
     600: '#e65100',
     700: '#cc4700',
     800: '#b33c00',
@@ -40,14 +39,14 @@ export const colors = {
   },
   
   accent: {
-    DEFAULT: '#FF6900', // Contiki Orange
+    DEFAULT: '#CCFF00', // Contiki Lime Green
     foreground: '#FFFFFF',
     50: '#fff3e6',
     100: '#ffe0b3',
     200: '#ffcc80',
     300: '#ffb74d',
     400: '#ffa726',
-    500: '#FF6900',
+    500: '#CCFF00',
     600: '#e65100',
     700: '#cc4700',
     800: '#b33c00',

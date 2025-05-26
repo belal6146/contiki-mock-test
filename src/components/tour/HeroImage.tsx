@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { trackEvent } from '@/lib/analytics';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -131,7 +130,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl, title, subtitle }) => {
           <div className="text-center">
             <div 
               className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin mb-6"
-              style={{ borderTopColor: '#FF6900' }}
+              style={{ borderTopColor: '#CCFF00' }}
             ></div>
             <p className="text-white text-lg font-medium">Loading your adventure...</p>
           </div>

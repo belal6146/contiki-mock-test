@@ -19,10 +19,10 @@
     --primary: 0 0% 0%; /* Black */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 25 100% 50%; /* Contiki Orange #FF6900 */
+    --secondary: 80 100% 50%; /* Lime Green #CCFF00 */
     --secondary-foreground: 0 0% 100%; /* White */
 
-    --accent: 25 100% 50%; /* Contiki Orange #FF6900 */
+    --accent: 80 100% 50%; /* Lime Green #CCFF00 */
     --accent-foreground: 0 0% 100%; /* White */
 
     --muted: 0 0% 96.1%;
@@ -38,7 +38,7 @@
     --radius: 0.5rem;
 
     /* Contiki specific colors */
-    --contiki-orange: 25 100% 50%; /* #FF6900 */
+    --contiki-orange: 80 100% 50%; /* #CCFF00 */
     --contiki-black: 0 0% 0%; /* #000000 */
     --contiki-gray: 0 0% 97%; /* #F7F7F7 */
     --contiki-dark-gray: 0 0% 20%; /* #333333 */
@@ -130,7 +130,7 @@
 
   /* Enhanced focus styles */
   a:focus, button:focus, input:focus, select:focus, textarea:focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-[#FF6900] focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-[#CCFF00] focus:ring-offset-2;
   }
 
   /* Custom text size for hero */
@@ -144,7 +144,7 @@
   /* Contiki Button System - Updated with correct brand colors */
   .btn {
     @apply inline-flex items-center justify-center rounded-lg text-sm font-bold transition-all duration-200 ease-in-out
-    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6900] focus:outline-none focus:ring-2 focus:ring-[#FF6900]
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00] focus:outline-none focus:ring-2 focus:ring-[#CCFF00]
     disabled:pointer-events-none disabled:opacity-50 transform hover:scale-105 active:scale-95;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -157,8 +157,8 @@
   }
 
   .btn-primary {
-    @apply btn bg-[#FF6900] text-white hover:bg-[#e65100] active:bg-[#cc4700] shadow-lg hover:shadow-xl;
-    background-color: #FF6900;
+    @apply btn bg-[#CCFF00] text-black hover:bg-[#b8e600] active:bg-[#a3cc00] shadow-lg hover:shadow-xl;
+    background-color: #CCFF00;
   }
 
   .btn-secondary {
@@ -166,7 +166,7 @@
   }
 
   .btn-outline {
-    @apply btn border-2 border-[#FF6900] bg-transparent text-[#FF6900] hover:bg-[#FF6900] hover:text-white shadow-lg hover:shadow-xl;
+    @apply btn border-2 border-[#CCFF00] bg-transparent text-[#CCFF00] hover:bg-[#CCFF00] hover:text-black shadow-lg hover:shadow-xl;
   }
 
   .btn-ghost {
@@ -330,10 +330,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FF6900;
+  background: #CCFF00;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e65100;
+  background: #b8e600;
 }

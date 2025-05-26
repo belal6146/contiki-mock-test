@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import PrevArrow from '../carousel/PrevArrow';
@@ -144,13 +143,13 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-[#FF6900] transition-colors duration-200">
+                      <h3 className="font-bold text-xl mb-3 text-gray-900 group-hover:text-[#CCFF00] transition-colors duration-200">
                         {highlight.title}
                       </h3>
                       <p className="text-gray-700 mb-4 line-clamp-3 leading-relaxed">
                         {highlight.description}
                       </p>
-                      <button className="text-[#FF6900] font-semibold text-sm hover:text-[#FF6900]/80 transition-colors duration-200 flex items-center gap-1">
+                      <button className="text-[#CCFF00] font-semibold text-sm hover:text-[#CCFF00]/80 transition-colors duration-200 flex items-center gap-1">
                         Read more →
                       </button>
                     </div>
@@ -169,10 +168,10 @@ const TripHighlights: React.FC<TripHighlightsProps> = ({
         }
         .highlights-slider .slick-dots li button:before {
           font-size: 12px;
-          color: #FF6900;
+          color: #CCFF00;
         }
         .highlights-slider .slick-dots li.slick-active button:before {
-          color: #FF6900;
+          color: #CCFF00;
         }
         .highlights-slider .slick-slide {
           padding: 0 8px;

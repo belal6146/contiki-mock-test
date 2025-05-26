@@ -1,173 +1,87 @@
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Search, Phone, MessageCircle, ChevronDown } from 'lucide-react';
-import Logo from './header/Logo';
-import MobileMenu from './header/MobileMenu';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
+import MenuLink from "./header/MenuLink";
+import DropdownItems from "./header/DropdownItems";
 import {
   destinationItems,
   travelStyleItems,
   aboutItems,
   inspiredItems
-} from './header/NavigationData';
+} from "./header/NavigationData";
 
-const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const NAV_ITEMS = [
+  { label: "DESTINATIONS", to: "/destinations", dropdown: destinationItems },
+  { label: "DEALS", to: "/deals", dropdown: [{ label: 'Current Deals', to: '/deals/current-deals' }] },
+  { label: "TRAVEL STYLES", to: "/travel-styles", dropdown: travelStyleItems },
+  { label: "ABOUT CONTIKI", to: "/about-contiki", dropdown: aboutItems },
+  { label: "GET INSPIRED", to: "/get-inspired", dropdown: inspiredItems },
+];
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const handleLinkClick = (label: string) => {
-    console.log('Navigation clicked:', label);
-    if (label === 'close') {
-      setIsMobileMenuOpen(false);
-    } else {
-      setIsMobileMenuOpen(false);
-    }
-  };
-
-  const navItems = [
-    { label: 'DESTINATIONS', to: '/destinations', hasDropdown: true, items: destinationItems },
-    { label: 'DEALS', to: '/deals', hasDropdown: true, items: [{ label: 'Current Deals', to: '/deals/current-deals' }] },
-    { label: 'TRAVEL STYLES', to: '/travel-styles', hasDropdown: true, items: travelStyleItems },
-    { label: 'ABOUT CONTIKI', to: '/about-contiki', hasDropdown: true, items: aboutItems },
-    { label: 'GET INSPIRED', to: '/get-inspired', hasDropdown: true, items: inspiredItems }
-  ];
-
-  return (
-    <header className="bg-white fixed top-0 left-0 right-0 z-40 shadow-sm">
-      {/* Top Utility Bar */}
-      <div className="py-2 border-b border-gray-200">
-        <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex justify-end space-x-6">
-          <Link 
-            to="/contact" 
-            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
-            onClick={() => handleLinkClick('Contact us')}
-          >
-            Contact us
-          </Link>
-          <Link 
-            to="/future-travel-credit" 
-            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
-            onClick={() => handleLinkClick('Future Travel Credit')}
-          >
-            Future Travel Credit
-          </Link>
-          <Link 
-            to="/subscribe" 
-            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
-            onClick={() => handleLinkClick('Subscribe to emails')}
-          >
-            Subscribe to emails
-          </Link>
-          <Link 
-            to="/login" 
-            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
-            onClick={() => handleLinkClick('Traveller log in')}
-          >
-            Traveller log in
-          </Link>
-          <Link 
-            to="/agent-login" 
-            className="text-xs font-medium text-gray-600 hover:underline hover:text-gray-800 transition-colors duration-150"
-            onClick={() => handleLinkClick('Agent log in')}
-          >
-            Agent log in
-          </Link>
-        </div>
+const Header = () => (
+  <header className="w-full z-50">
+    {/* Top Utility Bar */}
+    <div className="w-full bg-white border-b border-gray-100 text-xs text-right py-2 px-4">
+      <div className="max-w-screen-xl mx-auto flex justify-end gap-6">
+        <a href="#" className="hover:underline text-gray-600">Contact us</a>
+        <a href="#" className="hover:underline text-gray-600">Future Travel Credit</a>
+        <a href="#" className="hover:underline text-gray-600">Subscribe to emails</a>
+        <a href="#" className="hover:underline text-gray-600">Traveller log in</a>
+        <a href="#" className="hover:underline text-gray-600">Agent log in</a>
       </div>
+    </div>
 
-      {/* Primary Nav Bar */}
-      <div className="py-4">
-        <div className="max-w-screen-xl mx-auto px-4 lg:px-8 flex items-center justify-between">
-          {/* Logo - Positioned on the left with proper spacing */}
-          <div className="flex-shrink-0 mr-8">
-            <Link to="/" className="block" onClick={() => handleLinkClick('Logo')}>
-              <Logo />
-            </Link>
-          </div>
+    {/* Main Navbar */}
+    <nav className="w-full bg-white shadow-sm sticky top-0 z-40">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between py-4 px-4 lg:px-8">
+        {/* Logo */}
+        <Link to="/" className="flex-shrink-0 mr-8" aria-label="Contiki Home">
+          <img src="/logo-contiki.svg" alt="Contiki" className="h-7 w-auto" />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center space-x-12">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <Link 
-                  to={item.to}
-                  className="text-sm uppercase font-semibold tracking-wide text-black hover:text-[#FF6900] focus:outline-none focus:ring-2 focus:ring-[#FF6900] transition-colors duration-150 flex items-center"
-                  onClick={() => handleLinkClick(item.label)}
-                >
-                  {item.label}
-                  {item.hasDropdown && <ChevronDown className="h-3 w-3 ml-1" />}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Search + Actions Group */}
-          <div className="hidden lg:flex items-center">
-            {/* Search */}
-            <div className="flex items-center w-80 h-10 border-2 border-gray-300 rounded-full px-3">
-              <input 
-                type="text" 
-                placeholder="Aged 18–35? Find your adventure"
-                className="flex-grow text-sm text-gray-600 placeholder-gray-400 bg-transparent focus:outline-none"
-              />
-              <button 
-                className="ml-2 p-2 bg-[#FF6900] rounded-full hover:bg-[#e65100] transition-colors duration-150"
-                onClick={() => handleLinkClick('Search')}
-                aria-label="Search"
+        {/* Main Navigation with Dropdowns */}
+        <ul className="flex-1 flex justify-center items-center gap-8">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.label} className="relative group h-full flex items-center">
+              <MenuLink
+                to={item.to}
+                label={item.label}
+                hasDropdown={!!item.dropdown}
+                onClick={() => {}}
               >
-                <Search className="h-4 w-4 text-white" />
-              </button>
-            </div>
+                {item.dropdown && (
+                  <DropdownItems items={item.dropdown} onClick={() => {}} />
+                )}
+              </MenuLink>
+            </li>
+          ))}
+        </ul>
 
-            {/* Phone Button */}
-            <button 
-              className="inline-flex items-center ml-4 px-4 py-2 border-2 border-gray-300 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-100 transition-colors duration-150"
-              onClick={() => handleLinkClick('Phone')}
+        {/* Search, Phone, Cart */}
+        <div className="flex items-center gap-4">
+          {/* Search Bar */}
+          <form className="flex items-center border-2 border-gray-200 rounded-full px-3 py-1 bg-white">
+            <input
+              type="text"
+              placeholder="Aged 18–35? Find your adventure"
+              className="flex-grow text-sm text-gray-700 placeholder-gray-400 bg-transparent focus:outline-none"
+              style={{ minWidth: 180 }}
+            />
+            <button
+              type="submit"
+              className="ml-2 p-2 bg-[#CCFF00] rounded-full hover:bg-[#b8e600] transition-colors duration-150"
+              aria-label="Search"
             >
-              <Phone className="h-4 w-4 mr-2" />
-              0808 281 1120
+              <Search className="h-5 w-5 text-black" />
             </button>
-
-            {/* Chat Button */}
-            <button 
-              className="inline-flex items-center ml-4 px-4 py-2 border-2 border-gray-300 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-100 transition-colors duration-150"
-              onClick={() => handleLinkClick('Chat')}
-            >
-              <MessageCircle className="h-4 w-4 mr-2" />
-              Chat
-              <ChevronDown className="h-3 w-3 ml-1" />
-            </button>
-          </div>
-
-          {/* Mobile Hamburger Menu */}
-          <button
-            onClick={toggleMobileMenu}
-            className="lg:hidden p-2 text-gray-800 hover:bg-gray-100 rounded-lg transition-colors duration-150"
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          </form>
+          {/* Phone Number */}
+          <span className="font-bold text-black text-sm ml-2">0808 281 1120</span>
+          {/* Cart/Account icons can be added here */}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <MobileMenu 
-        isOpen={isMobileMenuOpen} 
-        destinationItems={destinationItems}
-        travelStyleItems={travelStyleItems}
-        aboutItems={aboutItems}
-        inspiredItems={inspiredItems}
-        onLinkClick={handleLinkClick}
-      />
-    </header>
-  );
-};
+    </nav>
+  </header>
+);
 
 export default Header;

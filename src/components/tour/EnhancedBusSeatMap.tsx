@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import SeatMapBanner from './seat-map/SeatMapBanner';
@@ -58,7 +57,7 @@ const EnhancedBusSeatMap: React.FC<EnhancedBusSeatMapProps> = ({ passengers }) =
       <div className="flex justify-end mt-8">
         <Button 
           onClick={handleSaveSelection}
-          className="bg-[#FF6900] hover:bg-[#e65100] text-white font-bold px-10 py-4 text-base uppercase tracking-wide transition-all duration-200 border-2 border-[#FF6900] hover:border-[#e65100] shadow-lg hover:shadow-xl transform hover:scale-105"
+          className="bg-[#CCFF00] hover:bg-[#b8e600] text-black font-bold px-10 py-4 text-base uppercase tracking-wide transition-all duration-200 border-2 border-[#CCFF00] hover:border-[#b8e600] shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           Save Seat Selection
         </Button>

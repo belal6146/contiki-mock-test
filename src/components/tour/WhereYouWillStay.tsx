@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -90,7 +89,7 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
               
               <CardContent className="p-8">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="bg-[#FF6900] text-white px-4 py-2 text-sm font-bold rounded-full uppercase tracking-wide">
+                  <span className="bg-[#CCFF00] text-black px-4 py-2 text-sm font-bold rounded-full uppercase tracking-wide">
                     Special Stay
                   </span>
                   <span className="bg-gray-100 text-gray-700 px-3 py-1 text-xs font-medium rounded-full">
@@ -123,7 +122,7 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
                 
                 <Button 
                   variant="outline" 
-                  className="border-[#FF6900] text-[#FF6900] hover:bg-[#FF6900] hover:text-white font-medium flex items-center gap-2 transition-all duration-200"
+                  className="border-[#CCFF00] text-[#CCFF00] hover:bg-[#CCFF00] hover:text-black font-medium flex items-center gap-2 transition-all duration-200"
                 >
                   See More <ExternalLink size={16} />
                 </Button>
@@ -133,8 +132,8 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
           
           {/* Accommodation summary */}
           <div className="h-full">
-            <Card className="flex flex-col items-center justify-center text-center p-8 h-full rounded-2xl shadow-xl bg-gradient-to-br from-[#FF6900]/5 to-[#CCFF00]/5">
-              <div className="bg-[#FF6900] rounded-full w-24 h-24 flex items-center justify-center mb-8 shadow-lg">
+            <Card className="flex flex-col items-center justify-center text-center p-8 h-full rounded-2xl shadow-xl bg-gradient-to-br from-[#CCFF00]/5 to-[#CCFF00]/5">
+              <div className="bg-[#CCFF00] rounded-full w-24 h-24 flex items-center justify-center mb-8 shadow-lg">
                 <span className="text-white text-3xl font-bold">{safeAccommodation.nightsCount}</span>
               </div>
               
@@ -142,7 +141,7 @@ const WhereYouWillStay: React.FC<WhereYouWillStayProps> = ({ accommodation }) =>
               
               <div className="space-y-3 text-gray-600">
                 <p className="flex items-center justify-center gap-2">
-                  <span className="w-2 h-2 bg-[#FF6900] rounded-full"></span>
+                  <span className="w-2 h-2 bg-[#CCFF00] rounded-full"></span>
                   {safeAccommodation.nightsCount} nights in Hotels
                 </p>
                 <p className="flex items-center justify-center gap-2">

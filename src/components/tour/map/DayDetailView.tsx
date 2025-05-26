@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MapPin, ChevronUp, ChevronDown, Utensils, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -36,7 +35,7 @@ const DayDetailView: React.FC<DayDetailViewProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <div className="flex items-center gap-3">
-          <div className="bg-[#FF6900] text-white px-2 py-1 rounded text-sm font-bold">
+          <div className="bg-[#CCFF00] text-black px-2 py-1 rounded text-sm font-bold">
             Day {day.day}
           </div>
           <h3 className="text-lg font-bold">{day.from || day.title}</h3>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -30,9 +29,9 @@ export const buttonClasses = (variant: 'primary' | 'secondary' | 'outline' = 'pr
   const baseClasses = 'inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantClasses = {
-    primary: 'bg-[#FF6900] text-white hover:bg-[#e65c00] focus:ring-[#FF6900]',
+    primary: 'bg-[#CCFF00] text-black hover:bg-[#b8e600] focus:ring-[#CCFF00]',
     secondary: 'bg-[#CCFF00] text-black hover:bg-[#b8e600] focus:ring-[#CCFF00]',
-    outline: 'border-2 border-[#FF6900] text-[#FF6900] hover:bg-[#FF6900] hover:text-white'
+    outline: 'border-2 border-[#CCFF00] text-[#CCFF00] hover:bg-[#CCFF00] hover:text-black'
   };
   
   const sizeClasses = {

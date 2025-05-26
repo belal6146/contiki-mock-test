@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MapPin, Building, Utensils, ArrowRight } from 'lucide-react';
 
@@ -19,7 +18,7 @@ const DayItineraryCard: React.FC<DayItineraryCardProps> = ({ day }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
       {/* Header */}
-      <div className="bg-[#FF6900] text-white px-4 py-2">
+      <div className="bg-[#CCFF00] text-black px-4 py-2">
         <span className="font-bold">Day {day.day}</span>
       </div>
       

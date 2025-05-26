@@ -1,8 +1,29 @@
-
 import { useState } from "react";
 import ContikiTripCard from "./ContikiTripCard";
-import PromotionCard from "./PromotionCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const PromotionCard = ({ title, subtitle, bgImage, buttonText, buttonLink }) => (
+  <div className="bg-white rounded-xl overflow-hidden shadow-lg flex flex-col h-full group hover:shadow-2xl transition-all duration-300">
+    <div className="relative h-48 w-full overflow-hidden">
+      <img 
+        src={bgImage}
+        alt={title}
+        className="w-full h-full object-cover transition-all duration-700 transform group-hover:scale-110" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
+        <h3 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow-lg">{title}</h3>
+        <p className="text-base md:text-lg mb-4 drop-shadow-md">{subtitle}</p>
+        <a
+          href={buttonLink}
+          className="bg-[#CCFF00] text-black font-bold rounded-full px-8 py-3 mt-2 hover:bg-[#b8e600] transition-colors shadow-lg"
+        >
+          {buttonText}
+        </a>
+      </div>
+    </div>
+  </div>
+);
 
 const PopularTrips = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -57,8 +78,12 @@ const PopularTrips = () => {
 
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 max-w-7xl mx-auto bg-white">
+      <div className="flex flex-col items-center mb-8">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-black uppercase tracking-tight text-center mb-2" style={{ letterSpacing: '0.04em' }}>Popular Trips</h2>
+        <div className="w-16 h-1 bg-[#CCFF00] rounded-full mb-2"></div>
+      </div>
+      
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Popular trips</h2>
         <div className="flex gap-2">
           <button 
             onClick={handlePrev}
@@ -80,7 +105,7 @@ const PopularTrips = () => {
       </div>
       
       {/* Trip Cards Grid - Horizontal Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
         {activeSlide === 0 && (
           <>
             <ContikiTripCard {...trips[0]} />
@@ -123,8 +148,8 @@ const PopularTrips = () => {
       
       {/* View All Trips Button */}
       <div className="flex justify-center">
-        <button className="bg-[#CCFF00] text-black font-bold py-3 px-8 rounded hover:bg-[#b8e600] transition-colors uppercase tracking-wide">
-          VIEW ALL TRIPS
+        <button className="bg-[#CCFF00] text-black font-extrabold py-4 px-12 rounded-full text-lg uppercase tracking-wider shadow-lg hover:bg-[#b8e600] transition-all duration-200">
+          View All Trips
         </button>
       </div>
     </section>

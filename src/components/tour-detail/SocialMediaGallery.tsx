@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Instagram, Heart, MessageCircle } from 'lucide-react';
 
@@ -98,7 +97,7 @@ const SocialMediaGallery: React.FC = () => {
           <div className="bg-white rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Share Your Adventure</h3>
             <p className="text-gray-600 mb-6">
-              Tag us in your photos using <span className="font-bold text-[#FF6900]">#GREEKHOPPING</span> and get featured!
+              Tag us in your photos using <span className="font-bold text-[#CCFF00]">#GREEKHOPPING</span> and get featured!
             </p>
             <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 mx-auto">
               <Instagram className="w-5 h-5" />

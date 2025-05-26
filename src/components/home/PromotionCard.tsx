@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface PromotionCardProps {
@@ -34,7 +33,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({
         
         <a 
           href={buttonLink}
-          className="inline-block bg-[#FF6900] hover:bg-[#e65100] text-white font-bold py-2 px-4 rounded-lg text-sm uppercase tracking-wide transition-colors duration-200 w-fit"
+          className="inline-block bg-[#CCFF00] hover:bg-[#b8e600] text-black font-bold py-2 px-4 rounded-lg text-sm uppercase tracking-wide transition-colors duration-200 w-fit"
         >
           {buttonText}
         </a>

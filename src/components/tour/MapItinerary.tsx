@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -88,7 +87,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
             <div className="flex border border-gray-300 rounded">
               <button
                 onClick={() => setViewType('list')}
-                className={`p-2 ${viewType === 'list' ? 'bg-[#FF6900] text-white' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'list' ? 'bg-[#CCFF00] text-black' : 'bg-white'}`}
                 aria-label="List view"
               >
                 <div className="w-4 h-4 flex flex-col gap-1">
@@ -99,7 +98,7 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
               </button>
               <button
                 onClick={() => setViewType('grid')}
-                className={`p-2 ${viewType === 'grid' ? 'bg-[#FF6900] text-white' : 'bg-white'}`}
+                className={`p-2 ${viewType === 'grid' ? 'bg-[#CCFF00] text-black' : 'bg-white'}`}
                 aria-label="Grid view"
               >
                 <div className="w-4 h-4 grid grid-cols-2 gap-0.5">

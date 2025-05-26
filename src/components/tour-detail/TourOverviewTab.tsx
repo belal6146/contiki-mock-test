@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Trip } from '@/types/trip';
 import TripHighlights from '@/components/tour/TripHighlights';
@@ -108,110 +107,89 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
   return (
     <div className="bg-white">
       {/* Hero Section with Trip Description */}
-      <div className="container py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="container py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left side - Image from Contiki */}
           <div className="lg:col-span-1">
             <img 
               src="https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720"
               alt="Greek islands tour - group of people in blue lake surrounded by mountains"
-              className="w-full h-[400px] object-cover rounded-lg"
+              className="w-full h-[440px] object-cover rounded-2xl shadow-lg"
             />
           </div>
           
           {/* Right side - Content */}
           <div className="lg:col-span-1">
-            <div className="mb-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-black text-black px-3 py-1 text-sm font-bold rounded">
-                  I'm planning to travel in
-                </span>
-                <div className="flex bg-gray-100 rounded overflow-hidden">
-                  <button className="bg-[#CCFF00] text-black px-4 py-1 text-sm font-bold">
-                    2025
-                  </button>
-                  <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200">
-                    2026
-                  </button>
+            <div className="mb-8">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="bg-black text-white px-4 py-2 text-base font-extrabold rounded-full">I'm planning to travel in</span>
+                <div className="flex bg-gray-100 rounded-full overflow-hidden">
+                  <button className="bg-[#CCFF00] text-black px-6 py-2 text-base font-extrabold rounded-full">2025</button>
+                  <button className="bg-gray-100 text-gray-700 px-6 py-2 text-base font-extrabold hover:bg-gray-200 rounded-full">2026</button>
                 </div>
               </div>
-              
-              <h1 className="text-2xl lg:text-3xl font-bold text-black mb-4">
-                The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.
-              </h1>
-              
+              <h1 className="text-3xl lg:text-4xl font-black text-black mb-6 leading-tight">The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.</h1>
               {/* Trip Details Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {/* Days */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">📅</span>
-                    <span className="font-bold text-sm">Days</span>
+                    <span className="text-2xl">📅</span>
+                    <span className="font-extrabold text-base">Days</span>
                   </div>
-                  <p className="text-sm text-gray-700">11 days, 1 country</p>
+                  <p className="text-base text-gray-700">11 days, 1 country</p>
                 </div>
-                
                 {/* Accommodation */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">🏨</span>
-                    <span className="font-bold text-sm">Accommodation</span>
+                    <span className="text-2xl">🏨</span>
+                    <span className="font-extrabold text-base">Accommodation</span>
                   </div>
-                  <p className="text-sm text-gray-700">8 nights in Hotels, 2 nights in Special Stay</p>
+                  <p className="text-base text-gray-700">8 nights in Hotels, 2 nights in Special Stay</p>
                 </div>
-                
                 {/* Meals */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">🍽️</span>
-                    <span className="font-bold text-sm">Meals</span>
+                    <span className="text-2xl">🍽️</span>
+                    <span className="font-extrabold text-base">Meals</span>
                   </div>
-                  <p className="text-sm text-gray-700">10 Breakfasts, 3 Dinners</p>
+                  <p className="text-base text-gray-700">10 Breakfasts, 3 Dinners</p>
                 </div>
-                
                 {/* Transport */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">🚢</span>
-                    <span className="font-bold text-sm">Transport</span>
+                    <span className="text-2xl">🚢</span>
+                    <span className="font-extrabold text-base">Transport</span>
                   </div>
-                  <p className="text-sm text-gray-700">Ferry</p>
+                  <p className="text-base text-gray-700">Ferry</p>
                 </div>
-                
                 {/* Group Size */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">👥</span>
-                    <span className="font-bold text-sm">Group Size</span>
+                    <span className="text-2xl">👥</span>
+                    <span className="font-extrabold text-base">Group Size</span>
                   </div>
-                  <p className="text-sm text-gray-700">Average 30 people</p>
+                  <p className="text-base text-gray-700">Average 30 people</p>
                 </div>
-                
                 {/* Team */}
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl">👨‍💼</span>
-                    <span className="font-bold text-sm">Team</span>
+                    <span className="text-2xl">👨‍💼</span>
+                    <span className="font-extrabold text-base">Team</span>
                   </div>
-                  <p className="text-sm text-gray-700">Expert Trip Manager, Local Guides</p>
+                  <p className="text-base text-gray-700">Expert Trip Manager, Local Guides</p>
                 </div>
               </div>
-              
-              <p className="text-gray-700 leading-relaxed mb-6 text-sm">
-                Embark on a Greek island hopping adventure, bouncing between Greece's major islands, where the nightlife's as endless as the architecture. You'll immerse yourself in Greece's wonderful city, sun, and sumptuous culture. Villages, volcanos, castles for days and enough grapes come to put glowing hearts in your eyes. By day you'll have ample time for exploring, and by night you'll sleep like a baby in accommodation that's specially selected for island hopping.
-              </p>
-              
-              {/* On the road to Net Zero Banner - using Contiki orange instead of lime */}
-              <div className="bg-[#CCFF00] text-black p-4 rounded-lg flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="bg-white text-[#CCFF00] w-8 h-8 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-bold">🌱</span>
+              <p className="text-gray-700 leading-relaxed mb-8 text-base">Embark on a Greek island hopping adventure, bouncing between Greece's major islands, where the nightlife's as endless as the architecture. You'll immerse yourself in Greece's wonderful city, sun, and sumptuous culture. Villages, volcanos, castles for days and enough grapes come to put glowing hearts in your eyes. By day you'll have ample time for exploring, and by night you'll sleep like a baby in accommodation that's specially selected for island hopping.</p>
+              {/* On the road to Net Zero Banner */}
+              <div className="bg-[#CCFF00] text-black p-5 rounded-2xl flex items-center justify-between mb-8 shadow-lg">
+                <div className="flex items-center gap-4">
+                  <div className="bg-white text-[#CCFF00] w-10 h-10 rounded-full flex items-center justify-center">
+                    <span className="text-lg font-bold">🌱</span>
                   </div>
-                  <span className="font-bold">On the road to Net Zero</span>
+                  <span className="font-extrabold text-lg">On the road to Net Zero</span>
                 </div>
-                <button className="text-black underline font-semibold text-sm">
-                  Find out more
-                </button>
+                <button className="text-black underline font-extrabold text-base rounded-full px-4 py-2 hover:bg-black/5 transition">Find out more</button>
               </div>
             </div>
           </div>

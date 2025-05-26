@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -36,7 +35,7 @@ const MapDisplay: React.FC<MapDisplayProps> = ({
     itinerary.forEach((day, index) => {
       const el = document.createElement('div');
       el.className = `w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer ${
-        index === activeMarkerIndex ? 'bg-[#FF6900]' : 'bg-[#CCFF00] text-black'
+        index === activeMarkerIndex ? 'bg-[#CCFF00]' : 'bg-[#CCFF00] text-black'
       }`;
       el.textContent = day.day.toString();
       
