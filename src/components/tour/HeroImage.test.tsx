@@ -1,7 +1,5 @@
-
 import React from 'react';
-import { render, act } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, screen, act } from '@testing-library/react';
 import HeroImage from './HeroImage';
 
 // Mock analytics
