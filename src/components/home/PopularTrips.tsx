@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import TripCard from "@/components/TripCard";
+import ContikiTripCard from "./ContikiTripCard";
 import PromotionCard from "./PromotionCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -9,38 +9,41 @@ const PopularTrips = () => {
 
   const trips = [
     {
-      id: "1",
+      id: 1,
       title: "Greek Island Hopping",
-      region: "Europe",
-      price: 1669,
-      oldPrice: 2225,
-      duration: 11,
-      countries: 1,
       image: "/lovable-uploads/e713b7c0-40aa-4ee2-a9d7-df2c791c2708.png",
-      isSpotlight: true,
-      slug: "greek-island-hopping"
-    },
-    {
-      id: "2",
-      title: "LA to the Bay",
-      region: "North America",
-      price: 2146,
-      oldPrice: 2525,
-      duration: 11,
+      rating: 4.6,
+      days: 11,
+      places: 5,
       countries: 1,
-      image: "/lovable-uploads/99c672c5-c363-4b07-bf54-fa34a6b5bd28.png",
-      slug: "la-to-the-bay"
+      description: "The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops.",
+      regularPrice: "£2,225",
+      price: "£1,669",
+      spotlight: true
     },
     {
-      id: "3",
+      id: 2,
+      title: "Canada and the Rockies",
+      image: "/lovable-uploads/99c672c5-c363-4b07-bf54-fa34a6b5bd28.png",
+      rating: 4.7,
+      days: 11,
+      places: 7,
+      countries: 1,
+      description: "The one that surrounds you with the majestic landscape of the Canadian Rockies, from Vancouver to the Rock.",
+      regularPrice: "£2,876",
+      price: "£2,274"
+    },
+    {
+      id: 3,
       title: "European Horizon",
-      region: "Europe",
-      price: 1140,
-      oldPrice: 1425,
-      duration: 10,
-      countries: 7,
       image: "https://images.unsplash.com/photo-1493707553966-283afac8c358?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      slug: "european-horizon"
+      rating: 4.6,
+      days: 10,
+      places: 13,
+      countries: 7,
+      description: "The one that fits in the best of Europe's icons for those short on time",
+      regularPrice: "£1,325",
+      price: "£1,060"
     }
   ];
 
@@ -55,7 +58,7 @@ const PopularTrips = () => {
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 max-w-7xl mx-auto bg-white">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">Popular trips</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Popular trips</h2>
         <div className="flex gap-2">
           <button 
             onClick={handlePrev}
@@ -76,12 +79,12 @@ const PopularTrips = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Trip Cards Grid - Horizontal Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         {activeSlide === 0 && (
           <>
-            {trips.slice(0, 2).map((trip) => (
-              <TripCard key={trip.id} {...trip} />
-            ))}
+            <ContikiTripCard {...trips[0]} />
+            <ContikiTripCard {...trips[1]} />
             <div className="lg:col-span-1">
               <PromotionCard 
                 title="Get set for GREECE 🌴"
@@ -91,40 +94,38 @@ const PopularTrips = () => {
                 buttonLink="/tours"
               />
             </div>
-            {trips.slice(2, 3).map((trip) => (
-              <TripCard key={trip.id} {...trip} />
-            ))}
+            <ContikiTripCard {...trips[2]} />
           </>
         )}
         
         {activeSlide === 1 && (
-          <>
-            <div className="col-span-full flex justify-center items-center p-12">
-              <p className="text-lg text-gray-500">More trips coming soon!</p>
-            </div>
-          </>
+          <div className="col-span-full flex justify-center items-center p-12">
+            <p className="text-lg text-gray-500">More trips coming soon!</p>
+          </div>
         )}
       </div>
       
-      <div className="mt-4 flex justify-center">
-        <div className="carousel-dots flex gap-2">
+      {/* Carousel Dots */}
+      <div className="flex justify-center mb-8">
+        <div className="flex gap-2">
           <button 
             onClick={() => setActiveSlide(0)} 
-            className={`w-2 h-2 rounded-full ${activeSlide === 0 ? 'bg-gray-800' : 'bg-gray-300'}`}
+            className={`w-2 h-2 rounded-full transition-colors ${activeSlide === 0 ? 'bg-gray-800' : 'bg-gray-300'}`}
             aria-label="Go to slide 1"
-          ></button>
+          />
           <button 
             onClick={() => setActiveSlide(1)} 
-            className={`w-2 h-2 rounded-full ${activeSlide === 1 ? 'bg-gray-800' : 'bg-gray-300'}`}
+            className={`w-2 h-2 rounded-full transition-colors ${activeSlide === 1 ? 'bg-gray-800' : 'bg-gray-300'}`}
             aria-label="Go to slide 2"
-          ></button>
+          />
         </div>
       </div>
       
-      <div className="mt-10 flex justify-center">
-        <a href="/tours" className="bg-[#CCFF00] text-black font-semibold py-3 px-8 rounded hover:opacity-90 transition-all duration-300 uppercase tracking-wide">
+      {/* View All Trips Button */}
+      <div className="flex justify-center">
+        <button className="bg-[#CCFF00] text-black font-bold py-3 px-8 rounded hover:bg-[#b8e600] transition-colors uppercase tracking-wide">
           VIEW ALL TRIPS
-        </a>
+        </button>
       </div>
     </section>
   );
