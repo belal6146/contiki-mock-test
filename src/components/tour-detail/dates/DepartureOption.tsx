@@ -5,7 +5,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import PriceBreakdown from './PriceBreakdown';
 import TripTimeline from './TripTimeline';
 import FellowTravellerList from '../../tour/FellowTravellerList';
-import BusSeatMap from '../../tour/BusSeatMap';
+import EnhancedBusSeatMap from '../../tour/EnhancedBusSeatMap';
 import OptionVariantSelector from './OptionVariantSelector';
 import FurtherInformation from './FurtherInformation';
 import CollapsibleSection from './CollapsibleSection';
@@ -225,7 +225,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
             </div>
           </div>
 
-          {/* Bottom sections */}
+          {/* Bottom sections with enhanced components */}
           <div className="p-6 border-t border-gray-100">
             <div className="mb-4">
               <CollapsibleSection 
@@ -245,13 +245,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
                 isOpen={seatingOpen}
                 onToggle={setSeatingOpen}
               >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="font-bold text-lg">Choose Your Seat</h4>
-                    <span className="text-sm text-gray-600">Seats are assigned on a first-come, first-served basis</span>
-                  </div>
-                  <BusSeatMap passengers={passengers} />
-                </div>
+                <EnhancedBusSeatMap passengers={passengers} />
               </CollapsibleSection>
             </div>
             
