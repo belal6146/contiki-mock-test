@@ -124,8 +124,8 @@ const FeaturedTrips = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <Skeleton className="h-52 w-full" />
-                <div className="p-5">
+                <Skeleton className="h-64 w-full" />
+                <div className="p-6">
                   <Skeleton className="h-6 w-3/4 mb-3" />
                   <Skeleton className="h-4 w-1/2 mb-3" />
                   <Skeleton className="h-4 w-1/4" />
@@ -147,9 +147,9 @@ const FeaturedTrips = () => {
           <div className="relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {visibleTrips.map((trip, index) => (
-                <div key={trip.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow group">
+                <div key={trip.id} className="w-72 h-auto bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow group">
                   {/* Trip Image */}
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden">
                     <img 
                       src={trip.image || `https://images.unsplash.com/photo-1571406252267-102c2b8eff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
                       alt={trip.name}
@@ -159,7 +159,7 @@ const FeaturedTrips = () => {
                     
                     {/* Trip Spotlight Badge */}
                     {trip.isSpotlight && (
-                      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      <div className="absolute top-3 left-3 bg-[#FEDA6A] text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         Trip Spotlight
                       </div>
                     )}
@@ -185,7 +185,7 @@ const FeaturedTrips = () => {
                   </div>
                   
                   {/* Trip Content */}
-                  <div className="p-5">
+                  <div className="p-6">
                     {/* Rating */}
                     <div className="flex items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
