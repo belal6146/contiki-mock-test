@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface MonthFilterProps {
@@ -10,21 +9,24 @@ interface MonthFilterProps {
 const MonthFilter: React.FC<MonthFilterProps> = ({ months, selectedMonth, onMonthChange }) => {
   return (
     <div className="flex items-center justify-center mb-8 overflow-x-auto">
-      <div className="flex space-x-2">
+      <ul className="flex flex-wrap gap-2">
         {months.map((month) => (
-          <button
-            key={month.id}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              selectedMonth === month.id
-                ? 'bg-[rgb(204,255,0)] text-black'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-            onClick={() => onMonthChange(month.id)}
-          >
-            {month.label}
-          </button>
+          <li key={month.id}>
+            <button
+              key={month.id}
+              className={`
+                px-3 py-1 text-xs font-medium uppercase rounded-full focus:outline-none focus:ring-2 focus:ring-secondary ${
+                  selectedMonth === month.id
+                    ? 'bg-secondary text-gray-900'
+                    : 'bg-lightBg text-gray-600 hover:bg-gray-200'
+                }`}
+              onClick={() => onMonthChange(month.id)}
+            >
+              {month.label}
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Info, ChevronUp, ChevronDown } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
@@ -73,9 +72,9 @@ const DepartureOptionHeader: React.FC<DepartureOptionHeaderProps> = ({
         {/* Right side - Price and Actions */}
         <div className="flex items-center gap-4">
           {hasDiscount && (
-            <div className="text-center">
-              <div className="text-orange-600 text-xs font-bold mb-1 uppercase tracking-wide">
-                {option.discount}% off
+            <div className="text-center discount">
+              <div className="text-sm font-semibold mb-1 uppercase text-red-600">
+                -{option.discount}% off
               </div>
             </div>
           )}
@@ -84,18 +83,18 @@ const DepartureOptionHeader: React.FC<DepartureOptionHeaderProps> = ({
             <div className="text-xs text-gray-500 mb-1">Price</div>
             <div className="flex items-center justify-end gap-2">
               {option.oldPrice && hasDiscount && (
-                <span className="text-xs line-through text-gray-400">
+                <span className="oldPrice text-sm line-through text-gray-500">
                   £{option.oldPrice}
                 </span>
               )}
-              <span className="font-bold text-lg text-black">
+              <span className="newPrice font-bold text-lg text-gray-900">
                 {formatCurrency(displayPrice)}
               </span>
             </div>
           </div>
           
           <button 
-            className="bg-[rgb(204,255,0)] text-black px-4 py-2 rounded-full text-sm font-bold hover:bg-[rgb(184,230,0)] transition-colors uppercase tracking-wide"
+            className="callUsBtn ml-4 px-6 py-3 rounded-full bg-secondary text-gray-900 font-semibold uppercase hover:bg-secondary-dark focus:ring-2 focus:ring-secondary"
             onClick={onBookNow}
           >
             CALL US

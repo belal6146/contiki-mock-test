@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Trip } from '@/types/trip';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -143,9 +142,44 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                   />
                 ))}
               </div>
+
+              {/* Load More Button */}
+              <button className="mx-auto block px-8 py-3 border border-gray-300 rounded-full text-sm font-semibold uppercase text-gray-900 hover:bg-gray-100">
+                Load More
+              </button>
             </div>
           </div>
         </div>
+        
+        {/* Bottom Feature Banner */}
+        <section className="bg-lightBg py-8">
+          <div className="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-900"><circle cx="12" cy="12" r="10"/><path d="M16 8h-2a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 17l1-1"/><path d="M17 7l-1 1"/></svg>
+              </div>
+              <p className="text-sm font-medium text-gray-900">Only £60 deposit to book</p>
+            </div>
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-900"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <p className="text-sm font-medium text-gray-900">Pay overtime, interest free</p>
+            </div>
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-900"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </div>
+              <p className="text-sm font-medium text-gray-900">No booking fee, no change fee</p>
+            </div>
+            <div className="flex flex-col items-center space-y-2">
+              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-900"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+              </div>
+              <p className="text-sm font-medium text-gray-900">FlexDeposit options</p>
+            </div>
+          </div>
+        </section>
       </TooltipProvider>
     </ConsentManagerProvider>
   );

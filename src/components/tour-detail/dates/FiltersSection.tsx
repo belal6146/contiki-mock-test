@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Grid, List } from 'lucide-react';
 import { MonthFilter, TripTypeFilter, MONTHS, TRIP_TYPES } from './index';
@@ -44,20 +43,20 @@ const FiltersSection: React.FC<FiltersSectionProps> = ({
           <span className="text-sm font-medium text-gray-700">View:</span>
           <div className="flex bg-gray-100 rounded-md overflow-hidden">
             <button 
-              className={`p-2 flex items-center justify-center transition-colors ${
+              className={`p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-secondary ${
                 viewMode === 'grid' 
-                  ? 'bg-[rgb(204,255,0)] text-black' 
-                  : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                  ? 'bg-secondary text-gray-900'
+                  : 'bg-lightBg text-gray-600 hover:bg-gray-200'
               }`}
               onClick={() => onViewModeChange('grid')}
             >
               <Grid size={18} />
             </button>
             <button 
-              className={`p-2 flex items-center justify-center transition-colors ${
+              className={`p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-secondary ${
                 viewMode === 'list' 
-                  ? 'bg-[rgb(204,255,0)] text-black' 
-                  : 'bg-transparent text-gray-600 hover:bg-gray-200'
+                  ? 'bg-secondary text-gray-900'
+                  : 'bg-lightBg text-gray-600 hover:bg-gray-200'
               }`}
               onClick={() => onViewModeChange('list')}
             >

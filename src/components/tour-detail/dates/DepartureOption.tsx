@@ -94,7 +94,7 @@ const DepartureOption: React.FC<DepartureOptionProps> = ({
   const hasDiscount = option.discount && option.discount > 0;
   
   return (
-    <div className="border border-gray-200 overflow-hidden transition-all duration-200 mb-0 bg-white">
+    <div className="border border-gray-300 rounded-lg p-6 mb-4 relative bg-white">
       <TooltipProvider>
         {/* Compact Header */}
         <DepartureOptionHeader

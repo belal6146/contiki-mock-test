@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Check } from 'lucide-react';
 
@@ -19,34 +18,15 @@ const TripTypeFilter: React.FC<TripTypeFilterProps> = ({ types, selectedTypes, o
     <div className="flex flex-wrap gap-2">
       {types.map((type) => {
         const isSelected = selectedTypes.includes(type.id);
-        let buttonClass = "flex items-center px-3 py-1 rounded-full text-sm transition-colors font-medium";
         
-        // Apply specific styling based on trip type to match original
-        if (type.id === 'plus') {
-          buttonClass += isSelected 
-            ? " bg-[rgb(204,255,0)] text-black"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        } else if (type.id === 'standard') {
-          buttonClass += isSelected 
-            ? " bg-yellow-400 text-black"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        } else if (type.id === 'pride') {
-          buttonClass += isSelected 
-            ? " bg-gradient-to-r from-pink-500 to-purple-500 text-white"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        } else if (type.id === 'gap') {
-          buttonClass += isSelected 
-            ? " bg-blue-500 text-white"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        } else if (type.id === 'chill') {
-          buttonClass += isSelected 
-            ? " bg-orange-400 text-black"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        } else {
-          buttonClass += isSelected
-            ? " bg-[rgb(204,255,0)] text-black"
-            : " bg-white border border-gray-300 text-gray-700 hover:bg-gray-50";
-        }
+        // Apply styling based on selection state
+        const buttonClass = `
+          px-4 py-2 text-sm font-semibold uppercase rounded-full focus:outline-none focus:ring-2 focus:ring-secondary ${
+            isSelected
+              ? 'bg-secondary text-gray-900' // Selected styling
+              : 'bg-lightBg text-gray-600 border border-gray-300 hover:bg-gray-200' // Unselected styling
+          }
+        `;
         
         return (
           <button

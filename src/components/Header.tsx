@@ -19,7 +19,7 @@ const NAV_ITEMS = [
 ];
 
 const Header = () => (
-  <header className="w-full sticky top-0 z-50 bg-white shadow-sm">
+  <header className="w-full sticky top-0 z-50 bg-white shadow-sm h-20">
     {/* Top Utility Bar */}
     <div className="w-full bg-white border-b border-gray-100 text-[11px] text-right py-1.5 px-4">
       <div className="max-w-screen-xl mx-auto flex justify-end gap-6">
@@ -36,7 +36,7 @@ const Header = () => (
       <div className="max-w-screen-xl mx-auto flex items-center justify-between py-3 px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0 mr-8" aria-label="Contiki Home">
-          <img src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&format=webp&height=200&mode=crop&quality=80&width=800" alt="Contiki" className="h-6 w-auto" />
+          <img src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&format=webp&height=200&mode=crop&quality=80&width=800" alt="Contiki" className="h-8 w-auto" />
         </Link>
 
         {/* Main Navigation with Dropdowns */}

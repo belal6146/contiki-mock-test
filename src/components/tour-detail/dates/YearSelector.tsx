@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface YearSelectorProps {
@@ -9,22 +8,22 @@ interface YearSelectorProps {
 const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYearChange }) => {
   return (
     <div className="flex justify-center mb-8">
-      <div className="flex bg-gray-100 rounded-full p-1">
+      <div className="inline-flex bg-lightBg rounded-lg p-1">
         <button 
-          className={`px-8 py-2 rounded-full font-semibold transition-colors ${
+          className={`px-4 py-2 text-sm font-semibold uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-secondary ${
             selectedYear === '2025' 
-              ? 'bg-black text-white' 
-              : 'bg-transparent text-gray-600 hover:bg-gray-200'
+              ? 'bg-secondary text-gray-900'
+              : 'text-gray-600'
           }`}
           onClick={() => onYearChange('2025')}
         >
           2025
         </button>
         <button 
-          className={`px-8 py-2 rounded-full font-semibold transition-colors ${
+          className={`px-4 py-2 text-sm font-semibold uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-secondary ${
             selectedYear === '2026' 
-              ? 'bg-black text-white' 
-              : 'bg-transparent text-gray-600 hover:bg-gray-200'
+              ? 'bg-secondary text-gray-900'
+              : 'text-gray-600'
           }`}
           onClick={() => onYearChange('2026')}
         >
