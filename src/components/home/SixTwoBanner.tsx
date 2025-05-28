@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const SixTwoBanner = () => {
@@ -8,9 +7,11 @@ const SixTwoBanner = () => {
         <div className="flex items-center justify-between">
           {/* Left side - Text content */}
           <div className="flex-1 pr-8">
-            <h2 className="text-white text-4xl font-bold mb-4 leading-tight">
-              six-<br />two
-            </h2>
+            <img 
+              src="https://www.contiki.com/media/2degaq2e/six-two-logo.svg?height=101&mode=max&width=123"
+              alt="Six-Two Travel Magazine Logo"
+              className="h-12 w-auto mb-4"
+            />
             <div className="space-y-2">
               <h3 className="text-[#CCFF00] text-3xl font-bold">
                 Think you've seen the world?
@@ -21,9 +22,14 @@ const SixTwoBanner = () => {
             </div>
           </div>
           
-          {/* Right side - World map */}
-          <div className="flex-1 flex justify-end">
-            <div className="relative">
+          {/* Right side - World map and Scratch It Off Banner */}
+          <div className="flex-1 flex justify-end relative">
+            <img 
+              src="https://www.contiki.com/media/iqbbptm1/scratch-banner5.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=1440"
+              alt="Scratch It Off Banner"
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+            <div className="relative z-10">
               <svg 
                 viewBox="0 0 800 400" 
                 className="w-96 h-48"

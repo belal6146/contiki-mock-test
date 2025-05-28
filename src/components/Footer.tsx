@@ -115,20 +115,14 @@ const Footer = () => {
               We're part of
             </div>
             <div className="flex items-center space-x-6">
-              <div className="bg-white border-2 border-gray-200 p-3 rounded-lg">
-                <span className="text-sm font-extrabold text-gray-900">TTC</span>
+              <div>
+                <img src="https://www.contiki.com/media/z0kkjtoj/ttc-core-logo-white-rgb.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="The Travel Corporation" className="h-8" />
               </div>
-              <div className="bg-white border-2 border-gray-200 p-3 rounded-lg">
-                <span className="text-sm font-extrabold text-gray-900">ATOL</span>
+              <div>
+                <img src="https://www.contiki.com/media/4vvbzugm/abta-logo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="ABTA" className="h-8" />
               </div>
-              <div className="bg-white border-2 border-gray-200 p-3 rounded-lg">
-                <span className="text-sm font-extrabold text-gray-900">ABTA</span>
-              </div>
-              <div className="bg-white border-2 border-gray-200 p-3 rounded-lg">
-                <span className="text-sm font-extrabold text-gray-900">IATA</span>
-              </div>
-              <div className="bg-white border-2 border-gray-200 p-3 rounded-lg">
-                <span className="text-sm font-extrabold text-gray-900">USTOA</span>
+              <div>
+                <img src="https://www.contiki.com/media/scmo443v/atol-logo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="ATOL" className="h-8" />
               </div>
             </div>
           </div>
@@ -161,6 +155,13 @@ const Footer = () => {
             All the products in this list are subject to: The laws of England. Offers subject to availability and terms and conditions. Please speak to one of our experienced travel advisors to find out which products this applies to. Prices include. And, trip departure dates are subject to final confirmation at time of booking. 
           </p>
           <div className="flex flex-wrap gap-6 pt-4">
+            <img src="https://www.contiki.com/media/voxkq3ue/feefo-lockup.png?height=126&mode=max&width=126" alt="Feefo Based on 20,000+ Verified Reviews" className="h-12" />
+            <img src="https://www.contiki.com/media/opwmano4/treadright-1.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="The TreadRight Foundation" className="h-10" />
+            <img src="https://www.contiki.com/media/h2qob34a/unwto-2.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="UN World Tourism Organization" className="h-10" />
+            <img src="https://www.contiki.com/media/gnpoqg4l/logo-wttc-white-small.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="World Travel & Tourism Council" className="h-10" />
+            <img src="https://www.contiki.com/media/ijlcn43e/platinum-trusted-service-award-2025-whiteout-landscape-1.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="Platinum Trusted Service Award 2025" className="h-10" />
+            <img src="https://www.contiki.com/media/n3mbd2t4/iaalogo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="International Achievement Awards" className="h-10" />
+            <img src="https://www.contiki.com/media/yqom0l0b/topp-logo.svg?center=0.5%2C0.5&format=webp&height=100&mode=crop&quality=80&width=300" alt="TOPP (Travel Opinion Platform)" className="h-10" />
             <Link to="/privacy-policy" className="hover:text-[#CCFF00] transition-colors font-medium">Privacy Policy</Link>
             <Link to="/cookie-policy" className="hover:text-[#CCFF00] transition-colors font-medium">Cookie Policy</Link>
             <Link to="/terms" className="hover:text-[#CCFF00] transition-colors font-medium">Terms & Conditions</Link>

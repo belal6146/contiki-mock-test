@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -132,11 +131,11 @@ const Destinations = () => {
       <Header />
       
       <main className="flex-grow">
-        <section className="bg-bgLight py-16">
+        <section className="bg-bgLight py-16" style={{ backgroundImage: `url('https://www.contiki.com/media/vsqbfbwh/dubrovnik-croatia.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1920')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="container mx-auto">
             <ErrorBoundary>
-              <h1 className="heading-lg text-center mb-2">Explore Destinations</h1>
-              <p className="text-center text-gray-700 mb-10 max-w-2xl mx-auto">
+              <h1 className="heading-lg text-center mb-2 text-white drop-shadow">Explore Destinations</h1>
+              <p className="text-center text-white drop-shadow mb-10 max-w-2xl mx-auto">
                 Discover amazing places around the world with our curated selection of top destinations
               </p>
               

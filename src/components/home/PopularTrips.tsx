@@ -32,41 +32,73 @@ const PopularTrips = () => {
     {
       id: 1,
       title: "Greek Island Hopping",
-      image: "/lovable-uploads/e713b7c0-40aa-4ee2-a9d7-df2c791c2708.png",
+      image: "https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720",
       rating: 4.6,
       days: 11,
       places: 5,
       countries: 1,
       description: "The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops.",
       regularPrice: "£2,225",
-      price: "£1,669",
+      price: "From £1,807",
       spotlight: true
     },
     {
       id: 2,
       title: "Canada and the Rockies",
-      image: "/lovable-uploads/99c672c5-c363-4b07-bf54-fa34a6b5bd28.png",
+      image: "https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720",
       rating: 4.7,
       days: 11,
       places: 7,
       countries: 1,
       description: "The one that surrounds you with the majestic landscape of the Canadian Rockies, from Vancouver to the Rock.",
       regularPrice: "£2,876",
-      price: "£2,274"
+      price: "From £2,274"
     },
     {
       id: 3,
       title: "European Horizon",
-      image: "https://images.unsplash.com/photo-1493707553966-283afac8c358?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://www.contiki.com/media/<media-id>/aerial-shot-of-albanian-beach.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720",
       rating: 4.6,
       days: 10,
       places: 13,
       countries: 7,
       description: "The one that fits in the best of Europe's icons for those short on time",
       regularPrice: "£1,325",
-      price: "£1,060"
+      price: "From £1,060"
+    },
+    {
+      id: 4,
+      title: "Austrian Ski Adventure",
+      image: "https://www.contiki.com/media/<media-id>/skiiers-on-slope-austria.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720",
+      rating: 4.5,
+      days: 7,
+      places: 3,
+      countries: 1,
+      description: "Hit the slopes in Austria for an epic ski and snowboard trip with amazing après-ski.",
+      regularPrice: "£1,100",
+      price: "From £950"
+    },
+    {
+      id: 5,
+      title: "French Château Experience",
+      image: "https://www.contiki.com/media/<media-id>/contiki-travelers-run-club-chateau.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720",
+      rating: 4.9,
+      days: 5,
+      places: 2,
+      countries: 1,
+      description: "Stay in a stunning French Château and explore the surrounding countryside.",
+      regularPrice: "£1,500",
+      price: "From £1,300"
     }
   ];
+
+  const greecePromo = {
+    title: "Get set for GREECE",
+    subtitle: "Save extra when you book this month!",
+    bgImage: "https://www.contiki.com/media/nbm4l7pr/greece-promo-banner.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200",
+    buttonText: "LET'S GO",
+    buttonLink: "/tours"
+  };
 
   const handlePrev = () => {
     setActiveSlide((prev) => (prev === 0 ? 0 : prev - 1));
@@ -79,7 +111,7 @@ const PopularTrips = () => {
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 max-w-7xl mx-auto bg-white">
       <div className="flex flex-col items-center mb-8">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-black uppercase tracking-tight text-center mb-2" style={{ letterSpacing: '0.04em' }}>Popular Trips</h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-black tracking-tight text-center mb-2" style={{ letterSpacing: '0.04em' }}>Popular Trips</h2>
         <div className="w-16 h-1 bg-[#CCFF00] rounded-full mb-2"></div>
       </div>
       
@@ -111,13 +143,7 @@ const PopularTrips = () => {
             <ContikiTripCard {...trips[0]} />
             <ContikiTripCard {...trips[1]} />
             <div className="lg:col-span-1">
-              <PromotionCard 
-                title="Get set for GREECE 🌴"
-                subtitle="Save extra when you book this month!"
-                bgImage="/lovable-uploads/e713b7c0-40aa-4ee2-a9d7-df2c791c2708.png"
-                buttonText="LET'S GO"
-                buttonLink="/tours"
-              />
+              <PromotionCard {...greecePromo} />
             </div>
             <ContikiTripCard {...trips[2]} />
           </>
