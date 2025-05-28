@@ -107,7 +107,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
   return (
     <div className="bg-white">
       {/* Hero Section with Trip Description */}
-      <div className="container py-12">
+      <div className="container max-w-7xl mx-auto py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left side - Image from Contiki */}
           <div className="lg:col-span-1">
@@ -122,99 +122,74 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
           <div className="lg:col-span-1">
             <div className="mb-8">
               <div className="flex items-center gap-4 mb-6">
-                <span className="bg-black text-white px-4 py-2 text-base font-extrabold rounded-full">I'm planning to travel in</span>
+                <span className="bg-black text-white px-3 py-1 text-xs font-bold rounded-full uppercase">I'm planning to travel in</span>
                 <div className="flex bg-gray-100 rounded-full overflow-hidden">
-                  <button className="bg-[#CCFF00] text-black px-6 py-2 text-base font-extrabold rounded-full">2025</button>
-                  <button className="bg-gray-100 text-gray-700 px-6 py-2 text-base font-extrabold hover:bg-gray-200 rounded-full">2026</button>
+                  <button className="bg-[#CCFF00] text-black px-4 py-1 text-sm font-bold rounded-full">2025</button>
+                  <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200 rounded-full">2026</button>
                 </div>
               </div>
-              <h1 className="text-3xl lg:text-4xl font-black text-black mb-6 leading-tight">The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.</h1>
+              <h1 className="text-2xl lg:text-3xl font-black text-black mb-6 leading-tight">The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.</h1>
               {/* Trip Details Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {/* Days */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">📅</span>
-                    <span className="font-extrabold text-base">Days</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">📅</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Days</span>
                   </div>
                   <p className="text-base text-gray-700">11 days, 1 country</p>
                 </div>
                 {/* Accommodation */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">🏨</span>
-                    <span className="font-extrabold text-base">Accommodation</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">🏨</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Accommodation</span>
                   </div>
                   <p className="text-base text-gray-700">8 nights in Hotels, 2 nights in Special Stay</p>
                 </div>
                 {/* Meals */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">🍽️</span>
-                    <span className="font-extrabold text-base">Meals</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">🍽️</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Meals</span>
                   </div>
                   <p className="text-base text-gray-700">10 Breakfasts, 3 Dinners</p>
                 </div>
                 {/* Transport */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">🚢</span>
-                    <span className="font-extrabold text-base">Transport</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">🚢</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Transport</span>
                   </div>
                   <p className="text-base text-gray-700">Ferry</p>
                 </div>
                 {/* Group Size */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">👥</span>
-                    <span className="font-extrabold text-base">Group Size</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">👥</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Group Size</span>
                   </div>
                   <p className="text-base text-gray-700">Average 30 people</p>
                 </div>
                 {/* Team */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">👨‍💼</span>
-                    <span className="font-extrabold text-base">Team</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xl">👨‍💼</span>
+                    <span className="font-bold text-sm uppercase text-gray-600">Team</span>
                   </div>
                   <p className="text-base text-gray-700">Expert Trip Manager, Local Guides</p>
                 </div>
               </div>
               <p className="text-gray-700 leading-relaxed mb-8 text-base">Embark on a Greek island hopping adventure, bouncing between Greece's major islands, where the nightlife's as endless as the architecture. You'll immerse yourself in Greece's wonderful city, sun, and sumptuous culture. Villages, volcanos, castles for days and enough grapes come to put glowing hearts in your eyes. By day you'll have ample time for exploring, and by night you'll sleep like a baby in accommodation that's specially selected for island hopping.</p>
               {/* On the road to Net Zero Banner */}
-              <div className="bg-[#CCFF00] text-black p-5 rounded-2xl flex items-center justify-between mb-8 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="bg-white text-[#CCFF00] w-10 h-10 rounded-full flex items-center justify-center">
-                    <span className="text-lg font-bold">🌱</span>
+              <div className="bg-[#CCFF00] text-black p-3 rounded-xl flex items-center justify-between mb-8 shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="bg-white text-[#CCFF00] w-7 h-7 rounded-full flex items-center justify-center">
+                    <span className="text-sm font-bold">🌱</span>
                   </div>
-                  <span className="font-extrabold text-lg">On the road to Net Zero</span>
+                  <span className="font-bold text-xs uppercase">On the road to Net Zero</span>
                 </div>
-                <button className="text-black underline font-extrabold text-base rounded-full px-4 py-2 hover:bg-black/5 transition">Find out more</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Selected Variation Section */}
-      <div className="bg-gray-50 py-8">
-        <div className="container">
-          <h2 className="text-xl font-bold mb-4">Selected Variation</h2>
-          {/* This would show the selected trip variation */}
-          <div className="flex flex-col md:flex-row items-center gap-6 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-            <img 
-              src="https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720" 
-              alt="Group of travelers on bikes" 
-              className="w-full md:w-1/3 h-48 object-cover rounded-lg"
-            />
-            <div className="flex-1">
-              <h3 className="text-lg font-bold mb-2">Greek Island Hopping Plus</h3>
-              <p className="text-gray-600 mb-4">Our most popular variation with premium accommodations and additional experiences.</p>
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-bold text-[#CCFF00]">From $1,899</span>
-                <button className="bg-[#CCFF00] text-black px-4 py-2 rounded hover:bg-[#CCFF00]/90 transition-colors">
-                  Select
-                </button>
+                <button className="text-black underline font-bold text-xs rounded-full px-2 py-1 hover:bg-black/5 transition">Find out more</button>
               </div>
             </div>
           </div>
@@ -226,37 +201,6 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
       
       {/* Map & Itinerary */}
       <MapItinerary itinerary={mockItinerary} />
-      
-      {/* Trip Highlights with Contiki image */}
-      <div className="bg-gray-50 py-12">
-        <div className="container">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold">Trip Highlights</h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-              <div className="flex flex-col space-y-6">
-                {highlights.slice(0, 3).map((highlight, index) => (
-                  <div key={index} className="flex gap-4">
-                    <span className="text-2xl">✨</span>
-                    <div>
-                      <h3 className="font-semibold mb-2">{highlight.title || 'Authentic Local Experiences'}</h3>
-                      <p className="text-gray-600 text-sm">{highlight.description || 'Immerse yourself in the local culture with unique experiences curated by our expert guides.'}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <img
-              src="https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920"
-              alt="The Colosseum, Rome"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-        </div>
-      </div>
       
       {/* Where You Will Stay with Contiki image */}
       <div className="bg-white py-12 border-t border-gray-200">

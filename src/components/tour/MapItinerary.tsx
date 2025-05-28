@@ -73,59 +73,54 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
 
   return (
     <section className="py-12 bg-white border-t border-gray-200">
-      <div className="container">
+      <div className="container max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">Trip Map & Itinerary</h2>
-            <p className="text-gray-600">Follow the route of your trip and see the key places you'll visit</p>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 md:gap-0">
+          <div className="flex-1">
+            <h2 className="text-2xl md:text-3xl font-black mb-2">Trip Map & Itinerary</h2>
+            <p className="text-gray-600 text-base">Follow the route of your trip and see the key places you'll visit</p>
           </div>
           
           {/* View Toggle */}
-          <div className="hidden md:flex items-center gap-4">
-            <span className="text-sm text-gray-600">Change view</span>
-            <div className="flex border border-gray-300 rounded">
-              <button
-                onClick={() => setViewType('list')}
-                className={`p-2 ${viewType === 'list' ? 'bg-[#CCFF00] text-black' : 'bg-white'}`}
-                aria-label="List view"
-              >
-                <div className="w-4 h-4 flex flex-col gap-1">
-                  <div className={`h-0.5 ${viewType === 'list' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                  <div className={`h-0.5 ${viewType === 'list' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                  <div className={`h-0.5 ${viewType === 'list' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                </div>
-              </button>
-              <button
-                onClick={() => setViewType('grid')}
-                className={`p-2 ${viewType === 'grid' ? 'bg-[#CCFF00] text-black' : 'bg-white'}`}
-                aria-label="Grid view"
-              >
-                <div className="w-4 h-4 grid grid-cols-2 gap-0.5">
-                  <div className={`${viewType === 'grid' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                  <div className={`${viewType === 'grid' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                  <div className={`${viewType === 'grid' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                  <div className={`${viewType === 'grid' ? 'bg-white' : 'bg-gray-600'}`}></div>
-                </div>
-              </button>
+          <div className="flex-shrink-0">
+            <div className="hidden md:flex items-center gap-4">
+              <span className="text-sm text-gray-600 font-semibold">Change view</span>
+              <div className="flex border border-gray-300 rounded-md overflow-hidden">
+                <button
+                  onClick={() => setViewType('list')}
+                  className={`p-2 ${viewType === 'list' ? 'bg-gray-200 text-black font-bold' : 'bg-white text-gray-600'} transition-colors duration-150`}
+                  aria-label="List view"
+                >
+                  {/* List icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+                <button
+                  onClick={() => setViewType('grid')}
+                  className={`p-2 ${viewType === 'grid' ? 'bg-gray-200 text-black font-bold' : 'bg-white text-gray-600'} transition-colors duration-150`}
+                  aria-label="Grid view"
+                >
+                  {/* Grid icon */}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 md:gap-0">
-          <Button 
-            variant="outline" 
-            className="flex items-center gap-2 text-black font-medium border-black hover:bg-gray-50 w-full md:w-auto"
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-6">
+          <Button
+            variant="outline"
+            className="flex items-center gap-2 text-gray-700 font-bold border-gray-400 hover:bg-gray-100 w-full md:w-auto rounded-full px-6 py-3 uppercase text-sm transition-colors duration-150"
           >
             <Download size={16} />
             <span>DOWNLOAD ITINERARY</span>
           </Button>
           
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             onClick={handleToggleAllDays}
-            className="text-gray-600 text-sm font-medium hover:bg-gray-50 w-full md:w-auto"
+            className="text-gray-600 text-sm font-semibold hover:bg-gray-100 w-full md:w-auto px-4 py-2 transition-colors duration-150"
           >
             {allExpanded ? 'COLLAPSE ALL DAYS' : 'EXPAND ALL DAYS'}
             {allExpanded ? <ChevronUp size={16} className="ml-2" /> : <ChevronDown size={16} className="ml-2" />}
@@ -133,18 +128,18 @@ const MapItinerary: React.FC<MapItineraryProps> = ({ itinerary = [] }) => {
         </div>
 
         {/* Timeline */}
-        <ItineraryTimeline 
-          itinerary={itinerary} 
+        <ItineraryTimeline
+          itinerary={itinerary}
           activeDay={activeDay}
-          onDayClick={handleDayClick} 
+          onDayClick={handleDayClick}
         />
 
         {/* Map and Day Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           {/* Map Component with better styling */}
-          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-lg">
+          <div className="h-[500px] bg-gray-100 rounded-lg overflow-hidden border border-gray-300 shadow-md">
             {hasCoordinates ? (
-              <MapDisplay 
+              <MapDisplay
                 itinerary={itinerary.filter((day): day is ItineraryDay => 'coordinates' in day)}
                 onMarkerClick={(index) => setActiveDay(index)}
                 activeMarkerIndex={activeDay}

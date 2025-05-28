@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 
 interface DetailsGridProps {
@@ -15,7 +14,8 @@ const TourDetailsGrid: React.FC<DetailsGridProps> = ({ highlights, included }) =
     <section className="py-12 bg-bgLight">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Highlights */}
+          {/* Highlights - REMOVING THIS SECTION */}
+          {/*
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h3 className="text-xl font-bold text-primary mb-6">Trip Highlights</h3>
             <ul className="space-y-3">
@@ -42,6 +42,7 @@ const TourDetailsGrid: React.FC<DetailsGridProps> = ({ highlights, included }) =
               ))}
             </ul>
           </div>
+          */}
           
           {/* What's Included */}
           <div className="bg-white rounded-lg shadow-lg p-6">

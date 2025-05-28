@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, KeyboardEvent } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -75,7 +74,7 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
 
   return (
     <section className="bg-white" aria-labelledby="tabNav-title">
-      <div className="container">
+      <div className="container max-w-7xl mx-auto">
         {/* Hidden accessible title for screen readers */}
         <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>
         
@@ -88,9 +87,9 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
                 onClick={() => handleTabClick(tab.id)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className={cn(
-                  "px-4 py-3 font-bold text-sm uppercase tracking-wider whitespace-nowrap",
+                  "px-6 py-4 font-bold text-base uppercase tracking-wider whitespace-nowrap",
                   "focus:outline-none focus:ring-0",
-                  "relative transition-colors duration-150 border-b-2",
+                  "relative transition-colors duration-150 border-b-4",
                   activeTab === tab.id
                     ? "text-black border-b-[#CCFF00]"
                     : "text-gray-500 hover:text-black border-b-transparent"

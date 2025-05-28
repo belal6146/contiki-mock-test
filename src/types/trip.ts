@@ -1,4 +1,3 @@
-
 export interface DayDetails {
   day: number;
   title: string;
@@ -28,7 +27,8 @@ export interface Trip {
   image: string;
   rating: number;
   reviewCount: number;
-  discountPercentage?: number; // Add this property
+  discountPercentage?: number;
+  spotlight?: boolean;
   itinerary: DayDetails[];
   variations: Variation[];
   highlights: string[];

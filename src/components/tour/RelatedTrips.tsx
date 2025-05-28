@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trip } from '@/types/trips';
@@ -17,7 +16,7 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
     return null;
   }
 
-  // Mock related trips with proper structure
+  // Mock related trips with proper structure - Keeping mock data for styling
   const mockRelatedTrips = [
     {
       id: 'spotlight-greece',
@@ -27,10 +26,11 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
       price: 746,
       originalPrice: 999,
       discount: 25,
-      image: 'https://source.unsplash.com/600x400/?meteora,greece',
+      image: 'https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720', // Using one of the provided images for consistency
       rating: 4.7,
       reviewCount: 1247,
-      countries: 1
+      countries: 1,
+      spotlight: true
     },
     {
       id: 'london-athens',
@@ -40,10 +40,11 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
       price: 4659,
       originalPrice: 6212,
       discount: 25,
-      image: 'https://source.unsplash.com/600x400/?greek,islands,boat',
+      image: 'https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg?center=0.6161542586835618%2C0.4987480082915613&format=webp&height=616&mode=crop&quality=80&width=720', // Using one of the provided images for consistency
       rating: 4.8,
       reviewCount: 892,
-      countries: 6
+      countries: 6,
+      spotlight: false
     },
     {
       id: 'greek-explorer',
@@ -53,88 +54,84 @@ const RelatedTrips: React.FC<RelatedTripsProps> = ({ trips }) => {
       price: 2199,
       originalPrice: null,
       discount: null,
-      image: 'https://source.unsplash.com/600x400/?meteora,monasteries',
+      image: 'https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920', // Using one of the provided images for consistency
       rating: 4.6,
       reviewCount: 567,
-      countries: 1
+      countries: 1,
+      spotlight: false
     }
   ];
   
   return (
-    <section className="py-16 bg-white">
-      <div className="container">
-        <h2 className="text-3xl font-bold text-black mb-2 text-center">Other trips you might like</h2>
-        <p className="text-gray-600 mb-12 text-center">This trip comes in different shapes and sizes. For more options, check these itineraries.</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-12 bg-gray-50">
+      <div className="container max-w-7xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-black text-black mb-4 text-center">Related Trips</h2>
+        <p className="text-gray-600 mb-10 text-center text-base max-w-2xl mx-auto">This trip comes in different shapes and sizes. For more options, check these itineraries.</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {mockRelatedTrips.map((trip) => (
-            <div key={trip.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="relative">
-                <img 
-                  src={trip.image} 
-                  alt={trip.name}
-                  className="w-full h-48 object-cover"
-                  loading="lazy"
-                />
-                
-                {/* Discount badges */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  {trip.discount && (
-                    <div className="bg-yellow-400 text-black px-2 py-1 text-xs font-bold rounded">
-                      {trip.discount}% OFF
-                    </div>
-                  )}
-                  <div className="bg-red-500 text-white px-2 py-1 text-xs font-bold rounded">
-                    Up to 30% off
+            <div key={trip.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 cursor-pointer">
+              <Link to={`/tours/${trip.id}`}>
+                <div className="relative">
+                  <img
+                    src={trip.image}
+                    alt={trip.name}
+                    className="w-full h-56 object-cover"
+                    loading="lazy"
+                  />
+
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1">
+                    {trip.spotlight && (
+                       <span className="bg-[#FF0080] text-white text-xs px-2 py-1 rounded-full font-bold uppercase tracking-wide leading-none">
+                        Trip Spotlight
+                      </span>
+                    )}
+                     {trip.discount && (
+                      <span className="bg-[#CCFF00] text-black text-xs px-2 py-1 rounded-full font-bold uppercase tracking-wide leading-none">
+                        {trip.discount}% OFF
+                      </span>
+                    )}
                   </div>
                 </div>
-              </div>
-              
-              <div className="p-6">
-                <h3 className="font-bold text-lg text-black mb-3 line-clamp-2">{trip.name}</h3>
-                
-                <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                  <span>{trip.duration}</span>
-                  <span>•</span>
-                  <span>{trip.countries} countr{trip.countries === 1 ? 'y' : 'ies'}</span>
-                  
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 ml-auto">
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-3 h-3 ${
-                            i < Math.floor(trip.rating) 
-                              ? 'text-yellow-400 fill-yellow-400' 
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
+
+                <div className="p-4 space-y-3">
+                  <h3 className="font-bold text-lg text-black line-clamp-2 leading-tight">{trip.name}</h3>
+
+                  <div className="flex items-center gap-3 text-sm text-gray-600">
+                    <span className="font-semibold">{trip.duration}</span>
+                    <span>•</span>
+                    <span className="font-semibold">{trip.countries} countr{trip.countries === 1 ? 'y' : 'ies'}</span>
+
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 ml-auto">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-3 h-3 ${
+                              i < Math.floor(trip.rating)
+                                ? 'text-[#FFEB3B] fill-[#FFEB3B]'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-500 font-medium">({trip.reviewCount})</span>
                     </div>
-                    <span className="text-xs text-gray-500">({trip.reviewCount})</span>
                   </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
+
                   <div>
-                    <div className="text-xs text-gray-500">From</div>
-                    <div className="flex items-center gap-2">
+                    <div className="text-xs text-gray-600 font-semibold">From</div>
+                    <div className="flex items-baseline gap-2">
                       {trip.originalPrice && (
-                        <span className="text-sm line-through text-gray-400">£{trip.originalPrice}</span>
+                        <span className="text-sm line-through text-gray-500">£{trip.originalPrice}</span>
                       )}
-                      <span className="font-bold text-lg text-black">£{trip.price}</span>
+                      <span className="font-bold text-xl text-black">£{trip.price}</span>
                     </div>
                   </div>
-                  
-                  <Link
-                    to={`/tours/${trip.id}`}
-                    className="bg-black text-white px-6 py-2 rounded text-sm font-semibold hover:bg-gray-800 transition-colors"
-                  >
-                    View Trip
-                  </Link>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

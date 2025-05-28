@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,11 +19,14 @@ const ChatNowButton = () => {
     <Button
       variant="secondary"
       size="icon"
-      className="fixed bottom-4 right-4 z-50 rounded-full w-14 h-14 bg-[#FF6600] text-white shadow-lg hover:bg-[#e65c00] hover:shadow-xl hover:scale-105 transition-all duration-300"
+      className="fixed bottom-6 right-6 z-50 rounded-full w-16 h-16 bg-[#CCFF00] text-black shadow-lg hover:bg-[#b8e600] hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-black"
       onClick={handleClick}
       aria-label="Chat now"
     >
-      <MessageCircle className="w-6 h-6" />
+      <div className="flex flex-col items-center justify-center">
+        <MessageCircle className="w-6 h-6 mb-1" />
+        <span className="text-xs font-bold uppercase">Chat<br />Now</span>
+      </div>
     </Button>
   );
 };

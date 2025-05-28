@@ -51,17 +51,17 @@ const PriceBar: React.FC<PriceBarProps> = ({
         <div className="py-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
           {/* Left side - Price info */}
           <div className="flex flex-col">
-            <div className="mb-2">
-              <span className="text-base text-gray-600 font-medium">From</span>
+            <div className="mb-1">
+              <span className="text-xs text-gray-700 font-semibold uppercase">From</span>
             </div>
-            <div className="flex items-baseline gap-4 mb-3">
-              <span className="text-5xl font-black text-black">{formatCurrency(newPrice)}</span>
+            <div className="flex items-baseline gap-2 mb-1">
+              <span className="text-3xl font-bold text-black">{formatCurrency(newPrice)}</span>
               {oldPrice && (
-                <span className="text-lg text-gray-400 line-through">{formatCurrency(oldPrice)}</span>
+                <span className="text-sm text-gray-500 line-through">{formatCurrency(oldPrice)}</span>
               )}
             </div>
-            <p className="text-base text-gray-600 hover:underline cursor-pointer">
-              Save your space with a deposit payment
+            <p className="text-sm text-gray-600 hover:underline cursor-pointer">
+              Find this price
             </p>
           </div>
           {/* Right side - Action buttons */}
@@ -85,16 +85,16 @@ const PriceBar: React.FC<PriceBarProps> = ({
               <span>Add To Compare</span>
             </button>
             {/* Request More Info button */}
-            <button 
-              className="border-2 border-gray-300 text-gray-800 px-8 py-3 font-bold text-base rounded-full hover:bg-gray-50 hover:border-gray-400 transition-all duration-150 uppercase tracking-wide bg-white shadow-sm"
+            <button
+              className="border border-gray-400 text-gray-700 px-6 py-3 font-bold text-sm rounded-full hover:bg-gray-50 hover:border-gray-500 transition-all duration-150 uppercase tracking-wide bg-white"
               onClick={handleRequestInfo}
               aria-label="Request more information"
             >
               REQUEST MORE INFO
             </button>
             {/* View Dates button */}
-            <button 
-              className="bg-[#CCFF00] text-black px-10 py-3 font-extrabold text-base rounded-full hover:bg-[#b8e600] transition-colors duration-150 uppercase tracking-wide shadow-lg"
+            <button
+              className="bg-[#CCFF00] text-black px-8 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors duration-150 uppercase tracking-wide"
               onClick={handleViewDates}
               aria-label="View available dates"
               data-tab="dates"

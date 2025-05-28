@@ -16,32 +16,31 @@ const TourHeader: React.FC<TourHeaderProps> = ({ tour, slug }) => {
         title={tour.name} 
         destination={tour.destination} 
       />
-      <div className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-        <div className="flex items-center gap-6">
-          {/* Star Rating */}
-          <div className="flex items-center gap-2">
+      <div className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex-1">
+          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight text-black">{tour.name}</h1>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-1">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
                 <Star 
                   key={i} 
-                  className={`w-6 h-6 ${i < Math.floor(tour.rating) ? 'text-[#FFEB3B] fill-[#FFEB3B]' : 'text-gray-300'}`} 
+                  className={`w-4 h-4 ${i < Math.floor(tour.rating) ? 'text-[#FFEB3B] fill-[#FFEB3B]' : 'text-gray-300'}`} 
                 />
               ))}
             </div>
-            <span className="text-lg font-extrabold ml-2 text-black">{tour.rating}</span>
+            <span className="text-sm font-bold text-black">{tour.rating}</span>
           </div>
-          {/* Reviews Count */}
-          <span className="text-base text-gray-700 font-semibold ml-4">
-            <span className="font-bold">{tour.reviewCount}</span> Reviews
+          <span className="text-sm text-gray-600">
+            <span className="font-semibold">{tour.reviewCount}</span> Reviews
           </span>
-          {/* Trip Spotlight Badge */}
-          <span className="bg-[#FF0080] text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide ml-4">
-            Trip Spotlight
-          </span>
+          {tour.spotlight && (
+            <span className="bg-[#FF0080] text-white px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide">
+              Trip Spotlight
+            </span>
+          )}
         </div>
-      </div>
-      <div className="mt-6 mb-2">
-        <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tight leading-tight text-black">{tour.name}</h1>
       </div>
     </div>
   );
