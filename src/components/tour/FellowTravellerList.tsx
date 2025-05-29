@@ -104,10 +104,12 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 font-montserrat">
+    <div className="contiki-card font-montserrat">
       <div className="p-8 border-b border-gray-100">
-        <h2 className="text-2xl font-bold mb-3 text-gray-900">Fellow Travelers</h2>
-        <p className="text-sm text-gray-600 leading-relaxed">
+        <h2 className="heading-md">
+          Fellow Travelers
+        </h2>
+        <p className="text-body leading-relaxed">
           Connect with your travel companions before the trip begins!
         </p>
       </div>
@@ -115,9 +117,9 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
       <div className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {displayedPassengers.map(passenger => (
-            <div key={passenger.id} className="flex items-start p-6 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-sm transition-all duration-200">
-              <Avatar className="h-12 w-12 mr-4 bg-[#CCFF00] border-2 border-[#b8e600] flex-shrink-0">
-                <AvatarFallback className="bg-[#CCFF00] text-black font-bold text-sm">
+            <div key={passenger.id} className="flex items-start p-6 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all duration-200">
+              <Avatar className="h-12 w-12 mr-4 bg-[var(--secondary)] border-2 border-[#b8e600] flex-shrink-0">
+                <AvatarFallback className="bg-[var(--secondary)] text-black font-bold text-sm">
                   {hasConsented ? getInitials(passenger) : passenger.firstName.charAt(0)}
                 </AvatarFallback>
               </Avatar>
@@ -145,7 +147,7 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
                     variant="outline"
                     size="sm"
                     onClick={() => openChat(passenger.id)}
-                    className="text-xs h-8 bg-white border-2 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
+                    className="btn-outline text-xs h-8 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
                   >
                     Message
                   </Button>
