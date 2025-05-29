@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useConsent } from '@/context/ConsentManager';
@@ -105,110 +104,99 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
   };
 
   return (
-    <div className="p-6 bg-white font-montserrat">
-      <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        {displayedPassengers.map(passenger => (
-          <div key={passenger.id} className="flex items-start p-4 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-sm transition-all duration-200">
-            <Avatar className="h-12 w-12 mr-4 bg-[rgb(204,255,0)] border-2 border-[rgb(184,230,0)] flex-shrink-0">
-              <AvatarFallback className="bg-[rgb(204,255,0)] text-black font-bold text-sm">
-                {hasConsented ? getInitials(passenger) : passenger.firstName.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
-            
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start mb-2">
-                <div className="flex-1">
-                  <h3 className="font-bold text-base text-black mb-1 truncate">
-                    {hasConsented ? getFullName(passenger) : maskName(getFullName(passenger))}
-                  </h3>
-                  <p className="text-xs text-gray-600 mb-1 font-medium">
-                    {hasConsented ? calculateAgeRange(passenger.dateOfBirthActual) : maskAge(passenger.age)} • {passenger.address.countryCode?.toUpperCase()}
-                  </p>
-                </div>
-                
-                <div className="ml-2 flex-shrink-0">
-                  <div className="bg-black text-white text-xs py-1 px-2 rounded-full font-bold uppercase tracking-wide">
-                    {getSeatId(passenger)}
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 font-montserrat">
+      <div className="p-8 border-b border-gray-100">
+        <h2 className="text-2xl font-bold mb-3 text-gray-900">Fellow Travelers</h2>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          Connect with your travel companions before the trip begins!
+        </p>
+      </div>
+
+      <div className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {displayedPassengers.map(passenger => (
+            <div key={passenger.id} className="flex items-start p-6 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-sm transition-all duration-200">
+              <Avatar className="h-12 w-12 mr-4 bg-[#CCFF00] border-2 border-[#b8e600] flex-shrink-0">
+                <AvatarFallback className="bg-[#CCFF00] text-black font-bold text-sm">
+                  {hasConsented ? getInitials(passenger) : passenger.firstName.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              
+              <div className="flex-1">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex-1">
+                    <h3 className="font-bold text-base text-gray-900 mb-1 truncate">
+                      {hasConsented ? getFullName(passenger) : maskName(getFullName(passenger))}
+                    </h3>
+                    <p className="text-xs text-gray-600 mb-1 font-medium">
+                      {hasConsented ? calculateAgeRange(passenger.dateOfBirthActual) : maskAge(passenger.age)} • {passenger.address.countryCode?.toUpperCase()}
+                    </p>
+                  </div>
+                  
+                  <div className="ml-2 flex-shrink-0">
+                    <div className="bg-black text-white text-xs py-1 px-3 rounded-full font-bold uppercase tracking-wide">
+                      Seat {getSeatId(passenger)}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="space-y-1 text-xs">
-                {passenger.travelPassion && (
-                  <p className="text-gray-600 font-medium">
-                    <span className="font-bold text-black">Interested in:</span> {passenger.travelPassion}
-                  </p>
-                )}
-                {passenger.numberOfTimesTravelledPreviously !== undefined && (
-                  <p className="text-gray-600 font-medium">
-                    <span className="font-bold text-black">{passenger.numberOfTimesTravelledPreviously}</span> previous trips
-                  </p>
-                )}
-                <p className="text-gray-600 font-medium">
-                  <span className="font-bold text-black">Room:</span> {getRoomInfo(passenger)}
-                </p>
-                {passenger.beddingPreference && (
-                  <p className="text-gray-600 font-medium">
-                    <span className="font-bold text-black">Bedding:</span> {passenger.beddingPreference === "doubleBed" ? "Double bed" : "Twin beds"}
-                  </p>
-                )}
-                <p className="text-gray-600 font-medium">
-                  <span className="font-bold text-black">Extras:</span> {getExtras(passenger)}
-                </p>
-              </div>
-
-              <div className="mt-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => openChat(passenger.passengerId)}
-                  className="text-xs h-7 bg-white border border-gray-300 text-black hover:bg-gray-50 font-medium"
-                >
-                  <MessageCircle className="w-3 h-3 mr-1" />
-                  Chat in-app
-                </Button>
+                <div className="flex items-center space-x-4 mt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => openChat(passenger.id)}
+                    className="text-xs h-8 bg-white border-2 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
+                  >
+                    Message
+                  </Button>
+                  {hasConsented && passenger.travelPassion && (
+                    <span className="text-xs text-gray-600 font-medium">
+                      {passenger.travelPassion}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Privacy consent toggle */}
-      <div className="mb-6 p-4 bg-[rgb(204,255,0)] border-2 border-[rgb(184,230,0)] rounded-lg">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-bold text-black uppercase tracking-wide mb-1">
-              {hasConsented ? "Showing full traveler details" : "Privacy mode enabled"}
-            </p>
-            <p className="text-xs text-black font-medium">
-              {hasConsented 
-                ? "Personal information is visible" 
-                : "Names and ages are anonymized for privacy"}
-            </p>
-          </div>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            onClick={toggleConsent}
-            className="text-xs h-8 bg-white border-2 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
-          >
-            {hasConsented ? "Enable privacy mode" : "Show full details"}
-          </Button>
+          ))}
         </div>
-      </div>
-      
-      {/* View all button */}
-      {passengers.length > 8 && !showAll && (
-        <div className="text-center">
-          <Button
-            variant="link"
-            onClick={() => setShowAll(true)}
-            className="text-black hover:text-gray-700 font-bold uppercase tracking-wide underline"
-          >
-            View all {passengers.length} travelers
-          </Button>
+
+        {/* Privacy consent toggle */}
+        <div className="mt-8 p-6 bg-[#CCFF00] border-2 border-[#b8e600] rounded-lg">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-bold text-black uppercase tracking-wide mb-1">
+                {hasConsented ? "Showing full traveler details" : "Privacy mode enabled"}
+              </p>
+              <p className="text-xs text-black font-medium">
+                {hasConsented 
+                  ? "Personal information is visible" 
+                  : "Names and ages are anonymized for privacy"}
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={toggleConsent}
+              className="text-xs h-8 bg-white border-2 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
+            >
+              {hasConsented ? "Enable privacy mode" : "Show full details"}
+            </Button>
+          </div>
         </div>
-      )}
+        
+        {/* View all button */}
+        {passengers.length > 5 && !showAll && (
+          <div className="text-center mt-8">
+            <Button
+              variant="link"
+              onClick={() => setShowAll(true)}
+              className="text-black hover:text-gray-700 font-bold uppercase tracking-wide underline"
+            >
+              View all {passengers.length} travelers
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

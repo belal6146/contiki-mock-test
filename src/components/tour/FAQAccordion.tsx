@@ -62,7 +62,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
                       <h3 className="text-base font-bold text-black text-left pr-4 leading-tight">
                         {faq.question}
                       </h3>
-                      <div className="flex-shrink-0 w-6 h-6 bg-[#CCFF00] rounded-full flex items-center justify-center ml-auto transform transition-transform duration-200 group-[data-state=open]:rotate-45">
+                      <div className="flex-shrink-0 w-6 h-6 bg-[#CCFF00] rounded-full flex items-center justify-center ml-auto transform transition-transform duration-200 group-[&[data-state=open]]:rotate-45">
                         <Plus className="w-4 h-4 text-black" />
                       </div>
                     </AccordionTrigger>
@@ -99,7 +99,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ tripFAQs = [], generalFAQs 
                       <h3 className="text-base font-bold text-black text-left pr-4 leading-tight">
                         {faq.question}
                       </h3>
-                      <div className="flex-shrink-0 w-6 h-6 bg-[#CCFF00] rounded-full flex items-center justify-center ml-auto transform transition-transform duration-200 group-[data-state=open]:rotate-45">
+                      <div className="flex-shrink-0 w-6 h-6 bg-[#CCFF00] rounded-full flex items-center justify-center ml-auto transform transition-transform duration-200 group-[&[data-state=open]]:rotate-45">
                         <Plus className="w-4 h-4 text-black" />
                       </div>
                     </AccordionTrigger>
