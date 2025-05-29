@@ -1,72 +1,82 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import BookWithConfidence from './BookWithConfidence';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden">
-      {/* Background Image - Updated to use the correct external URL */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920"
-          alt="Rome Colosseum - Last minute deals destination"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
-
-      {/* Last Minute Deals Banner */}
-      <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 text-center">
-        <div className="mb-8">
-          <h2 className="text-white text-base uppercase font-bold tracking-wider leading-none mb-2">
-            LAST MINUTE
-          </h2>
-          <h2 className="text-[#CCFF00] text-7xl font-extrabold uppercase tracking-tight leading-none mb-4">
-            DEALS
-          </h2>
-          <p className="text-white text-lg font-medium mb-10">
-            Save BIG on trips departing soon
-          </p>
-          <Link
-            to="/deals"
-            className="inline-block bg-[#CCFF00] text-black font-bold px-10 py-4 rounded-full text-base uppercase tracking-wider hover:bg-[#b8e600] transition-colors duration-200 transform hover:scale-105 shadow-lg"
-          >
-            VIEW DEALS
-          </Link>
+    <>
+      <section className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden">
+        {/* Background Image - Updated to use the correct external URL */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://www.contiki.com/media/jfzlex0q/colosseum-destiantion-image.jpg?center=0.44179409763085564%2C0.5350877192982456&format=webp&height=600&mode=crop&quality=80&width=1920"
+            alt="Rome Colosseum - Last minute deals destination"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
-      </div>
 
-      {/* Main Content (Centered text and search bar) - Adjust position and styling */}
-      {/* This content appears below the Last Minute Deals banner and is centered */}
-      <div className="relative z-10 text-center text-white max-w-screen-xl mx-auto px-4 lg:px-8 mt-60">
-        {/* The main heading "TRAVEL FOR 18-35S" is not visible in the provided homepage screenshot */}
-        {/* Based on the instruction to replicate the homepage screenshot, I will remove or comment out this heading */}
-        
-        {/* Find Your Adventure Graphic */}
-        <img 
-          src="https://www.contiki.com/media/be2hvn55/find-your-adventure.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200"
-          alt="Find Your Adventure"
-          className="mx-auto mb-8 w-full max-w-md"
-        />
+        {/* Last Minute Deals Banner */}
+        <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 text-center">
+          <div className="mb-8">
+            <h2 className="text-white text-base uppercase font-bold tracking-wider leading-none mb-2">
+              LAST MINUTE
+            </h2>
+            <h2 className="text-[#CCFF00] text-7xl font-extrabold uppercase tracking-tight leading-none mb-4">
+              DEALS
+            </h2>
+            <p className="text-white text-lg font-medium mb-10">
+              Save BIG on trips departing soon
+            </p>
+            <Link
+              to="/deals"
+              className="inline-block bg-[#CCFF00] text-black font-bold px-10 py-4 rounded-full text-base uppercase tracking-wider hover:bg-[#b8e600] transition-colors duration-200 transform hover:scale-105 shadow-lg"
+            >
+              VIEW DEALS
+            </Link>
+          </div>
+        </div>
 
-        {/* Search Bar */}
-        <div className="mb-16 w-full max-w-3xl mx-auto">
-           {/* Assuming the SearchBar component will be updated separately to match the design */}
+        {/* Main Content (Centered text and search bar) - Adjust position and styling */}
+        {/* This content appears below the Last Minute Deals banner and is centered */}
+        <div className="relative z-10 text-center text-white max-w-screen-xl mx-auto px-4 lg:px-8 mt-60">
+          {/* The main heading "TRAVEL FOR 18-35S" is not visible in the provided homepage screenshot */}
+          {/* Based on the instruction to replicate the homepage screenshot, I will remove or comment out this heading */}
+          
+          {/* Find Your Adventure Graphic */}
+          <img 
+            src="https://www.contiki.com/media/be2hvn55/find-your-adventure.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200"
+            alt="Find Your Adventure"
+            className="mx-auto mb-8 w-full max-w-md"
+          />
+
+          {/* Removed the div that previously contained the SearchBar */}
+          {/* Search Bar is now positioned absolutely below this content */}
+
+          {/* CTA Buttons and Trust indicators are not visible in the initial homepage screenshot */}
+          {/* I will remove or comment them out for now to match the provided blueprint */}
+          
+        </div>
+
+        {/* Search Bar - Positioned over the hero image */}
+        {/* Added absolute positioning, centering, z-index, width constraints, and horizontal padding */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-[1400px] px-4">
           <SearchBar />
         </div>
 
-        {/* CTA Buttons and Trust indicators are not visible in the initial homepage screenshot */}
-        {/* I will remove or comment them out for now to match the provided blueprint */}
-        
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center opacity-70">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center opacity-70">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+          </div>
         </div>
-      </div>
-    </section>
+
+      </section>
+
+      {/* BookWithConfidence component placed after the hero section */}
+      <BookWithConfidence />
+    </>
   );
 };
 
