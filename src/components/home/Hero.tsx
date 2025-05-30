@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import BookWithConfidence from './BookWithConfidence';
+import TrendingDestinations from './TrendingDestinations';
 
 const Hero = () => {
   return (
     <>
-      <section className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden mt-[-70px]">
         {/* Background Image - Updated to use the correct external URL */}
         <div className="absolute inset-0 z-0">
           <img
@@ -38,30 +38,19 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Main Content (Centered text and search bar) - Adjust position and styling */}
+        {/* Main Content (Centered text and search bar) */}
         {/* This content appears below the Last Minute Deals banner and is centered */}
         <div className="relative z-10 text-center text-white max-w-screen-xl mx-auto px-4 lg:px-8 mt-60">
-          {/* The main heading "TRAVEL FOR 18-35S" is not visible in the provided homepage screenshot */}
-          {/* Based on the instruction to replicate the homepage screenshot, I will remove or comment out this heading */}
-          
           {/* Find Your Adventure Graphic */}
-          <img 
+          <img
             src="https://www.contiki.com/media/be2hvn55/find-your-adventure.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200"
             alt="Find Your Adventure"
             className="mx-auto mb-8 w-full max-w-md"
           />
-
-          {/* Removed the div that previously contained the SearchBar */}
-          {/* Search Bar is now positioned absolutely below this content */}
-
-          {/* CTA Buttons and Trust indicators are not visible in the initial homepage screenshot */}
-          {/* I will remove or comment them out for now to match the provided blueprint */}
-          
         </div>
 
         {/* Search Bar - Positioned over the hero image */}
-        {/* Added absolute positioning, centering, z-index, width constraints, and horizontal padding */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-[1400px] px-4">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-[90%] max-w-[1400px] px-4">
           <SearchBar />
         </div>
 
@@ -74,8 +63,10 @@ const Hero = () => {
 
       </section>
 
-      {/* BookWithConfidence component placed after the hero section */}
-      <BookWithConfidence />
+      {/* BookWithConfidence component should be placed in the parent layout, not here */}
+      {/* Trending Destinations component placed after Hero (in the parent layout) */}
+      {/* <TrendingDestinations /> */}
+
     </>
   );
 };
