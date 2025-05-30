@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Header from '@/components/Header';
@@ -7,9 +6,11 @@ import PopularTrips from '@/components/home/PopularTrips';
 import PayOverTime from '@/components/home/PayOverTime';
 import BookWithConfidence from '@/components/home/BookWithConfidence';
 import TopTripsPromo from '@/components/home/TopTripsPromo';
-import TravelDestinationsGrid from '@/components/home/TravelDestinationsGrid';
 import AsSeenIn from '@/components/home/AsSeenIn';
-import SixTwoBanner from '@/components/home/SixTwoBanner';
+import SaveOnTripsSection from '@/components/home/SaveOnTripsSection';
+import AsiaPromoSection from '@/components/home/AsiaPromoSection';
+import TrendingDestinations from '@/components/home/TrendingDestinations';
+import TravelDestinations from '@/components/home/TravelDestinations';
 import BackToTopButton from '@/components/BackToTopButton';
 import ChatNowButton from '@/components/ChatNowButton';
 import Footer from '@/components/Footer';
@@ -67,46 +68,52 @@ const Index = () => {
         <ErrorBoundary>
           <Hero />
         </ErrorBoundary>
-        
+
+        {/* Popular Trips section */}
         <ErrorBoundary>
           <section aria-labelledby="popular-trips-heading">
             <PopularTrips />
           </section>
         </ErrorBoundary>
-        
+
+        {/* Trending Destinations section */}
+        <ErrorBoundary>
+          <section aria-labelledby="trending-destinations-heading">
+            <TrendingDestinations />
+          </section>
+        </ErrorBoundary>
+
+        {/* Pay over time section */}
         <ErrorBoundary>
           <section aria-labelledby="payment-options-heading">
             <PayOverTime />
           </section>
         </ErrorBoundary>
-        
+
+        {/* Book with confidence section */}
         <ErrorBoundary>
           <section aria-labelledby="booking-confidence-heading">
             <BookWithConfidence />
           </section>
         </ErrorBoundary>
-        
+
+        {/* Promotional Banners/Cards */}
+        <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 py-12">
+          <ErrorBoundary><SaveOnTripsSection /></ErrorBoundary>
+          <ErrorBoundary><AsiaPromoSection /></ErrorBoundary>
+        </div>
+
+         {/* Travel Destinations section */}
         <ErrorBoundary>
-          <section aria-labelledby="top-trips-heading">
-            <TopTripsPromo />
-          </section>
+           <section aria-labelledby="travel-destinations-heading">
+             <TravelDestinations />
+           </section>
         </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="destinations-heading">
-            <TravelDestinationsGrid />
-          </section>
-        </ErrorBoundary>
-        
+
+        {/* As seen in section */}
         <ErrorBoundary>
           <section aria-labelledby="media-mentions-heading">
             <AsSeenIn />
-          </section>
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <section aria-labelledby="six-two-banner-heading">
-            <SixTwoBanner />
           </section>
         </ErrorBoundary>
       </main>

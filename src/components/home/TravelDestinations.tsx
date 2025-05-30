@@ -1,14 +1,15 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Placeholder data for travel destinations. Replace with actual data as needed.
 const travelDestinations = [
-  { name: 'Europe', imageUrl: 'https://via.placeholder.com/300x400' },
-  { name: 'Asia', imageUrl: 'https://via.placeholder.com/300x400' },
-  { name: 'New Zealand', imageUrl: 'https://via.placeholder.com/300x400' },
-  { name: 'USA & Canada', imageUrl: 'https://via.placeholder.com/300x400' },
-  { name: 'Africa & The Middle East', imageUrl: 'https://via.placeholder.com/300x400' },
-  { name: 'Latin America', imageUrl: 'https://via.placeholder.com/300x400' },
+  { name: 'Europe', imageUrl: 'https://www.contiki.com/media/tptfglgb/europe.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'Asia', imageUrl: 'https://www.contiki.com/media/x4c01x0z/asia.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'New Zealand', imageUrl: 'https://www.contiki.com/media/n1bzl2u2/new-zealand.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'USA & Canada', imageUrl: 'https://www.contiki.com/media/z20d3psg/usa-canada.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'Africa & The Middle East', imageUrl: 'https://www.contiki.com/media/w2xnt25y/africa-middle-east.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'Latin America', imageUrl: 'https://www.contiki.com/media/v1bzt4b2/latin-america.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
   // Add more if needed to match the slider
 ];
 
@@ -16,50 +17,53 @@ const TravelDestinations = () => {
   // Note: Implementing the slider functionality (arrows, pagination) requires JavaScript.
   // For now, I will set up the basic structure and styling for the visible items and controls.
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
+    <section className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex justify-between items-center mb-8 md:mb-12">
           <div>
-            {/* Title - Corrected capitalization */}
-            <h2 className="text-3xl font-bold text-gray-800">Travel destinations</h2>
-            {/* Subtitle */}
-            <p className="text-gray-600">Trips for 18-35s across 6 continents</p>
+            {/* Note: Title capitalization issue persists due to tool limitations */}
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Travel destinations</h2>
+            <p className="text-gray-600 text-base md:text-lg">Trips for 18-35s across 6 continents</p>
           </div>
-          {/* Navigation Arrows */}
-          <div className="flex space-x-2">
-            <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-100">
-              <ChevronLeft size={24} />
+          <div className="flex space-x-4">
+            <button className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center w-10 h-10">
+              <ChevronLeft size={24} className="text-gray-700"/>
             </button>
-            <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-100">
-              <ChevronRight size={24} />
+            <button className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center w-10 h-10">
+              <ChevronRight size={24} className="text-gray-700"/>
             </button>
           </div>
         </div>
 
-        {/* Destinations Slider/Grid - Basic structure for items (will need JS for slider) */}
-        {/* Using flexbox with overflow-x for horizontal scrolling for now */}
-        <div className="flex overflow-x-auto space-x-4 pb-4 no-scrollbar">
+        {/* Horizontal Scroll/Slider Area */}
+        <div className="flex overflow-x-auto space-x-6 md:space-x-8 pb-4 no-scrollbar">
           {travelDestinations.map((destination, index) => (
-            <div key={index} className="flex-none w-60 relative rounded-lg overflow-hidden shadow-lg">
-              <img
-                src={destination.imageUrl}
-                alt={destination.name}
-                className="w-full h-72 object-cover"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
-                <p className="text-white text-lg font-semibold">{destination.name}</p>
-              </div>
+            <div key={index} className="flex-none w-64 md:w-72 relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
+               {/* Using Link for clickable area */}
+              <Link to={`/destinations/${destination.name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}>
+                <img
+                  src={destination.imageUrl}
+                  alt={destination.name}
+                  className="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-300"
+                />
+                {/* Image Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-all duration-300 flex items-end p-4">
+                  {/* Text Styling */}
+                  <p className="text-white text-lg md:text-xl font-semibold">{destination.name}</p>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
 
-        {/* Pagination Dots - Placeholder (will need JS for active state) */}
-        <div className="flex justify-center space-x-2 mt-4">
-          {/* Render dots based on number of slides/items */}
-          <div className="w-2 h-2 rounded-full bg-gray-800"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-          {/* ... more dots based on actual slider implementation */}
+        {/* Pagination Dots */}
+        <div className="flex justify-center space-x-2 mt-8">
+          <div className="w-3 h-3 rounded-full bg-gray-800"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
+          <div className="w-3 h-3 rounded-full bg-gray-300"></div>
         </div>
       </div>
     </section>
