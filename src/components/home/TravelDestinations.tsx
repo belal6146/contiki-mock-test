@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 // Placeholder data for travel destinations. Replace with actual data as needed.
 const travelDestinations = [
-  { name: 'Europe', imageUrl: 'https://www.contiki.com/media/tptfglgb/europe.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
-  { name: 'Asia', imageUrl: 'https://www.contiki.com/media/x4c01x0z/asia.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
-  { name: 'New Zealand', imageUrl: 'https://www.contiki.com/media/n1bzl2u2/new-zealand.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
-  { name: 'USA & Canada', imageUrl: 'https://www.contiki.com/media/z20d3psg/usa-canada.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
-  { name: 'Africa & The Middle East', imageUrl: 'https://www.contiki.com/media/w2xnt25y/africa-middle-east.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
-  { name: 'Latin America', imageUrl: 'https://www.contiki.com/media/v1bzt4b2/latin-america.jpg?center=0.5%2C0.5&mode=crop&width=300&height=400&rnd=133568878354900000' },
+  { name: 'Greece', imageUrl: 'https://www.contiki.com/media/hwddpgoo/santorini-greece.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=600&quality=80' },
+  { name: 'Thailand', imageUrl: 'https://www.contiki.com/media/0aqfpa3z/thailand-boats-blue-sea-cleark-sky.jpg?center=0.5429498776829141%2C0.4949910485235911&format=webp&mode=crop&width=600&height=600&quality=80' },
+  { name: 'New Zealand', imageUrl: 'https://www.contiki.com/media/lydpfklj/bungee-jumping-of-bridge-new-zealand-074nwzd2014.jpg?center=0.595794648418738%2C0.47619724149666776&format=webp&mode=crop&width=600&height=600&quality=80' },
+  { name: 'Canada', imageUrl: 'https://www.contiki.com/media/52rnops0/trio-of-travelers-sitting-near-lake-in-canada.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=600&quality=80' },
+  { name: 'Africa', imageUrl: 'https://www.contiki.com/media/ybubztox/people-enjoying-a-safari-looking-at-elephants.jpg?center=0.6695362852875208%2C0.5037560438168477&format=webp&mode=crop&width=600&height=600&quality=80' },
+  { name: 'Peru', imageUrl: 'https://www.contiki.com/media/g2mmyrhg/machu-picchu-peru.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=600&quality=80' },
   // Add more if needed to match the slider
 ];
 

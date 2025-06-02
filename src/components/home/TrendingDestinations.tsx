@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 // Placeholder data for trending destinations. Replace with actual data as needed.
 const trendingDestinations = [
-  { name: 'Japan', imageUrl: 'https://www.contiki.com/media/p50rnykt/japan.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Costa Rica', imageUrl: 'https://www.contiki.com/media/n01tzt5g/costa-rica.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'New Zealand', imageUrl: 'https://www.contiki.com/media/h4g5y0ms/new-zealand.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Peru', imageUrl: 'https://www.contiki.com/media/cjwqms23/peru.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Vietnam', imageUrl: 'https://www.contiki.com/media/f1nck1kj/vietnam.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Thailand', imageUrl: 'https://www.contiki.com/media/tpsg5k1l/thailand.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Morocco', imageUrl: 'https://www.contiki.com/media/j10d1x2h/morocco.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
-  { name: 'Croatia', imageUrl: 'https://www.contiki.com/media/z03k21f3/croatia.jpg?center=0.5%2C0.5&mode=crop&width=300&height=200&rnd=133568878354900000' },
+  { name: 'Peru', imageUrl: 'https://www.contiki.com/media/uajlcdrj/travelers-in-peru-with-local.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Costa Rica', imageUrl: 'https://www.contiki.com/media/drrdlwua/beautiful-views-over-the-green-hills-of-costa-rica.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'New Zealand', imageUrl: 'https://www.contiki.com/media/kqwgnk3o/group-kayaking-in-new-zealand.jpg?center=0.4446997292513467%2C0.7705410151810563&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Vietnam', imageUrl: 'https://www.contiki.com/media/0r3cxv5w/people-enjoying-a-basket-shape-boat-ride-in-a-narrow-river-flowers-around.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Thailand', imageUrl: 'https://www.contiki.com/media/o1tlubxb/fun-and-games-thailand-beach.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Morocco', imageUrl: 'https://www.contiki.com/media/c3ldip4e/woman-tourist-visiting-old-temple-in-marrakech-morocco.jpg?center=0.8007518796992481%2C0.4799498746867168&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Croatia', imageUrl: 'https://www.contiki.com/media/rkojkmvk/large-boat-in-croatia.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
+  { name: 'Peru', imageUrl: 'https://www.contiki.com/media/uajlcdrj/travelers-in-peru-with-local.jpg?center=0.5%2C0.5&format=webp&mode=crop&width=600&height=450&quality=80' },
 ];
 
 const TrendingDestinations = () => {
