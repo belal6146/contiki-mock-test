@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { formatCurrency } from '@/lib/utils';
 import { trackEvent } from '@/lib/analytics';
-import { Share, Plus } from 'lucide-react';
+// Share and Plus icons were moved to TourDetail.tsx
+// import { Share, Plus } from 'lucide-react';
 
 interface PriceBarProps {
   oldPrice?: number;
@@ -35,76 +36,62 @@ const PriceBar: React.FC<PriceBarProps> = ({
     trackEvent('request_info_clicked', { price: newPrice });
   };
   
-  const handleShare = () => {
-    console.debug('[PriceBar] share clicked');
-    trackEvent('share_clicked', { price: newPrice });
-  };
+  // Share and Add to Compare handlers were moved to TourDetail.tsx
+  // const handleShare = () => {
+  //   console.debug('[PriceBar] share clicked');
+  //   trackEvent('share_clicked', { price: newPrice });
+  // };
   
-  const handleAddToCompare = () => {
-    console.debug('[PriceBar] addToCompare clicked');
-    trackEvent('add_to_compare_clicked', { price: newPrice });
-  };
+  // const handleAddToCompare = () => {
+  //   console.debug('[PriceBar] addToCompare clicked');
+  //   trackEvent('add_to_compare_clicked', { price: newPrice });
+  // };
   
   return (
-    <section className="bg-white border-b border-gray-200" aria-label="Tour pricing information">
-      <div className="container max-w-7xl mx-auto">
-        <div className="py-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
-          {/* Left side - Price info */}
-          <div className="flex flex-col">
-            <div className="mb-1">
-              <span className="text-xs text-gray-700 font-semibold uppercase">From</span>
-            </div>
-            <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-3xl font-bold text-black">{formatCurrency(newPrice)}</span>
-              {oldPrice && (
-                <span className="text-sm text-gray-500 line-through">{formatCurrency(oldPrice)}</span>
-              )}
-            </div>
-            <p className="text-sm text-gray-600 hover:underline cursor-pointer">
-              Find this price
-            </p>
+    <>
+      {/* The parent component (TourDetail) will provide the container and layout */}
+      {/* Removed outer containers that were interfering with layout in TourDetail */}
+      <div className="py-0 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 w-full">
+        {/* Left side - Price info */}
+        <div className="flex flex-col">
+          <div className="mb-1">
+            <span className="text-xs text-gray-700 font-semibold uppercase">From</span>
           </div>
-          {/* Right side - Action buttons */}
-          <div className="flex items-center gap-4 flex-wrap">
-            {/* Share button */}
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-base font-bold transition-colors duration-150 px-6 py-3 rounded-full border border-gray-300 bg-white hover:bg-gray-50 shadow-sm"
-              aria-label="Share this tour"
-            >
-              <Share size={20} />
-              <span>Share</span>
-            </button>
-            {/* Add to Compare button */}
-            <button
-              onClick={handleAddToCompare}
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-base font-bold transition-colors duration-150 px-6 py-3 rounded-full border border-gray-300 bg-white hover:bg-gray-50 shadow-sm"
-              aria-label="Add to compare"
-            >
-              <Plus size={20} />
-              <span>Add To Compare</span>
-            </button>
-            {/* Request More Info button */}
-            <button
-              className="border border-gray-400 text-gray-700 px-6 py-3 font-bold text-sm rounded-full hover:bg-gray-50 hover:border-gray-500 transition-all duration-150 uppercase tracking-wide bg-white"
-              onClick={handleRequestInfo}
-              aria-label="Request more information"
-            >
-              REQUEST MORE INFO
-            </button>
-            {/* View Dates button */}
-            <button
-              className="bg-[#CCFF00] text-black px-8 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors duration-150 uppercase tracking-wide"
-              onClick={handleViewDates}
-              aria-label="View available dates"
-              data-tab="dates"
-            >
-              VIEW DATES
-            </button>
+          <div className="flex items-baseline gap-2 mb-1 leading-none">
+            <span className="text-4xl font-black text-black">{formatCurrency(newPrice)}</span>
+            {oldPrice && (
+              <span className="text-base text-gray-500 line-through">{formatCurrency(oldPrice)}</span>
+            )}
           </div>
+          <p className="text-sm text-gray-600 hover:underline cursor-pointer">
+            Find this price
+          </p>
+           <p className="text-sm text-gray-600 mt-1">
+            Save your space with a deposit payment
+          </p>
+        </div>
+        {/* Right side - Action buttons */}
+        <div className="flex flex-col items-end gap-2 w-full lg:w-auto">
+          {/* Request More Info button */}
+          <button
+            className="border border-gray-400 text-gray-700 px-8 py-3 font-bold text-sm rounded-full hover:bg-gray-500 hover:border-gray-500 transition-all duration-150 uppercase tracking-wide bg-white w-full text-center"
+            onClick={handleRequestInfo}
+            aria-label="Request more information"
+          >
+            REQUEST MORE INFO
+          </button>
+          {/* View Dates button */}
+          <button
+            className="bg-[#CCFF00] text-black px-8 py-3 font-bold text-sm rounded-full hover:bg-[#b8e600] transition-colors duration-150 uppercase tracking-wide w-full text-center"
+            onClick={handleViewDates}
+            aria-label="View available dates"
+            data-tab="dates"
+          >
+            VIEW DATES
+          </button>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

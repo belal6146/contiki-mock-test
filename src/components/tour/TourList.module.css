@@ -1,0 +1,42 @@
+.tour-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.HeaderField_defaultFlexBasis {
+  flex-basis: 16.66%; /* Assuming 6 columns as per HTML structure */
+}
+
+.tour-list__button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Basic button styles - will likely be shared or come from a utility */
+.btn {
+  /* Add base button styles here or import */
+}
+
+.btn--L {
+    /* Large button styles */
+}
+
+.btn-sec {
+    /* Secondary button styles */
+}
+
+.btn--icon-Left {
+    /* Button with left icon styles */
+}
+
+.text-button-l {
+    /* Large button text styles */
+} 

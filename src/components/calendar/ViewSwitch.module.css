@@ -1,0 +1,53 @@
+.viewSwitch {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 2rem;
+}
+
+.viewSwitch__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.viewSwitch__button:hover {
+  border-color: var(--primary-color);
+  background-color: var(--hover-color);
+}
+
+.viewSwitch__buttonActive {
+  border-color: var(--primary-color);
+  background-color: var(--background-color);
+}
+
+.viewSwitch__icon {
+  width: 20px;
+  height: 20px;
+  color: #d0d0d0;
+  transition: all 0.2s ease;
+}
+
+.viewSwitch__buttonActive .viewSwitch__icon {
+  color: var(--primary-color);
+}
+
+.viewSwitchText {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.viewSwitchWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+} 

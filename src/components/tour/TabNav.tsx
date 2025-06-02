@@ -1,5 +1,8 @@
 import React, { useState, useEffect, KeyboardEvent } from 'react';
 import { cn } from '@/lib/utils';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import styles from './TabNav.module.css';
 
 interface TabNavProps {
   children: React.ReactNode;
@@ -72,54 +75,74 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
     }
   };
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: tabs.length,
+      slidesToSlide: 1
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1
+    }
+  };
+
   return (
-    <section className="bg-white" aria-labelledby="tabNav-title">
+    <div className="w-full bg-white border-b border-gray-200">
       <div className="container max-w-7xl mx-auto">
-        {/* Hidden accessible title for screen readers */}
-        <h2 id="tabNav-title" className="sr-only">Tour Information Tabs</h2>
-        
-        {/* Tab Navigation */}
-        <div className="border-b border-gray-200" role="tablist" aria-label="Tour details">
-          <div className="flex overflow-x-auto hide-scrollbar">
+        {/* Tab Headers with Carousel */}
+        <div className={styles.tab__section} style={{ '--tabs-count': tabs.length } as React.CSSProperties}>
+          <Carousel
+            responsive={responsive}
+            infinite={false}
+            showDots={false}
+            arrows={false}
+            className={styles.tab__carousel}
+            itemClass={styles.tab__item}
+            containerClass={styles.tab__container}
+          >
             {tabs.map((tab, index) => (
-              <button
-                key={tab.id}
-                onClick={() => handleTabClick(tab.id)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                className={cn(
-                  "px-6 py-4 font-bold text-base uppercase tracking-wider whitespace-nowrap",
-                  "focus:outline-none focus:ring-0",
-                  "relative transition-colors duration-150 border-b-4",
-                  activeTab === tab.id
-                    ? "text-black border-b-[#CCFF00]"
-                    : "text-gray-500 hover:text-black border-b-transparent"
+              <React.Fragment key={tab.id}>
+                <div
+                  className={cn(
+                    styles.tab__item,
+                    styles['tab__item--uppercase'],
+                    activeTab === tab.id && styles['tab__item--active']
+                  )}
+                  data-testid={activeTab === tab.id ? "tab-active" : "tab"}
+                  onClick={() => handleTabClick(tab.id)}
+                >
+                  <p 
+                    className={cn(
+                      styles['tab__item-text'],
+                      activeTab === tab.id && styles['tab__item-text--active']
+                    )}
+                    data-item-type="General Interaction"
+                    data-item-name="tour-page-tab"
+                    data-testid="genericText"
+                  >
+                    {tab.label}
+                  </p>
+                </div>
+                {index < tabs.length - 1 && (
+                  <div className={styles['tab__item-divider']} data-testid="divider" />
                 )}
-                aria-selected={activeTab === tab.id}
-                aria-controls={`tab-panel-${tab.id}`}
-                id={`tab-${tab.id}`}
-                role="tab"
-                tabIndex={activeTab === tab.id ? 0 : -1}
-                type="button"
-                data-tab={tab.id}
-              >
-                {tab.label}
-              </button>
+              </React.Fragment>
             ))}
-          </div>
+          </Carousel>
         </div>
-        
         {/* Tab Content */}
-        <div 
-          className="min-h-[300px] md:min-h-[400px]" 
-          role="tabpanel" 
-          id={`tab-panel-${activeTab}`} 
-          aria-labelledby={`tab-${activeTab}`}
-          tabIndex={0}
-        >
+        <div className="py-8">
           {children}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

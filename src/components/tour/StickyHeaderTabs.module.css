@@ -1,0 +1,43 @@
+.stickyHeader__tabs {
+  display: flex;
+  align-items: center;
+}
+
+.stickyHeader__tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.stickyHeader__tab--active {
+  border-bottom: 2px solid #000;
+}
+
+.stickyHeader__tabText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+  margin: 0;
+}
+
+.stickyHeader__tabText--active {
+  color: #000;
+  font-weight: 600;
+}
+
+/* Reusing styles from StickyHeader.module.css for common classes */
+.text-paragraph-s {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.divider {
+  display: inline-block;
+  background-color: #e5e5e5;
+}
+
+.divider--vertical {
+  width: 1px;
+} 

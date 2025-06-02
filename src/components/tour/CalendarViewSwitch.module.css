@@ -1,0 +1,45 @@
+.calendarViewSwitch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.calendarViewSwitch__text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #666;
+  margin: 0;
+}
+
+.calendarViewSwitch__wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.calendarViewSwitch__iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.calendarViewSwitch__iconBox:hover {
+  background-color: #f5f5f5;
+}
+
+.calendarViewSwitch__iconBox--selected {
+  background-color: #f5f5f5;
+}
+
+.calendarViewSwitch__icon {
+  color: #666;
+  transition: color 0.2s ease-in-out;
+}
+
+.calendarViewSwitch__iconBox--selected .calendarViewSwitch__icon {
+  color: #000;
+} 

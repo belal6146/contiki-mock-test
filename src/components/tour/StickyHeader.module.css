@@ -1,0 +1,310 @@
+.stickyHeader__container {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stickyHeader__containerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.stickyHeader__overview {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stickyHeader__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stickyHeader__title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tripHeader__feefo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tripHeader__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ratingStars {
+  display: inline-block;
+}
+
+.ratingStars__star {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: gold; /* Placeholder, replace with SVG */
+  mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxwYXRoIGQ9Ik0xMiA2LjE5TDExLjI0IDguNThMOC43IDkuMjJMOS41IDExLjgxTDcuMzYgMTQuMzJMMTIgMTQuMzJMMTYuNjQgMTQuMzJMMTQuNSA5LjI0TDE1LjMgNi42OkwxMiA2LjE5WiIgZmlsbD0iY3VycmVudENvbG9yIi8+CiAgICA8cGF0aCBkPSJNMjIgOS4yNGwtMy43MiAxLjQ1bDIuNTggMy42MWwtNC43Ny0uMTlsLTItMy41LTIuMzkgMy4yOGwtNC42Ni0uNDRsMi40NyAzLjYzTDIgMTguNDJsMy42OC0xLjQ1LTIuNTggMy42MWw0Ljc3LjE5bDIgMy41bDIuMzktMy4yOGw0LjY2LjQ0LTIuNDctMy42M0wyMiA5LjI0eiIgZmlsbD0iY3VycmVudENvbG9yIi8+Cjwvc3ZnPg==') no-repeat center / contain;
+}
+
+.ratingStars__box--active {
+  display: flex;
+  width: auto;
+  overflow: hidden;
+}
+
+.ratingStars__star--half {
+  width: 8px; /* Half star width */
+}
+
+.tripHeader__ratingText {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #000;
+}
+
+.tripHeader__reviews {
+  display: flex;
+  align-items: center;
+}
+
+.richText p {
+  margin: 0;
+}
+
+.textLinkM {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #0070f3; /* Placeholder color */
+  text-decoration: none;
+}
+
+.textLinkM:hover {
+  text-decoration: underline;
+}
+
+.tripHeader__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+.tripHeader__titleDesktop {
+  /* Specific styles for desktop if needed */
+}
+
+.textDefault {
+  color: #000;
+}
+
+.headerVariants {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.headerVariants__name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.textSubtitleS {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.headerVariants__buttonWrapper {
+  /* Style for variant button wrapper if needed */
+}
+
+.stickyHeader__tabs {
+  display: flex;
+  align-items: center;
+}
+
+.stickyHeader__tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.stickyHeader__tab--active {
+  border-bottom: 2px solid #000;
+}
+
+.stickyHeader__tabText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+  margin: 0;
+}
+
+.stickyHeader__tabText--active {
+  color: #000;
+  font-weight: 600;
+}
+
+.textParagraphS {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.divider {
+  display: inline-block;
+  background-color: #e5e5e5;
+}
+
+.divider--vertical {
+  width: 1px;
+}
+
+.stickyHeader__deals {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stickyHeader__pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripHeader__pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripHeader__prices {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.tripHeader__oldPriceWithDiscountTag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tripHeader__oldPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.tripHeader__oldPrice__text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.textParagraphM {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.tripHeader__oldPrice__strikethrough {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #666;
+  text-decoration: line-through;
+}
+
+.textStrikethroughM {
+  text-decoration: line-through;
+}
+
+.tripHeader__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.tripHeader__priceFrom {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.textCommM {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.tripHeader__priceCost {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+.textCommL {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.tripHeader__findPrice {
+  margin-top: 0.25rem;
+}
+
+.stickyHeader__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn--L {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+}
+
+.btn-pr {
+  background-color: #000;
+  color: white;
+}
+
+.btn-pr:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--icon-Left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.textButtonL {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.stickyHeader__easyQuoteButton {
+  /* Specific styles for easy quote button if needed */
+}
+
+.btn-sec-booking {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+} 

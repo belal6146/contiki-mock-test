@@ -1,0 +1,93 @@
+.stickyHeader__pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripHeader__pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripHeader__prices {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.tripHeader__oldPriceWithDiscountTag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tripHeader__oldPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.tripHeader__oldPrice__text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.text-paragraph-m {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.tripHeader__oldPrice__strikethrough {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #666;
+  text-decoration: line-through;
+}
+
+.text-strikethrough-m {
+  text-decoration: line-through;
+}
+
+.tripHeader__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.tripHeader__priceFrom {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #666;
+}
+
+.text-comm-m {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.tripHeader__priceCost {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+.text-comm-l {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.tripHeader__findPrice {
+  margin-top: 0.25rem;
+}
+
+/* Reusing styles from StickyHeader.module.css for common classes */
+.text-link-m {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #0070f3; /* Placeholder color */
+  text-decoration: none;
+}
+
+.text-link-m:hover {
+  text-decoration: underline;
+} 

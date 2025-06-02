@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTour } from '@/hooks/trips/useTour';
@@ -17,11 +16,19 @@ import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
 import TourHeader from '@/components/tour-detail/TourHeader';
 import TourTabContent from '@/components/tour-detail/TourTabContent';
+import Breadcrumb from '@/components/Breadcrumb';
+import { Share, Plus } from 'lucide-react';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { tour, loading, error } = useTour(slug || '');
   const [activeTab, setActiveTab] = useState('trip');
+  
+  // State for the Dates and Pricing section
+  const [selectedYear, setSelectedYear] = useState(2025);
+  const [selectedMonth, setSelectedMonth] = useState(6); // Default to June
+  const [selectedTripTypes, setSelectedTripTypes] = useState<string[]>([]);
+  const [calendarView, setCalendarView] = useState<'list' | 'calendar'>('list');
   
   useEffect(() => {
     console.debug('[TourDetail] mounted', { slug });
@@ -63,22 +70,88 @@ const TourDetail = () => {
     { id: 'reviews', label: 'REVIEWS' }
   ];
 
+  // Handlers for the Dates and Pricing selectors
+  const handleYearChange = (year: number) => {
+    setSelectedYear(year);
+    console.log(`Year changed to: ${year}`);
+  };
+
+  const handleMonthChange = (month: number) => {
+    setSelectedMonth(month);
+    console.log(`Month changed to: ${month}`);
+  };
+
+  const handleTripTypeChange = (types: string[]) => {
+    setSelectedTripTypes(types);
+    console.log('Selected trip types:', types);
+  };
+
+  const handleViewChange = (view: 'list' | 'calendar') => {
+    setCalendarView(view);
+    console.log('Calendar view changed to:', view);
+  };
+
   return (
     <BookingProvider>
       <div className="min-h-screen flex flex-col bg-white">
         <TourDetailHead trip={tour} slug={slug} />
         <Header />
         
-        {/* Tour Header with Breadcrumb and Rating - moved to top after header */}
-        <TourHeader tour={tour} slug={slug} />
-        
-        {/* Price Bar */}
-        <PriceBar 
-          oldPrice={tour.oldPrice} 
-          newPrice={tour.price} 
-          rating={tour.rating} 
-          reviewCount={tour.reviewCount}
-        />
+        {/* Subheader: Breadcrumb and Share/Compare Buttons */}
+        <div className="container max-w-7xl mx-auto py-3 flex justify-between items-center border-b border-gray-200">
+          <Breadcrumb 
+            title={tour.name} 
+            destination={tour.destination} 
+          />
+           {/* Share and Add to Compare buttons */}
+          <div className="flex items-center gap-5">
+             {/* Share button */}
+            <button
+              // onClick={handleShare} // Add appropriate handler
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150"
+              aria-label="Share this tour"
+            >
+              <Share size={16} />
+              <span>Share</span>
+            </button>
+            {/* Add to Compare button */}
+            <button
+               // onClick={handleAddToCompare} // Add appropriate handler
+              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150"
+              aria-label="Add to compare"
+            >
+              <Plus size={16} />
+              <span>Add To Compare</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Main Header Section: Tour Info and Price/Buttons */}
+        {/* Based on Contiki HTML structure, this section contains Title, Info/Variants, and Deals */}
+        <div className="container max-w-7xl mx-auto pt-6 pb-6">
+           {/* Tour Title */}
+          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight text-black mb-4">{tour.name}</h1>
+
+          {/* Info (Rating, Reviews, Variants) and Deals (Price, Buttons) Side-by-Side */}
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+             {/* Tour Info (Rating, Reviews, Variants) */}
+            <div className="flex-1">
+               {/* Tour Header component will now only contain Rating, Reviews, Variants */}
+               <TourHeader tour={tour} slug={slug} />
+            </div>
+
+            {/* Price and Buttons Section (PriceBar) */}
+            {/* PriceBar content is now controlled by this flex container */}
+            <div className="flex-shrink-0 w-full lg:w-auto lg:min-w-[380px]">
+              <PriceBar 
+                oldPrice={tour.oldPrice} 
+                newPrice={tour.price} 
+                rating={tour.rating} 
+                reviewCount={tour.reviewCount}
+              />
+            </div>
+          </div>
+        </div>
         
         {/* TabNav */}
         <TabNav 

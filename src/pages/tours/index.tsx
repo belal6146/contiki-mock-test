@@ -28,110 +28,134 @@ const Tours = () => {
     destination: initialDestination,
     year: initialYear,
     travelers: initialTravelers,
+    month: '',
+    tripType: '',
   });
   
   const [currentPage, setCurrentPage] = useState(1);
   const tripsPerPage = 9;
+  const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
   
   // Set up debounced filter update
   const debouncedFilterUpdate = debounce((newFilters: typeof filters) => {
     trackEvent('tours_filter_change', { filters: newFilters });
     setFilters(newFilters);
-    setCurrentPage(1); // Reset page when filters change
+    setCurrentPage(1);
   }, 300);
   
   // Fetch trips based on filters
   const { trips, loading, error } = useTrips({
     destination: filters.destination || undefined,
-    // Add additional filter params as needed
+    year: filters.year || undefined,
+    month: filters.month || undefined,
+    tripType: filters.tripType || undefined,
   });
   
   useEffect(() => {
     trackPageView(window.location.pathname + location.search);
-    console.debug('[TripListing] mounted');
   }, [location.pathname, location.search]);
   
   const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFilters = { ...filters, destination: e.target.value };
     debouncedFilterUpdate(newFilters);
-    console.debug('[TripListing] filtersChanged', { filters: newFilters });
   };
   
   const handleYearChange = (year: string) => {
     const newFilters = { ...filters, year };
     debouncedFilterUpdate(newFilters);
-    console.debug('[TripListing] filtersChanged', { filters: newFilters });
+  };
+
+  const handleMonthChange = (month: string) => {
+    const newFilters = { ...filters, month };
+    debouncedFilterUpdate(newFilters);
+  };
+
+  const handleTripTypeChange = (tripType: string) => {
+    const newFilters = { ...filters, tripType };
+    debouncedFilterUpdate(newFilters);
   };
   
   const handleTravelersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const travelers = parseInt(e.target.value, 10);
     const newFilters = { ...filters, travelers: isNaN(travelers) ? 1 : travelers };
     debouncedFilterUpdate(newFilters);
-    console.debug('[TripListing] filtersChanged', { filters: newFilters });
   };
   
   const handleLoadMore = () => {
     setCurrentPage(prev => prev + 1);
-    console.debug('[TripListing] loadMore', { newPage: currentPage + 1 });
     trackEvent('load_more_trips', { page: currentPage + 1 });
   };
   
-  // Calculate total number of trips to display
   const displayedTrips = trips.slice(0, currentPage * tripsPerPage);
   const hasMore = displayedTrips.length < trips.length;
   
+  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  const tripTypes = ['PLUS', 'STANDARD', 'PRIDE', 'CAP 18-25', 'CHILL'];
+
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white font-['Helvetica_Neue']">
       <Helmet>
         <title>Find Your Perfect Trip | Contiki Tours</title>
         <meta name="description" content="Explore our range of trips for 18-35 year olds. Filter by destination, date, and number of travelers to find your perfect adventure." />
         <meta name="keywords" content="contiki tours, travel packages, young adult travel, group travel" />
-        
-        {/* Open Graph / Social Media */}
         <meta property="og:title" content="Find Your Perfect Trip | Contiki Tours" />
         <meta property="og:description" content="Explore our range of trips for 18-35 year olds. Filter by destination, date, and number of travelers to find your perfect adventure." />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://www.contiki.com/tours-og-image.jpg" />
         <meta property="og:url" content="https://www.contiki.com/tours" />
-        
-        {/* Canonical URL */}
         <link rel="canonical" href="https://www.contiki.com/tours" />
       </Helmet>
       
       <Header />
       
       {/* Filter Bar */}
-      <div className="sticky top-16 z-30 bg-gray-100 shadow-sm">
-        <div className="container py-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="sticky top-20 z-30 bg-white border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            {/* Destination Search */}
             <div className="md:col-span-2">
-              <label htmlFor="destination" className="block text-sm font-medium text-gray-700 mb-1">
-                Destination
+              <label htmlFor="destination" className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
+                Where to?
               </label>
-              <Input
-                id="destination"
-                type="text"
-                placeholder="Where to?"
-                value={filters.destination}
-                onChange={handleDestinationChange}
-                className="w-full transition-all duration-150 ease-in-out focus:ring-accent"
-                aria-label="Filter by destination"
-              />
+              <div className="relative">
+                <Input
+                  id="destination"
+                  type="text"
+                  placeholder="Search destinations"
+                  value={filters.destination}
+                  onChange={handleDestinationChange}
+                  className="w-full h-12 text-[15px] transition-all duration-150 ease-in-out focus:ring-[#D8FD02] border-gray-300 pl-4 pr-10"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
             </div>
             
+            {/* Year Selection */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Year
+              <label className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
+                When?
               </label>
               <div className="flex rounded-md overflow-hidden border border-gray-300">
                 <button
-                  className={`flex-1 py-2 px-4 ${filters.year === '2025' ? 'bg-[#CCFF00] text-black' : 'bg-white text-gray-700'}`}
+                  className={`flex-1 py-3 px-4 text-[15px] font-bold transition-all duration-200 ${
+                    filters.year === '2025' 
+                      ? 'bg-[#D8FD02] text-black' 
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
                   onClick={() => handleYearChange('2025')}
                 >
                   2025
                 </button>
                 <button
-                  className={`flex-1 py-2 px-4 ${filters.year === '2026' ? 'bg-[#CCFF00] text-black' : 'bg-white text-gray-700'}`}
+                  className={`flex-1 py-3 px-4 text-[15px] font-bold transition-all duration-200 ${
+                    filters.year === '2026' 
+                      ? 'bg-[#D8FD02] text-black' 
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
                   onClick={() => handleYearChange('2026')}
                 >
                   2026
@@ -139,103 +163,232 @@ const Tours = () => {
               </div>
             </div>
             
+            {/* Travelers Input */}
             <div>
-              <label htmlFor="travelers" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="travelers" className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
                 Travelers
               </label>
-              <Input
-                id="travelers"
-                type="number"
-                min="1"
-                value={filters.travelers}
-                onChange={handleTravelersChange}
-                className="w-full transition-all duration-150 ease-in-out focus:ring-accent"
-                aria-label="Number of travelers"
-              />
+              <div className="relative">
+                <Input
+                  id="travelers"
+                  type="number"
+                  min="1"
+                  value={filters.travelers}
+                  onChange={handleTravelersChange}
+                  className="w-full h-12 text-[15px] transition-all duration-150 ease-in-out focus:ring-[#D8FD02] focus:border-[#D8FD02] border-gray-300 pl-4 pr-10 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div className="mt-4 flex justify-end">
-            <Button 
-              className="bg-[#CCFF00] text-black hover:bg-[#CCFF00]/90"
-              onClick={() => {
-                console.debug('[TripListing] searchClicked', { filters });
-                trackEvent('search_trips', { filters });
-              }}
-            >
-              Search Trips
-            </Button>
+
+          {/* Month and Trip Type Filters */}
+          <div className="flex flex-wrap items-center gap-6 mb-6">
+            {/* Month Filters */}
+            <div className="flex items-center gap-3">
+              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Month:</span>
+              <div className="flex flex-wrap gap-2">
+                {months.map(month => (
+                  <button
+                    key={month}
+                    className={`px-3 py-1.5 text-[13px] font-bold rounded-full transition-colors duration-200 ${
+                      filters.month === month 
+                        ? 'bg-[#D8FD02] text-black' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                    onClick={() => handleMonthChange(filters.month === month ? '' : month)}
+                  >
+                    {month}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Trip Type Filters */}
+            <div className="flex items-center gap-3">
+              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Trip Type:</span>
+              <div className="flex flex-wrap gap-2">
+                {tripTypes.map(type => (
+                  <button
+                    key={type}
+                    className={`px-3 py-1.5 text-[13px] font-bold rounded-full transition-colors duration-200 ${
+                      filters.tripType === type 
+                        ? 'bg-[#D8FD02] text-black' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                    onClick={() => handleTripTypeChange(filters.tripType === type ? '' : type)}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Active Filters, Sort By and View Toggle */}
+          <div className="flex justify-between items-center">
+            {/* Active Filters */}
+            <div className="flex items-center gap-3">
+              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Active filters:</span>
+              <div className="flex flex-wrap gap-2">
+                {filters.month && (
+                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[13px] font-bold px-3 py-1.5 rounded-full">
+                    {filters.month}
+                    <button 
+                      className="ml-1 text-gray-500 hover:text-gray-700"
+                      onClick={() => handleMonthChange('')}
+                      aria-label={`Remove ${filters.month} filter`}
+                    >
+                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </span>
+                )}
+                {filters.tripType && (
+                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[13px] font-bold px-3 py-1.5 rounded-full">
+                    {filters.tripType}
+                    <button 
+                      className="ml-1 text-gray-500 hover:text-gray-700"
+                      onClick={() => handleTripTypeChange('')}
+                      aria-label={`Remove ${filters.tripType} filter`}
+                    >
+                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Sort By and View Toggle */}
+            <div className="flex items-center gap-6">
+              {/* Sort By */}
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Sort by:</span>
+                <select 
+                  className="h-10 px-4 text-[15px] border border-gray-300 rounded-md focus:ring-[#D8FD02] focus:border-[#D8FD02] transition-all duration-150 ease-in-out"
+                  onChange={(e) => {
+                    trackEvent('sort_trips', { sort: e.target.value });
+                  }}
+                >
+                  <option value="recommended">Recommended</option>
+                  <option value="price_low">Price: Low to High</option>
+                  <option value="price_high">Price: High to Low</option>
+                  <option value="duration">Duration</option>
+                  <option value="rating">Rating</option>
+                </select>
+              </div>
+
+              {/* View Toggle */}
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">View:</span>
+                <div className="flex rounded-md overflow-hidden border border-gray-300">
+                  <button 
+                    className={`p-2 transition-colors duration-200 ${
+                      viewType === 'grid' 
+                        ? 'bg-[#D8FD02] text-black' 
+                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setViewType('grid')}
+                    aria-label="Switch to grid view"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                  </button>
+                  <button 
+                    className={`p-2 transition-colors duration-200 ${
+                      viewType === 'list' 
+                        ? 'bg-[#D8FD02] text-black' 
+                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setViewType('list')}
+                    aria-label="Switch to list view"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-      <main className="flex-grow container py-8">
-        <h1 className="text-3xl font-bold mb-2">Find Your Perfect Trip</h1>
-        <p className="text-gray-600 mb-6">Discover adventures crafted for 18-35s across the globe</p>
-        
-        {/* Results */}
+
+      {/* Main Content */}
+      <main className="flex-1 container mx-auto px-4 py-8">
+        {/* Loading State */}
         {loading && (
-          <div className="flex justify-center items-center py-12" aria-live="polite" aria-busy="true">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#CCFF00]" role="status">
-              <span className="sr-only">Loading trips...</span>
-            </div>
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#D8FD02]"></div>
           </div>
         )}
-        
+
+        {/* Error State */}
         {error && (
-          <div className="bg-red-50 p-4 rounded-md text-red-500 mb-6" role="alert" aria-live="assertive">
-            Error loading trips: {error}
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Oops! Something went wrong</h2>
+            <p className="text-gray-600 mb-6">We couldn't load the trips. Please try again later.</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="bg-[#D8FD02] text-black font-bold px-6 py-3 rounded-full hover:bg-[#c4e602] transition-colors"
+            >
+              Try Again
+            </button>
           </div>
         )}
-        
+
+        {/* Trip Grid/List */}
         {!loading && !error && (
           <>
-            <p className="mb-4 text-gray-600" aria-live="polite">{trips.length} trips found</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Suspense fallback={<div className="col-span-full flex justify-center py-12"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#CCFF00]"></div></div>}>
+            <div className={`grid gap-8 ${viewType === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+              <Suspense fallback={
+                <div className="col-span-full flex justify-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#D8FD02]"></div>
+                </div>
+              }>
                 {displayedTrips.map((trip) => (
                   <TripCard
                     key={trip.id}
                     id={trip.id}
-                    slug={trip.slug}
                     title={trip.name}
                     region={trip.destination}
                     price={trip.price}
                     oldPrice={trip.oldPrice}
                     duration={trip.duration}
-                    countries={1}
+                    countries={trip.countries}
                     image={trip.image}
                     isSpotlight={trip.rating >= 4.5}
-                    discountPercentage={trip.discountPercentage || 0}
+                    discountPercentage={trip.discountPercentage}
+                    slug={trip.slug}
+                    viewType={viewType}
                   />
                 ))}
               </Suspense>
             </div>
-            
-            {trips.length === 0 && (
-              <div className="text-center py-12" role="status" aria-live="polite">
-                <p className="text-lg text-gray-600">No trips found matching your criteria.</p>
-                <p className="mt-2">Try adjusting your filters.</p>
-              </div>
-            )}
-            
+
             {/* Load More Button */}
             {hasMore && (
-              <div className="flex justify-center mt-8">
-                <Button 
-                  variant="outline"
+              <div className="text-center mt-12">
+                <button
                   onClick={handleLoadMore}
-                  className="px-6 py-2 border-2 border-black text-black hover:bg-black hover:text-white transition-colors"
+                  className="bg-[#D8FD02] text-black font-bold px-8 py-3 rounded-full hover:bg-[#c4e602] transition-colors"
                 >
                   Load More Trips
-                </Button>
+                </button>
               </div>
             )}
           </>
         )}
       </main>
-      
+
       <Footer />
       <BackToTopButton />
       <HelpButton />

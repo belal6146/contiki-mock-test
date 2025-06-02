@@ -1,0 +1,62 @@
+.tab__section {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.tab__carousel {
+  position: relative;
+}
+
+.tab__container {
+  display: flex;
+  align-items: center;
+}
+
+.tab__item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab__item--active {
+  color: #000;
+  font-weight: 600;
+}
+
+.tab__itemText {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #666;
+  margin: 0;
+  transition: color 0.2s ease-in-out;
+}
+
+.tab__itemText--active {
+  color: #000;
+  font-weight: 600;
+}
+
+.tab__itemDivider {
+  width: 1px;
+  height: 24px;
+  background-color: #e5e5e5;
+  margin: 0 0.5rem;
+}
+
+/* Override carousel styles */
+:global(.react-multi-carousel-list) {
+  overflow: visible;
+}
+
+:global(.react-multi-carousel-track) {
+  display: flex;
+  align-items: center;
+}
+
+:global(.react-multi-carousel-item) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 

@@ -7,33 +7,33 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --popover-foreground: 222.2 84% 4.9%;
 
     /* Contiki Brand Colors - Official */
-    --primary: 0 0% 0%; /* Black */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 80 100% 50%; /* Lime Green #CCFF00 */
-    --secondary-foreground: 0 0% 100%; /* White */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 80 100% 50%; /* Lime Green #CCFF00 */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
 
     --radius: 0.5rem;
 
@@ -336,4 +336,67 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b8e600;
+}
+
+/* Dropdown Animations */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Mobile Menu Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Utility Classes */
+.contiki-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-100 p-4 md:p-6;
+}
+
+.heading-md {
+  @apply text-lg font-bold text-gray-900 mb-4;
+}
+
+.text-body {
+  @apply text-sm text-gray-700;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center px-4 py-2 border-2 border-[#CCFF00] text-sm font-bold text-black rounded-full hover:bg-[#CCFF00] transition-all duration-200;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-4 py-2 bg-[#CCFF00] text-sm font-bold text-black rounded-full hover:bg-[#b8e600] transition-all duration-200;
 }

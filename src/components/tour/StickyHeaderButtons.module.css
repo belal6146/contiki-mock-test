@@ -1,0 +1,52 @@
+.stickyHeader__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn--L {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+}
+
+.btn-pr {
+  background-color: #000;
+  color: white;
+}
+
+.btn-pr:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--icon-Left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.text-button-l {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.stickyHeader__easyQuoteButton {
+  /* Specific styles for easy quote button if needed */
+}
+
+.btn-sec-booking {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+} 

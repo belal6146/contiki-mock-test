@@ -1,0 +1,120 @@
+.tripTypeFilter {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.tripTypeFilter__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.tripTypeFilter__button:hover {
+  border-color: var(--primary-color);
+  background-color: var(--hover-color);
+}
+
+.tripTypeFilter__buttonActive {
+  border-color: var(--primary-color);
+  background-color: var(--background-color);
+}
+
+.tripTypeFilter__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.tripTypeFilter__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tripTypeFilter__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.tripTypeFilter__item:hover {
+  background-color: var(--hover-color);
+}
+
+.tripTypeFilter__checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  background-color: transparent;
+}
+
+.tripTypeFilter__checkboxActive {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.tripTypeFilter__checkboxActive::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.tripTypeFilter__label {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+  font-weight: 400;
+}
+
+.tripTypeFilter__labelActive {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* Trip type specific colors */
+.tripTypeFilter__checkbox[data-type="standard"] {
+  background-color: #ebff99;
+  border-color: #ebff99;
+}
+
+.tripTypeFilter__checkbox[data-type="plus"] {
+  background-color: #e0e0ff;
+  border-color: #e0e0ff;
+}
+
+.tripTypeFilter__checkbox[data-type="age"] {
+  background-color: #ccf5ff;
+  border-color: #ccf5ff;
+} 

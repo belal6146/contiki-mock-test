@@ -33,4 +33,5 @@ export interface Trip {
   variations: Variation[];
   highlights: string[];
   included: string[];
+  variantName?: string;
 }

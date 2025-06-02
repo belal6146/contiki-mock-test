@@ -1,0 +1,161 @@
+.yearAndMonthSelector {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.yearAndMonthSelector__yearSelector {
+  display: flex;
+}
+
+.optionSwitchWrapper {
+  position: relative;
+  --optionsCount: 2;
+  --itemWidth: 80px;
+}
+
+.yearSelector {
+  display: flex;
+  height: 48px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.optionSwitch__label {
+  height: 48px;
+  position: relative;
+  width: var(--itemWidth);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  z-index: 1;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.optionSwitch__labelActive {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.optionSwitch__text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.optionSwitch__textActive {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.textH5 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.textLabelL {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.first {
+  position: absolute;
+  height: 48px;
+  width: var(--itemWidth);
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.yearAndMonthSelector__monthSelector {
+  flex: 1;
+  overflow: hidden;
+}
+
+.reactMultiCarouselList {
+  width: 100%;
+}
+
+.reactMultiCarouselTrack {
+  display: flex;
+  list-style: none;
+  padding: 4px;
+  margin: 0;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d0d0d0 transparent;
+  scroll-behavior: smooth;
+}
+
+.reactMultiCarouselTrack::-webkit-scrollbar {
+  height: 6px;
+}
+
+.reactMultiCarouselTrack::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.reactMultiCarouselTrack::-webkit-scrollbar-thumb {
+  background-color: #d0d0d0;
+  border-radius: 3px;
+}
+
+.reactMultiCarouselItem {
+  flex: 0 0 auto;
+  width: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reactMultiCarouselItemActive {
+  opacity: 1;
+}
+
+.monthsForm__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  height: 40px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.monthsForm__label:hover {
+  background-color: var(--hover-color);
+}
+
+.monthsForm__text {
+  margin: 0;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.monthsForm__inputActive + .monthsForm__text {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+input[type="radio"] {
+  display: none;
+} 
