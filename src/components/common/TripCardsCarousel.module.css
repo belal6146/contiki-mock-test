@@ -1,0 +1,104 @@
+/* Styles for the Trip Cards Carousel component */
+
+.tripCardsCarousel {
+  /* Add styles for the main carousel container */
+  position: relative; /* Needed for absolute positioning of arrows/dots */
+  padding: 20px 0; /* Example padding */
+}
+
+.tripCardsCarousel__carouselBox {
+  /* Styles for the area containing the carousel track */
+}
+
+.tripCardsCarousel__wrapper {
+  /* Styles for the carousel wrapper */
+}
+
+.tripCardsCarousel__content {
+  /* Styles for the carousel track */
+  overflow: hidden; /* Hide items outside the view */
+}
+
+.tripCardsCarousel__item {
+  /* Styles for individual items in the carousel */
+  padding: 0 10px; /* Add some space between cards */
+  box-sizing: border-box; /* Include padding in item width */
+}
+
+.carouselTitleSection__buttonGroup {
+  /* Styles for the container of title and arrows */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Space below the title section */
+  padding: 0 10px; /* Match carousel item padding */
+}
+
+.carouselTitleSection__heading {
+  /* Styles for the heading/title */
+}
+
+.titleSection {
+  /* Styles for the title section */
+}
+
+.titleSection__title {
+  /* Styles for the carousel title */
+  font-size: 24px; /* Example size */
+  font-weight: bold;
+}
+
+.carouselArrows {
+  display: flex;
+  gap: 10px; /* Space between arrows */
+  align-items: center;
+}
+
+.carouselArrows__arrow {
+  /* Styles for the carousel arrow buttons */
+  background: none;
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 50%; /* Circular shape */
+  padding: 10px; /* Adjust size of the circular button */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.carouselArrows__arrow:hover {
+  background-color: #eee;
+  border-color: #999;
+}
+
+.carouselArrows__arrow--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carouselArrows__arrow svg {
+  width: 12px; /* Adjust icon size */
+  height: 12px; /* Adjust icon size */
+  fill: currentColor; /* Use parent color */
+}
+
+.carouselDots {
+  /* Styles for the carousel dots container */
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Space above dots */
+}
+
+.carouselDots__dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.carouselDots__dot--active {
+  background-color: #000; /* Active dot color */
+} 

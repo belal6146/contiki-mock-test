@@ -3,21 +3,23 @@ import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import styles from './Header.module.css';
 
-interface NavItem {
-  label: string;
-  to: string;
-  hasDropdown: boolean;
-  dropdownContent?: any;
+// Updated interface to match placeholderNavItems structure
+interface MobileNavItem {
+  name: string;
+  type: 'link' | 'dropdown'; // Keep type for potential future use
+  href?: string; // Use href consistent with anchor tags
 }
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  navItems: NavItem[];
-  onLinkClick: (label: string) => void;
+  // Updated prop name and type
+  navigationData: MobileNavItem[];
+  // onLinkClick: (label: string) => void; // Remove or adjust if not needed with simplified links
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, onLinkClick }) => {
+// Updated component to use navigationData prop
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navigationData }) => {
   if (!isOpen) return null;
 
   return (
@@ -28,22 +30,25 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navItems, onLi
         </button>
       </div>
       <nav className={styles.mobileMenuNav}>
-        {navItems.map((item) => (
-          <div key={item.label} className={styles.mobileMenuItem}>
-            <Link
-              to={item.to}
+        {/* Mapping over navigationData and using 'name' and 'href' */}
+        {navigationData.map((item) => (
+          <div key={item.name} className={styles.mobileMenuItem}>
+            {/* Using anchor tags for simplicity */}
+            <a
+              href={item.href || '#'}
               className={styles.mobileMenuLink}
               onClick={() => {
-                onLinkClick(item.label);
-                onClose();
+                // onLinkClick(item.name); // Call if needed
+                onClose(); // Close menu on link click
               }}
             >
-              {item.label}
-            </Link>
+              {item.name}
+            </a>
           </div>
         ))}
       </nav>
       <div className={styles.mobileMenuFooter}>
+        {/* Footer links - keep as is or adjust as needed */}
         <Link to="/contact" className={styles.mobileMenuFooterLink}>
           Contact Us
         </Link>

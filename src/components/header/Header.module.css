@@ -16,7 +16,7 @@
 .topbar {
   background-color: #f5f5f5; /* Used existing color, adjust if needed */
   border-bottom: 1px solid #e5e5e5; /* Used existing border, adjust if needed */
-  padding: 10px 20px; /* Adjusted padding */
+  padding: 6px 20px; /* Adjusted padding for a more compact topbar */
   display: flex;
   justify-content: flex-end; /* Align links to the right */
   align-items: center;
@@ -28,7 +28,6 @@
   display: flex;
   font-family: soleil, sans-serif;
   font-weight: 400;
-  /* Removed old padding */
   text-size-adjust: 100%;
   unicode-bidi: isolate;
   width: 100%;
@@ -37,6 +36,7 @@
   margin: 0 auto; /* Center the content */
   padding: 0 20px;
   box-sizing: border-box; /* Include padding in width calculation */
+  height: 28px; /* Adjusted height for topbar */
 }
 
 .topbarRightSide {
@@ -46,14 +46,13 @@
 
 .topbarLinks {
   display: flex;
-  gap: 15px; /* Adjusted gap */
-  /* Add font size, color, etc. for links */
+  gap: 12px; /* Adjusted gap */
 }
 
 .topbarLink {
   color: #666; /* Used existing color */
   text-decoration: none;
-  font-size: 14px; /* Adjusted font size */
+  font-size: 12px; /* Adjusted font size for topbar links */
   transition: color 0.2s;
   background: none;
   border: none;
@@ -69,18 +68,18 @@
 .navbarWrapper {
   max-width: 1200px; /* Kept existing max-width */
   margin: 0 auto;
-  padding: 10px 20px; /* Adjusted padding */
+  padding: 0 20px; /* Adjusted padding */
   display: flex;
   justify-content: space-between; /* Distribute space between logo/nav and right side */
   align-items: center;
-  padding: 0 20px;
   box-sizing: border-box; /* Include padding in width calculation */
+  height: 65px; /* Adjusted height for navbar */
 }
 
 .navbarLinks {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Keep this gap for space between logo/nav and right side */
+  gap: 35px; /* Adjusted gap */
   width: 100%;
 }
 
@@ -99,29 +98,26 @@
 
 .navbarLogo {
   display: block;
-  margin-right: 30px; /* Added margin-right to create space between logo and navigation */
+  margin-right: 40px; /* Adjusted margin-right to create space between logo and navigation */
 }
 
 .navbarLogoImage {
-  height: 40px; /* Kept existing height */
+  height: 38px; /* Adjusted height for logo */
   width: auto;
 }
 
 .navbarMenu {
   display: flex;
-  gap: 20px; /* Adjusted gap */
-  /* Removed margin-left */
+  gap: 30px; /* Adjusted gap */
   flex-grow: 1; /* Allow navigation to take available space */
   align-items: center; /* Vertically align nav items */
 }
 
 .navItem {
   position: relative; /* Needed for dropdown positioning */
-  /* Add font size, color, etc. for nav items */
 }
 
 .navItemContainer {
-  /* Styles for the button/link that triggers dropdown */
   background: none;
   border: none;
   cursor: pointer;
@@ -136,16 +132,17 @@
 }
 
 .navItemButtonText {
-  font-size: 1rem; /* Kept existing font size */
-  font-weight: 500; /* Kept existing font weight */
+  font-size: 14px; /* Adjusted font size */
+  font-weight: 600; /* Adjusted font weight */
   color: #333; /* Kept existing color */
   text-transform: uppercase;
+  letter-spacing: 0.75px; /* Adjusted letter spacing */
 }
 
 .navItemArrow {
-  width: 16px; /* Kept existing width */
-  height: 16px; /* Kept existing height */
-  margin-left: 5px; /* Space between text and arrow */
+  width: 14px; /* Adjusted width */
+  height: 14px; /* Adjusted height */
+  margin-left: 4px; /* Adjusted space between text and arrow */
   transition: transform 0.3s ease;
   cursor: pointer;
   color: inherit;
@@ -221,7 +218,7 @@
 .navbarRightSide {
   display: flex;
   align-items: center;
-  gap: 20px; /* Space between search bar and contact info */
+  gap: 25px; /* Adjusted space between search bar and contact info */
 }
 
 /* Search Bar styles */
@@ -230,16 +227,19 @@
   align-items: center;
   border: 1px solid #ccc; /* Example border */
   border-radius: 20px; /* Rounded corners */
-  padding: 5px 10px; /* Adjust padding */
-  background-color: #f9f9f9; /* Example light background in search bar */
+  padding: 4px 12px; /* Adjusted padding */
+  background-color: #fff; /* Ensure white background */
+  height: 32px; /* Adjusted height */
 }
 
 .searchInput {
   border: none;
   outline: none;
-  padding: 0 5px; /* Adjust padding */
+  padding: 0 6px 0 0; /* Adjusted padding */
   background: none; /* Transparent background */
-  /* Add font size and color */
+  font-size: 14px; /* Adjusted font size */
+  color: #333; /* Adjusted font color */
+  width: 150px; /* Example width, adjust as needed */
 }
 
 .searchButton {
@@ -254,17 +254,19 @@
 
 /* Styles for the circular search button */
 .searchButtonCircular {
-    width: 30px; /* Example size */
-    height: 30px; /* Example size */
+    width: 24px; /* Adjusted size */
+    height: 24px; /* Adjusted size */
     border-radius: 50%; /* Make it circular */
-    background-color: #aaff00; /* Example bright yellow/green */
-    color: #000; /* Example icon color */
-    margin-left: 5px; /* Space between input and button */
+    background-color: #CCFF00; /* Use theme color */
+    color: #000; /* Icon color */
+    margin-left: 4px; /* Adjusted space between input and button */
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .searchIcon {
-    width: 18px; /* Example icon size */
-    height: 18px; /* Example icon size */
+    width: 14px; /* Adjusted icon size */
+    height: 14px; /* Adjusted icon size */
+    color: #000; /* Adjusted icon color */
 }
 
 
@@ -272,25 +274,28 @@
 .contactInfo {
   display: flex;
   align-items: center;
-  gap: 5px; /* Space between phone number and icons */
-  /* Add font size and color for phone number */
+  gap: 6px; /* Adjusted gap between number and icons */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .phoneNumber {
-    font-weight: bold; /* Example styling */
-    font-size: 16px; /* Example size */
+    font-weight: 600; /* Adjusted styling */
+    font-size: 14px; /* Adjusted size */
+    color: #333; /* Adjusted color */
+    text-decoration: none; /* Remove underline */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .contactIcons {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between icons */
+    gap: 3px; /* Adjusted space between icons */
 }
 
 .contactIcon {
-    width: 20px; /* Example icon size */
-    height: 20px; /* Example icon size */
-    /* Add icon color */
+    width: 16px; /* Adjusted icon size */
+    height: 16px; /* Adjusted icon size */
+    color: #666; /* Adjusted icon color */
 }
 
 

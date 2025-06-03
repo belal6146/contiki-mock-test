@@ -1,0 +1,179 @@
+/* Styles for the Trip Card component */
+
+.tripCard {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tripCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imageSection {
+  position: relative;
+  width: 100%;
+}
+
+.ratioBox {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; /* 2:1 aspect ratio */
+}
+
+.imageAnchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.imageSection__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.highestAvailableSaving__label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  background-color: rgb(255, 30, 55);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.contentSection {
+  padding: 15px;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.starsFullRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ratingStars {
+  display: flex;
+}
+
+.ratingStars__star {
+  /* Placeholder for star icon styling */
+  width: 16px;
+  height: 16px;
+  background-color: gold; /* Example color */
+  mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIj48cGF0aCBkPSJNMy42MSA5Ny44MkM3My4yIDI2Ljc0IDIwNS41LTkuNSA2OCA0OWwtOS40IDIyLjhsLTEuNiAzMS41TDIuNSA5NC4zYy00LjIuNi03LjggMy05LjMgNi44LTEuNSA0LjEuOSAxNC40IDQuOSAxNi45TDU4LjMgMTYxIDI4LjUgMjY5LjJDMTkuMiAyOTkuOSAzMyAzMDguMyA1NC41IDI4Ny41bDE0MS41LTc2LjdMMjY0IDQuOWMtNS4yLTkuMS0yLjMtMjAuMSA3LjItMjVzMjEuNC0zLjczIDI2LjcgNC4yTDM2OCAxNDUuNWwxNDEuNS03Ni43YzIxLjUtMjAuOCAzNS4zLTI5LjIgMjYtLjVMMTQ4LjIgMjY5LjJjLTkuMyAzMC42IDQuNSA0MiAzMC45IDIxLjJMNTguMyAxNjFsNTQuNy00NS42YzQgMi41IDYuMyAxMi44IDQuOSAxNi45LTEuNSA1LjktNS4xIDguOC05LjMgNi44TDIuNSA5NC4zem01NjkuNzQgMjE2LjhjMTkuNyA2My0xOC4zIDE0OS41LTg5LjcgMTczLjQtMjkuOCAxMC02My42IDE1LjctOTguNiAxNS43LTY3LjMgMC0xMzkuNi0xOS44LTE3OS4xLTYxLjEtNDEuOC00Mi42LTY2LTY2LjYtNjkuNi05Ni42LTcuOC03NiAxOC42LTEzNy45IDU4LjEtMTY1LjlsMTIzLjUtODYuMUMzMzUuNyA5My4zIDQxNy4xIDg0IDQ4Ni45IDEwOC43YzI4LjEtOS4zIDU4LjktMTIuNiA4OC44LTAuMyA0LjEuOSAxMS44IDEuNyAxNi4zIDcuNGw5IDcuOGMtMi4xIDguMS02LjMgMTQuNi0xMC40IDE3LjgtMjYuMiAyMS43LTU1LjMgNDcuNy04Ni43IDYxLjUtMjYuMyAxMS45LTUzIDIxLTc5LjQgMjYuNy0xNi40IDMuNS0zMy4yIDYuMi01MCA5LTguNyAxLjQtMTcuNSAxLjctMjYuMyAxLjgtdjguOGg4LjhjOS41IDAgMTguMyAyIDIzIDQtNS4zLTguMi05LjQtMTUuNC0xMy44LTIyLjQtMjMuNSAzMC44LTM2LjggNDIuOC00MC43IDYzLjEtOC40IDM4LjEtMzAgNTguNC00OC42IDY4LjktMTUuOSAxMC0yOS44IDE3LjQtNDMuNiAyNS0xMS43IDYuNC0yMy41IDEyLjktMzUuMyAxOS42LTguOSAxMi4zLTE4LjUgMjEuOC0yNi44IDI5LjktOS45IDkuNy0xOS41IDE5LjMtMjcgMjcuNi03LjEgNy44LTEzLjcgMTYtMTkuOCAyNC41LTI4IDM4LjktNTAuNiA4NC40LTU4LjIgMTMzLjItMy4yIDE5LjQtMy42IDM4LjgtMi4xIDU3LjZjLjUgNi42IDEuMyAxMy4xIDMuMSAxOS40IDcuNSAyNC41IDE5IDQ0IDMzLjQgNTcuM3MxMi44IDI2LjYgMTUuOSAzMS4xYy00LjEgNi45LTExLjIgMTQuNi0yMi41IDEzLjgtMTQuNy0uOS0yNy40LTUuMS00MC4xLTguOC0yOS44LTguNy01OC4zLTE5LjktODUuMS0zMi44LTEwLjQtNC44LTIyLjQtMTAuOC0zNC42LTE3LjQtMTAuNi0xNC40LTE4LjQtMzEuMS0xNy43LTQ4LjR6TTQ4Ni45IDEwOC43bC0xMjMuNSA4Ni4xYy0zOS41IDI3LjMtNjUuOSA4OS45LTY4LjkgMTY1LjktMi4xIDY3LjEgMzMuNyAxMjguNSAxMDUuNSAxNTkuOSAzOS42IDE3LjMgODEuNSA1My41IDg0LjYgNDUuOCAyNS42LTcuNiAzNi44LTIzIDQzLjYtNDUuOCAyOS43LTI1LjEgNjMuNC01Ny42IDExOS40LTY1LjYgNDEuNC02IDc2LjgtMTYuNyAxMDUtMzEuNCAxMi40LTYuNSAyMy44LTE0LjMgMzMuOS0yMy41IDEwLjgtOS45IDE3LjgtMjEuNCAyMC4xLTM0IDExLjktNjQgLTI4LjEtMTQ5LjUtOTEuNy0xNzMuNHptNzkuNCAxODguNmEzMi44IDMyLjggMCAxIDEtNDYuNC00Ni40IDMyLjggMzIuOCAwIDEgMSA0Ni40IDQ2LjR6TTIzMC41IDQyNS42YTMwLjIgMzAuMiAwIDEgMSA0Mi44IDQyLjggMzAuMiAzMC4yIDAgMSAxLTQyLjgtNDIuOHptMTAyLjktMjM3LjhjLTE1LjcgMC0yOC40IDguNS0zNC45IDE5LjEtOC41IDEzLjYtMTIgMzAuNC0xMiAzOS4yYzAgMjAuNSA4LjEgMzYuNSAxOS4xIDQ3LjQgOS4zIDkuMyAyMC44IDE0LjYgMzIuOCAxNC42IDE3LjIgMCAzMi4yLTYuNyA0My41LTE5LjYgMTIuNS0xNC41IDE5LjItMzEuNiAxOS4yLTQ3LjMgMC0xOC45LTcuNy0zNC45LTE4LjItNDQuMy02LjktNi4yLTE2LjEtMTAuMS0yNC41LTEwLjZ6bS0zMS41IDM3LjhhNTAuNyA1MC43IDAgMSAwIDY5LjMtNDguMyA1MC43IDUwLjcgMCAxIDAgLTY5LjMgNDguM3oiPjwvcGF0aD48L3N2Z3M+'); /* Placeholder SVG mask for stars */
+  mask-size: cover;
+}
+
+.ratingStars__star--half {
+  mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyODggNTEyIj48cGF0aCBkPSJNNjQgNDY0Yy0xNy43IDAgLTMuNy0xNC02LjQtMzEuOS0zLjctMjMuOS01LjUtNDguNC04LjEtNzMtMi45LTI4LjQtNS44LTU3LjMtNy43LTg2LjQtMS44LTI4LjYtMi43LTU3LjMtMi43Ljg2LjItMzIuMyAzLjItNjQuNSA3LjgtOTUuOSAxOS4zLTEzNy45IDc3LjEtMjQ5IDExNy41LTI3MC41IDM5LjctMjEuNSA4OC4zLTM5LjEgMTQxLjYtNDcuNCA0MC43LTYuNiA4My05LjggMTI2LjMtOS44IDc3LjcgMCAxNTAgMjEuOCAyMDMuOCA2MS42IDQ3LjQgMzQuNyA3OC4xIDgwIDg1LjEgMTMyLjQuOSAxMS45IDEuOCAyMy44IDIuNyAzNS42IDIuOSAzMy43IDMuNyA2Ny40IDMuNyAxMDEuMS4xIDI2LjMtMS4xIDUyLjUtMy41IDc4LjYtNC43IDU3LjUtMzQgMTA2LjMtODcuOCAxNDcuOC00NS45IDM0LjktOTcuMiA1OS4yLTE1Mi42IDcyLjQtMzAuMyA3LjEtNjEuNiAxMi43LTkyLjkgMTYuNy0xNy44IDIuNC0zNS45IDQuNC01My44IDYuNS05IDUuNS0xOCA5LjUtMjcuNyAxMy4xLTguNSAxMi4zLTE4LjEgMjIuOC0yNi41IDMyLjItOS45IDEwLjktMTkuNSAyMS43LTI3IDMyLjEtNy41IDEwLjctMTQgMjIuMS0xOS44IDM0LjMtMjAuOCAzNS41LTM3IDc3LjQtNDguNSAxMjEuMS01LjcgMjEuNy05LjQgNDMuOS0xMi42IDY2LjItNS40IDM3LjgtOCA3Ni4yLTcuMyAxMTQuNy41IDMxLjIgMi4yIDYyLjQgNS4zIDkyLjggNi40IDYuMiAxMy4zIDEwLjMgMjYuNSAxMC4zbDE2MC0uMSAzMiAwIDYuMyAyODguNy01OTYuMSA0OC41IDc0LjkgMTUuNnptMjI4LjctMzE2LjFjLTE1LjcgMC0yOC40IDguNS0zNC45IDE5LjEtOC41IDEzLjYtMTIgMzAuNC0xMiAzOS4yIDAgMjAuNSA4LjEgMzYuNSAxOS4xIDQ3LjQgOS4zIDkuMyAyMC44IDE0LjYgMzIuOCAxNC42IDE3LjIgMCAzMi4yLTYuNyA0My41LTE5LjYgMTIuNS0xNC41IDE5LjItMzEuNiAxOS4yLTQ3LjMgMC0xOC45LTcuNy0zNC45LTE4LjItNDQuMy02LjktNi4yLTE2LjEtMTAuMS0yNC41LTEwLjZ6bS0zMS41IDM3LjhhNTAuNyA1MC43IDAgMSAwIDY5LjMtNDguMyA1MC43IDUwLjcgMCAxIDAtNjkuMyA0OC4zIi8+PC9zdmc+'); /* Placeholder SVG mask for half stars */
+  mask-size: cover;
+}
+
+.contentTitle__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.contentInfoPoints {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.contentInfoPoint {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.contentInfoPoint__icon {
+  width: 14px;
+  height: 14px;
+  /* Add styling for icons (color, etc.) */
+}
+
+.contentBody {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.contentFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.compareButton {
+  /* Use existing button styles or define new ones */
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.priceSection__leftMiddle {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.priceSection__leftMiddleLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.priceSection__leftMiddleQuickPrice {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.priceSection__rightButton {
+  /* Use existing button styles or define new ones */
+}
+
+/* Styles for the VIEW TRIP button */
+.btnPr {
+  background-color: #aaff00; /* Contiki green */
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Space for icon if any */
+} 

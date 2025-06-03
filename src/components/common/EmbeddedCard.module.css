@@ -1,0 +1,51 @@
+/* Styles for the Embedded Card component */
+
+.embeddedCard {
+  position: relative; /* Needed for absolute positioning of text overlay */
+  overflow: hidden; /* Hide overflowing parts of the image */
+  border-radius: 8px; /* Example rounded corners */
+  /* Add width and height or aspect ratio styles as needed */
+}
+
+.embeddedCard__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the container without distortion */
+}
+
+.embeddedCard__text {
+  position: absolute; /* Position text overlay on top of the image */
+  top: 0;
+  left: 0;
+  width: 100%; /* Take full width of the parent */
+  height: 100%; /* Take full height of the parent */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically and horizontally */
+  text-align: center;
+  padding: 32px 12px; /* Padding from screenshot */
+  box-sizing: border-box; /* Include padding in width/height */
+  /* Add background color/gradient and text color styles here */
+  background-color: rgba(0, 0, 0, 0); /* From screenshot - adjust as needed */
+  color: rgb(0, 0, 0); /* From screenshot - adjust as needed */
+  font-family: soleil, sans-serif; /* From screenshot */
+  font-weight: 400; /* From screenshot */
+  text-size-adjust: 100%; /* From screenshot */
+  unicode-bidi: isolate; /* From screenshot */
+}
+
+.embeddedCard__button {
+  /* Styles for the button within the text overlay - you might use existing button styles */
+  margin-top: auto; /* Push the button to the bottom */
+}
+
+.embeddedCard__button-pr {
+  /* Specific styles for this button variant if needed */
+}
+
+/* Add styles for the text within the button if necessary */
+.text-button-l {
+  /* Styles for the button text */
+} 

@@ -59,7 +59,7 @@ const PopularTrips = () => {
     {
       id: 3,
       title: "European Horizon",
-      image: "https://www.contiki.com/media/nbm4l7pr/greece-promo-banner.jpg?center=0.5%2C0.5&format=webp&height=600&mode=crop&quality=80&width=1200",
+      image: "https://www.contiki.com/media/y5mczjrf/2997eurs2013-1-1.jpg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=900&amp;height=450&amp;quality=80",
       rating: 4.6,
       days: 10,
       places: 13,
@@ -97,77 +97,83 @@ const PopularTrips = () => {
   };
 
   const handleNext = () => {
-    setActiveSlide((prev) => (prev === 1 ? 1 : prev + 1));
+    setActiveSlide((prev) => (prev === Math.ceil(trips.length / 3) - 1 ? Math.ceil(trips.length / 3) - 1 : prev + 1));
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex justify-between items-center mb-8 md:mb-12">
-          <div className="flex flex-col items-center w-full">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 tracking-tight text-center mb-2">Popular Trips</h2>
-            <div className="w-16 h-1 bg-[#CCFF00] rounded-full"></div>
-          </div>
-          <div className="flex space-x-4 flex-shrink-0">
-            <button
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="flex items-center justify-center mb-12 relative">
+          <h2 className="text-[32px] font-extrabold" style={{ color: 'rgb(41, 41, 41)', textTransform: 'none' }}>Popular Trips</h2>
+          <div className="flex items-center gap-3 absolute right-0 top-1/2 transform -translate-y-1/2">
+            <button 
               onClick={handlePrev}
-              className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center w-10 h-10"
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={activeSlide === 0}
-              aria-label="Previous slide"
             >
-              <ChevronLeft className={`h-5 w-5 ${activeSlide === 0 ? 'text-gray-400' : 'text-gray-700'}`} />
+              <ChevronLeft className="w-5 h-5 text-gray-700" />
             </button>
-            <button
+            <button 
               onClick={handleNext}
-              className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center w-10 h-10"
-              disabled={activeSlide === 1}
-              aria-label="Next slide"
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={activeSlide === Math.ceil(trips.length / 3) - 1}
             >
-              <ChevronRight className={`h-5 w-5 ${activeSlide === 1 ? 'text-gray-400' : 'text-gray-700'}`} />
+              <ChevronRight className="w-5 h-5 text-gray-700" />
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 md:mb-12">
-          {activeSlide === 0 && (
-            <>
-              <ContikiTripCard {...trips[0]} />
-              <ContikiTripCard {...trips[1]} />
-              <div className="md:col-span-2 lg:col-span-1">
-                <PromotionCard {...greecePromo} />
-              </div>
-              <ContikiTripCard {...trips[2]} />
-            </>
-          )}
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Render items based on active slide */}
+          {trips.slice(activeSlide * 3, (activeSlide * 3) + 2).map((trip) => (
+             <ContikiTripCard key={trip.id} {...trip} />
+          ))}
 
-          {activeSlide === 1 && (
-            <>
-              <ContikiTripCard {...trips[3]} />
-              <div className="md:col-span-3 lg:col-span-full flex justify-center items-center p-12">
-                <p className="text-lg text-gray-500">More trips coming soon!</p>
-              </div>
-            </>
-          )}
+          {/* Promotional Card */}
+          <div className="relative rounded-[8px] overflow-hidden aspect-[3/4] group">
+            <img 
+              src="https://www.contiki.com/media/bi2ngwbt/asia-with-contiki_embedded-card.jpg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=642&amp;height=772.5&amp;quality=30" 
+              alt="Asia with Contiki" 
+              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+              <Link 
+                to="/en-gb/activity/asia-with-contiki"
+                className="inline-block bg-secondary text-black py-3 px-6 rounded-full font-extrabold text-[13px] hover:bg-[#b8e600] transition-colors uppercase tracking-[0.5px] shadow-[0_2px_4px_rgba(0,0,0,0.1)] text-center"
+              >
+                LET'S GO
+              </Link>
+            </div>
+          </div>
+          
+          {trips.slice((activeSlide * 3) + 2, (activeSlide * 3) + 3).map((trip) => (
+               <ContikiTripCard key={trip.id} {...trip} />
+            ))}
+
         </div>
 
-        <div className="flex justify-center space-x-2 mt-8 md:mt-10">
-          <button
-            onClick={() => setActiveSlide(0)}
-            className={`w-3 h-3 rounded-full transition-colors ${activeSlide === 0 ? 'bg-gray-800' : 'bg-gray-300'}`}
-            aria-label="Go to slide 1"
-          />
-          <button
-            onClick={() => setActiveSlide(1)}
-            className={`w-3 h-3 rounded-full transition-colors ${activeSlide === 1 ? 'bg-gray-800' : 'bg-gray-300'}`}
-            aria-label="Go to slide 2"
-          />
+        {/* Pagination */}
+        <div className="flex justify-center items-center gap-2 mt-8">
+          {Array.from({ length: Math.ceil(trips.length / 3) }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveSlide(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                activeSlide === index ? 'bg-black' : 'bg-gray-300'
+              }`}
+            />
+          ))}
         </div>
 
-        <div className="flex justify-center mt-10 md:mt-12">
-          <Link to="/trips">
-            <button className="bg-[#CCFF00] text-black font-extrabold py-4 px-12 rounded-full text-lg uppercase tracking-wider shadow-lg hover:bg-[#b8e600] transition-all duration-200">
-              View All Trips
-            </button>
+        {/* View All Button */}
+        <div className="text-center mt-12">
+          <Link
+            to="/tours"
+            className="inline-block bg-black text-white py-3 px-8 rounded-full font-extrabold text-[13px] hover:bg-gray-900 transition-colors uppercase tracking-[0.5px] shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+          >
+            VIEW ALL TRIPS
           </Link>
         </div>
       </div>

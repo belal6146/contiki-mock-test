@@ -68,6 +68,10 @@ export const colors = {
     900: '#171717',
   },
   
+  // Specific Contiki brand colors from blueprint
+  contikiYellow: '#FFEB3B',
+  contikiPink: '#FF0080',
+
   destructive: {
     DEFAULT: 'hsl(var(--destructive))',
     foreground: 'hsl(var(--destructive-foreground))'

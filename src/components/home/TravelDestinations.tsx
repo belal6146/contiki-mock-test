@@ -50,7 +50,7 @@ const TravelDestinations = () => {
       <div className="container mx-auto px-4 lg:px-8">
         {/* Title Section */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Travel destinations</h2>
+          <h2 className="text-[32px] font-extrabold mb-4" style={{ color: 'rgb(41, 41, 41)', textTransform: 'none' }}>Travel destinations</h2>
           <p className="text-gray-600 text-lg">Trips for 18-35s across 6 continents</p>
         </div>
 

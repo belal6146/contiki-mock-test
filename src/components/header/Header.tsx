@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import Image from 'next/image'; // Remove Next.js Image import
 // import Link from 'next/link'; // Remove Next.js Link import
-import { Menu, X, ChevronDown, Search } from 'lucide-react';
+import { Menu, X, ChevronDown, Search, MessageCircle } from 'lucide-react';
 import styles from './Header.module.css'; // Import CSS module
 // import { mainNavigationItems as NavigationData, MainNavItem, DropdownContent } from './NavigationData'; // Commenting out problematic import
 import MobileMenu from './MobileMenu';
@@ -129,14 +129,24 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
 
           <div className={styles.navRight}>
-            {/* Search Icon */}
-            <button className={styles.searchButton} aria-label="Search">
-              <Search size={20} />
-            </button>
+            {/* Search Icon and Bar */}
+             <div className={styles.searchBar}>
+                <input type="text" placeholder="Aged 18-35? Find your adventure." className={styles.searchInput} />
+                 {/* Assuming the search button is part of the search bar */}
+                 <button className={`${styles.searchButton} ${styles.searchButtonCircular}`} aria-label="Search">
+                     <Search className={styles.searchIcon} />
+                </button>
+            </div>
 
-            {/* Contact Us Dropdown */}
-            {/* Assuming ContactDropdown does not heavily rely on the full NavigationData structure */}
-            <ContactDropdown />
+            {/* Contact Info (Phone Number and Icons) */}
+             <div className={styles.contactInfo}>
+                <a href="tel:08082811120" className={styles.phoneNumber}>0808 281 1120</a>
+                 {/* Assuming the icons are in a separate div for styling */}
+                 <div className={styles.contactIcons}>
+                     <MessageCircle className={styles.contactIcon} />
+                     {/* Add other icons as needed, e.g., Mail */}
+                 </div>
+            </div>
 
             {/* Mobile Menu Button */}
             <button onClick={toggleMobileMenu} className={styles.mobileMenuButton} aria-label="Toggle Mobile Menu">

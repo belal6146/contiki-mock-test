@@ -19,7 +19,7 @@ const TrendingDestinations = () => {
       <div className="container mx-auto px-4 lg:px-8 text-center max-w-screen-xl">
         {/* Title - Corrected capitalization and styling */}
         {/* Note: Title capitalization issue persists due to tool limitations */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 md:mb-20 text-gray-800">Trending destinations</h2>
+        <h2 className="text-[32px] font-extrabold mb-12 md:mb-20" style={{ color: 'rgb(41, 41, 41)', textTransform: 'none' }}>Trending destinations</h2>
 
         {/* Destinations Grid - Adjusted gap and column layout for responsiveness */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-20">
