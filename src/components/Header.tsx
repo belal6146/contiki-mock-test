@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, ChevronDown, Menu } from "lucide-react";
+import { Search, ChevronDown, Menu, MessageSquare } from "lucide-react";
 import MenuLink from "./header/MenuLink";
 import DropdownItems from "./header/DropdownItems";
 import MobileMenu from "./header/MobileMenu";
@@ -37,6 +37,7 @@ const Header = () => {
 
   const handleLinkClick = (label: string) => {
     trackEvent('Navigation', 'Click', label);
+    setActiveDropdown(null);
   };
 
   const handleNewsletterClick = (e: React.MouseEvent) => {
@@ -55,62 +56,92 @@ const Header = () => {
     trackEvent('Navigation', 'Dropdown Toggle', label);
   };
 
+  // Close dropdown when clicking outside (basic implementation)
+  // You might need a more sophisticated solution depending on your needs
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return; // Basic check
+      // Check if the click is outside any dropdown content or dropdown trigger
+      const dropdownTriggers = document.querySelectorAll(`.${styles.navItemContainer}`);
+      const dropdownContents = document.querySelectorAll(`.${styles.dropdownContent}`);
+
+      let isClickInsideDropdown = false;
+      dropdownTriggers.forEach(trigger => {
+        if (trigger.contains(event.target as Node)) {
+          isClickInsideDropdown = true;
+        }
+      });
+      dropdownContents.forEach(content => {
+         if (content.contains(event.target as Node)) {
+          isClickInsideDropdown = true;
+        }
+      });
+
+      if (!isClickInsideDropdown) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [styles.navItemContainer, styles.dropdownContent]);
+
   return (
     <header className={styles.header}>
       {/* Topbar */}
-      <div id="topbar" className={styles.topbar} role="navigation" aria-label="Top navigation">
+      <div className={styles.topbar} role="navigation" aria-label="Top navigation">
         <div className={styles.topbarWrapper}>
-          <div className={styles.topbarRightSide}>
-            <div className={styles.topbarLinks}>
-              <Link 
-                className={styles.topbarLink} 
-                to="/contact" 
-                onClick={() => handleLinkClick('Contact us')}
-                aria-label="Contact us"
-              >
-                Contact us
-              </Link>
-              <Link 
-                className={styles.topbarLink} 
-                to="/future-travel-credit" 
-                onClick={() => handleLinkClick('Future Travel Credit')}
-                aria-label="Future Travel Credit"
-              >
-                Future Travel Credit
-              </Link>
-              <button 
-                className={styles.topbarLink} 
-                onClick={handleNewsletterClick}
-                aria-label="Subscribe to emails"
-              >
-                Subscribe to emails
-              </button>
-              <a 
-                className={styles.topbarLink} 
-                href="https://my.contiki.com/login" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => handleLoginClick('traveller')}
-                aria-label="Traveller log in"
-              >
-                Traveller log in
-              </a>
-              <a 
-                className={styles.topbarLink} 
-                href="https://agents.ttc.com/login" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => handleLoginClick('agent')}
-                aria-label="Agent log in"
-              >
-                Agent log in
-              </a>
-            </div>
+          <div className={styles.topbarLinks}>
+            <Link
+              className={styles.topbarLink}
+              to="/en-gb/contact"
+              onClick={() => handleLinkClick('Contact us')}
+              title="Contact us"
+            >
+              Contact us
+            </Link>
+            <Link
+              className={styles.topbarLink}
+              to="/en-gb/resources/ftc"
+              onClick={() => handleLinkClick('Future Travel Credit')}
+              title="Future Travel Credit"
+            >
+              Future Travel Credit
+            </Link>
+            <button
+              className={styles.topbarLink}
+              onClick={handleNewsletterClick}
+              title="Subscribe to emails"
+            >
+              Subscribe to emails
+            </button>
+            <a
+              className={styles.topbarLink}
+              href="https://my.contiki.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleLoginClick('traveller')}
+              title="Traveller log in"
+            >
+              Traveller log in
+            </a>
+            <a
+              className={styles.topbarLink}
+              href="https://agents.ttc.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleLoginClick('agent')}
+              title="Agent log in"
+            >
+              Agent log in
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Navigation */}
       <div className={styles.navbarWrapper}>
         <div className={styles.navbarLinks}>
           {/* Menu Button */}
@@ -123,12 +154,28 @@ const Header = () => {
           </button>
 
           {/* Logo */}
-          <Link className={styles.navbarLogo} to="/" aria-label="Contiki Home">
-            <img 
-              src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg" 
-              alt="Contiki" 
-              className={styles.navbarLogoImage}
-            />
+          <Link className={styles.navbarLogo} to="/en-gb" aria-label="Contiki Home">
+            <picture className={styles.navbarLogoImage}>
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=400&amp;height=400&amp;quality=80" 
+                media="(max-width: 768px) and (-webkit-min-device-pixel-ratio: 2)"
+              />
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=200&amp;height=200&amp;quality=80" 
+                media="(max-width: 768px)"
+              />
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=1600&amp;height=400&amp;quality=80" 
+                media="(-webkit-min-device-pixel-ratio: 2)"
+              />
+              <img 
+                src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+                data-src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+                alt="image" 
+                className={styles.navbarLogoImage}
+                draggable="true"
+              />
+            </picture>
           </Link>
 
           {/* Main Menu */}
@@ -165,31 +212,30 @@ const Header = () => {
               </div>
             ))}
           </nav>
-        </div>
 
-        {/* Navbar Aside */}
-        <div className={styles.navbarAside}>
-          {/* Search */}
-          <div className={styles.search} role="search">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="search" 
-                placeholder="Aged 18-35? Find your adventure" 
-                className={styles.searchInput} 
-                aria-label="Search"
+          {/* Search Bar and Contact Info */}
+          <div className={styles.navbarRightSide}>
+            {/* Search Bar */}
+            <div className={styles.searchBar}>
+              <input
+                type="text"
+                placeholder="Aged 18-35? Find your adventure."
+                className={styles.searchInput}
               />
-              <button 
-                type="submit" 
-                className={styles.searchButton}
-                aria-label="Search"
-              >
+              <button className={`${styles.searchButton} ${styles.searchButtonCircular}`}>
                 <Search className={styles.searchIcon} />
               </button>
-            </form>
-          </div>
+            </div>
 
-          {/* Contact */}
-          <ContactDropdown />
+            {/* Contact Info */}
+            <div className={styles.contactInfo}>
+              <span className={styles.phoneNumber}>0808 281 1120</span>
+              <div className={styles.contactIcons}>
+                <MessageSquare className={styles.contactIcon} />
+                <ChevronDown className={styles.contactIcon} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

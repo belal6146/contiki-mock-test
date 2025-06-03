@@ -8,7 +8,7 @@ const AsiaPromoSection = () => {
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
         style={{
-          backgroundImage: `url('https://www.contiki.com/media/4f5tft0w/hero-asia.jpg?center=0.5%2C0.5&mode=crop&width=1200&height=600&rnd=133568878354900000')`,
+          backgroundImage: `url('https://www.contiki.com/media/smpji2l0/group-of-young-people-riding-bikes-vietnam-road.jpg')`,
         }}
       ></div>
       {/* Overlay */}

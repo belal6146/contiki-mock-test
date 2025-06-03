@@ -98,7 +98,7 @@ const App = () => {
             <div id="insideChatPaneHeader" style={{ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(0, 0, 0)' }}>
               <h1 id="insideChatPaneHeaderImageWrapper" tabIndex={0} aria-label="Chat Now" style={{ textAlign: 'left', paddingLeft: '20px' }}>
                 <span className="imageAlignHelper"></span>
-                <img alt="" aria-role="presentation" src="https://eu2-cdn.inside-graph.com/custom/3-contiki-header-black-AM.svg?1748104561464" />
+                <img alt="" role="presentation" src="https://eu2-cdn.inside-graph.com/custom/3-contiki-header-black-AM.svg?1748104561464" />
               </h1>
               <div id="insideChatPaneButtons">
                 <div style={{ display: 'none' }} id="insideChatPaneBackButton" aria-label="Back to Main Menu" role="button" className="insideChatPaneHeaderButton hasTooltip" tabIndex={0}>

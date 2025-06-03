@@ -1,26 +1,42 @@
-/* Header */
+/* Add these styles to src/components/header/Header.module.css */
+
+/* General Header styles (adjust as needed) */
 .header {
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 50;
   background-color: white;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-width: 100vw; /* Ensure header doesn't exceed viewport width */
 }
 
 /* Topbar */
 .topbar {
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 0.5rem 0;
+  background-color: #f5f5f5; /* Used existing color, adjust if needed */
+  border-bottom: 1px solid #e5e5e5; /* Used existing border, adjust if needed */
+  padding: 10px 20px; /* Adjusted padding */
+  display: flex;
+  justify-content: flex-end; /* Align links to the right */
+  align-items: center;
 }
 
 .topbarWrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  align-items: center;
+  color: rgb(0, 0, 0);
   display: flex;
+  font-family: soleil, sans-serif;
+  font-weight: 400;
+  /* Removed old padding */
+  text-size-adjust: 100%;
+  unicode-bidi: isolate;
+  width: 100%;
   justify-content: flex-end;
+  max-width: 1200px; /* Adjusted max-width to match navbarWrapper */
+  margin: 0 auto; /* Center the content */
+  padding: 0 20px;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .topbarRightSide {
@@ -30,13 +46,14 @@
 
 .topbarLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: 15px; /* Adjusted gap */
+  /* Add font size, color, etc. for links */
 }
 
 .topbarLink {
-  color: #666;
+  color: #666; /* Used existing color */
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 14px; /* Adjusted font size */
   transition: color 0.2s;
   background: none;
   border: none;
@@ -50,18 +67,21 @@
 
 /* Navbar */
 .navbarWrapper {
-  max-width: 1200px;
+  max-width: 1200px; /* Kept existing max-width */
   margin: 0 auto;
-  padding: 1rem;
+  padding: 10px 20px; /* Adjusted padding */
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Distribute space between logo/nav and right side */
   align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .navbarLinks {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2rem; /* Keep this gap for space between logo/nav and right side */
+  width: 100%;
 }
 
 .navbarMenuButton {
@@ -79,72 +99,104 @@
 
 .navbarLogo {
   display: block;
+  margin-right: 30px; /* Added margin-right to create space between logo and navigation */
 }
 
 .navbarLogoImage {
-  height: 40px;
+  height: 40px; /* Kept existing height */
   width: auto;
 }
 
 .navbarMenu {
   display: flex;
-  gap: 2rem;
+  gap: 20px; /* Adjusted gap */
+  /* Removed margin-left */
+  flex-grow: 1; /* Allow navigation to take available space */
+  align-items: center; /* Vertically align nav items */
 }
 
 .navItem {
-  position: relative;
+  position: relative; /* Needed for dropdown positioning */
+  /* Add font size, color, etc. for nav items */
 }
 
 .navItemContainer {
+  /* Styles for the button/link that triggers dropdown */
   background: none;
   border: none;
-  padding: 0.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  padding: 5px 0; /* Adjusted padding */
 }
 
 .navItemContentWrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+   display: flex;
+   align-items: center;
 }
 
 .navItemButtonText {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #333;
+  font-size: 1rem; /* Kept existing font size */
+  font-weight: 500; /* Kept existing font weight */
+  color: #333; /* Kept existing color */
+  text-transform: uppercase;
 }
 
 .navItemArrow {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.2s;
+  width: 16px; /* Kept existing width */
+  height: 16px; /* Kept existing height */
+  margin-left: 5px; /* Space between text and arrow */
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  color: inherit;
 }
 
 .navItemArrowActive {
   transform: rotate(180deg);
 }
 
-/* Navbar Aside */
+/* Remove old unused styles */
+/*
+.navbarContact {
+  margin-left: auto;
+}
+
 .navbarAside {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-/* Search */
 .search {
   position: relative;
 }
 
 .searchInput {
-  padding: 0.5rem 2.5rem 0.5rem 1rem;
-  border: 1px solid #e5e5e5;
-  border-radius: 4px;
-  width: 300px;
-  font-size: 0.875rem;
+  appearance: auto;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 80px;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  cursor: text;
+  display: block;
+  font-family: 'acumin-pro-semi-condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 48px;
+  line-height: 21px;
+  margin: 0;
+  outline: none;
+  overflow: clip;
+  padding: 16px 64px 16px 24px;
+  position: absolute;
+  right: 0px;
+  text-align: start;
+  text-size-adjust: 100%;
+  top: 0px;
+  transition: all 0.5s ease 0s;
+  width: 324px;
+  word-spacing: 0px;
 }
 
 .searchButton {
@@ -163,21 +215,108 @@
   height: 20px;
   color: #666;
 }
+*/
+
+/* Right side of Main Navigation (Search Bar and Contact Info) */
+.navbarRightSide {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between search bar and contact info */
+}
+
+/* Search Bar styles */
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 20px; /* Rounded corners */
+  padding: 5px 10px; /* Adjust padding */
+  background-color: #f9f9f9; /* Example light background in search bar */
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  padding: 0 5px; /* Adjust padding */
+  background: none; /* Transparent background */
+  /* Add font size and color */
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styles for the circular search button */
+.searchButtonCircular {
+    width: 30px; /* Example size */
+    height: 30px; /* Example size */
+    border-radius: 50%; /* Make it circular */
+    background-color: #aaff00; /* Example bright yellow/green */
+    color: #000; /* Example icon color */
+    margin-left: 5px; /* Space between input and button */
+}
+
+.searchIcon {
+    width: 18px; /* Example icon size */
+    height: 18px; /* Example icon size */
+}
+
+
+/* Contact Info styles (Phone number and icons) */
+.contactInfo {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between phone number and icons */
+  /* Add font size and color for phone number */
+}
+
+.phoneNumber {
+    font-weight: bold; /* Example styling */
+    font-size: 16px; /* Example size */
+}
+
+.contactIcons {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between icons */
+}
+
+.contactIcon {
+    width: 20px; /* Example icon size */
+    height: 20px; /* Example icon size */
+    /* Add icon color */
+}
+
+
+/* Mobile Menu Button (hide on desktop) */
+.navbarMenuButton {
+  display: none; /* Hide by default on desktop */
+  /* Use media queries to show on mobile */
+}
+
+/* You will need to add media queries to handle responsive behavior
+   and adjust styles for mobile views based on the images if needed */
+
 
 /* Dropdown */
 .dropdownContent {
   position: absolute;
-  top: 100%;
+  top: 100%; /* Position below the nav item */
   left: 0;
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 200px;
-  z-index: 100;
+  z-index: 10; /* Ensure it appears above other content */
+  background-color: #fff; /* Example background */
+  border: 1px solid #eee; /* Example border */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Example shadow */
+  /* Add padding and other styling */
 }
 
-/* Newsletter */
+/* Added newsletter styles */
 .newsletterOverlay {
   position: fixed;
   top: 0;
@@ -312,9 +451,7 @@
     gap: 1rem;
   }
 
-  .navbarAside {
-    gap: 1rem;
-  }
+  /* Removed navbarAside display none */
 
   .searchInput {
     width: 200px;
@@ -341,4 +478,82 @@
   .searchInput {
     width: 150px;
   }
-} 
+}
+
+/* Contact Dropdown */
+.contactDropdown {
+  position: relative;
+}
+
+.contactDropdownTrigger {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactDropdownIcon {
+  width: 24px;
+  height: 24px;
+  color: #666;
+}
+
+.contactDropdownContent {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.contactDropdownSection {
+  margin-bottom: 1rem;
+}
+
+.contactDropdownSection:last-child {
+  margin-bottom: 0;
+}
+
+.contactDropdownHeading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.contactDropdownItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contactDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.contactDropdownItem:hover {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.contactDropdownItemIcon {
+  width: 16px;
+  height: 16px;
+  color: #666;
+}

@@ -8,7 +8,7 @@ const SaveOnTripsSection = () => {
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
         style={{
-          backgroundImage: `url('https://www.contiki.com/media/k1n1cn3v/hero-save-on-trips.jpg?center=0.5%2C0.5&mode=crop&width=1200&height=600&rnd=133568878354900000')`,
+          backgroundImage: `url('https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg')`,
         }}
       ></div>
       {/* Overlay */}
