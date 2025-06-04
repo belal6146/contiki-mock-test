@@ -74,13 +74,14 @@
   align-items: center;
   box-sizing: border-box; /* Include padding in width calculation */
   height: 65px; /* Adjusted height for navbar */
+  flex-wrap: nowrap; /* Prevent wrapping in the main navbar wrapper */
 }
 
 .navbarLinks {
   display: flex;
   align-items: center;
-  gap: 35px; /* Adjusted gap */
-  width: 100%;
+  gap: 40px; /* Adjusted gap between logo/nav and right side based on blueprint */
+  flex-shrink: 0; /* Prevent shrinking of the left section */
 }
 
 .navbarMenuButton {
@@ -98,7 +99,8 @@
 
 .navbarLogo {
   display: block;
-  margin-right: 40px; /* Adjusted margin-right to create space between logo and navigation */
+  margin-right: 50px; /* Adjusted margin-right to create space between logo and navigation based on blueprint */
+  flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .navbarLogoImage {
@@ -108,13 +110,14 @@
 
 .navbarMenu {
   display: flex;
-  gap: 30px; /* Adjusted gap */
-  flex-grow: 1; /* Allow navigation to take available space */
+  gap: 30px; /* Adjusted gap between navigation items based on blueprint */
   align-items: center; /* Vertically align nav items */
+  flex-shrink: 0; /* Prevent navigation menu from shrinking */
 }
 
 .navItem {
   position: relative; /* Needed for dropdown positioning */
+  flex-shrink: 0; /* Prevent individual nav items from shrinking */
 }
 
 .navItemContainer {
@@ -132,20 +135,23 @@
 }
 
 .navItemButtonText {
-  font-size: 14px; /* Adjusted font size */
-  font-weight: 600; /* Adjusted font weight */
-  color: #333; /* Kept existing color */
+  font-family: "acumin-pro-semi-condensed", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 19.6px;
+  color: rgb(0, 0, 0);
   text-transform: uppercase;
-  letter-spacing: 0.75px; /* Adjusted letter spacing */
+  white-space: nowrap; /* Prevent text wrapping in navigation links */
 }
 
 .navItemArrow {
-  width: 14px; /* Adjusted width */
-  height: 14px; /* Adjusted height */
-  margin-left: 4px; /* Adjusted space between text and arrow */
+  width: 12px; /* Adjusted width */
+  height: 12px; /* Adjusted height */
+  margin-left: 3px; /* Adjusted space between text and arrow */
   transition: transform 0.3s ease;
   cursor: pointer;
   color: inherit;
+  flex-shrink: 0; /* Prevent arrow from shrinking */
 }
 
 .navItemArrowActive {
@@ -219,6 +225,7 @@
   display: flex;
   align-items: center;
   gap: 25px; /* Adjusted space between search bar and contact info */
+  flex-shrink: 0; /* Prevent the entire right section from shrinking */
 }
 
 /* Search Bar styles */
@@ -230,6 +237,7 @@
   padding: 4px 12px; /* Adjusted padding */
   background-color: #fff; /* Ensure white background */
   height: 32px; /* Adjusted height */
+  flex-shrink: 0; /* Prevent search bar from shrinking */
 }
 
 .searchInput {
@@ -240,6 +248,7 @@
   font-size: 14px; /* Adjusted font size */
   color: #333; /* Adjusted font color */
   width: 150px; /* Example width, adjust as needed */
+  white-space: nowrap; /* Prevent text wrapping in search input */
 }
 
 .searchButton {
@@ -250,6 +259,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0; /* Prevent search button from shrinking */
 }
 
 /* Styles for the circular search button */
@@ -284,18 +294,21 @@
     color: #333; /* Adjusted color */
     text-decoration: none; /* Remove underline */
     white-space: nowrap; /* Prevent wrapping */
+    flex-shrink: 0; /* Prevent phone number from shrinking */
 }
 
 .contactIcons {
     display: flex;
     align-items: center;
     gap: 3px; /* Adjusted space between icons */
+    flex-shrink: 0; /* Prevent icons container from shrinking */
 }
 
 .contactIcon {
     width: 16px; /* Adjusted icon size */
     height: 16px; /* Adjusted icon size */
     color: #666; /* Adjusted icon color */
+    flex-shrink: 0; /* Prevent individual icons from shrinking */
 }
 
 
