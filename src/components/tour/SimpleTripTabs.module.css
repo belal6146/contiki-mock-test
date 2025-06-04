@@ -1,0 +1,79 @@
+.tabSection {
+  /* Sticky positioning and background handled by Tailwind classes in the component */
+}
+
+.container {
+  /* Max width and centering handled by Tailwind classes in the component */
+}
+
+.tabsContainer {
+  /* Flex display and overflow handled by Tailwind classes in the component */
+  /* Add styles to center the tabs horizontally if needed and there's extra space */
+   justify-content: center;
+}
+
+.tabButton {
+  /* Padding, font weight, transition, whitespace handled by Tailwind classes in the component */
+  /* Font size is currently handled by text-sm in component, will increase */
+  font-size: 1rem; /* Equivalent to text-base */
+  
+  /* Active state border and color handled by Tailwind classes */
+  /* Hover state color handled by Tailwind classes */
+  
+  /* Ensure consistent height */
+  height: 3.5rem; /* Roughly equivalent to px-6 py-4 */
+
+  /* Remove default button styles if needed */
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  /* Prevent text selection (to remove cursor) */
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  /* Adjust padding and spacing - Increased padding again */
+  padding: 0 2.5rem; /* Increased padding for more space */
+  position: relative; /* Needed for underline positioning */
+}
+
+/* Styles for the active tab */
+.tabButton.active {
+  color: #000; /* Active text is black */
+  font-weight: 700; /* Increased font weight for active tab */
+}
+
+/* Add the underline using a pseudo-element */
+.tabButton.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Position it at the very bottom of the button */
+  left: 0; /* Position from the left */
+  right: 0; /* Position from the right */
+  height: 3px; /* Slightly thicker underline based on image */
+  background-color: #CCFF00; /* Yellow-green color */
+  transition: background-color 0.3s ease-in-out; /* Transition color as well */
+}
+
+/* Styles for inactive tabs */
+.tabButton.text-gray-500 {
+    color: #a0a0a0; /* Lighter gray color based on image */
+    font-weight: 400; /* Standard font weight for inactive */
+}
+
+/* Hover style for inactive tabs */
+.tabButton.hover\:text-black:hover {
+    color: #000; /* Hover text is black */
+}
+
+/* Adjust font size for smaller screens if needed */
+@media (max-width: 768px) {
+  .tabButton {
+    font-size: 0.875rem; /* text-sm */
+    padding: 0 1.5rem;
+     height: 3rem; /* Adjust height for smaller screens */
+  }
+    /* Underline for smaller screens - should still span full width */
+    /* left and right handle width here */
+} 

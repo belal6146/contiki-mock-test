@@ -10,7 +10,7 @@ import TourDetailHead from '@/components/tour-detail/TourDetailHead';
 import TourDetailSkeleton from '@/components/tour-detail/TourDetailSkeleton';
 import TourNotFound from '@/components/tour-detail/TourNotFound';
 import TourErrorState from '@/components/tour-detail/TourErrorState';
-import TabNav from '@/components/tour/TabNav';
+import SimpleTripTabs from '@/components/tour/SimpleTripTabs';
 import PriceBar from '@/components/tour/PriceBar';
 import ChatNowButton from '@/components/tour/ChatNowButton';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -143,7 +143,7 @@ const TourDetail = () => {
         </div>
         
         {/* TabNav */}
-        <TabNav 
+        <SimpleTripTabs 
           tabs={tabs} 
           activeTab={activeTab} 
           onChange={(tabId) => {
@@ -156,7 +156,7 @@ const TourDetail = () => {
             tour={tour}
             onRetry={handleRetry}
           />
-        </TabNav>
+        </SimpleTripTabs>
         
         {/* ChatNow Button */}
         <ChatNowButton />
