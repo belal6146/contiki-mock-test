@@ -143,8 +143,33 @@ const Header = () => {
 
       {/* Main Navigation */}
       <div className={styles.navbarWrapper}>
+        {/* Logo */}
+        <Link className={styles.navbarLogo} to="/" aria-label="Contiki Home">
+          <picture className={styles.navbarLogoImage}>
+            <source 
+              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=400&amp;height=400&amp;quality=80" 
+              media="(max-width: 768px) and (-webkit-min-device-pixel-ratio: 2)"
+            />
+            <source 
+              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=200&amp;height=200&amp;quality=80" 
+              media="(max-width: 768px)"
+            />
+            <source 
+              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=1600&amp;height=400&amp;quality=80" 
+              media="(-webkit-min-device-pixel-ratio: 2)"
+            />
+            <img 
+              src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+              data-src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+              alt="image" 
+              className={styles.navbarLogoImage}
+              draggable="true"
+            />
+          </picture>
+        </Link>
+
         <div className={styles.navbarLinks}>
-          {/* Menu Button */}
+          {/* Menu Button (for mobile) */}
           <button 
             className={styles.navbarMenuButton}
             onClick={() => setIsMobileMenuOpen(true)}
@@ -152,31 +177,6 @@ const Header = () => {
           >
             <Menu className={styles.navbarMenuIcon} />
           </button>
-
-          {/* Logo */}
-          <Link className={styles.navbarLogo} to="/en-gb" aria-label="Contiki Home">
-            <picture className={styles.navbarLogoImage}>
-              <source 
-                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=400&amp;height=400&amp;quality=80" 
-                media="(max-width: 768px) and (-webkit-min-device-pixel-ratio: 2)"
-              />
-              <source 
-                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=200&amp;height=200&amp;quality=80" 
-                media="(max-width: 768px)"
-              />
-              <source 
-                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=1600&amp;height=400&amp;quality=80" 
-                media="(-webkit-min-device-pixel-ratio: 2)"
-              />
-              <img 
-                src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
-                data-src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
-                alt="image" 
-                className={styles.navbarLogoImage}
-                draggable="true"
-              />
-            </picture>
-          </Link>
 
           {/* Main Menu */}
           <nav className={styles.navbarMenu} role="navigation" aria-label="Main navigation">
@@ -243,8 +243,11 @@ const Header = () => {
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-        navItems={NAV_ITEMS}
-        onLinkClick={handleLinkClick}
+        navigationData={NAV_ITEMS.map(item => ({
+          name: item.label,
+          type: item.hasDropdown ? 'dropdown' : 'link', // Assuming dropdown if hasDropdown is true
+          href: item.to,
+        }))}
       />
 
       {/* Newsletter Modal */}

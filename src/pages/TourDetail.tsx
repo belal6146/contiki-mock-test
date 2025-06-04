@@ -98,57 +98,46 @@ const TourDetail = () => {
         <Header />
         
         {/* Subheader: Breadcrumb and Share/Compare Buttons */}
-        <div className="container max-w-7xl mx-auto py-3 flex justify-between items-center border-b border-gray-200">
-          <Breadcrumb 
-            title={tour.name} 
-            destination={tour.destination} 
-          />
-           {/* Share and Add to Compare buttons */}
-          <div className="flex items-center gap-5">
-             {/* Share button */}
-            <button
-              // onClick={handleShare} // Add appropriate handler
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150"
-              aria-label="Share this tour"
-            >
-              <Share size={16} />
-              <span>Share</span>
-            </button>
-            {/* Add to Compare button */}
-            <button
-               // onClick={handleAddToCompare} // Add appropriate handler
-              className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150"
-              aria-label="Add to compare"
-            >
-              <Plus size={16} />
-              <span>Add To Compare</span>
-            </button>
+        <div className="container max-w-5xl mx-auto pt-8 pb-2 flex flex-col gap-2">
+          <div className="flex justify-between items-center">
+            <Breadcrumb title={tour.name} destination={tour.destination} />
+            <div className="flex items-center gap-5">
+              <button className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150" aria-label="Share this tour">
+                <Share size={16} />
+                <span>Share</span>
+              </button>
+              <button className="flex items-center gap-2 text-gray-700 hover:text-black text-sm font-bold transition-colors duration-150" aria-label="Add to compare">
+                <Plus size={16} />
+                <span>Add To Compare</span>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Main Header Section: Tour Info and Price/Buttons */}
-        {/* Based on Contiki HTML structure, this section contains Title, Info/Variants, and Deals */}
-        <div className="container max-w-7xl mx-auto pt-6 pb-6">
-           {/* Tour Title */}
-          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight text-black mb-4">{tour.name}</h1>
-
-          {/* Info (Rating, Reviews, Variants) and Deals (Price, Buttons) Side-by-Side */}
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
-             {/* Tour Info (Rating, Reviews, Variants) */}
-            <div className="flex-1">
-               {/* Tour Header component will now only contain Rating, Reviews, Variants */}
-               <TourHeader tour={tour} slug={slug} />
+        <div className="container max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-8 pt-2 pb-8 border-b border-gray-200">
+          {/* Left: Title, Rating, Reviews */}
+          <div className="flex-1 min-w-0">
+            <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight text-black mb-2">{tour.name}</h1>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="flex items-center">
+                <span className="text-yellow-400 mr-1">★</span>
+                <span className="font-bold text-lg text-black">{tour.rating}</span>
+              </span>
+              <span className="text-gray-600 text-base font-semibold">{tour.reviewCount} Reviews</span>
             </div>
-
-            {/* Price and Buttons Section (PriceBar) */}
-            {/* PriceBar content is now controlled by this flex container */}
-            <div className="flex-shrink-0 w-full lg:w-auto lg:min-w-[380px]">
-              <PriceBar 
-                oldPrice={tour.oldPrice} 
-                newPrice={tour.price} 
-                rating={tour.rating} 
-                reviewCount={tour.reviewCount}
-              />
+          </div>
+          {/* Right: Price and CTAs */}
+          <div className="flex flex-col items-end min-w-[320px]">
+            <div className="flex flex-col items-end">
+              <span className="uppercase text-xs text-gray-500 font-bold mb-1">From</span>
+              <span className="text-3xl md:text-4xl font-black text-black mb-1">${tour.price.toLocaleString()}</span>
+              <span className="text-xs text-gray-500 mb-2">Find this price</span>
+              <span className="text-xs text-gray-400 mb-4">Save your space with a deposit payment</span>
+            </div>
+            <div className="flex gap-3 w-full">
+              <button className="border border-gray-400 text-black font-bold px-6 py-2 rounded-full uppercase tracking-wide text-sm hover:bg-gray-100 transition">Request More Info</button>
+              <button className="bg-[#D8FD02] text-black font-bold px-6 py-2 rounded-full uppercase tracking-wide text-sm hover:bg-[#b8e600] transition">View Dates</button>
             </div>
           </div>
         </div>

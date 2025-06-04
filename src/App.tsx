@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { BookingProvider } from "@/context/BookingContext";
 import { trackPageView } from "@/lib/analytics";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { Login } from "@/pages/Login";
 
 // Import API setup to ensure interceptors are registered
 import "@/lib/api";
@@ -49,6 +51,26 @@ const App = () => {
                 <Route path="/tours/:slug" element={<TourDetail />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
+                <Route path="/login" element={<Login />} />
+                
+                {/* Protected Routes */}
+                <Route
+                  path="/who-is-travelling"
+                  element={
+                    <ProtectedRoute>
+                      <div>See Who's Travelling Page</div>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/bus-seating-plan"
+                  element={
+                    <ProtectedRoute>
+                      <div>Bus Seating Plan Page</div>
+                    </ProtectedRoute>
+                  }
+                />
+                
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

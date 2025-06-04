@@ -107,14 +107,29 @@ const Tours = () => {
       </Helmet>
       
       <Header />
+
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4 pt-6 pb-2">
+        <nav className="text-[13px] text-gray-500" aria-label="Breadcrumb">
+          <ol className="list-none p-0 inline-flex">
+            <li className="flex items-center">
+              <a href="/" className="hover:underline text-gray-500">Home</a>
+              <svg className="mx-2 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </li>
+            <li className="flex items-center">
+              <span className="text-gray-700 font-bold">Tours</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
       
       {/* Filter Bar */}
       <div className="sticky top-20 z-30 bg-white border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {/* Destination Search */}
             <div className="md:col-span-2">
-              <label htmlFor="destination" className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
+              <label htmlFor="destination" className="block text-[15px] font-extrabold text-gray-900 mb-3 uppercase tracking-[1px]">
                 Where to?
               </label>
               <div className="relative">
@@ -124,10 +139,10 @@ const Tours = () => {
                   placeholder="Search destinations"
                   value={filters.destination}
                   onChange={handleDestinationChange}
-                  className="w-full h-12 text-[15px] transition-all duration-150 ease-in-out focus:ring-[#D8FD02] border-gray-300 pl-4 pr-10"
+                  className="w-full h-14 text-[16px] font-medium transition-all duration-150 ease-in-out focus:ring-[#D8FD02] border-gray-300 pl-4 pr-10 rounded-full shadow-sm"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
@@ -136,12 +151,12 @@ const Tours = () => {
             
             {/* Year Selection */}
             <div>
-              <label className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
+              <label className="block text-[15px] font-extrabold text-gray-900 mb-3 uppercase tracking-[1px]">
                 When?
               </label>
-              <div className="flex rounded-md overflow-hidden border border-gray-300">
+              <div className="flex rounded-full overflow-hidden border border-gray-300">
                 <button
-                  className={`flex-1 py-3 px-4 text-[15px] font-bold transition-all duration-200 ${
+                  className={`flex-1 py-3 px-6 text-[16px] font-bold transition-all duration-200 rounded-l-full ${
                     filters.year === '2025' 
                       ? 'bg-[#D8FD02] text-black' 
                       : 'bg-white text-gray-700 hover:bg-gray-50'
@@ -151,7 +166,7 @@ const Tours = () => {
                   2025
                 </button>
                 <button
-                  className={`flex-1 py-3 px-4 text-[15px] font-bold transition-all duration-200 ${
+                  className={`flex-1 py-3 px-6 text-[16px] font-bold transition-all duration-200 rounded-r-full ${
                     filters.year === '2026' 
                       ? 'bg-[#D8FD02] text-black' 
                       : 'bg-white text-gray-700 hover:bg-gray-50'
@@ -165,7 +180,7 @@ const Tours = () => {
             
             {/* Travelers Input */}
             <div>
-              <label htmlFor="travelers" className="block text-[13px] font-bold text-gray-900 mb-2 uppercase tracking-[0.5px]">
+              <label htmlFor="travelers" className="block text-[15px] font-extrabold text-gray-900 mb-3 uppercase tracking-[1px]">
                 Travelers
               </label>
               <div className="relative">
@@ -175,10 +190,10 @@ const Tours = () => {
                   min="1"
                   value={filters.travelers}
                   onChange={handleTravelersChange}
-                  className="w-full h-12 text-[15px] transition-all duration-150 ease-in-out focus:ring-[#D8FD02] focus:border-[#D8FD02] border-gray-300 pl-4 pr-10 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full h-14 text-[16px] font-medium transition-all duration-150 ease-in-out focus:ring-[#D8FD02] focus:border-[#D8FD02] border-gray-300 pl-4 pr-10 rounded-full shadow-sm [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
@@ -187,15 +202,15 @@ const Tours = () => {
           </div>
 
           {/* Month and Trip Type Filters */}
-          <div className="flex flex-wrap items-center gap-6 mb-6">
+          <div className="flex flex-wrap items-center gap-8 mb-8">
             {/* Month Filters */}
             <div className="flex items-center gap-3">
-              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Month:</span>
+              <span className="text-[15px] font-extrabold text-gray-900 uppercase tracking-[1px]">Month:</span>
               <div className="flex flex-wrap gap-2">
                 {months.map(month => (
                   <button
                     key={month}
-                    className={`px-3 py-1.5 text-[13px] font-bold rounded-full transition-colors duration-200 ${
+                    className={`px-4 py-2 text-[14px] font-bold rounded-full transition-colors duration-200 ${
                       filters.month === month 
                         ? 'bg-[#D8FD02] text-black' 
                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -210,12 +225,12 @@ const Tours = () => {
 
             {/* Trip Type Filters */}
             <div className="flex items-center gap-3">
-              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Trip Type:</span>
+              <span className="text-[15px] font-extrabold text-gray-900 uppercase tracking-[1px]">Trip Type:</span>
               <div className="flex flex-wrap gap-2">
                 {tripTypes.map(type => (
                   <button
                     key={type}
-                    className={`px-3 py-1.5 text-[13px] font-bold rounded-full transition-colors duration-200 ${
+                    className={`px-4 py-2 text-[14px] font-bold rounded-full transition-colors duration-200 ${
                       filters.tripType === type 
                         ? 'bg-[#D8FD02] text-black' 
                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -230,13 +245,13 @@ const Tours = () => {
           </div>
 
           {/* Active Filters, Sort By and View Toggle */}
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Active Filters */}
             <div className="flex items-center gap-3">
-              <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Active filters:</span>
+              <span className="text-[15px] font-extrabold text-gray-900 uppercase tracking-[1px]">Active filters:</span>
               <div className="flex flex-wrap gap-2">
                 {filters.month && (
-                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[13px] font-bold px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[14px] font-bold px-4 py-2 rounded-full">
                     {filters.month}
                     <button 
                       className="ml-1 text-gray-500 hover:text-gray-700"
@@ -250,7 +265,7 @@ const Tours = () => {
                   </span>
                 )}
                 {filters.tripType && (
-                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[13px] font-bold px-3 py-1.5 rounded-full">
+                  <span className="flex items-center gap-1 bg-gray-200 text-gray-700 text-[14px] font-bold px-4 py-2 rounded-full">
                     {filters.tripType}
                     <button 
                       className="ml-1 text-gray-500 hover:text-gray-700"
@@ -267,12 +282,12 @@ const Tours = () => {
             </div>
 
             {/* Sort By and View Toggle */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-8">
               {/* Sort By */}
               <div className="flex items-center gap-2">
-                <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">Sort by:</span>
+                <span className="text-[15px] font-extrabold text-gray-900 uppercase tracking-[1px]">Sort by:</span>
                 <select 
-                  className="h-10 px-4 text-[15px] border border-gray-300 rounded-md focus:ring-[#D8FD02] focus:border-[#D8FD02] transition-all duration-150 ease-in-out"
+                  className="h-12 px-5 text-[16px] border border-gray-300 rounded-full focus:ring-[#D8FD02] focus:border-[#D8FD02] transition-all duration-150 ease-in-out"
                   onChange={(e) => {
                     trackEvent('sort_trips', { sort: e.target.value });
                   }}
@@ -287,10 +302,10 @@ const Tours = () => {
 
               {/* View Toggle */}
               <div className="flex items-center gap-2">
-                <span className="text-[13px] font-bold text-gray-900 uppercase tracking-[0.5px]">View:</span>
-                <div className="flex rounded-md overflow-hidden border border-gray-300">
+                <span className="text-[15px] font-extrabold text-gray-900 uppercase tracking-[1px]">View:</span>
+                <div className="flex rounded-full overflow-hidden border border-gray-300">
                   <button 
-                    className={`p-2 transition-colors duration-200 ${
+                    className={`p-3 transition-colors duration-200 rounded-l-full ${
                       viewType === 'grid' 
                         ? 'bg-[#D8FD02] text-black' 
                         : 'bg-white text-gray-700 hover:bg-gray-50'
@@ -303,7 +318,7 @@ const Tours = () => {
                     </svg>
                   </button>
                   <button 
-                    className={`p-2 transition-colors duration-200 ${
+                    className={`p-3 transition-colors duration-200 rounded-r-full ${
                       viewType === 'list' 
                         ? 'bg-[#D8FD02] text-black' 
                         : 'bg-white text-gray-700 hover:bg-gray-50'

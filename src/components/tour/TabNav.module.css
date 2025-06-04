@@ -15,9 +15,10 @@
 .tab__item {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
   position: relative;
+  transition: color 0.2s ease-in-out;
 }
 
 .tab__item--active {
@@ -25,24 +26,39 @@
   font-weight: 600;
 }
 
+.tab__item:hover:not(.tab__item--active) .tab__itemText {
+  color: #555;
+}
+
 .tab__itemText {
   font-size: 1rem;
   line-height: 1.5rem;
-  color: #666;
+  color: #000;
   margin: 0;
   transition: color 0.2s ease-in-out;
 }
 
 .tab__itemText--active {
   color: #000;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .tab__itemDivider {
   width: 1px;
   height: 24px;
   background-color: #e5e5e5;
-  margin: 0 0.5rem;
+  margin: 0 1rem;
+}
+
+.tab__item--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease-in-out;
 }
 
 /* Override carousel styles */
@@ -59,4 +75,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-} 
+}
+
+.tab__item--active::after {
+  width: 100%;
+}
+
+/* Add styles for the uppercase text if needed - already in JS, keeping CSS clean */ 

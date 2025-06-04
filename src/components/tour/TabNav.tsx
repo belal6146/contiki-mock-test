@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEvent } from 'react';
+import React, { useState, useEffect, KeyboardEvent, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -16,6 +16,7 @@ interface TabNavProps {
 
 const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActiveTab, onChange }) => {
   const [internalActiveTab, setInternalActiveTab] = useState(externalActiveTab || tabs[0]?.id);
+  const [mounted, setMounted] = useState(false);
   
   // Sync internal state with external prop if provided
   useEffect(() => {
@@ -23,6 +24,30 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
       setInternalActiveTab(externalActiveTab);
     }
   }, [externalActiveTab]);
+
+  // Effect to set mounted to true after component mounts
+  useEffect(() => {
+    // Use a small timeout to ensure DOM is ready and styles applied
+    const timer = setTimeout(() => {
+      setMounted(true);
+      console.debug('[TabNav] mounted effect triggered');
+
+      // Trigger a window resize event to potentially force carousel recalculation
+      try {
+        window.dispatchEvent(new Event('resize'));
+        console.debug('[TabNav] dispatched resize event');
+      } catch (e) {
+        // Fallback for older browsers that don't support new Event()
+        const resizeEvent = document.createEvent('HTMLEvents');
+        resizeEvent.initEvent('resize', true, false);
+        window.dispatchEvent(resizeEvent);
+        console.debug('[TabNav] dispatched fallback resize event');
+      }
+
+    }, 100); // Increased timeout slightly
+    
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array ensures this runs once on mount
 
   useEffect(() => {
     console.debug('[ResponsiveQA] TabNav', { 
@@ -97,46 +122,49 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
     <div className="w-full bg-white border-b border-gray-200">
       <div className="container max-w-7xl mx-auto">
         {/* Tab Headers with Carousel */}
-        <div className={styles.tab__section} style={{ '--tabs-count': tabs.length } as React.CSSProperties}>
-          <Carousel
-            responsive={responsive}
-            infinite={false}
-            showDots={false}
-            arrows={false}
-            className={styles.tab__carousel}
-            itemClass={styles.tab__item}
-            containerClass={styles.tab__container}
-          >
-            {tabs.map((tab, index) => (
-              <React.Fragment key={tab.id}>
-                <div
-                  className={cn(
-                    styles.tab__item,
-                    styles['tab__item--uppercase'],
-                    activeTab === tab.id && styles['tab__item--active']
-                  )}
-                  data-testid={activeTab === tab.id ? "tab-active" : "tab"}
-                  onClick={() => handleTabClick(tab.id)}
-                >
-                  <p 
+        {mounted && (
+          <div className={styles.tab__section} style={{ '--tabs-count': tabs.length } as React.CSSProperties}>
+            <Carousel
+              responsive={responsive}
+              infinite={false}
+              showDots={false}
+              arrows={false}
+              className={styles.tab__carousel}
+              itemClass={styles.tab__item}
+              containerClass={styles.tab__container}
+              key={mounted ? 'mounted' : 'not-mounted'}
+            >
+              {tabs.map((tab, index) => (
+                <div key={tab.id} className={cn(styles.tab__itemWrapper)}>
+                  <div
                     className={cn(
-                      styles['tab__item-text'],
-                      activeTab === tab.id && styles['tab__item-text--active']
+                      styles.tab__item,
+                      styles['tab__item--uppercase'],
+                      activeTab === tab.id && styles['tab__item--active']
                     )}
-                    data-item-type="General Interaction"
-                    data-item-name="tour-page-tab"
-                    data-testid="genericText"
+                    data-testid={activeTab === tab.id ? "tab-active" : "tab"}
+                    onClick={() => handleTabClick(tab.id)}
                   >
-                    {tab.label}
-                  </p>
+                    <p 
+                      className={cn(
+                        styles['tab__item-text'],
+                        activeTab === tab.id && styles['tab__item-text--active']
+                      )}
+                      data-item-type="General Interaction"
+                      data-item-name="tour-page-tab"
+                      data-testid="genericText"
+                    >
+                      {tab.label}
+                    </p>
+                  </div>
+                  {index < tabs.length - 1 && (
+                    <div className={styles['tab__item-divider']} data-testid="divider" />
+                  )}
                 </div>
-                {index < tabs.length - 1 && (
-                  <div className={styles['tab__item-divider']} data-testid="divider" />
-                )}
-              </React.Fragment>
-            ))}
-          </Carousel>
-        </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
         {/* Tab Content */}
         <div className="py-8">
           {children}

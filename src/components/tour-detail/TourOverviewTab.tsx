@@ -106,20 +106,18 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
 
   return (
     <div className="bg-white">
-      {/* Hero Section with Trip Description */}
       <div className="container max-w-7xl mx-auto py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left side - Image from Contiki */}
-          <div className="lg:col-span-1">
-            <img 
-              src="https://www.contiki.com/media/uhxfozab/group-of-people-in-blue-lake-surrounded-by-mountains.jpg?center=0.5%2C0.5&format=webp&height=616&mode=crop&quality=80&width=720"
-              alt="Greek islands tour - group of people in blue lake surrounded by mountains"
-              className="w-full h-[440px] object-cover rounded-2xl shadow-lg"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Hero Image */}
+          <div>
+            <img
+              src="https://www.contiki.com/media/j2ljq1yb/3211eurs2022-1.jpg?crop=0%2C0%2C0.3326776261074397%2C0&cropmode=percentage&format=webp&mode=crop&width=1920&height=800&quality=80"
+              alt="Greek Island Hopping Plus Trip"
+              className="w-full h-[420px] md:h-[520px] lg:h-[600px] object-cover rounded-2xl shadow-lg"
             />
           </div>
-          
           {/* Right side - Content */}
-          <div className="lg:col-span-1">
+          <div>
             <div className="mb-8">
               <div className="flex items-center gap-4 mb-6">
                 <span className="bg-black text-white px-3 py-1 text-xs font-bold rounded-full uppercase">I'm planning to travel in</span>
@@ -128,7 +126,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
                   <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm font-bold hover:bg-gray-200 rounded-full">2026</button>
                 </div>
               </div>
-              <h1 className="text-2xl lg:text-3xl font-black text-black mb-6 leading-tight">The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.</h1>
+              <h1 className="text-2xl lg:text-3xl font-black text-black mb-6 leading-tight normal-case">The one that takes you through Mykonos, Paros, Santorini and Ios with comfy sleeps between island hops, with upgraded accommodation too.</h1>
               {/* Trip Details Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {/* Days */}
