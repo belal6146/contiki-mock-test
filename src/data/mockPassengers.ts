@@ -1,4 +1,3 @@
-
 import { FellowTraveller } from '@/components/tour/FellowTravellerList';
 
 // Generate a comprehensive list of mock passengers
@@ -115,3 +114,5 @@ export const generateMockPassengers = (): FellowTraveller[] => {
 };
 
 export const mockPassengers = generateMockPassengers();
+export const mockPassengersFull = generateMockPassengers();
+export const mockPassengersSparse = mockPassengersFull.slice(0, 5);

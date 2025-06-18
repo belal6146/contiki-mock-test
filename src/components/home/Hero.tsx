@@ -11,8 +11,8 @@ const Hero = () => {
         {/* Background Image - Ensure full cover and center */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://www.contiki.com/media/o4zlyrai/arial-shot-of-albanian-beach.jpg"
-            alt="Aerial shot of Albanian beach"
+            src="https://www.contiki.com/media/j5spsbdx/colorful-aurora-borealis-iceland.jpg"
+            alt="Colorful Aurora Borealis in Iceland"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-black/40"></div>

@@ -123,47 +123,47 @@ const TabNav: React.FC<TabNavProps> = ({ children, tabs, activeTab: externalActi
       <div className="container max-w-7xl mx-auto">
         {/* Tab Headers with Carousel */}
         {mounted && (
-          <div className={styles.tab__section} style={{ '--tabs-count': tabs.length } as React.CSSProperties}>
-            <Carousel
-              responsive={responsive}
-              infinite={false}
-              showDots={false}
-              arrows={false}
-              className={styles.tab__carousel}
-              itemClass={styles.tab__item}
-              containerClass={styles.tab__container}
+        <div className={styles.tab__section} style={{ '--tabs-count': tabs.length } as React.CSSProperties}>
+          <Carousel
+            responsive={responsive}
+            infinite={false}
+            showDots={false}
+            arrows={false}
+            className={styles.tab__carousel}
+            itemClass={styles.tab__item}
+            containerClass={styles.tab__container}
               key={mounted ? 'mounted' : 'not-mounted'}
-            >
-              {tabs.map((tab, index) => (
+          >
+            {tabs.map((tab, index) => (
                 <div key={tab.id} className={cn(styles.tab__itemWrapper)}>
-                  <div
-                    className={cn(
-                      styles.tab__item,
-                      styles['tab__item--uppercase'],
-                      activeTab === tab.id && styles['tab__item--active']
-                    )}
-                    data-testid={activeTab === tab.id ? "tab-active" : "tab"}
-                    onClick={() => handleTabClick(tab.id)}
-                  >
-                    <p 
-                      className={cn(
-                        styles['tab__item-text'],
-                        activeTab === tab.id && styles['tab__item-text--active']
-                      )}
-                      data-item-type="General Interaction"
-                      data-item-name="tour-page-tab"
-                      data-testid="genericText"
-                    >
-                      {tab.label}
-                    </p>
-                  </div>
-                  {index < tabs.length - 1 && (
-                    <div className={styles['tab__item-divider']} data-testid="divider" />
+                <div
+                  className={cn(
+                    styles.tab__item,
+                    styles['tab__item--uppercase'],
+                    activeTab === tab.id && styles['tab__item--active']
                   )}
+                  data-testid={activeTab === tab.id ? "tab-active" : "tab"}
+                  onClick={() => handleTabClick(tab.id)}
+                >
+                  <p 
+                    className={cn(
+                      styles['tab__item-text'],
+                      activeTab === tab.id && styles['tab__item-text--active']
+                    )}
+                    data-item-type="General Interaction"
+                    data-item-name="tour-page-tab"
+                    data-testid="genericText"
+                  >
+                    {tab.label}
+                  </p>
                 </div>
-              ))}
-            </Carousel>
-          </div>
+                {index < tabs.length - 1 && (
+                  <div className={styles['tab__item-divider']} data-testid="divider" />
+                )}
+                </div>
+            ))}
+          </Carousel>
+        </div>
         )}
         {/* Tab Content */}
         <div className="py-8">

@@ -1,7 +1,5 @@
-
 import { useState } from 'react';
 import { SeatData, BookingPassenger } from './SeatMapTypes';
-import { mockPassengers } from '@/data/mockPassengers';
 
 export const useSeatSelection = (passengers: BookingPassenger[]) => {
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
@@ -11,7 +9,7 @@ export const useSeatSelection = (passengers: BookingPassenger[]) => {
   // Create seat layout with driver, courier, toilet, and passenger seats
   const generateSeats = (): SeatData[] => {
     const seats: SeatData[] = [];
-    const enhancedPassengers = mockPassengers.slice(0, 40);
+    const enhancedPassengers = passengers.slice(0, 40);
     
     // Generate 18 rows of seats (2 seats per row = 36 passenger seats)
     for (let row = 1; row <= 18; row++) {

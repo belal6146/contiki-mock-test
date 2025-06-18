@@ -11,7 +11,7 @@ import YearSelector from './dates/YearSelector';
 import FiltersSection from './dates/FiltersSection';
 import ActiveFilters from './dates/ActiveFilters';
 import ResultsSummary from './dates/ResultsSummary';
-import { mockBookingData } from './dates/mockData';
+import { mockPassengersFull, mockPassengersSparse } from '@/data/mockPassengers';
 
 interface TourDatesTabProps {
   trip: Trip;
@@ -24,6 +24,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
   const [selectedYear, setSelectedYear] = useState<string>('2025');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [useFullPassengers, setUseFullPassengers] = useState(true);
   
   // Generate departure options
   const options = generateDepartureOptions(trip);
@@ -125,6 +126,22 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
               {/* Results Summary */}
               <ResultsSummary optionsCount={options.length} />
 
+              {/* Toggle for mock passenger data */}
+              <div className="flex justify-center mb-6">
+                <button
+                  onClick={() => setUseFullPassengers(true)}
+                  className={`px-4 py-2 rounded-l-md text-sm font-semibold ${useFullPassengers ? 'bg-black text-white' : 'bg-gray-200 text-gray-700'}`}
+                >
+                  Show &gt;= 10 Travelers (Current: {mockPassengersFull.length})
+                </button>
+                <button
+                  onClick={() => setUseFullPassengers(false)}
+                  className={`px-4 py-2 rounded-r-md text-sm font-semibold ${!useFullPassengers ? 'bg-black text-white' : 'bg-gray-200 text-gray-700'}`}
+                >
+                  Show &lt; 10 Travelers (Current: {mockPassengersSparse.length})
+                </button>
+              </div>
+
               {/* Departure Options */}
               <div className="space-y-0 mb-10">
                 {options.map((option) => (
@@ -138,7 +155,7 @@ const TourDatesTab: React.FC<TourDatesTabProps> = ({ trip }) => {
                     onBookByPhone={handleBookByPhone}
                     onRequestInfo={handleRequestInfo}
                     tripTypeLabels={tripTypeLabels}
-                    passengers={mockBookingData}
+                    passengers={useFullPassengers ? mockPassengersFull : mockPassengersSparse}
                   />
                 ))}
               </div>

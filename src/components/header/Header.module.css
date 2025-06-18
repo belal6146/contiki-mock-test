@@ -16,9 +16,9 @@
 .topbar {
   background-color: #ffffff;
   border-bottom: 1px solid #e5e5e5;
-  padding: 6px 20px; /* Keep padding for left/right spacing of content */
+  padding: 6px 20px;
   display: flex;
-  justify-content: center; /* Center the wrapper within the topbar */
+  justify-content: flex-end; /* Align content to the right */
   align-items: center;
 }
 
@@ -30,10 +30,8 @@
   font-weight: 400;
   text-size-adjust: 100%;
   unicode-bidi: isolate;
-  width: 100%; /* Ensure wrapper takes full width inside topbar padding */
-  justify-content: flex-end; /* Align content inside wrapper to the right */
-  max-width: 1200px; /* Revert max-width */
-  margin: 0 auto; /* Center the wrapper */
+  width: auto; /* Allow wrapper to take natural width */
+  justify-content: flex-end; /* Ensure content inside wrapper aligns right */
   padding: 0;
   box-sizing: border-box;
   height: 28px;

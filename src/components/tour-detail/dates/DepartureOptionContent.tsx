@@ -7,7 +7,7 @@ import EnhancedBusSeatMap from '../../tour/EnhancedBusSeatMap';
 import OptionVariantSelector from './OptionVariantSelector';
 import FurtherInformation from './FurtherInformation';
 import CollapsibleSection from './CollapsibleSection';
-import { mockPassengers } from '@/data/mockPassengers';
+import { mockPassengersFull, mockPassengersSparse } from '@/data/mockPassengers';
 import { BookingPassenger } from '../../tour/seat-map/SeatMapTypes';
 
 interface OptionVariant {
@@ -84,27 +84,31 @@ const DepartureOptionContent: React.FC<DepartureOptionContentProps> = ({
 
       {/* Bottom sections with enhanced components */}
       <div className="p-6 border-t border-gray-100">
-        <div className="mb-4">
-          <CollapsibleSection 
-            title="See Who's Travelling" 
-            icon={Users}
-            isOpen={travelersOpen}
-            onToggle={setTravelersOpen}
-          >
-            <FellowTravellerList passengers={mockPassengers} />
-          </CollapsibleSection>
-        </div>
+        {passengers && passengers.length >= 10 && (
+          <div className="mb-4">
+            <CollapsibleSection 
+              title="See Who's Travelling" 
+              icon={Users}
+              isOpen={travelersOpen}
+              onToggle={setTravelersOpen}
+            >
+              <FellowTravellerList passengers={passengers} />
+            </CollapsibleSection>
+          </div>
+        )}
 
-        <div className="mb-4">
-          <CollapsibleSection 
-            title="Bus Seating Plan" 
-            icon={Bus}
-            isOpen={seatingOpen}
-            onToggle={setSeatingOpen}
-          >
-            <EnhancedBusSeatMap passengers={mockPassengers} />
-          </CollapsibleSection>
-        </div>
+        {passengers && passengers.length >= 10 && (
+          <div className="mb-4">
+            <CollapsibleSection 
+              title="Bus Seating Plan" 
+              icon={Bus}
+              isOpen={seatingOpen}
+              onToggle={setSeatingOpen}
+            >
+              <EnhancedBusSeatMap passengers={passengers} />
+            </CollapsibleSection>
+          </div>
+        )}
         
         <div className="mt-6 pt-4 border-t border-gray-200">
           <p className="text-xs text-gray-600 italic">Flights there and back again aren't included.</p>

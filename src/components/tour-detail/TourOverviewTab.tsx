@@ -110,7 +110,7 @@ const TourOverviewTab: React.FC<TourOverviewTabProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Hero Image */}
           <div>
-            <img
+            <img 
               src="https://www.contiki.com/media/j2ljq1yb/3211eurs2022-1.jpg?crop=0%2C0%2C0.3326776261074397%2C0&cropmode=percentage&format=webp&mode=crop&width=1920&height=800&quality=80"
               alt="Greek Island Hopping Plus Trip"
               className="w-full h-[420px] md:h-[520px] lg:h-[600px] object-cover rounded-2xl shadow-lg"

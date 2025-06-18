@@ -134,8 +134,8 @@ const PopularTrips = () => {
           {/* Promotional Card */}
           <div className="relative rounded-[8px] overflow-hidden aspect-[3/4] group">
             <img 
-              src="https://www.contiki.com/media/bi2ngwbt/asia-with-contiki_embedded-card.jpg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=642&amp;height=772.5&amp;quality=30" 
-              alt="Asia with Contiki" 
+              src="https://www.contiki.com/media/wv2mdkt5/gb_eu-europe_sale_embedded-card.jpg" 
+              alt="Europe Sale Embedded Card" 
               className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">

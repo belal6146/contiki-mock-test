@@ -143,30 +143,30 @@ const Header = () => {
 
       {/* Main Navigation */}
       <div className={styles.navbarWrapper}>
-        {/* Logo */}
+          {/* Logo */}
         <Link className={styles.navbarLogo} to="/" aria-label="Contiki Home">
-          <picture className={styles.navbarLogoImage}>
-            <source 
-              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=400&amp;height=400&amp;quality=80" 
-              media="(max-width: 768px) and (-webkit-min-device-pixel-ratio: 2)"
-            />
-            <source 
-              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=200&amp;height=200&amp;quality=80" 
-              media="(max-width: 768px)"
-            />
-            <source 
-              srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=1600&amp;height=400&amp;quality=80" 
-              media="(-webkit-min-device-pixel-ratio: 2)"
-            />
-            <img 
-              src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
-              data-src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
-              alt="image" 
-              className={styles.navbarLogoImage}
-              draggable="true"
-            />
-          </picture>
-        </Link>
+            <picture className={styles.navbarLogoImage}>
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=400&amp;height=400&amp;quality=80" 
+                media="(max-width: 768px) and (-webkit-min-device-pixel-ratio: 2)"
+              />
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=200&amp;height=200&amp;quality=80" 
+                media="(max-width: 768px)"
+              />
+              <source 
+                srcSet="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=1600&amp;height=400&amp;quality=80" 
+                media="(-webkit-min-device-pixel-ratio: 2)"
+              />
+              <img 
+                src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+                data-src="https://www.contiki.com/media/hvkhcawu/contiki-primary-logo-black.svg?center=0.5%2C0.5&amp;format=webp&amp;mode=crop&amp;width=800&amp;height=200&amp;quality=80" 
+                alt="image" 
+                className={styles.navbarLogoImage}
+                draggable="true"
+              />
+            </picture>
+          </Link>
 
         <div className={styles.navbarLinks}>
           {/* Menu Button (for mobile) */}
