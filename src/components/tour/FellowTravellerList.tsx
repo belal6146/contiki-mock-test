@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useConsent } from '@/context/ConsentManager';
 import { maskName, maskAge } from '@/utils/DataMasking';
 import { Button } from '@/components/ui/button';
 import { MessageCircle } from 'lucide-react';
+import { mockUsers } from '@/data/mockChat';
+import { ENABLE_MOCK_CHAT } from '@/components/features/chat/ChatModule';
 
 export interface FellowTraveller {
   id: number;
@@ -39,9 +41,14 @@ interface FellowTravellerListProps {
   passengers: FellowTraveller[];
 }
 
+const ChatModule = ENABLE_MOCK_CHAT ? React.lazy(() => import('@/components/features/chat/ChatModule').then(m => ({ default: m.ChatModule }))) : undefined;
+
 const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers }) => {
   const { hasConsented, toggleConsent } = useConsent();
   const [showAll, setShowAll] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(mockUsers[0]?.id || '');
+  const [chatTargetUserId, setChatTargetUserId] = useState<string | null>(null);
+  const [showGroupChat, setShowGroupChat] = useState(false);
   
   const displayedPassengers = showAll ? passengers : passengers.slice(0, 8);
   
@@ -97,14 +104,45 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
     return `${seatRow}${seatLetter}`;
   };
 
-  const openChat = (passengerId: number) => {
-    console.log(`Opening chat for passenger ${passengerId}`);
-    // This would open the chat functionality
-    alert(`Chat feature would open for passenger ${passengerId}`);
+  const findMockUserId = (passenger: FellowTraveller) => {
+    const match = mockUsers.find(
+      u => u.name.toLowerCase().startsWith(passenger.firstName.toLowerCase())
+    );
+    return match ? match.id : mockUsers[0].id;
+  };
+
+  const openChat = (passenger: FellowTraveller) => {
+    if (ENABLE_MOCK_CHAT) {
+      setChatTargetUserId(findMockUserId(passenger));
+    } else {
+      alert(`Chat feature would open for passenger ${passenger.id}`);
+    }
   };
 
   return (
     <div className="contiki-card font-montserrat">
+      {ENABLE_MOCK_CHAT && (
+        <div className="p-4 border-b border-gray-100 flex items-center gap-2">
+          <span className="font-bold text-sm">Viewing as:</span>
+          <select
+            className="border rounded px-2 py-1 text-sm"
+            value={currentUserId}
+            onChange={e => setCurrentUserId(e.target.value)}
+          >
+            {mockUsers.map(user => (
+              <option key={user.id} value={user.id}>{user.name}</option>
+            ))}
+          </select>
+          <Button
+            variant="outline"
+            size="sm"
+            className="ml-4 text-xs h-8 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
+            onClick={() => setShowGroupChat(true)}
+          >
+            Group Chat
+          </Button>
+        </div>
+      )}
       <div className="p-8 border-b border-gray-100">
         <h2 className="heading-md">
           Fellow Travelers
@@ -146,8 +184,8 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
                 <Button
                   variant="outline"
                   size="sm"
-                    onClick={() => openChat(passenger.id)}
-                    className="btn-outline text-xs h-8 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
+                  onClick={() => openChat(passenger)}
+                  className="btn-outline text-xs h-8 border-black text-black hover:bg-gray-100 font-bold uppercase tracking-wide"
                 >
                     Message
                 </Button>
@@ -160,10 +198,10 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
             </div>
           </div>
         ))}
+        </div>
       </div>
-      
       {/* Privacy consent toggle */}
-        <div className="mt-8 p-6 bg-[#CCFF00] border-2 border-[#b8e600] rounded-lg">
+      <div className="mt-8 p-6 bg-[#CCFF00] border-2 border-[#b8e600] rounded-lg">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-bold text-black uppercase tracking-wide mb-1">
@@ -185,10 +223,9 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
           </Button>
         </div>
       </div>
-      
       {/* View all button */}
-        {passengers.length > 5 && !showAll && (
-          <div className="text-center mt-8">
+      {passengers.length > 5 && !showAll && (
+        <div className="text-center mt-8">
           <Button
             variant="link"
             onClick={() => setShowAll(true)}
@@ -198,7 +235,26 @@ const FellowTravellerList: React.FC<FellowTravellerListProps> = ({ passengers })
           </Button>
         </div>
       )}
-      </div>
+      {/* Chat modal (lazy loaded) */}
+      {ENABLE_MOCK_CHAT && chatTargetUserId && (
+        <Suspense fallback={<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"><div className="bg-white p-8 rounded shadow">Loading chat...</div></div>}>
+          <ChatModule
+            currentUserId={currentUserId}
+            targetUserId={chatTargetUserId}
+            onClose={() => setChatTargetUserId(null)}
+          />
+        </Suspense>
+      )}
+      {ENABLE_MOCK_CHAT && showGroupChat && (
+        <Suspense fallback={<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"><div className="bg-white p-8 rounded shadow">Loading chat...</div></div>}>
+          <ChatModule
+            currentUserId={currentUserId}
+            chatType="hostel"
+            roomId="hostel123"
+            onClose={() => setShowGroupChat(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };
